@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+            --color-primary: #2563eb; /* Blue */
+            --color-secondary: #facc15; /* Yellow */
+            --color-tertiary: #10b981; /* Green */
+            --bg-dark: #1f2937; /* Dark gray */
+            --bg-light: #f9fafb; /* Light gray */
+            --text-color: #111827; /* Dark gray text */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .badge {
+            background-color: var(--color-secondary);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--color-primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+            border: 4px solid white;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            font-size: 1rem;
+            color: var(--color-tertiary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {{#if name}}
+        <section class="py-12 text-center">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="{{name}}" class="rounded-full w-32 h-32 mx-auto mb-4 border-4 border-white">
+            {{/if}}
+            <h1 class="text-4xl font-bold mb-4">{{name}}</h1>
+            {{#if title}}
+            <p class="text-xl mb-6">{{title}}</p>
+            {{/if}}
+            {{#if about_us}}
+            <div class="card">
+                <p>{{about_us}}</p>
+            </div>
+            {{/if}}
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="py-12">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {{#if skills.frontend}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">Frontend</h3>
+                    <div>
+                        {{#each skills.frontend}}
+                        <span class="badge">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">Backend</h3>
+                    <div>
+                        {{#each skills.backend}}
+                        <span class="badge">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">Mobile Development</h3>
+                    <div>
+                        {{#each skills.mobileDevelopment}}
+                        <span class="badge">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">DevOps</h3>
+                    <div>
+                        {{#each skills.devops}}
+                        <span class="badge">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="py-12">
+            <h2 class="section-title">Professional Journey</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">{{title}}</h3>
+                        <p class="timeline-date">{{date_start}} - {{date_end}}</p>
+                        <p class="text-gray-500">{{company}} ({{location}})</p>
+                        {{#if responsibilities}}
+                        <ul class="list-disc pl-5 mt-2 text-gray-500">
+                            {{#each responsibilities}}
+                            <li class="mb-1">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="py-12">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">{{name}}</h3>
+                    <p class="text-gray-500 mb-4">{{description}}</p>
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}" class="project-image">
+                    {{/if}}
+                    {{#if features}}
+                    <div class="mt-4">
+                        <h4 class="font-semibold mb-2">Key Features:</h4>
+                        <ul class="list-disc pl-5 text-gray-500">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    {{#if technologies}}
+                    <div class="mt-4">
+                        <h4 class="font-semibold mb-2">Technologies Used:</h4>
+                        <div class="flex flex-wrap">
+                            {{#each technologies}}
+                            <span class="badge">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if link}}
+                    <a href="{{link}}" target="_blank" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">View Project</a>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="py-12">
+            <h2 class="section-title">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {{#each education}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">{{title}}</h3>
+                    <p class="text-gray-500">{{institution}}</p>
+                    <p class="text-gray-500">{{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul class="list-disc pl-5 mt-2 text-gray-500">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="py-12">
+            <h2 class="section-title">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="font-bold mb-2">{{name}}</h3>
+                    <p class="text-gray-500">{{issuer}}</p>
+                    <p class="text-gray-500">{{date}}</p>
+                    {{#if credential_id}}
+                    <p class="text-sm text-gray-500 mt-2">Credential ID: {{credential_id}}</p>
+                    {{/if}}
+                    {{#if link}}
+                    <a href="{{link}}" target="_blank" class="mt-2 inline-block text-blue-500 hover:underline">View Credential</a>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+    </div>
+</body>
+
+</html>

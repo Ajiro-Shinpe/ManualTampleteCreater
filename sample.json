@@ -1,0 +1,417 @@
+{
+    "name": "Daniyal Shahid Ali",
+    "title": "Full Stack | PHP | Laravel | MERN | MEAN | Node.js | React.js | DevOps | Kubernetes | Docker | AWS | Google Cloud",
+    "summary": "Experienced full-stack developer with expertise in frontend, backend, and mobile development technologies.",
+    "profile_image": "",
+    "about_us": "What I can do for you? 🤟 - Architect large scale project 🔧 - Can develop highly interactive Front end / User Interfaces for your web applications.- Progressive Web Applications ( PWA ) in normal and SPA Stacks. - Can build robust and maintainable Back End Servers for web applications. - Can solve your problems via Bug Fixing 🐛 - Feature Upgrade 💡 - Project planning & requirement gathering - Integration of third-party services.- Documentation and design. 📓 - Deployment. 🚀 - Testing 🔧",
+    "skills": {
+      "frontend": [
+        "Reactjs ",
+        "Nextjs ",
+        "Redux (Saga, Thunk, Observable, Event emitters) " ,
+        "Typescript ",
+        "Angular JS ",
+        "HTML5 ",
+        "CSS3 ",
+        "Bootstrap ",
+        "Flex Layout ",
+        "Styled Components ",
+        "CSS modules ",
+        "SCSS ",
+        "Responsive Design "
+      ],
+      "backend": [
+        "PHP ",
+        "Laravel ",
+        "WordPress ",
+        ".Net ",
+        "NodeJS ",
+        "ExpressJS ",
+        "Typescript ",
+        "MongoDB ",
+        "SQL ",
+        "Symfony 5 ",
+        "REST APIs Development ",
+        "Microservices "
+      ],
+      "mobileDevelopment": [
+        "Android Native ",
+        "React Native ",
+        "Flutter ",
+        "Ionic Framework "
+       ],
+      "devops": [
+        "Docker ",
+        "Kubernetes ",
+        "AWS ",
+        "Google Cloud "
+      ]
+    },
+    "experience": [
+      {
+        "image": "",
+        "title": "Full-stack Developer ",
+        "company": "innoscripta AG ",
+        "company_url": "",
+        "location": "Germany ",
+        "date_start": "2023-04 ",
+        "date_end": "Present ",
+        "responsibilities": [
+          "Working as Full-stack Developer "
+        ]
+      },
+      {
+        "image": "",
+        "title": "Information Technology Team Lead ",
+        "company": "CastNest ",
+        "company_url": "",
+        "location": "",
+        "date_start": "2021-01 ",
+        "date_end": "2022-04 ",
+        "responsibilities": [
+          "Managing complex web-based business",
+          "Line management and personal development of a team of highly skilled developers",
+          "Leading implementation of web applications (PHP & Java frameworks, CSS, XHTML, jQuery, AJAX)",
+          "Understanding and contributing to the technical solution from design through to code level",
+          "Participate in reviews and meetings and provide updates on project progress",
+          "Take responsibility for ensuring that risks and issues are identified and managed closely",
+          "Work closely with relevant teams internally to ensure alignment",
+          "Contributing to post implementation reviews",
+          "Supporting project resource scheduling and department capacity planning",
+          "Ownership, development and management of allocated departmental processes",
+          "Undertake small analysis projects in the form of consultancy",
+          "Take responsibility for making key decisions to ensure successful implementation"
+        ]
+      },
+      {
+        "image": "",
+        "title": "Full Stack Developer",
+        "company": "Westarter.com",
+        "company_url": "",
+        "location": "",
+        "date_start": "2018-01",
+        "date_end": "2020-12",
+        "responsibilities": [
+          "Laid out complete business continuity plan to maintain data protection",
+          "Managed company-level architecture, platform and data configuration processes",
+          "Completed and submitted monthly and yearly reports to support executive decision making",
+          "Tested security technologies and implemented network penetration assessment tools",
+          "Embraced macro-level strategic decisions and micro-level implementation",
+          "Provided project leadership in a dynamic technology-driven environment",
+          "Handled client inquiries with exceptional professionalism",
+          "Collaborated with cross-functional intra-company teams",
+          "ETA management",
+          "R&D management"
+        ]
+      },
+      {
+        "image": "",
+        "title": "Full-stack Developer",
+        "company": "ITWorld Software Company",
+        "company_url": "",
+        "location": "Pakistan",
+        "date_start": "2015-02",
+        "date_end": "2017-12",
+        "responsibilities": [
+          "Worked as Full-stack Developer"
+        ]
+      },
+      {
+        "image": "",
+        "title": "Senior PHP Developer",
+        "company": "Bigcats Private Limited",
+        "company_url": "",
+        "location": "Karachi",
+        "date_start": "2013-01",
+        "date_end": "2015-01",
+        "responsibilities": [
+          "Work In Bigcat's Marketing Agency as a Senior PHP developer"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "image": "",
+        "title": "Aptech Certified Computer Professional (ACCP)",
+        "degree": "Computer Software Engineering",
+        "institution": "Aptech Pakistan",
+        "date_start": "2014",
+        "date_end": "2016",
+        "details": [
+          "Semester 1: Certificate of Proficiency in Systems Management (CPISM)",
+          "Semester 2: Diploma in Information Systems Management (DISM)",
+          "Semester 3: Higher Diploma in Software Engineering (HDSE I)",
+          "Semester 4: Higher Diploma in Software Engineering (HDSE II)",
+          "Semester 5: Advance Diploma in Software Engineering (ADSE I)",
+          "Semester 6: Advance Diploma in Software Engineering (ADSE II)"
+        ]
+      },
+      {
+        "image": "",
+        "title": "Computer Architecture",
+        "degree": "1 Year Course",
+        "institution": "Princeton University",
+        "date_start": "2021",
+        "date_end": "2022",
+        "details": []
+      }
+    ],
+    "certifications": [
+      {
+        "image": "",
+        "name": "Basic Training - Data Protection 2023",
+        "issuer": "DataGuard",
+        "date": "2023-12",
+        "expire": "",
+        "credential_id": "dd679822-a4cf-4724-8662-c73ebdd27790",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "ISO/IEC 20000 IT Service Management Associate",
+        "issuer": "SkillFront",
+        "date": "2023-02",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "ISO/IEC 27001 Information Security Associate",
+        "issuer": "SkillFront",
+        "date": "2023-01",
+        "expire": "",
+        "credential_id": "03481440682585",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Cybersecurity Essentials",
+        "issuer": "Cisco",
+        "date": "2022-12",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Authorized Buyers API Basics",
+        "issuer": "Google",
+        "date": "2022-11",
+        "expire": "",
+        "credential_id": "44kYf4zW5mnLquoCizZebnrJ",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Foundations Of Business And Entrepreneurship",
+        "issuer": "SkillFront",
+        "date": "2022-11",
+        "expire": "",
+        "credential_id": "SFE0017faeb4577b",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Campaign manager 360 Certification",
+        "issuer": "Google",
+        "date": "2022-10",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Creative Certification Exam",
+        "issuer": "Google",
+        "date": "2022-10",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Display & Video 360 Certification",
+        "issuer": "Google",
+        "date": "2022-10",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Google Analytics Professional Certification",
+        "issuer": "Google Analytics",
+        "date": "2022-10",
+        "expire": "",
+        "credential_id": "GVuRcjmtWYD7t5aMTUvrhaJr",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Search Ads 360 Certification",
+        "issuer": "Google",
+        "date": "2022-10",
+        "expire": "",
+        "credential_id": "131448863",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Containerize a full-stack NodeJS application in Docker",
+        "issuer": "Coursera",
+        "date": "2022-01",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "Server-side Development with NodeJS, Express and MongoDB",
+        "issuer": "The Hong Kong University of Science and Technology",
+        "date": "2022-01",
+        "expire": "",
+        "credential_id": "77TH43LBQLM9",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "WordPress Developer",
+        "issuer": "Coursera",
+        "date": "",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      },
+      {
+        "image": "",
+        "name": "IBM Watson Build & Deploy AI Messenger Chatbot Certified",
+        "issuer": "Coursera",
+        "date": "",
+        "expire": "",
+        "credential_id": "",
+        "url": ""
+      }
+    ],
+    "projects": [
+      {
+        "image": "",
+        "name": "Castnest",
+        "url": "",
+        "description": "Direct integration with Facebook, YouTube, LinkedIn, Twitter, and Twitch and 30+ platforms. Streaming capabilities to Amazon Live, Vimeo and others using custom feature.",
+        "features": [
+          "Multi-platform integration",
+          "Custom streaming features",
+          "Social media platform support"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Catsense",
+        "url": "",
+        "description": "Comprehensive Customer Relationship Management System",
+        "features": [
+          "One Click Invoice Creation",
+          "Create Estimates",
+          "Create Good Looking Proposals",
+          "Leads Management",
+          "Record Expenses",
+          "Record Payments",
+          "Support System",
+          "Knowledge Base",
+          "Built In Staff Tasks",
+          "Manage Contracts",
+          "Goals Tracking",
+          "Survey Reports",
+          "Customized Reports"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Affiliate Coupon Tester",
+        "url": "",
+        "description": "Chrome Extension that automatically searches for coupons on multiple sites around the globe and applies best voucher or deal to your site.",
+        "features": [
+          "Automatic coupon search",
+          "One-click apply functionality",
+          "Best deal finder",
+          "Global coupon support"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Petrol stations RF POS",
+        "url": "",
+        "description": "Complete Solution for Petrol Stations Management",
+        "features": [
+          "Control over technological processes and forecourt equipment",
+          "Fuel dispensers management",
+          "ATG systems integration",
+          "Price panel control",
+          "Cashiers and fuel attendants tracking",
+          "Remote monitoring",
+          "Reporting system",
+          "RF ID system implementation",
+          "Integration with PTS Controller"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Dubai travel tourism",
+        "url": "",
+        "description": "Comprehensive Travel Booking System",
+        "features": [
+          "Tours & Packages Management",
+          "Hotels Management",
+          "Tour Plan Management",
+          "Payment Gateways Integration",
+          "Ratings Management",
+          "Support Ticket System",
+          "SEO Analytics Management",
+          "Chat Integration"
+        ]
+      },
+      {
+        "image": "",
+        "name": "OptimizedBodyAndMind.co.uk COVID-19 TEST",
+        "url": "",
+        "description": "Healthcare service platform for Blood Testing, Vitamin Injections, IV Drips, Laser Treatment at doorstep",
+        "features": [
+          "Appointment Booking",
+          "Rating Management",
+          "Delivery Management",
+          "Test Reports Management",
+          "Invoices and Bills",
+          "PPC Traffic Tracker",
+          "Newsletters And Subscribers"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Meeting room Lights Effect for SPECIAL SECURITY UNIT – Sindh Police",
+        "url": "",
+        "description": "Hardware & Android APP for controlling meeting room lighting",
+        "features": [
+          "Light temperature control (Warm to Cool)",
+          "Dimming control",
+          "Row/Column specific control",
+          "Multiple lighting effects",
+          "ESP8266 Signal Processing",
+          "ATMEGA328P Processing"
+        ]
+      },
+      {
+        "image": "",
+        "name": "FindBestVouchers",
+        "url": "",
+        "description": "Coupons and Deals Web App with product reviews, daily savings, and buying guides",
+        "features": [
+          "Coupon and vouchers management",
+          "Stores management",
+          "Multi Vendor support",
+          "Customer Feedbacks survey",
+          "Deal Finder"
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --secondary: #7c3aed;
+            --accent: #f97316;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --neutral: #cbd5e1;
+            --card: rgba(255, 255, 255, 0.95);
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, var(--dark), #1e1b4b);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--glass);
+        }
+
+        .header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--neutral);
+            max-width: 600px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 2rem;
+            color: var(--dark);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(8, 145, 178, 0.1);
+            border-radius: 12px;
+            color: var(--primary);
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(8, 145, 178, 0.2);
+        }
+
+        .timeline-item {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 2rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-subtitle {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .list-items {
+            list-style: none;
+        }
+
+        .list-items li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-items li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid var(--glass);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .header {
+                padding: 2rem 0;
+            }
+
+            .about-section {
+                padding: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="name">{{name}}</h1>
+                <div class="title">{{title}}</div>
+            </div>
+        </header>
+
+        {{#if about_us}}
+        <section class="about-section">
+            <h2 class="section-title">About</h2>
+            <p>{{about_us}}</p>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="grid">
+                    {{#if skills.frontend}}
+                    <div class="card">
+                        <h3 class="timeline-title">Frontend Development</h3>
+                        {{#each skills.frontend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.backend}}
+                    <div class="card">
+                        <h3 class="timeline-title">Backend Development</h3>
+                        {{#each skills.backend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.mobileDevelopment}}
+                    <div class="card">
+                        <h3 class="timeline-title">Mobile Development</h3>
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.devops}}
+                    <div class="card">
+                        <h3 class="timeline-title">DevOps</h3>
+                        {{#each skills.devops}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if experience}}
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Professional Experience</h2>
+                {{#each experience}}
+                <div class="timeline-item">
+                    <h3 class="timeline-title">{{title}}</h3>
+                    <div class="timeline-subtitle">{{company}} | {{date_start}} - {{date_end}}</div>
+                    {{#if responsibilities}}
+                    <ul class="list-items">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if projects}}
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="grid">
+                    {{#each projects}}
+                    <div class="card">
+                        <h3 class="timeline-title">{{name}}</h3>
+                        {{#if description}}
+                        <p class="timeline-subtitle">{{description}}</p>
+                        {{/if}}
+                        {{#if features}}
+                        <ul class="list-items">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if education}}
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="timeline-item">
+                    <h3 class="timeline-title">{{title}}</h3>
+                    <div class="timeline-subtitle">{{degree}} | {{institution}} | {{date_start}} - {{date_end}}</div>
+                    {{#if details}}
+                    <ul class="list-items">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if certifications}}
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+                <div class="grid">
+                    {{#each certifications}}
+                    <div class="card">
+                        <h3 class="timeline-title">{{name}}</h3>
+                        <div class="timeline-subtitle">
+                            {{issuer}} | {{date}}
+                            {{#if credential_id}}
+                            <br>Credential ID: {{credential_id}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

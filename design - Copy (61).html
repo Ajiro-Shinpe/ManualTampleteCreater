@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Commissioner:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #22D3EE;
+            --tertiary: #7C3AED;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text: #1E293B;
+            --text-light: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            padding: 2rem;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--background) 0px,
+                var(--background) 10px,
+                rgba(34, 211, 238, 0.03) 10px,
+                rgba(34, 211, 238, 0.03) 20px
+            );
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .header-container {
+            background: var(--primary);
+            border-radius: 24px;
+            padding: 3rem;
+            color: var(--surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .profile-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .profile-title {
+            font-size: 1.5rem;
+            color: var(--surface);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .content-section {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-section {
+            grid-column: span 8;
+        }
+
+        .sidebar-section {
+            grid-column: span 4;
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+        }
+
+        .section-title::before {
+            content: "//";
+            color: var(--accent);
+        }
+
+        .experience-card {
+            border-left: 2px solid var(--border);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .experience-card::before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .experience-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .date-tag {
+            font-family: 'Space Mono', monospace;
+            background: var(--background);
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+        }
+
+        .skill-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            position: relative;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--background);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--tertiary));
+            width: var(--skill-percentage);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--background);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--surface);
+            border-radius: 12px;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-section,
+            .sidebar-section {
+                grid-column: span 12;
+            }
+
+            .header-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 1rem;
+            }
+
+            .header-container {
+                padding: 2rem;
+            }
+
+            .profile-name {
+                font-size: 2.5rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="resume-container">
+            <header class="header-container">
+                <div class="header-content">
+                    <div class="profile-info">
+                        <h1 class="profile-name">{{name}}</h1>
+                        <p class="profile-title">{{title}}</p>
+                        {{#if about_us}}
+                        <p>{{about_us}}</p>
+                        {{/if}}
+                    </div>
+
+                    {{#if contact}}
+                    <div class="contact-info">
+                        <h2 class="section-title">Contact</h2>
+                        <ul>
+                            {{#each contact}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                </div>
+            </header>
+
+            <main class="main-grid">
+                <section class="experience-section content-section">
+                    {{#if experience}}
+                    <h2 class="section-title">Experience</h2>
+                    {{#each experience}}
+                    <div class="experience-card">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <div class="meta-info">
+                            <span>{{company}}</span>
+                            <span class="date-tag">{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    {{#if projects}}
+                    <h2 class="section-title">Projects</h2>
+                    <div class="project-grid">
+                        {{#each projects}}
+                        <div class="project-card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p>{{description}}</p>
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                <span class="tech-tag">{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </section>
+
+                <aside class="sidebar-section">
+                    {{#if skills}}
+                    <div class="content-section">
+                        <h2 class="section-title">Skills</h2>
+                        <div class="skill-grid">
+                            {{#each skills}}
+                            <div class="skill-item">
+                                <div class="skill-header">
+                                    <span>{{@key}}</span>
+                                    <span>{{this}}</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="--skill-percentage: {{this}}"></div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if education}}
+                    <div class="content-section">
+                        <h2 class="section-title">Education</h2>
+                        {{#each education}}
+                        <div class="experience-card">
+                            <h3 class="experience-title">{{degree}}</h3>
+                            <div class="meta-info">
+                                <span>{{institution}}</span>
+                                <span class="date-tag">{{date_start}} - {{date_end}}</span>
+                            </div>
+                            {{#if details}}
+                            <ul>
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </aside>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

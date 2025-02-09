@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF9F76;
+            --secondary: #FFC876;
+            --accent: #76B7FF;
+            --text: #4A4A4A;
+            --light: #FFF9F5;
+            --bg-dots: #FFE8E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--bg-dots) 2px, transparent 2px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .profile-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 
+                0 0 0 5px var(--primary),
+                0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .profile-doodle {
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            top: -10px;
+            left: -10px;
+            background: 
+                radial-gradient(circle at 30% 30%, var(--secondary) 2px, transparent 2px),
+                radial-gradient(circle at 70% 70%, var(--accent) 2px, transparent 2px),
+                radial-gradient(circle at 30% 70%, var(--primary) 2px, transparent 2px),
+                radial-gradient(circle at 70% 30%, var(--secondary) 2px, transparent 2px);
+            animation: rotate 10s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 5px 0 0 5px;
+        }
+
+        .section-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-bubble {
+            background: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+            border: 2px solid var(--primary);
+            color: var(--text);
+        }
+
+        .skill-bubble:hover {
+            transform: scale(1.05);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Experience */
+        .experience-card {
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .experience-card:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-title {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Education */
+        .education-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-title {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="profile-container">
+                <div class="profile-doodle"></div>
+                <img src="{{profile_picture_url}}" alt="Profile Picture" class="profile-picture">
+            </div>
+            <h1 class="name">{{name}}</h1>
+            <p style="color: var(--accent); font-size: 1.2rem;">{{location}}</p>
+            <p style="max-width: 600px; margin: 1rem auto;">{{about_us}}</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                {{#each skills}}
+                <span class="skill-bubble">{{this}}</span>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            {{#each experience}}
+            <div class="experience-card">
+                <h3 class="experience-title">{{title}}</h3>
+                <p class="experience-company">{{company}}</p>
+                <p style="font-size: 0.9rem; color: var(--text); opacity: 0.8;">{{date_start}} - {{date_end}}</p>
+                <p style="margin-top: 1rem;">{{description}}</p>
+            </div>
+            {{/each}}
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <img src="{{image}}" alt="{{name}}" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <a href="{{url}}" target="_blank" style="color: var(--primary); text-decoration: none; display: inline-block; margin-top: 1rem;">View Project →</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="education-card">
+                <h3 class="education-title">{{institution}}</h3>
+                <p style="color: var(--primary); font-weight: 500;">{{degree}}</p>
+                <p style="font-size: 0.9rem; color: var(--text); opacity: 0.8;">{{date_start}} - {{date_end}}</p>
+                <p style="margin-top: 0.5rem;">{{details}}</p>
+            </div>
+            {{/each}}
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; {{year}} {{name}} | Made with ❤️</p>
+    </footer>
+</body>
+</html>

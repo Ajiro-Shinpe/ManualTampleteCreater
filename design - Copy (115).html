@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0E1014;
+            --bg-secondary: #171B22;
+            --text-primary: #E6E6E6;
+            --text-secondary: #8E8E8E;
+            --accent-primary: #00FFD4;
+            --accent-secondary: #4A4AFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .left-panel, .right-panel {
+            width: 50%;
+            padding: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .diagonal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--text-secondary);
+            padding-bottom: 2rem;
+        }
+
+        .profile-name {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .experience-card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(var(--accent-primary), var(--accent-secondary));
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .experience-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            background-color: var(--bg-secondary);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            width: var(--skill-percentage);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .resume-container {
+                flex-direction: column;
+            }
+
+            .left-panel, .right-panel {
+                width: 100%;
+                padding: 2rem;
+            }
+
+            .diagonal-overlay {
+                clip-path: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="diagonal-overlay"></div>
+        <div class="left-panel">
+            <div class="header">
+                <h1 class="profile-name">{{name}}</h1>
+                <p class="profile-title">{{title}}</p>
+            </div>
+
+            {{#if experience}}
+            <h2 class="section-title">Professional Experience</h2>
+            {{#each experience}}
+            <div class="experience-card">
+                <h3 class="experience-title">{{title}}</h3>
+                <div class="experience-meta">
+                    <span>{{company}}</span>
+                    <span>{{date_start}} - {{date_end}}</span>
+                </div>
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
+
+        <div class="right-panel">
+            {{#if projects}}
+            <h2 class="section-title">Projects</h2>
+            {{#each projects}}
+            <div class="experience-card">
+                <h3 class="experience-title">{{name}}</h3>
+                <p>{{description}}</p>
+                <div class="tech-stack">
+                    {{#each tech_stack}}
+                    <span class="tech-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+
+            {{#if skills}}
+            <h2 class="section-title">Skills</h2>
+            {{#each skills}}
+            <div class="experience-card">
+                <div class="experience-meta">
+                    <span>{{@key}}</span>
+                    <span>{{this}}</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+
+            {{#if education}}
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="experience-card">
+                <h3 class="experience-title">{{degree}}</h3>
+                <div class="experience-meta">
+                    <span>{{institution}}</span>
+                    <span>{{date_start}} - {{date_end}}</span>
+                </div>
+                {{#if details}}
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

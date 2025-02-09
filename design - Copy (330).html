@@ -1,0 +1,57 @@
+}}
+<div class="project-card">
+    <h3>{{name}}</h3>
+    <p>{{description}}</p>
+    {{#if features}}
+    <ul>
+        {{#each features}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>
+{{/each}}
+</div>
+{{/if}}
+</section>
+
+<section class="education-container">
+{{#if education}}
+<h2>Education</h2>
+<div class="education-grid">
+{{#each education}}
+<div class="education-card">
+    <h3>{{degree}}</h3>
+    <p>{{institution}} | {{date_start}} - {{date_end}}</p>
+    {{#if details}}
+    <ul>
+        {{#each details}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>
+{{/each}}
+</div>
+{{/if}}
+</section>
+
+<section class="certifications-container">
+{{#if certifications}}
+<h2>Certifications</h2>
+<div class="certifications-grid">
+{{#each certifications}}
+<div class="certifications-card">
+    <h3>{{name}}</h3>
+    <p>{{issuer}} | {{date}}</p>
+    {{#if credential_id}}
+    <p>ID: {{credential_id}}</p>
+    {{/if}}
+</div>
+{{/each}}
+</div>
+{{/if}}
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0A192F;
+            --text-primary: #E6F1FF;
+            --text-secondary: #8892B0;
+            --accent-primary: #64FFDA;
+            --accent-secondary: #CCD6F6;
+            --nav-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) var(--bg-primary);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        .vertical-nav {
+            width: var(--nav-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: color-mix(in srgb, var(--bg-primary) 90%, white);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            border-right: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            color: var(--bg-primary);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-primary);
+            background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+        }
+
+        .nav-link svg {
+            stroke: var(--text-secondary);
+            transition: stroke 0.3s ease;
+        }
+
+        .nav-link:hover svg, .nav-link.active svg {
+            stroke: var(--accent-primary);
+        }
+
+        .portfolio-content {
+            margin-left: var(--nav-width);
+            width: calc(100% - var(--nav-width));
+            padding: 2rem;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            padding: 1rem;
+            position: relative;
+            border-left: 2px solid var(--accent-primary);
+            margin-left: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            left: -29px;
+            top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .vertical-nav {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            .portfolio-content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="vertical-nav">
+        <div class="nav-logo">
+            {{#if name}}
+                {{name.[0]}}{{name.[1]}}
+            {{else}}
+                JD
+            {{/if}}
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                Home
+            </a>
+            <a href="#skills" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 15 9.5 9 7 15h10Z"/><path d="m2 9 10-7 10 7"/><path d="m6 16 6 6 6-6"/>
+                </svg>
+                Skills
+            </a>
+            <a href="#experience" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="5" rx="2"/>
+                    <path d="M2 10h20"/>
+                </svg>
+                Experience
+            </a>
+            <a href="#projects" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <path d="M3 9h18"/>
+                    <path d="M9 21V9"/>
+                </svg>
+                Projects
+            </a>
+        </div>
+    </nav>
+    
+    <div class="portfolio-content">
+        <section id="home" class="section hero">
+            <h1 class="hero-title">{{name}}</h1>
+            <p class="hero-subtitle">{{title}}</p>
+        </section>
+
+        {{#if skills}}
+        <section id="skills" class="section">
+            <div class="skills-grid">
+                {{#if skills.frontend}}
+                <div class="skill-card">
+                    <h3>Frontend</h3>
+                    {{#each skills.frontend}}
+                    <div>{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="skill-card">
+                    <h3>Backend</h3>
+                    {{#each skills.backend}}
+                    <div>{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section id="experience" class="section">
+            <div class="timeline">
+                <h2 style="color: var(--accent-primary); text-align: center; margin-bottom: 2rem;">Professional Journey</h2>
+                {{#each experience}}
+                <div class="timeline-item">
+                    <h3 style="color: var(--accent-secondary);">{{title}}</h3>
+                    <p>{{company}} | {{date_start}} - {{date_end}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section id="projects" class="section">
+            <div class="timeline">
+                <h2 style="color: var(--accent-primary); text-align: center; margin-bottom: 2rem;">Projects</h2>
+                {{#each projects}}
+                <div class="timeline-item">
+                    <h3 style="color: var(--accent-secondary);">{{name}}</h3>
+                    <p>{{description}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

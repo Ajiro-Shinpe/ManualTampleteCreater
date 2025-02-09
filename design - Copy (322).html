@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} - Minimalist Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --primary: #5c6bc0;
+      --secondary: #29b6f6;
+      --background: #f5f5f5;
+      --surface: #ffffff;
+      --text: #333333;
+      --muted: #666666;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portfolio-container {
+      max-width: 1200px;
+      width: 90%;
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .title {
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    .about-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .about-content {
+      background-color: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 3rem;
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .about-content h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .skill-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 2rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .skill-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .skill-card h3 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+    }
+
+    .experience-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .experience-card {
+      background-color: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 3rem;
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .experience-card h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .experience-card .job {
+      margin-bottom: 2rem;
+    }
+
+    .experience-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-card p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .experience-card .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .experience-card .feature-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-card .feature-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-container {
+        margin: 2rem 0;
+      }
+
+      .about-content {
+        padding: 2rem;
+      }
+
+      .experience-card {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio-container">
+    <div class="header">
+      {{#if name}}
+      <h1>{{name}}</h1>
+      {{/if}}
+      {{#if title}}
+      <div class="title">{{title}}</div>
+      {{/if}}
+    </div>
+
+    {{#if about_us}}
+    <div class="about-section">
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>{{about_us}}</p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if skills}}
+    <div class="skill-section">
+      <h2 style="color: var(--primary); margin-bottom: 2rem;">Skills & Expertise</h2>
+      <div class="skill-grid">
+        {{#if skills.frontend}}
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <p>{{join skills.frontend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.backend}}
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <p>{{join skills.backend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.devops}}
+        <div class="skill-card">
+          <h3>DevOps</h3>
+          <p>{{join skills.devops ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.mobileDevelopment}}
+        <div class="skill-card">
+          <h3>Mobile</h3>
+          <p>{{join skills.mobileDevelopment ", "}}</p>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if experience}}
+    <div class="experience-section">
+      <div class="experience-card">
+        <h2>Experience</h2>
+        {{#each experience}}
+        <div class="job">
+          <h3>{{title}}</h3>
+          <p>{{company}} | {{date_start}} - {{date_end}}</p>
+          {{#if responsibilities}}
+          <ul class="feature-list">
+            {{#each responsibilities}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</body>
+</html>

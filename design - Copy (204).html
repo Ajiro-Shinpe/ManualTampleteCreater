@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniyal Shahid Ali - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F4F4F4; /* Light gray background */
+            color: #333333; /* Dark text */
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portfolio-container {
+            width: 80%;
+            height: 80%;
+            background-color: #FFFFFF;
+            transform: skewX(-10deg);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .portfolio-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transform: skewX(10deg);
+        }
+
+        .profile-section {
+            width: 30%;
+            background-color: #007ACC; /* Blue accent color */
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-summary {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .content-section {
+            width: 70%;
+            background-color: #FFFFFF;
+            padding: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #007ACC;
+            margin-bottom: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background-color: #F4F4F4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .skill-name {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level-bar {
+            height: 0.5rem;
+            background-color: #E0E0E0;
+            border-radius: 0.25rem;
+            position: relative;
+        }
+
+        .skill-level-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #007ACC;
+            border-radius: 0.25rem;
+            width: var(--skill-percentage, 0%);
+        }
+
+        .experience-timeline,
+        .education-timeline,
+        .certifications-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0.25rem;
+            left: -2rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #007ACC;
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: #707070;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-details {
+            font-size: 0.9rem;
+            color: #707070;
+            line-height: 1.6;
+        }
+
+        .timeline-details li {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #F4F4F4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: #707070;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-features li {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            color: #707070;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="portfolio-container">
+            <div class="portfolio-content">
+                <div class="profile-section">
+                    {{#if profile_image}}
+                    <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                    {{/if}}
+                    <h1 class="profile-name">{{name}}</h1>
+                    <p class="profile-title">{{title}}</p>
+                    {{#if summary}}
+                    <p class="profile-summary">{{summary}}</p>
+                    {{/if}}
+                </div>
+                <div class="content-section">
+                    {{#if skills}}
+                    <div class="section-title">Skills</div>
+                    <div class="skills-grid">
+                        {{#each skills}}
+                        <div class="skill-item">
+                            <div class="skill-name">{{@key}}</div>
+                            <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if experience}}
+                    <div class="section-title">Experience</div>
+                    <div class="experience-timeline">
+                        {{#each experience}}
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                            <h3 class="timeline-title">{{title}}</h3>
+                            <p class="timeline-details">{{company}} {{#if location}} ({{location}}) {{/if}}</p>
+                            <ul class="timeline-details">
+                                {{#each responsibilities}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if education}}
+                    <div class="section-title">Education</div>
+                    <div class="education-timeline">
+                        {{#each education}}
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                            <h3 class="timeline-title">{{degree}}</h3>
+                            <p class="timeline-details">{{institution}}</p>
+                            {{#if details}}
+                            <ul class="timeline-details">
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if certifications}}
+                    <div class="section-title">Certifications</div>
+                    <div class="certifications-timeline">
+                        {{#each certifications}}
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{date}}</div>
+                            <h3 class="timeline-title">{{name}}</h3>
+                            <p class="timeline-details">{{issuer}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if projects}}
+                    <div class="section-title">Projects</div>
+                    <div class="projects-grid">
+                        {{#each projects}}
+                        <div class="project-card">
+                            {{#if image}}
+                            <img src="{{image}}" alt="{{name}}" class="project-image">
+                            {{/if}}
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{description}}</p>
+                            {{#if features}}
+                            <ul class="project-features">
+                                {{#each features}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

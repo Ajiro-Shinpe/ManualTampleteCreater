@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Professional Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --accent-primary: #6366F1;
+            --accent-secondary: #818CF8;
+            --text-primary: #E2E8F0;
+            --text-secondary: #94A3B8;
+            --success: #10B981;
+            --card-radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+        }
+
+        .profile-section {
+            position: sticky;
+            top: 2rem;
+            height: calc(100vh - 4rem);
+            background: var(--bg-secondary);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: var(--accent-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section {
+            background: var(--bg-secondary);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .experience-card {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: calc(var(--card-radius) - 4px);
+            margin-bottom: 1rem;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .date-range {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: calc(var(--card-radius) - 4px);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .project-title {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .certifications-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .certification-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: calc(var(--card-radius) - 4px);
+            padding: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-section {
+                position: relative;
+                height: auto;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-container {
+            max-height: calc(100% - 380px);
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 3px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if name}}
+        <aside class="profile-section">
+            <div class="profile-header">
+                {{#if profile_image}}
+                <div class="profile-image">
+                    <img src="{{profile_image}}" alt="{{name}}">
+                </div>
+                {{/if}}
+                <h1 class="name">{{name}}</h1>
+                {{#if title}}
+                <p class="title">{{title}}</p>
+                {{/if}}
+            </div>
+            
+            {{#if skills}}
+            <div class="scroll-container">
+                <div class="skills-container">
+                    {{#each skills.frontend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                    {{#each skills.backend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                    {{#each skills.devops}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </aside>
+        {{/if}}
+
+        <main class="main-content">
+            {{#if about_us}}
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    About
+                </h2>
+                <p>{{about_us}}</p>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experience
+                </h2>
+                {{#each experience}}
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <h3>{{title}}</h3>
+                            <p class="company-name">{{company}}</p>
+                        </div>
+                        <span class="date-range">{{date_start}} - {{date_end}}</span>
+                    </div>
+                    {{#if responsibilities}}
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    Projects
+                </h2>
+                <div class="project-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-certificate"></i>
+                    Certifications
+                </h2>
+                <div class="certifications-list">
+                    {{#each certifications}}
+                    <div class="certification-card">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}} - {{date}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </main>
+    </div>
+</body>
+</html>

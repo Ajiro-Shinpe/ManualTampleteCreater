@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E1E1E;
+            --secondary-color: #FF3366;
+            --tertiary-color: #FFF7F8;
+            --text-color: #333333;
+            --bg-color: #FFFFFF;
+            --grid-color: #F0F0F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -2rem;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, 
+                var(--primary-color), 
+                var(--primary-color) 4px, 
+                transparent 4px, 
+                transparent 8px);
+        }
+
+        .title-block {
+            grid-column: 1 / 8;
+        }
+
+        .profile-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .profile-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .profile-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            color: var(--text-color);
+        }
+
+        .about-block {
+            grid-column: 8 / -1;
+            background: var(--tertiary-color);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-content {
+            grid-column: 1 / 9;
+            display: grid;
+            gap: 4rem;
+        }
+
+        .sidebar {
+            grid-column: 9 / -1;
+            display: grid;
+            gap: 4rem;
+        }
+
+        .section {
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 2rem;
+            height: 2px;
+            background: var(--secondary-color);
+            margin-right: 1rem;
+        }
+
+        .card {
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-date {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .card-content {
+            position: relative;
+        }
+
+        .experience-title, .project-title, .education-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .experience-company {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1.2rem;
+            background: var(--tertiary-color);
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .skill-item {
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .skill-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            white-space: nowrap;
+        }
+
+        .skill-level {
+            width: 100%;
+            height: 2px;
+            background: var(--grid-color);
+            position: relative;
+        }
+
+        .skill-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--secondary-color);
+            width: var(--skill-percentage);
+        }
+
+        .decorative-number {
+            position: absolute;
+            top: -2rem;
+            right: 0;
+            font-family: 'Syne', sans-serif;
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--tertiary-color);
+            z-index: -1;
+            line-height: 1;
+        }
+
+        @media (max-width: 1200px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                grid-template-columns: 1fr;
+            }
+
+            .title-block, .about-block {
+                grid-column: 1 / -1;
+            }
+
+            .main-content, .sidebar {
+                grid-column: 1 / -1;
+            }
+
+            .profile-name {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .profile-name {
+                font-size: 3rem;
+            }
+
+            .resume-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Hover Effects */
+        .card {
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(10px);
+        }
+
+        .tech-tag {
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <div class="title-block">
+                <h1 class="profile-name">{{name}}</h1>
+                <p class="profile-title">{{title}}</p>
+            </div>
+            {{#if about_us}}
+            <div class="about-block">
+                <p class="profile-description">{{about_us}}</p>
+            </div>
+            {{/if}}
+        </header>
+
+        <main class="main-content">
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                <div class="decorative-number">01</div>
+                {{#each experience}}
+                <div class="card">
+                    <div class="card-date">
+                        {{date_start}} - {{date_end}}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <p class="experience-company">{{company}}</p>
+                        {{#if description}}
+                        <p>{{description}}</p>
+                        {{else}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="decorative-number">02</div>
+                {{#each projects}}
+                <div class="card">
+                    <div class="card-date">Featured</div>
+                    <div class="card-content">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tech-stack">
+                            {{#each tech_stack}}
+                            <span class="tech-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </main>
+
+        <aside class="sidebar">
+            {{#if skills}}
+            <section class="section">
+                <h2 class="section-title">Skills</h2>
+                {{#each skills}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="card">
+                    <div class="card-date">
+                        {{date_start}} - {{date_end}}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="education-title">{{degree}}</h3>
+                        <p class="experience-company">{{institution}}</p>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </aside>
+    </div>
+</body>
+</html>

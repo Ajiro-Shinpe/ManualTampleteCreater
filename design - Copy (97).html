@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0F172A;
+            --secondary-color: #475569;
+            --accent-color: #2563EB;
+            --accent-light: #DBEAFE;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+            --hover-color: #F1F5F9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 1000px;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .header {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-info {
+            position: relative;
+        }
+
+        .profile-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .profile-description {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            background: var(--hover-color);
+            border-color: var(--border-color);
+        }
+
+        .experience-title, .project-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .experience-company {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .skill-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--accent-light);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        ul li::before {
+            content: '•';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        @media (max-width: 1024px) {
+            .header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .profile-name::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 1rem;
+            }
+
+            .profile-name {
+                font-size: 2.5rem;
+            }
+
+            .skill-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <div class="profile-info">
+                <h1 class="profile-name">{{name}}</h1>
+                <p class="profile-title">{{title}}</p>
+                {{#if about_us}}
+                <p class="profile-description">{{about_us}}</p>
+                {{/if}}
+            </div>
+            <div class="contact-info">
+                <p>✉️ your.email@example.com</p>
+                <p>📱 (123) 456-7890</p>
+                <p>📍 City, Country</p>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <div class="main-content">
+                {{#if experience}}
+                <div class="section">
+                    <h2 class="section-title">Professional Experience</h2>
+                    {{#each experience}}
+                    <div class="card">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <div class="experience-company">
+                            <span>{{company}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        {{#if description}}
+                        <p>{{description}}</p>
+                        {{else}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if projects}}
+                <div class="section">
+                    <h2 class="section-title">Featured Projects</h2>
+                    {{#each projects}}
+                    <div class="card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tech-stack">
+                            {{#each tech_stack}}
+                            <span class="tech-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+
+            <div class="sidebar">
+                {{#if skills}}
+                <div class="section">
+                    <h2 class="section-title">Skills</h2>
+                    <div class="skill-container">
+                        {{#each skills}}
+                        <div class="skill-item">
+                            <div class="skill-name">{{@key}}</div>
+                            <div class="skill-level">{{this}}</div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if education}}
+                <div class="section">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="card">
+                        <h3 class="experience-title">{{degree}}</h3>
+                        <div class="experience-company">
+                            <span>{{institution}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

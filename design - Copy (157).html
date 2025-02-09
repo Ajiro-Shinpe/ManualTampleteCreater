@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f7f7;
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --text: #1e293b;
+            --muted: #64748b;
+            --card: #ffffff;
+            --accent: #f43f5e;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid white;
+            padding: 4px;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: var(--secondary);
+        }
+
+        .nav-links a:hover {
+            background: var(--accent);
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .card-subtitle span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+        .card-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-section {
+                padding: 2rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="profile-section">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+            {{else}}
+            <div class="profile-image" style="background: white; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user fa-3x" style="color: var(--primary);"></i>
+            </div>
+            {{/if}}
+            <h1 class="name">{{name}}</h1>
+            <div class="title">{{title}}</div>
+            <ul class="nav-links">
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#projects"><i class="fas fa-rocket"></i> Projects</a></li>
+            </ul>
+        </section>
+
+        {{#if skills}}
+        <section id="skills" class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+            <div class="card-grid">
+                {{#if skills.frontend}}
+                <div class="card">
+                    <h3 class="card-title">Frontend Development</h3>
+                    <ul class="card-list">
+                        {{#each skills.frontend}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="card">
+                    <h3 class="card-title">Backend Development</h3>
+                    <ul class="card-list">
+                        {{#each skills.backend}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="card">
+                    <h3 class="card-title">Mobile Development</h3>
+                    <ul class="card-list">
+                        {{#each skills.mobileDevelopment}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="card">
+                    <h3 class="card-title">DevOps & Cloud</h3>
+                    <ul class="card-list">
+                        {{#each skills.devops}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section id="experience" class="section">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            {{#each experience}}
+            <div class="card">
+                <h3 class="card-title">{{title}}</h3>
+                <div class="card-subtitle">
+                    <span><i class="fas fa-building"></i>{{company}}</span>
+                    {{#if date_start}}
+                    <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
+                    {{/if}}
+                </div>
+                {{#if responsibilities}}
+                <ul class="card-list">
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section id="projects" class="section">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Projects</h2>
+            {{#each projects}}
+            <div class="card">
+                <h3 class="card-title">{{name}}</h3>
+                {{#if description}}
+                <p style="color: var(--muted); margin-bottom: 1rem;">{{description}}</p>
+                {{/if}}
+                {{#if features}}
+                <ul class="card-list">
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

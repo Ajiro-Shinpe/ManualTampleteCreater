@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff69b4;
+            --secondary: #333333;
+            --bg: #f7f7f7;
+            --text: #666666;
+            --muted: #a0a0a0;
+            --card: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--card);
+            padding: 1rem;
+            text-align: center;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .card-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 0.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>{{name}}</h1>
+            <p>{{title}}</p>
+        </header>
+
+        {{#if about_us}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+            <p>{{about_us}}</p>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+            <div class="grid">
+                {{#each skills}}
+                <div class="card">
+                    <h3 class="card-title">{{this}}</h3>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="grid">
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">
+                        <span><i class="fas fa-building"></i> {{company}}</span>
+                        {{#if location}}
+                        <span><i class="fas fa-map-marker-alt"></i> {{location}}</span>
+                        {{/if}}
+                        {{#if date_start}}
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                        {{/if}}
+                    </div>
+                    {{#if responsibilities}}
+                    <ul class="card-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="grid">
+                {{#each education}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">
+                        <span><i class="fas fa-graduation-cap"></i> {{degree}}</span>
+                        <span><i class="fas fa-university"></i> {{institution}}</span>
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                    </div>
+                    {{#if details}}
+                    <ul class="card-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+            <div class="grid">
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    {{#if description}}
+                    <p>{{description}}</p>
+                    {{/if}}
+                    {{#if features}}
+                    <ul class="card-list">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+
+</html>

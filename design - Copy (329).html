@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - {{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --primary: #00ffa3;
+            --secondary: #ff00d4;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --accent: #7000ff;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            padding: 4rem;
+            position: relative;
+            min-height: 90vh;
+            place-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 163, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(112, 0, 255, 0.15) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            z-index: 1;
+            transform: translateX(-2rem);
+            opacity: 0;
+            animation: slideIn 1s ease forwards;
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .hero-about {
+            font-size: 1.2rem;
+            max-width: 60ch;
+            position: relative;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .skill-category {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-category:hover::before {
+            opacity: 0.1;
+        }
+
+        .skill-category h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        .projects-container .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 2rem;
+        }
+
+        .projects-container .project-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .projects-container .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .projects-container .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .projects-container .project-card:hover::before {
+            opacity: 0.1;
+        }
+        .projects-container .project-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .projects-container .project-card p, .projects-container .project-card ul {
+            position: relative;
+            z-index: 1;
+        }
+        .projects-container .project-card ul li {
+            list-style: disc; /* Or any other list style you prefer */
+            margin-left: 20px;
+        }
+
+        /* Education, Certifications styles (same as Experience) */
+        .experience-container, .education-container, .certifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .experience-card ,.education-card, .certifications-card { /* ... (same styles as .experience-card) */
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experiencecard::before ,.education-card::before, .certifications-card::before { /* ... */
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .experience-card:hover , .education-card:hover, .certifications-card:hover { /* ... */
+            transform: translateY(-10px);
+        }
+
+        .experience-card:hover::before ,.education-card:hover::before, .certifications-card:hover::before { /* ... */
+            opacity: 0.1;
+        }
+
+        .education-card h3, .certifications-card h3, .experience-card h3 { /* ... */
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .education-card p, .certifications-card p, .experiencecard p,
+        .education-card ul, .certifications-card ul , .experience-card ul{ /* Style lists too */
+            position: relative;
+            z-index: 1;
+        }
+        .education-card ul li, .certifications-card ul li , .experience-card ul li{
+            list-style: disc; /* Or any other list style you prefer */
+            margin-left: 20px;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-title {
+                padding-left: 0;
+                border-left: none;
+                border-bottom: 4px solid var(--accent);
+                padding-bottom: 1rem;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-name">{{name}}</h1>
+                <p class="hero-title">{{title}}</p>
+                <div class="hero-about">{{about_us}}</div>
+            </div>
+        </section>
+
+        <section class="skills-container">
+            {{#if skills.frontend}}
+            <div class="skill-category">
+                <h3>Frontend Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.frontend}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="skill-category">
+                <h3>Backend Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.backend}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="skill-category">
+                <h3>Mobile Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.mobileDevelopment}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="skill-category">
+                <h3>DevOps & Cloud</h3>
+                <ul class="skill-list">
+                    {{#each skills.devops}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </section>
+    </div>
+    <div class="container">
+        <section class="experience-container">
+            {{#if experience}}
+            {{#each experience}}
+            <div class="experience-card">
+                <h3>{{title}}</h3>
+                <p>{{company}} | {{date_start}} - {{date_end}}</p>
+                {{#if responsibilities}}
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+                {{#if description}}
+                <p>{{description}}</p>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
+
+        <section class="projects-container">
+            {{#if projects}}
+            <h2>Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    {{#if features}}
+                    <ul>
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </section>
+
+        <section class="education-container">
+            {{#if education}}
+            <h2>Education</h2>
+            <div class="education-grid">
+                {{#each education}}
+                <div class="education-card">
+                    <h3>{{degree}}</h3>
+                    <p>{{institution}} | {{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </section>
+
+        <section class="certifications-container">
+            {{#if certifications}}
+            <h2>Certifications</h2>
+            <div class="certifications-grid">
+                {{#each certifications}}
+                <div class="certifications-card">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} | {{date}}</p>
+                    {{#if credential_id}}
+                    <p>ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </section>
+    </div>
+</body>
+</html>

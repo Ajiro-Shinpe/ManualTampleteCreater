@@ -1,0 +1,87 @@
+
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+<div class="container" id="template">
+    <!-- Handlebars template will be inserted here -->
+
+
+
+
+
+
+
+
+
+</div>
+ <!-- JavaScript to render the template with JSON data -->
+ <script> // Sample JSON data
+ fetch('sample.json')  // Adjust the path if necessary
+  .then(response => response.json())
+  .then((JsonData) => {
+
+    // const JsonData = {
+    //     name: "dddddddddd Doe",
+    //     title: "Web Developer",
+    //     summary: "A passionate developer with 5 years of experience.",
+    //     about_us: "I am a full-stack web developer specializing in building modern, scalable web applications.",
+    //     skills: {
+    //         frontend: "HTML, CSS, JavaScript, React",
+    //         backend: "Node.js, Express, Laravel",
+    //         mobileDevelopment: "React Native, Flutter",
+    //         devops: "Docker, Kubernetes, AWS"
+    //     },
+    //     experience: [
+    //         {
+    //             title: "Software Engineer",
+    //             company: "Tech Solutions Inc.",
+    //             company_url: "https://www.techsolutions.com",
+    //             location: "San Francisco, CA",
+    //             date_start: "Jan 2020",
+    //             date_end: "Present",
+    //             responsibilities: ["Developed APIs", "Implemented CI/CD pipelines", "Collaborated with cross-functional teams"]
+    //         }
+    //     ],
+    //     education: [
+    //         {
+    //             degree: "Bachelor of Science in Computer Science",
+    //             institution: "XYZ University",
+    //             date_start: "2015",
+    //             date_end: "2019",
+    //             details: ["Graduated with honors", "Specialized in Web Development"]
+    //         }
+    //     ],
+    //     certifications: [
+    //         {
+    //             name: "AWS Certified Solutions Architect",
+    //             issuer: "Amazon Web Services",
+    //             date: "2022-06-15",
+    //             expire: "2025-06-15"
+    //         }
+    //     ],
+    //     projects: [
+    //         {
+    //             name: "Portfolio Website",
+    //             url: "https://johndoe.com",
+    //             description: "A personal portfolio website showcasing my projects and experience.",
+    //             features: ["Responsive design", "Blog section", "Contact form"]
+    //         }
+    //     ]
+    // };
+
+
+    // Get the template HTML and compile it with Handlebars
+    fetch('design.html')
+  .then(response => response.text())
+  .then((resdata) => {
+
+    const template = Handlebars.compile(resdata);
+    const html = template(JsonData);
+    document.getElementById('template').innerHTML = html;
+  })
+
+
+  });
+   
+
+
+</script>

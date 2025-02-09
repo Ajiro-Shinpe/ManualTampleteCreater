@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .timeline-container {
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .cert-badge {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden py-20 px-4">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-pink-600/20"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            {{#if name}}
+            <h1 class="text-5xl font-bold mb-4 gradient-text">{{name}}</h1>
+            {{/if}}
+            {{#if title}}
+            <p class="text-xl text-gray-300">{{title}}</p>
+            {{/if}}
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4">
+        {{#if about_us}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">About Me</h2>
+            <div class="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm">
+                <p class="text-gray-300 leading-relaxed">{{about_us}}</p>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Skills & Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{#if skills.frontend}}
+                <div class="skill-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-indigo-400">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.frontend}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-indigo-500/20 text-indigo-300">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-400">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.backend}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-purple-500/20 text-purple-300">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-pink-400">Mobile</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-pink-500/20 text-pink-300">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.devops}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-blue-500/20 text-blue-300">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Experience</h2>
+            <div class="timeline-container relative">
+                <div class="timeline-line"></div>
+                {{#each experience}}
+                <div class="mb-12 relative">
+                    <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm max-w-2xl mx-auto">
+                        <h3 class="text-xl font-semibold text-indigo-300">{{title}}</h3>
+                        <h4 class="text-lg text-gray-400">{{company}}</h4>
+                        <p class="text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                        {{#if responsibilities}}
+                        <ul class="space-y-2">
+                            {{#each responsibilities}}
+                            <li class="text-gray-300 flex items-start">
+                                <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-2"></span>
+                                {{this}}
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{#each projects}}
+                <div class="project-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-indigo-300">{{name}}</h3>
+                    <p class="text-gray-400 mb-4">{{description}}</p>
+                    {{#if features}}
+                    <div class="flex flex-wrap gap-2">
+                        {{#each features}}
+                        <span class="px-2 py-1 rounded-full text-xs bg-indigo-500/20 text-indigo-300">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{#each certifications}}
+                <div class="cert-badge bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm">
+                    <h3 class="text-lg font-semibold text-indigo-300">{{name}}</h3>
+                    <p class="text-gray-400">{{issuer}}</p>
+                    <p class="text-gray-500 text-sm mt-2">{{date}}</p>
+                    {{#if credential_id}}
+                    <p class="text-gray-600 text-sm mt-1">ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </main>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav rounded-full px-6 py-3 flex gap-6">
+        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#skills" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-code"></i>
+        </a>
+        <a href="#experience" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-briefcase"></i>
+        </a>
+        <a href="#projects" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-project-diagram"></i>
+        </a>
+        <a href="#certifications" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-certificate"></i>
+        </a>
+    </nav>
+</body>
+</html>

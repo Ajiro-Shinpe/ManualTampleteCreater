@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 3px;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 2px solid #fff;
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -20px;
+            top: 15px;
+            bottom: -15px;
+            width: 2px;
+            background: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 bg-white rounded-lg shadow-lg overflow-hidden">
+        <!-- Sidebar -->
+        <div class="gradient-bg p-8 text-white md:col-span-1">
+            {{#if name}}
+            <h1 class="text-3xl font-bold">{{name}}</h1>
+            <div class="h-1 w-14 bg-white mt-2"></div>
+            {{/if}}
+
+            <div class="mt-6 space-y-4">
+                {{#if email}}
+                <p class="flex items-center"><span class="font-semibold">Email:</span> {{email}}</p>
+                {{/if}}
+                {{#if phone}}
+                <p class="flex items-center"><span class="font-semibold">Phone:</span> {{phone}}</p>
+                {{/if}}
+            </div>
+
+            {{#if skills}}
+            <div class="mt-6">
+                <h3 class="text-lg font-semibold">Skills</h3>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    {{#each skills}}
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-sm">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+
+        <!-- Main Content -->
+        <div class="p-8 md:col-span-2">
+            {{#if experience}}
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold">Experience</h2>
+                <div class="relative pl-6 mt-4 space-y-6">
+                    {{#each experience}}
+                    <div class="timeline-item">
+                        <div class="timeline-line"></div>
+                        <h3 class="font-semibold">{{title}}</h3>
+                        <a href="{{company_url}}" class="text-blue-600 hover:underline">{{company}}</a>
+                        <p class="text-sm text-gray-500">{{date_start}} - {{date_end}} | {{location}}</p>
+                        <ul class="text-sm text-gray-700 mt-2">
+                            {{#each responsibilities}}
+                            <li>- {{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold">Projects</h2>
+                <div class="mt-4 grid gap-4">
+                    {{#each projects}}
+                    <div class="p-4 border rounded-lg hover:shadow-lg transition">
+                        <a href="{{url}}" class="text-lg font-semibold text-blue-600 hover:underline">{{name}}</a>
+                        <p class="text-gray-700 text-sm mt-1">{{description}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section>
+                <h2 class="text-2xl font-semibold">Education</h2>
+                <div class="mt-4 space-y-4">
+                    {{#each education}}
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h3 class="font-semibold">{{institution}}</h3>
+                        <p class="text-sm text-gray-600">{{degree}}</p>
+                        <p class="text-sm text-gray-500">{{date_start}} - {{date_end}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

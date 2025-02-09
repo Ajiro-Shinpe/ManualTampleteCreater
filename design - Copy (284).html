@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Vertical Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f0c808;
+            --secondary: #fb8500;
+            --accent: #ff006e;
+            --background: #001d3d;
+            --surface: #003566;
+            --text: #fffefe;
+            --muted: #94a3b8;
+            --border: #4a6799;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-family: 'Satisfy', cursive;
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: var(--muted);
+            font-size: 1.2rem;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--surface);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            font-size: 1.4rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .skill-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: rgba(240, 200, 8, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background-color: rgba(251, 133, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .experience-company {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .experience-responsibilities li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+        }
+
+        .experience-responsibilities li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: rgba(255, 0, 110, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-features li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+        }
+
+        .project-features li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .cert-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background-color: rgba(240, 200, 8, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-details {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .skill-container,
+            .experience-container,
+            .project-container,
+            .cert-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            {{#if profile_image}}
+            <div class="profile-image">
+                <img src="{{profile_image}}" alt="Profile">
+            </div>
+            {{else}}
+            <div class="profile-image">
+                <i class="fas fa-user" style="font-size: 3rem; line-height: 120px; color: var(--text); text-align: center; width: 100%;"></i>
+            </div>
+            {{/if}}
+            {{#if name}}
+            <h1 class="name">{{name}}</h1>
+            {{/if}}
+            {{#if title}}
+            <div class="title">{{title}}</div>
+            {{/if}}
+        </header>
+
+        {{#if about_us}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i>About</h2>
+            <p class="about-text">{{about_us}}</p>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
+            <div class="skill-container">
+                {{#if skills.frontend}}
+                {{#each skills.frontend}}
+                <div class="skill-card">
+                    <h3 class="skill-title">{{this}}</h3>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if skills.backend}}
+                {{#each skills.backend}}
+                <div class="skill-card">
+                    <h3 class="skill-title">{{this}}</h3>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
+            <div class="experience-container">
+                {{#each experience}}
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <div class="experience-company">{{company}} | {{date_start}} - {{date_end}}</div>
+                    </div>
+                    {{#if responsibilities}}
+                    <ul class="experience-responsibilities">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Projects</h2>
+            <div class="project-container">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p>{{description}}</p>
+                    {{#if features}}
+                    <ul class="project-features">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-certificate"></i>Certifications</h2>
+            <div class="cert-container">
+                {{#each certifications}}
+                <div class="cert-card">
+                    <h3 class="cert-title">{{name}}</h3>
+                    <div class="cert-details">{{issuer}} | {{date}}</div>
+                    {{#if credential_id}}
+                    <div class="cert-details">ID: {{credential_id}}</div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

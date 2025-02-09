@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --background: #f8fafc;
+            --text: #0f172a;
+            --card: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: var(--card);
+            padding: 2rem;
+            position: fixed;
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+        }
+
+        .main-content {
+            margin-left: 300px;
+            padding: 2rem;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            position: fixed;
+            top: 0;
+            left: 300px;
+            right: 0;
+            transform-origin: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .progress-bar {
+                left: 0;
+            }
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .feature-tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 300px;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform-origin: 0;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid, .project-grid, .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-grid">
+        <aside class="sidebar">
+            <div class="profile-section">
+                {{#if name}}
+                <h1 class="text-xl font-bold mb-2">{{name}}</h1>
+                {{/if}}
+                {{#if title}}
+                <p class="text-gray-600">{{title}}</p>
+                {{/if}}
+            </div>
+
+            <nav>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="scroll-progress" id="scrollProgress"></div>
+
+            {{#if about_us}}
+            <section id="about" class="section">
+                <h2 class="section-title">About Me</h2>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <p class="text-lg">{{about_us}}</p>
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if skills}}
+            <section id="skills" class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skill-grid">
+                    {{#if skills.frontend}}
+                    <div class="skill-category">
+                        <h3 class="text-lg font-semibold mb-3">Frontend Development</h3>
+                        <div>
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.backend}}
+                    <div class="skill-category">
+                        <h3 class="text-lg font-semibold mb-3">Backend Development</h3>
+                        <div>
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-category">
+                        <h3 class="text-lg font-semibold mb-3">Mobile Development</h3>
+                        <div>
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.devops}}
+                    <div class="skill-category">
+                        <h3 class="text-lg font-semibold mb-3">DevOps</h3>
+                        <div>
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section id="experience" class="section">
+                <h2 class="section-title">Professional Experience</h2>
+                {{#each experience}}
+                <div class="experience-card">
+                    <h3 class="text-xl font-semibold">{{title}}</h3>
+                    <h4 class="text-lg text-gray-600">{{company}}</h4>
+                    <p class="text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                    {{#if responsibilities}}
+                    <ul class="space-y-2">
+                        {{#each responsibilities}}
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-2"></span>
+                            {{this}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section id="projects" class="section">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="project-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="text-xl font-semibold mb-2">{{name}}</h3>
+                            <p class="text-gray-600 mb-4">{{description}}</p>
+                            {{#if features}}
+                            <div class="feature-list">
+                                {{#each features}}
+                                <span class="feature-tag">{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section id="certifications" class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="cert-grid">
+                    {{#each certifications}}
+                    <div class="cert-card">
+                        <h3 class="text-lg font-semibold">{{name}}</h3>
+                        <p class="text-gray-600">{{issuer}}</p>
+                        <p class="text-gray-500 text-sm mt-2">{{date}}</p>
+                        {{#if credential_id}}
+                        <p class="text-gray-400 text-sm mt-1">ID: {{credential_id}}</p>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.transform = `scaleX(${scrolled}%)`;
+        });
+    </script>
+</body>
+</html>

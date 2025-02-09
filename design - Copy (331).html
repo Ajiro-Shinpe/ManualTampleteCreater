@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - {{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anybody:wght@400;800&family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --accent: #ff3c00;
+            --secondary: #ffeb00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.4;
+        }
+
+        /* Header Section */
+        .header {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            min-height: 100vh;
+            padding: 2vw;
+            gap: 2vw;
+            background: var(--black);
+            position: relative;
+        }
+
+        .header::before {
+            content: "SCROLL ↓";
+            position: fixed;
+            bottom: 2vw;
+            right: 2vw;
+            color: var(--white);
+            font-size: 1rem;
+            writing-mode: vertical-rl;
+            animation: blink 1s step-end infinite;
+        }
+
+        .name-block {
+            grid-column: 1 / 8;
+            grid-row: 2 / 4;
+            background: var(--white);
+            padding: 2vw;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+        }
+
+        .name {
+            font-family: 'Anybody', cursive;
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: var(--black);
+            mix-blend-mode: difference;
+        }
+
+        .title-block {
+            grid-column: 6 / -1;
+            grid-row: 3 / 5;
+            background: var(--accent);
+            padding: 2vw;
+            color: var(--white);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            transform: rotate(2deg);
+            z-index: 2;
+        }
+
+        .about-block {
+            grid-column: 2 / 11;
+            grid-row: 5 / 8;
+            background: var(--white);
+            padding: 3vw;
+            font-size: 1.2rem;
+            border: 5px solid var(--black);
+            position: relative;
+        }
+
+        .about-block::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: -1rem;
+            bottom: -1rem;
+            background: var(--secondary);
+            z-index: -1;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 4vw 2vw;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2vw;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--white),
+                var(--white) 20px,
+                #f0f0f0 20px,
+                #f0f0f0 40px
+            );
+        }
+
+        .skill-category {
+            background: var(--black);
+            color: var(--white);
+            padding: 2vw;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateX(10px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Anybody', cursive;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            border-bottom: 5px solid var(--accent);
+            padding-bottom: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '⬤';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 0.8rem;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border: 2px solid var(--black);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .name-block, .title-block, .about-block {
+                grid-column: 1 / -1;
+                grid-row: auto;
+            }
+
+            .title-block {
+                transform: none;
+            }
+
+            .about-block {
+                margin: 2rem 0;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="name-block">
+            <h1 class="name">{{name}}</h1>
+        </div>
+        <div class="title-block">
+            <p>{{title}}</p>
+        </div>
+        <div class="about-block">
+            <p>{{about_us}}</p>
+        </div>
+    </header>
+
+    <section class="skills">
+        {{#if skills.frontend}}
+        <div class="skill-category">
+            <h3>Frontend</h3>
+            <ul class="skill-list">
+                {{#each skills.frontend}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+
+        {{#if skills.backend}}
+        <div class="skill-category">
+            <h3>Backend</h3>
+            <ul class="skill-list">
+                {{#each skills.backend}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+
+        {{#if skills.mobileDevelopment}}
+        <div class="skill-category">
+            <h3>Mobile</h3>
+            <ul class="skill-list">
+                {{#each skills.mobileDevelopment}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+
+        {{#if skills.devops}}
+        <div class="skill-category">
+            <h3>DevOps</h3>
+            <ul class="skill-list">
+                {{#each skills.devops}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+    </section>
+</body>
+</html>

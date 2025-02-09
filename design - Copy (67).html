@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #f3f3f3;
+            --primary: #232946;
+            --secondary: #eebbc3;
+            --shadow-light: rgba(255, 255, 255, 0.7);
+            --shadow-dark: rgba(0, 0, 0, 0.1);
+            --card-radius: 15px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: var(--bg-color);
+            padding: 40px;
+            border-radius: var(--card-radius);
+            box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-light);
+        }
+
+        .profile {
+            text-align: center;
+        }
+
+        .profile h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .profile p {
+            color: gray;
+            font-size: 1.1rem;
+        }
+
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .contact a {
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: var(--bg-color);
+            box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 15px var(--shadow-dark), -6px -6px 15px var(--shadow-light);
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .card {
+            background: var(--bg-color);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: var(--card-radius);
+            box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 15px var(--shadow-dark), -6px -6px 15px var(--shadow-light);
+        }
+
+        .tech-stack span {
+            padding: 5px 10px;
+            background: var(--secondary);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: white;
+            margin-right: 5px;
+        }
+
+        .skills-bar {
+            background: #ddd;
+            height: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skills-bar div {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile">
+            <h1>{{name}}</h1>
+            <p>{{title}}</p>
+            {{#if about_us}}
+            <p>{{about_us}}</p>
+            {{/if}}
+
+            {{#if contact}}
+            <div class="contact">
+                {{#each contact}}
+                <a href="#">{{this}}</a>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+            <h2>Experience</h2>
+            {{#each experience}}
+            <div class="card">
+                <h3>{{title}}</h3>
+                <p><strong>{{company}}</strong> ({{date_start}} - {{date_end}})</p>
+                {{#if description}}
+                <p>{{description}}</p>
+                {{else}}
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Projects -->
+        <div class="section">
+            <h2>Projects</h2>
+            {{#each projects}}
+            <div class="card">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+                <div class="tech-stack">
+                    {{#each tech_stack}}
+                    <span>{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Skills -->
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="card">
+                {{#each skills}}
+                <div>
+                    <p><strong>{{@key}}</strong></p>
+                    <div class="skills-bar">
+                        <div style="width: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <h2>Education</h2>
+            {{#each education}}
+            <div class="card">
+                <h3>{{degree}}</h3>
+                <p><strong>{{institution}}</strong> ({{date_start}} - {{date_end}})</p>
+                {{#if details}}
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+
+</body>
+</html>

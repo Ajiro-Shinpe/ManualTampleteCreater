@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - {{title}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFA500;
+            --secondary-color: #00BFFF;
+            --accent-color: #FF69B4;
+            --background-color: #F0F8FF;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            margin: 3rem auto;
+        }
+
+        .section {
+            background-color: #FFFFFF;
+            border-radius: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .name-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .about-us {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+        }
+
+        .skill-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: "◆";
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .experience-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .experience-item {
+            background-color: #F5F5F5;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0.5rem;
+            background-color: var(--accent-color);
+        }
+
+        .experience-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .experience-company,
+        .experience-date {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-responsibilities {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background-color: #F5F5F5;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-features li {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .project-features li::before {
+            content: "▪";
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center">
+                    {{#if profile_image}}
+                    <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+                    {{/if}}
+                </div>
+                <div class="col-md-8">
+                    <h1 class="name-title">{{name}}</h1>
+                    <p class="title">{{title}}</p>
+                    <p class="about-us">{{about_us}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skill-section">
+                {{#if skills.frontend}}
+                <div>
+                    <h3>Frontend</h3>
+                    <ul class="skill-list">
+                        {{#each skills.frontend}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div>
+                    <h3>Backend</h3>
+                    <ul class="skill-list">
+                        {{#each skills.backend}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div>
+                    <h3>Mobile Development</h3>
+                    <ul class="skill-list">
+                        {{#each skills.mobileDevelopment}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div>
+                    <h3>DevOps</h3>
+                    <ul class="skill-list">
+                        {{#each skills.devops}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-section">
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3 class="experience-title">{{title}}</h3>
+                    <p class="experience-company">{{company}}</p>
+                    <p class="experience-date">{{date_start}} - {{date_end}}</p>
+                    <div class="experience-responsibilities">
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">My Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{description}}</p>
+                    <ul class="project-features">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

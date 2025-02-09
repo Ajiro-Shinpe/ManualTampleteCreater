@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF7F50;
+            --secondary: #40E0D0;
+            --accent: #FFD700;
+            --dark: #1A1A1A;
+            --light: #F0F0F0;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Navigation Dots */
+    .nav-dots {
+        position: fixed;
+        top: 50%;
+        right: 2rem;
+        transform: translateY(-50%);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--muted);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .nav-dot:hover, .nav-dot.active {
+        background: var(--primary);
+        transform: scale(1.2);
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, var(--bg), var(--card));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+    }
+
+    .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        border: 4px solid var(--primary);
+        padding: 4px;
+    }
+
+    .name {
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        font-size: 1.2rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+    }
+
+    /* Section Styles */
+    .section {
+        padding: 4rem 0;
+    }
+
+    .section-content {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .skill-category {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+
+    .skill-category-title {
+        font-size: 1.2rem;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+    }
+
+    .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .skill-tag {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+        background: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    /* Experience and Projects Sections */
+    .experience-grid, .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .card-subtitle span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .card-list {
+        list-style: none;
+    }
+
+    .card-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--text);
+    }
+
+    .card-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem;
+        }
+
+        .nav-dots {
+            display: none;
+        }
+
+        .name {
+            font-size: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <nav class="nav-dots">
+    
+    <div class="nav-dot active" onclick="document.getElementById('hero').scrollIntoView({behavior: 'smooth'})"></div>
+    
+    <div class="nav-dot" onclick="document.getElementById('skills').scrollIntoView({behavior: 'smooth'})"></div>
+    
+    <div class="nav-dot" onclick="document.getElementById('experience').scrollIntoView({behavior: 'smooth'})"></div>
+    
+    <div class="nav-dot" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})"></div>
+    
+    </nav>
+    
+<div class="container">
+        <section id="hero" class="hero-section">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+            {{else}}
+            <div class="profile-image" style="background: var(--card); display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user fa-3x" style="color: var(--primary);"></i>
+            </div>
+            {{/if}}
+            {{#if name}}
+            <h1 class="name">{{name}}</h1>
+            {{/if}}
+            {{#if title}}
+            <div class="title">{{title}}</div>
+            {{/if}}
+        </section>
+    
+        {{#if skills}}
+        <section id="skills" class="section">
+            <div class="section-content">
+                <h2 class="section-title"><i class="fas fa-code"></i>Technical Skills</h2>
+                <div class="skills-grid">
+                    {{#if skills.frontend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Frontend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.backend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Backend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Mobile Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+    
+                    {{#if skills.devops}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">DevOps & Cloud</h3>
+                        <div class="skill-tags">
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if experience}}
+        <section id="experience" class="section">
+            <div class="section-content">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
+                <div class="experience-grid">
+                    {{#each experience}}
+                    <div class="card">
+                        <h3 class="card-title">{{title}}</h3>
+                        <div class="card-subtitle">
+                            <span><i class="fas fa-building"></i>{{company}}</span>
+                            {{#if date_start}}
+                            <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
+                            {{/if}}
+                        </div>
+                        {{#if responsibilities}}
+                        <ul class="card-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    
+        {{#if projects}}
+        <section id="projects" class="section">
+            <div class="section-content">
+                <h2 class="section-title"><i class="fas fa-rocket"></i>Projects</h2>
+                <div class="projects-grid">
+                    {{#each projects}}
+                    <div class="card">
+                        <h3 class="card-title">{{name}}</h3>
+                        {{#if description}}
+                        <p style="color: var(--muted); margin-bottom: 1rem;">{{description}}</p>
+                        {{/if}}
+                        {{#if features}}
+                        <ul class="card-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    </div>
+    </body>
+    
+    </html>
+    

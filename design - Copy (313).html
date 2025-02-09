@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #009688;
+      --secondary-color: #FF9800;
+      --accent-color: #4CAF50;
+      --text-color: #333333;
+      --background-color: #FAFAFA;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-name {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .profile-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+
+    .profile-description {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .section {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 30px;
+    }
+
+    .experience-list,
+    .project-list,
+    .education-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .experience-item,
+    .project-item,
+    .education-item {
+      margin-bottom: 30px;
+    }
+
+    .experience-title,
+    .project-title,
+    .education-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+
+    .experience-company,
+    .education-info {
+      font-size: 16px;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .experience-date,
+    .education-date {
+      font-size: 14px;
+      color: var(--secondary-color);
+    }
+
+    .project-description {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .skill-item {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .skill-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .skill-progress {
+      width: 100%;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background-color: #fff;
+      width: var(--skill-percentage);
+      transition: width 1s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 30px;
+      }
+
+      .profile-info {
+        margin-bottom: 20px;
+      }
+
+      .profile-image {
+        width: 90px;
+        height: 90px;
+        margin-right: 20px;
+      }
+
+      .profile-name {
+        font-size: 28px;
+      }
+
+      .profile-title {
+        font-size: 16px;
+      }
+
+      .profile-description {
+        font-size: 14px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .experience-title,
+      .project-title,
+      .education-title {
+        font-size: 16px;
+      }
+
+      .experience-company,
+      .education-info,
+      .project-description {
+        font-size: 14px;
+      }
+
+      .experience-date,
+      .education-date {
+        font-size: 12px;
+      }
+
+      .tech-tag {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      .skill-name {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="profile-info">
+        {{#if profile_image}}
+        <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+        {{/if}}
+        <div>
+          <h1 class="profile-name">{{name}}</h1>
+          <h2 class="profile-title">{{title}}</h2>
+        </div>
+      </div>
+      {{#if about_us}}
+      <p class="profile-description">{{about_us}}</p>
+      {{/if}}
+    </div>
+
+    <div class="section">
+      {{#if experience.length}}
+      <h2 class="section-title">Experience</h2>
+      <ul class="experience-list">
+        {{#each experience}}
+        <li class="experience-item">
+          <h3 class="experience-title">{{title}}</h3>
+          <p class="experience-company">{{company}}</p>
+          <p class="experience-date">{{date_start}} - {{date_end}}</p>
+          {{#if description}}
+          <p>{{description}}</p>
+          {{else}}
+          <ul>
+            {{#each responsibilities}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+
+      {{#if projects.length}}
+      <h2 class="section-title">Projects</h2>
+      <ul class="project-list">
+        {{#each projects}}
+        <li class="project-item">
+          <h3 class="project-title">{{name}}</h3>
+          <p class="project-description">{{description}}</p>
+          <div class="tech-stack">
+            {{#each tech_stack}}
+            <span class="tech-tag">{{this}}</span>
+            {{/each}}
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+
+    <div class="section">
+      {{#if skills}}
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        {{#each skills}}
+        <div class="skill-item">
+          <h3 class="skill-name">{{@key}}</h3>
+          <div class="skill-progress">
+            <div class="skill-bar" style="--skill-percentage: {{this}};"></div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{#if education.length}}
+      <h2 class="section-title">Education</h2>
+      <ul class="education-list">
+        {{#each education}}
+        <li class="education-item">
+          <h3 class="education-title">{{degree}}</h3>
+          <p class="education-info">{{institution}}</p>
+          <p class="education-date">{{date_start}} - {{date_end}}</p>
+          {{#if details}}
+          <ul>
+            {{#each details}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+  </div>
+</body>
+</html>

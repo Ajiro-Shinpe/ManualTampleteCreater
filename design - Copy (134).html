@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2e6da4;
+            --secondary: #f1c40f;
+            --bg-light: #f9f9f9;
+            --border-color: #ddd;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg-light);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background: var(--primary);
+            color: #fff;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-dark);
+            margin-right: 2rem;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category-title {
+            color: var(--primary-dark);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.75rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .item-subtitle {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .responsibilities,
+        .features-list {
+            list-style: none;
+            margin-left: 1.25rem;
+        }
+
+        .responsibilities li,
+        .features-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .responsibilities li::before,
+        .features-list li::before {
+            content: "•"; /* Use a bullet */
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .project-description {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .profile-picture {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-picture">
+            {{/if}}
+            <div class="header-info">
+                {{#if name}}
+                <h1 class="name">{{name}}</h1>
+                {{/if}}
+
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+            </div>
+        </header>
+
+        <div class="section">
+            {{#if about_us}}
+            <p>{{about_us}}</p>
+            {{/if}}
+        </div>
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            {{#if skills.frontend}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Frontend Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.frontend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Backend Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.backend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Mobile Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">DevOps & Cloud</h3>
+                <div class="skills-grid">
+                    {{#each skills.devops}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            {{#each experience}}
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">{{title}}</div>
+                    <div class="item-subtitle">
+                        <span><i class="fas fa-building"></i> {{company}}</span>
+                        {{#if date_start}}
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                        {{/if}}
+                        {{#if location}}
+                        <span><i class="fas fa-map-marker-alt"></i> {{location}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+                {{#if responsibilities}}
+                <ul class="responsibilities">
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">{{institution}}</div>
+                    <div class="item-subtitle">
+                        <span><i class="fas fa-university"></i> {{degree}}</span>
+                        {{#if date_start}}
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+                {{#if details}}
+                <ul class="features-list">
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">{{name}}</div>
+                    <div class="item-subtitle">
+                        <span><i class="fas fa-certificate"></i> {{issuer}}</span>
+                        {{#if date}}
+                        <span><i class="fas fa-calendar"></i> {{date}}</span>
+                        {{/if}}
+                        {{#if expire}}
+                        <span><i class="fas fa-calendar"></i> Expires: {{expire}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            {{#each projects}}
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">{{name}}</div>
+                </div>
+                {{#if description}}
+                <div class="project-description">{{description}}</div>
+                {{/if}}
+                {{#if features}}
+                <ul class="features-list">
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+    </div>
+</body>
+
+</html>

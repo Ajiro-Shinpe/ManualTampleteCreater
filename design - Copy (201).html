@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            color: #f1f5f9;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .contact-list li svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            color: #64748b;
+        }
+
+        .main-content {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .timeline-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            height: 0.5rem;
+            background: #64748b;
+            border-radius: 0.25rem;
+            position: relative;
+        }
+
+        .skill-level-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: #a5b4fc;
+            border-radius: 0.25rem;
+            width: var(--skill-percentage, 80%);
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="sidebar">
+            <div class="profile-card">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                {{/if}}
+                <h1 class="profile-name">{{name}}</h1>
+                <p class="profile-title">{{title}}</p>
+            </div>
+
+            {{#if contact}}
+            <div>
+                <h2 class="section-title">Contact</h2>
+                <ul class="contact-list">
+                    {{#each contact}}
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="{{this.icon}}" />
+                        </svg>
+                        <span>{{this.text}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="main-content">
+            {{#if about_us}}
+            <div>
+                <h2 class="section-title">About Me</h2>
+                <p>{{about_us}}</p>
+            </div>
+            {{/if}}
+
+            {{#if experience}}
+            <div>
+                <h2 class="section-title">Experience</h2>
+                <ul class="timeline">
+                    {{#each experience}}
+                    <li class="timeline-item">
+                        <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                        <div class="timeline-content">
+                            <h3>{{title}}</h3>
+                            <p>{{company}}</p>
+                            <ul>
+                                {{#each responsibilities}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if projects}}
+            <div>
+                <h2 class="section-title">Projects</h2>
+                <ul class="timeline">
+                    {{#each projects}}
+                    <li class="timeline-item">
+                        <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                        <div class="timeline-content">
+                            <h3>{{name}}</h3>
+                            <p>{{description}}</p>
+                            <div>
+                                <strong>Tech Stack:</strong>
+                                {{#each tech_stack}}
+                                <span class="badge badge-primary">{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills}}
+            <div>
+                <h2 class="section-title">Skills</h2>
+                <ul class="skill-list">
+                    {{#each skills}}
+                    <li class="skill-item">
+                        <div class="skill-name">{{@key}}</div>
+                        <div class="skill-level">
+                            <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div>
+                <h2 class="section-title">Education</h2>
+                <ul class="timeline">
+                    {{#each education}}
+                    <li class="timeline-item">
+                        <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                        <div class="timeline-content">
+                            <h3>{{degree}}</h3>
+                            <p>{{institution}}</p>
+                            {{#if details}}
+                            <ul>
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

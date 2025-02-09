@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50; /* Dark blue/gray */
+            --secondary: #3498db; /* Bright blue */
+            --background: #ecf0f1; /* Light gray */
+            --text: #222; /* Dark text */
+            --accent: #e74c3c; /* Red/orange accent */
+            --card-bg: #fff; /* White for cards */
+            --shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure footer sticks to bottom */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 2rem auto;
+            flex: 1; /* Allow content to expand */
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 1rem 1rem 0 0; /* Rounded top corners */
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 0 0 1rem 1rem; /* Rounded bottom corners */
+            box-shadow: 0 4px 8px var(--shadow);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .profile-card h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-left: 0.5rem; /* Small indent */
+            border-left: 4px solid var(--accent); /* Accent border */
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px var(--shadow);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .experience-list,
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on smaller screens */
+            gap: 1.5rem;
+        }
+
+        .experience-item,
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .experience-item:hover,
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+        .project-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-card p {
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 0 0 1rem 1rem; /* Rounded bottom corners */
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>{{name}}</h1>
+            <p>{{profession}}</p>
+        </header>
+
+        <div class="profile-card">
+            <img src="{{profile_picture_url}}" alt="Profile Picture">
+            <h2>{{name}}</h2>
+            <p>{{location}}</p>
+            <p>{{about_us}}</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                {{#each skills}}
+                <div class="skill-item">{{this}}</div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-list">
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}}</h3>
+                    <a href="{{company_url}}">{{company}}</a>
+                    <p>{{date_start}} - {{date_end}}</p>
+                    <p>{{description}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}">
+                    {{/if}}
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <a href="{{url}}">Learn More</a>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

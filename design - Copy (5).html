@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            color: #222;
+            font-size: 14px;
+            line-height: 26px;
+            background-color: #eee;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 1px 1px 2px #DAD7D7;
+            border-radius: 3px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .full-name {
+            font-size: 40px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section__title {
+            letter-spacing: 2px;
+            color: #54AFE4;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .responsibilities-list {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .responsibilities-list li {
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background-color: #fff;
+            border-bottom: none;
+            padding: 20px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            {{#if name}}
+            <div class="full-name">
+                <span class="first-name">{{name}}</span>
+            </div>
+            {{/if}}
+            
+            <div class="contact-info">
+                <span class="email">Email: </span>
+                <span class="email-val">{{email}}</span>
+                <span class="separator">|</span>
+                <span class="phone">Phone: </span>
+                <span class="phone-val">{{phone}}</span>
+            </div>
+
+            {{#if about_us}}
+            <div class="about">
+                <span class="position">About</span>
+                <span class="desc">
+                    <p>{{about_us}}</p>
+                </span>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="details">
+            {{#if skills}}
+            <div class="section">
+                <div class="section__title">Skills</div>
+                <div class="row">
+                    {{#if skills.frontend}}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">Frontend</div>
+                            </div>
+                            <div class="card-body">
+                                {{skills.frontend}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if skills.backend}}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">Backend</div>
+                            </div>
+                            <div class="card-body">
+                                {{skills.backend}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if skills.mobileDevelopment}}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">Mobile Development</div>
+                            </div>
+                            <div class="card-body">
+                                {{skills.mobileDevelopment}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if skills.devops}}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">DevOps</div>
+                            </div>
+                            <div class="card-body">
+                                {{skills.devops}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if experience}}
+            <div class="section">
+                <div class="section__title">Experience</div>
+                <div class="section__list">
+                    {{#each experience}}
+                    <div class="section__list-item">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">{{title}}</div>
+                                <div class="addr"><a href="{{company_url}}">{{company}}</a></div>
+                                <div class="duration">Location: {{location}} | Duration: {{date_start}} - {{date_end}}</div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="responsibilities-list">
+                                    {{#each responsibilities}}
+                                    <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div class="section">
+                <div class="section__title">Education</div>
+                <div class="section__list">
+                    {{#each education}}
+                    <div class="section__list-item">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">{{institution}}</div>
+                                <div class="duration">{{date_start}} - {{date_end}}</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="name">{{degree}}</div>
+                                {{#if details}}
+                                <ul class="responsibilities-list">
+                                    {{#each details}}
+                                    <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if certifications}}
+            <div class="section">
+                <div class="section__title">Certifications</div>
+                <div class="section__list">
+                    {{#each certifications}}
+                    <div class="section__list-item">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name">{{name}}</div>
+                                <div class="addr">Issued by: {{issuer}}</div>
+                                <div class="duration">Date: {{date}} | Expiry: {{expire}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if projects}}
+            <div class="section">
+                <div class="section__title">Projects</div>
+                <div class="section__list">
+                    {{#each projects}}
+                    <div class="section__list-item">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="name"><a href="{{url}}">{{name}}</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text">{{description}}</div>
+                                {{#if features}}
+                                <ul class="responsibilities-list">
+                                    {{#each features}}
+                                    <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f0f2f5;
+            --secondary-bg: #ffffff;
+            --accent-1: #FF6B6B;
+            --accent-2: #4ECDC4;
+            --accent-3: #45B7D1;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            gap: 2rem;
+        }
+
+        .header {
+            grid-column: 1 / span 24;
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            grid-column: 1 / span 8;
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-1);
+            opacity: 0.1;
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card {
+            grid-column: 9 / span 16;
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .skills-section {
+            grid-column: 1 / span 14;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-section {
+            grid-column: 15 / span 10;
+        }
+
+        .projects-section {
+            grid-column: 1 / span 24;
+        }
+
+        .certifications-section {
+            grid-column: 1 / span 24;
+        }
+
+        .section-card {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--accent-2);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-category {
+            padding: 1.5rem;
+            background: var(--primary-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-3);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem;
+            background: var(--primary-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-1);
+            border-radius: 50%;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--primary-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .certification-card {
+            background: var(--primary-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 1400px) {
+            .header {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card,
+            .about-card {
+                grid-column: 1 / -1;
+            }
+
+            .skills-section,
+            .experience-section {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if name}}
+        <header class="header">
+            <div class="profile-card">
+                {{#if profile_image}}
+                <div class="profile-image">
+                    <img src="{{profile_image}}" alt="{{name}}">
+                </div>
+                {{/if}}
+                <h1 class="name">{{name}}</h1>
+                {{#if title}}
+                <p class="title">{{title}}</p>
+                {{/if}}
+            </div>
+            {{#if about_us}}
+            <div class="about-card">
+                <p>{{about_us}}</p>
+            </div>
+            {{/if}}
+        </header>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="skills-section">
+            <div class="section-card">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    {{#if skills.frontend}}
+                    <div class="skill-category">
+                        <h3>Frontend Development</h3>
+                        <div class="skill-list">
+                            {{#each skills.frontend}}
+                            <span class="skill-item">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.backend}}
+                    <div class="skill-category">
+                        <h3>Backend Development</h3>
+                        <div class="skill-list">
+                            {{#each skills.backend}}
+                            <span class="skill-item">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="experience-section">
+            <div class="section-card">
+                <h2 class="section-title">Experience</h2>
+                <div class="timeline">
+                    {{#each experience}}
+                    <div class="timeline-item">
+                        <h3>{{title}}</h3>
+                        <p>{{company}}</p>
+                        <p>{{date_start}} - {{date_end}}</p>
+                        {{#if responsibilities}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="projects-section">
+            <div class="section-card">
+                <h2 class="section-title">Projects</h2>
+                <div class="project-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3>{{name}}</h3>
+                        <p>{{description}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="certifications-section">
+            <div class="section-card">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    {{#each certifications}}
+                    <div class="certification-card">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}} - {{date}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} - Radiant Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Rubik:wght@400;500;700&display=swap');
+
+    :root {
+      --primary: #9b59b6;
+      --secondary: #3498db;
+      --background: #f5f5f5;
+      --surface: #ffffff;
+      --text: #333333;
+      --muted: #666666;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portfolio-container {
+      max-width: 1200px;
+      width: 90%;
+      margin: 4rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 3rem;
+    }
+
+    .card {
+      background-color: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .header h1 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .title {
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    .about-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-content h2 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .about-content p {
+      color: var(--muted);
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-gap: 1rem;
+    }
+
+    .skill-card {
+      background-color: rgba(var(--primary), 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: scale(1.05);
+    }
+
+    .skill-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .experience-card {
+      background-color: rgba(var(--secondary), 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .experience-card h2 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .experience-card p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 2rem;
+    }
+
+    .project-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .project-card h3 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 1.5rem;
+    }
+
+    .cert-card {
+      background-color: rgba(var(--secondary), 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cert-card h3 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-container {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    {{#if name}}
+    <h1>{{name}}</h1>
+    {{/if}}
+    {{#if title}}
+    <div class="title">{{title}}</div>
+    {{/if}}
+  </div>
+
+  <div class="portfolio-container">
+    {{#if about_us}}
+    <div class="card about-card">
+      <div>
+        <img src="about-image.jpg" alt="About Image" width="100%" height="auto" />
+      </div>
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>{{about_us}}</p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if skills}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 2rem;">Skills & Expertise</h2>
+      <div class="skill-grid">
+        {{#if skills.frontend}}
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <p>{{join skills.frontend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.backend}}
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <p>{{join skills.backend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.devops}}
+        <div class="skill-card">
+          <h3>DevOps</h3>
+          <p>{{join skills.devops ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.mobileDevelopment}}
+        <div class="skill-card">
+          <h3>Mobile</h3>
+          <p>{{join skills.mobileDevelopment ", "}}</p>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if experience}}
+    <div class="card experience-card">
+      <h2>Experience</h2>
+      {{#each experience}}
+      <div>
+        <h3>{{title}}</h3>
+        <p>{{company}} | {{date_start}} - {{date_end}}</p>
+        {{#if responsibilities}}
+        <ul class="feature-list">
+          {{#each responsibilities}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if projects}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 2rem;">Projects</h2>
+      <div class="project-grid">
+        {{#each projects}}
+        <div class="project-card">
+          <h3>{{name}}</h3>
+          <p>{{description}}</p>
+          {{#if features}}
+          <ul class="feature-list">
+            {{#each features}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if certifications}}
+    <div class="card">
+      <h2 style="color: var(--secondary); margin-bottom: 2rem;">Certifications</h2>
+      <div class="cert-grid">
+        {{#each certifications}}
+        <div class="cert-card">
+          <h3>{{name}}</h3>
+          <p>{{issuer}} | {{date}}</p>
+          {{#if credential_id}}
+          <p>ID: {{credential_id}}</p>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</body>
+</html>

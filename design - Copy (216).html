@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+        :root {
+            --primary: #2dd4bf;
+            --secondary: #4f46e5;
+            --background: #fafafa;
+            --text: #18181b;
+            --muted: #71717a;
+            --border: #e4e4e7;
+        }
+
+        * {
+            scroll-behavior: smooth;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .sticky-sidebar {
+            position: sticky;
+            top: 2rem;
+            height: calc(100vh - 4rem);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 1000;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 4rem 0;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(79, 70, 229, 0.1));
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        .experience-card {
+            position: relative;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.6s ease;
+        }
+
+        .experience-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .cert-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(45, 212, 191, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .cert-card:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        @media (max-width: 768px) {
+            .sticky-sidebar {
+                position: relative;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Sidebar -->
+            <aside class="lg:col-span-3">
+                <div class="sticky-sidebar space-y-8">
+                    {{#if name}}
+                    <div data-aos="fade-right">
+                        <h1 class="text-4xl font-bold mb-2">{{name}}</h1>
+                        {{#if title}}
+                        <p class="text-muted">{{title}}</p>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+
+                    <nav class="space-y-4">
+                        <a href="#about" class="block text-muted hover:text-primary transition-colors">About</a>
+                        <a href="#skills" class="block text-muted hover:text-primary transition-colors">Skills</a>
+                        <a href="#experience" class="block text-muted hover:text-primary transition-colors">Experience</a>
+                        <a href="#projects" class="block text-muted hover:text-primary transition-colors">Projects</a>
+                        <a href="#certifications" class="block text-muted hover:text-primary transition-colors">Certifications</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="lg:col-span-9">
+                {{#if about_us}}
+                <section id="about" class="mb-20" data-aos="fade-up">
+                    <h2 class="text-3xl font-bold mb-8">About</h2>
+                    <p class="text-lg leading-relaxed text-muted">{{about_us}}</p>
+                </section>
+                <div class="section-divider"></div>
+                {{/if}}
+
+                {{#if skills}}
+                <section id="skills" class="mb-20">
+                    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Skills</h2>
+                    
+                    {{#if skills.frontend}}
+                    <div class="mb-8" data-aos="fade-up">
+                        <h3 class="text-xl font-semibold mb-4">Frontend Development</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.backend}}
+                    <div class="mb-8" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-semibold mb-4">Backend Development</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.backend}}
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.mobileDevelopment}}
+                    <div class="mb-8" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-semibold mb-4">Mobile Development</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.devops}}
+                    <div class="mb-8" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-xl font-semibold mb-4">DevOps</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.devops}}
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </section>
+                <div class="section-divider"></div>
+                {{/if}}
+
+                {{#if experience}}
+                <section id="experience" class="mb-20">
+                    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Experience</h2>
+                    
+                    {{#each experience}}
+                    <div class="experience-card pl-8 mb-12" data-aos="fade-up">
+                        <h3 class="text-xl font-semibold">{{title}}</h3>
+                        <p class="text-muted mb-2">{{company}}</p>
+                        <p class="text-sm text-muted mb-4">{{date_start}} - {{date_end}}</p>
+                        
+                        {{#if responsibilities}}
+                        <ul class="space-y-2">
+                            {{#each responsibilities}}
+                            <li class="text-muted">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </section>
+                <div class="section-divider"></div>
+                {{/if}}
+
+                {{#if projects}}
+                <section id="projects" class="mb-20">
+                    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Projects</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{#each projects}}
+                        <div class="project-card p-6 rounded-lg" data-aos="fade-up">
+                            <h3 class="text-xl font-semibold mb-2">{{name}}</h3>
+                            <p class="text-muted mb-4">{{description}}</p>
+                            
+                            {{#if features}}
+                            <div class="flex flex-wrap gap-2">
+                                {{#each features}}
+                                <span class="text-xs px-2 py-1 rounded-full bg-gray-100">{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                <div class="section-divider"></div>
+                {{/if}}
+
+                {{#if certifications}}
+                <section id="certifications">
+                    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Certifications</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{#each certifications}}
+                        <div class="cert-card p-6 rounded-lg bg-white" data-aos="fade-up">
+                            <h3 class="text-lg font-semibold">{{name}}</h3>
+                            <p class="text-muted">{{issuer}}</p>
+                            <p class="text-sm text-muted mt-2">{{date}}</p>
+                            {{#if credential_id}}
+                            <p class="text-xs text-muted mt-1">ID: {{credential_id}}</p>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>

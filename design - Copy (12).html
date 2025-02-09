@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3B82F6; /* Blue */
+            --secondary: #10B981; /* Green */
+            --accent: #F59E0B; /* Orange */
+            --background: #F9FAFB;
+            --text: #1F2937;
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-info svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+        }
+
+        .section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill {
+            background: var(--background);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .experience-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .experience-item a:hover {
+            text-decoration: underline;
+        }
+
+        .experience-item .duration {
+            color: #6B7280;
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+
+        .responsibilities-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .responsibilities-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .responsibilities-list li::before {
+            content: '▹';
+            position: absolute;
+            left: -1rem;
+            color: var(--accent);
+        }
+
+        .project-card {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-card a:hover {
+            text-decoration: underline;
+        }
+
+        .education-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .education-item p {
+            color: #6B7280;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--background);
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>{{name}}</h1>
+            <p>{{about_us}}</p>
+            <div class="contact-info">
+                {{#if email}}
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    {{email}}
+                </span>
+                {{/if}}
+                {{#if phone}}
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    {{phone}}
+                </span>
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        {{#if skills}}
+        <div class="section">
+            <div class="section-title">Skills</div>
+            <div class="skills-grid">
+                {{#each skills}}
+                <div class="skill">{{this}}</div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Experience Section -->
+        {{#if experience}}
+        <div class="section">
+            <div class="section-title">Experience</div>
+            {{#each experience}}
+            <div class="experience-item">
+                <h3>{{title}}</h3>
+                <a href="{{company_url}}">{{company}}</a>
+                <div class="duration">{{date_start}} - {{date_end}}</div>
+                <ul class="responsibilities-list">
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- Projects Section -->
+        {{#if projects}}
+        <div class="section">
+            <div class="section-title">Projects</div>
+            {{#each projects}}
+            <div class="project-card">
+                <h3><a href="{{url}}">{{name}}</a></h3>
+                <p>{{description}}</p>
+                <ul class="responsibilities-list">
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- Education Section -->
+        {{#if education}}
+        <div class="section">
+            <div class="section-title">Education</div>
+            {{#each education}}
+            <div class="education-item">
+                <h3>{{institution}}</h3>
+                <p>{{degree}} | {{date_start}} - {{date_end}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; {{year}} {{name}}. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

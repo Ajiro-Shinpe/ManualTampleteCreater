@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1e1e1e; /* Dark background */
+            --card-color: #282828; /* Darker card background */
+            --text-color: #eee; /* Light text */
+            --accent-color: #00bcd4; /* Teal accent */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Stronger shadow */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1; /* Allow content to expand */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 10px var(--shadow-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem; /* Space between image and text */
+        }
+
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .profile-info {
+            flex: 1; /* Allow info to expand */
+        }
+        .profile-card h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            color: #aaa; /* Slightly lighter text */
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color); /* Accent underline */
+            padding-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background-color: var(--card-color);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .experience-list,
+        .projects-grid,
+        .education-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .experience-item,
+        .project-card,
+        .education-item {
+            background-color: var(--card-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .experience-item:hover,
+        .project-card:hover,
+        .education-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+        .project-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px var(--shadow-color);
+
+        }
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-card p {
+            color: #aaa;
+            opacity: 0.8;
+        }
+        .experience-item h3, .education-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .experience-item a, .education-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .experience-item a:hover, .education-item a:hover {
+            text-decoration: underline;
+        }
+        .experience-item .duration, .education-item .duration {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .responsibilities-list, .education-details {
+            list-style-type: disc;
+            margin-left: 1.25rem;
+            color: #aaa;
+        }
+
+        footer {
+            background-color: var(--card-color);
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid #333; /* Subtle border */
+            margin-top: auto; /* Push footer to bottom */
+            border-radius: 0.5rem 0.5rem 0 0;
+            box-shadow: 0 -2px 4px var(--shadow-color);
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{name}}</h1>
+            <p>{{profession}}</p>
+        </header>
+
+        <div class="profile-card">
+            <img src="{{profile_picture_url}}" alt="Profile Picture">
+            <div class="profile-info">
+                <h2>{{name}}</h2>
+                <p>{{location}}</p>
+                <p>{{about_us}}</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                {{#each skills}}
+                <div class="skill-item">{{this}}</div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-list">
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}}</h3>
+                    <a href="{{company_url}}">{{company}}</a>
+                    <div class="duration">{{date_start}} - {{date_end}}</div>
+                    <ul class="responsibilities-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}">
+                    {{/if}}
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul class="responsibilities-list">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    <a href="{{url}}" target="_blank">Learn More</a> </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-list">
+                {{#each education}}
+                <div class="education-item">
+                    <h3>{{institution}}</h3>
+                    <p>{{degree}}</p>
+                    <div class="duration">{{date_start}} - {{date_end}}</div>
+                    <ul class="education-details">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

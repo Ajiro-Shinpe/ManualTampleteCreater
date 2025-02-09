@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Glassmorphism Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --bg: #1a1a1a; /* Dark background */
+            --glass: rgba(255, 255, 255, 0.1); /* Glassmorphism background */
+            --text-primary: #f1f1f1; /* Light text */
+            --text-secondary: #a0a0a0; /* Gray text */
+            --accent: #ff6b6b; /* Bright accent color */
+            --border: rgba(255, 255, 255, 0.1); /* Light border */
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Glassmorphism shadow */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            max-width: 1400px;
+            width: 90%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-image i {
+            font-size: 5rem;
+            color: var(--text-secondary);
+        }
+
+        .name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .exp-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .exp-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-company {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .exp-list {
+            list-style: none;
+        }
+
+        .exp-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .exp-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid,
+            .exp-grid,
+            .projects-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        <aside class="sidebar">
+            <div class="profile">
+                {{#if profile_image}}
+                <div class="profile-image">
+                    <img src="{{profile_image}}" alt="Profile">
+                </div>
+                {{else}}
+                <div class="profile-image">
+                    <i class="fas fa-user"></i>
+                </div>
+                {{/if}}
+                {{#if name}}
+                <h1 class="name">{{name}}</h1>
+                {{/if}}
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+            </div>
+            {{#if about_us}}
+            <div class="quick-links">
+                <div class="quick-link">
+                    <i class="fas fa-user"></i>
+                    <span>{{about_us}}</span>
+                </div>
+            </div>
+            {{/if}}
+        </aside>
+
+        <main class="main-content">
+            {{#if skills}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i>Skills & Expertise</h2>
+                <div class="skills-grid">
+                    {{#if skills.frontend}}
+                    <div>
+                        <h3>Frontend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.backend}}
+                    <div>
+                        <h3>Backend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.devops}}
+                    <div>
+                        <h3>DevOps & Cloud</h3>
+                        <div class="skill-tags">
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.mobileDevelopment}}
+                    <div>
+                        <h3>Mobile Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i>Professional Experience</h2>
+                <div class="exp-grid">
+                    {{#each experience}}
+                    <div class="exp-card">
+                        <h3 class="exp-title">{{title}}</h3>
+                        <div class="exp-company">{{company}} | {{date_start}} - {{date_end}}</div>
+                        {{#if responsibilities}}
+                        <ul class="exp-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i>Featured Projects</h2>
+                <div class="projects-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p class="project-desc">{{description}}</p>
+                        {{#if features}}
+                        <ul class="exp-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-certificate"></i>Certifications & Awards</h2>
+                <div class="cert-grid">
+                    {{#each certifications}}
+                    <div class="cert-card">
+                        <h3 class="cert-title">{{name}}</h3>
+                        <div class="cert-desc">{{issuer}} | {{date}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </main>
+    </div>
+</body>
+</html>

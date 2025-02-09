@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #3498DB;
+            --color-secondary: #27AE60;
+            --color-accent: #E74C3C;
+            --color-neutral: #34495E;
+            --color-background: #ECF0F1;
+            --neon-glow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-neutral);
+        }
+
+        .sidebar {
+            background: var(--color-neutral);
+            min-height: 100vh;
+            position: fixed;
+            width: 300px;
+            padding: 2rem;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            padding: 2rem;
+        }
+
+        .neon-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+        }
+
+        .neon-card:hover {
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .hex-tag {
+            background: var(--color-primary);
+            color: white;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            margin: 0.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .hex-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--color-secondary);
+            border-radius: 2px;
+        }
+
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 300px;
+            right: 0;
+            height: 4px;
+            background: var(--color-accent);
+            transform-origin: 0;
+            z-index: 1000;
+        }
+
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            margin: 2rem 0;
+            border-radius: 2px;
+        }
+
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-neutral);
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.2);
+            background: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar text-white">
+        <div class="text-center mb-8">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="{{name}}" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white">
+            {{/if}}
+            <h1 class="text-2xl font-bold mb-2">{{name}}</h1>
+            <p class="text-sm opacity-80">{{title}}</p>
+        </div>
+        <div class="space-y-4">
+            <p class="text-sm leading-relaxed">{{about_us}}</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Skills Section -->
+        {{#if skills}}
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {{#if skills.frontend}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Frontend Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.frontend}}
+                        <span class="hex-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Backend Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.backend}}
+                        <span class="hex-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Mobile Development</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="hex-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-primary">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.devops}}
+                        <span class="hex-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        <div class="section-divider"></div>
+
+        <!-- Experience Section -->
+        {{#if experience}}
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Professional Experience</h2>
+            <div class="timeline space-y-8">
+                {{#each experience}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold">{{title}}</h3>
+                    <p class="text-lg text-secondary mb-2">{{company}}</p>
+                    <p class="text-sm text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                    {{#if responsibilities}}
+                    <ul class="space-y-2">
+                        {{#each responsibilities}}
+                        <li class="flex items-start">
+                            <span class="text-primary mr-2">▹</span>
+                            <span>{{this}}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        <div class="section-divider"></div>
+
+        <!-- Projects Section -->
+        {{#if projects}}
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Featured Projects</h2>
+            <div class="project-showcase">
+                {{#each projects}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold mb-3">{{name}}</h3>
+                    <p class="text-gray-600 mb-4">{{description}}</p>
+                    {{#if features}}
+                    <div class="space-y-2">
+                        {{#each features}}
+                        <span class="hex-tag text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Education Section -->
+        {{#if education}}
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{#each education}}
+                <div class="neon-card p-6">
+                    <h3 class="text-xl font-bold">{{title}}</h3>
+                    <p class="text-gray-600">{{institution}}</p>
+                    <p class="text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul class="space-y-2">
+                        {{#each details}}
+                        <li class="text-sm">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Certifications Section -->
+        {{#if certifications}}
+        <section>
+            <h2 class="text-3xl font-bold mb-8">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{#each certifications}}
+                <div class="neon-card p-6">
+                    <h3 class="text-lg font-bold mb-2">{{name}}</h3>
+                    <p class="text-gray-600">{{issuer}}</p>
+                    <p class="text-gray-500">{{date}}</p>
+                    {{#if credential_id}}
+                    <p class="text-sm text-gray-400 mt-2">ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </main>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav hidden md:block">
+        <a href="#skills" class="nav-dot"></a>
+        <a href="#experience" class="nav-dot"></a>
+        <a href="#projects" class="nav-dot"></a>
+        <a href="#education" class="nav-dot"></a>
+    </nav>
+</body>
+</html>

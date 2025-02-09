@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F0F0F3; /* Light Gray Background */
+            --text: #333; /* Dark Gray Text */
+            --shadow-light: 6px 6px 12px #c8c8cb, -6px -6px 12px #ffffff;
+            --shadow-dark: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+            --primary: #4f46e5; /* Indigo */
+            --secondary: #facc15; /* Yellow */
+
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: #777;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .card {
+            background-color: var(--bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            text-align: center;
+            background-color: var(--bg);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-dark);
+            transition: transform 0.2s;
+        }
+        .skill-item:hover{
+            transform: translateY(-5px);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            height: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: #ddd;
+            overflow: hidden;
+            box-shadow: inset var(--shadow-dark);
+        }
+
+        .skill-level-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: var(--skill-percentage, 0%);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0.75rem;
+            width: 2px;
+            background-color: #ccc;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--bg);
+            border: 3px solid var(--primary);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .timeline-content {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--bg);
+            box-shadow: var(--shadow-light);
+            margin-left: 2rem;
+        }
+        .timeline-date{
+            color: #777;
+            font-size: small;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s;
+            background-color: var(--bg);
+        }
+        .project-card:hover{
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: #777;
+        }
+        .project-features{
+            margin-top: 1rem;
+        }
+        .feature-tag{
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #eee;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+
+<div class="container">
+
+    <div class="profile">
+        {{#if profile_image}}
+        <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+        {{/if}}
+        {{#if name}}
+        <h1 class="profile-name">{{name}}</h1>
+        {{/if}}
+        {{#if title}}
+        <p class="profile-title">{{title}}</p>
+        {{/if}}
+        {{#if summary}}
+        <p>{{summary}}</p>
+        {{/if}}
+    </div>
+
+    {{#if about_us}}
+    <section class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="card">
+            <p>{{about_us}}</p>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="card">
+            <div class="skill-grid">
+                {{#if skills.frontend}}
+                {{#each skills.frontend}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if skills.backend}}
+                {{#each skills.backend}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                {{#each skills.mobileDevelopment}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if skills.devops}}
+                {{#each skills.devops}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="card">
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                    <div class="timeline-content">
+                        <h3>{{title}}</h3>
+                        <p>{{company}}</p>
+                        {{#if location}}
+                        <p>{{location}}</p>
+                        {{/if}}
+                        {{#if responsibilities}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="card">
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}" class="project-image">
+                    {{/if}}
+                    <div class="project-content">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p class="project-description">{{description}}</p>
+                        {{#if features}}
+                        <div class="project-features">
+                            {{#each features}}
+                            <span class="feature-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="card">
+            <div class="timeline">
+                {{#each education}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                    <div class="timeline-content">
+                        <h3>{{degree}}</h3>
+                        <p>{{institution}}</p>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if certifications}}
+    <section class="section">
+        <h2 class="section-title">Certifications</h2>
+        <div class="card">
+            <div class="timeline">
+                {{#each certifications}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date}}</div>
+                    <div class="timeline-content">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}}</p>
+                        {{#if credential_id}}
+                        <p>ID: {{credential_id}}</p>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    <footer class="footer">
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    </footer>
+</div>
+</body>
+
+</html>

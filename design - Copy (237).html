@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2A2F4F;
+            --color-secondary: #917FB3;
+            --color-accent: #E5BEEC;
+            --color-background: #FDE2F3;
+            --color-text: #2A2F4F;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .skill-pill {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-pill:hover {
+            background-color: var(--color-secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--color-secondary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            border: 2px solid var(--color-secondary);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="glass-card p-8 mb-12 animate__animated animate__fadeIn">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="{{name}}" class="w-48 h-48 rounded-full object-cover floating">
+                {{/if}}
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">{{name}}</h1>
+                    <p class="text-xl text-secondary mb-4">{{title}}</p>
+                    <p class="text-lg">{{about_us}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        {{#if skills}}
+        <div class="glass-card p-8 mb-12">
+            <h2 class="section-header text-3xl font-bold">Expertise</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {{#if skills.frontend}}
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.frontend}}
+                        <span class="skill-pill">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                
+                {{#if skills.backend}}
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.backend}}
+                        <span class="skill-pill">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Mobile</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-pill">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.devops}}
+                        <span class="skill-pill">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Experience Section -->
+        {{#if experience}}
+        <div class="glass-card p-8 mb-12">
+            <h2 class="section-header text-3xl font-bold">Experience</h2>
+            <div class="space-y-8">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-bold">{{title}}</h3>
+                    <p class="text-lg text-secondary">{{company}}</p>
+                    <p class="text-sm mb-2">{{date_start}} - {{date_end}}</p>
+                    {{#if responsibilities}}
+                    <ul class="list-disc list-inside space-y-2">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Projects Section -->
+        {{#if projects}}
+        <div class="glass-card p-8">
+            <h2 class="section-header text-3xl font-bold">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{#each projects}}
+                <div class="project-card glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                    <p class="mb-4">{{description}}</p>
+                    {{#if features}}
+                    <div class="space-y-2">
+                        {{#each features}}
+                        <span class="skill-pill text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</body>
+</html>

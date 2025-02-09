@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a202c; /* Dark background */
+            --text-color: #f0f6fc; /* Light text */
+            --accent-color: #6366f1; /* Purple accent */
+            --card-bg: #2d3748; /* Slightly lighter card background */
+            --border-color: #4a5568; /* Subtle border */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            flex: 1; /* Allow container to grow and take available space */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 1rem;
+        }
+        .profile-image-placeholder{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .profile-image-placeholder i{
+            color: var(--bg-color);
+            font-size: 3rem;
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1rem;
+            color: #a0aec3;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsive grid */
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .item-title-light{
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #a0aec3;
+        }
+
+
+        .item-subtitle {
+            color: #a0aec3;
+            font-size: 0.9rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .item-subtitle span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .description {
+            color: #a0aec3;
+            margin-top: 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+        .skill-tag:hover{
+            background-color: #4c51bf;
+        }
+
+        .responsibilities, .features-list {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .responsibilities li, .features-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #a0aec3;
+        }
+
+        .responsibilities li::before, .features-list li::before {
+            content: "•";
+            position: absolute;
+            left: -1rem;
+            color: var(--accent-color);
+        }
+        .footer{
+            margin-top: auto;
+            text-align: center;
+            padding: 1rem 0;
+            color: #a0aec3;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+            {{else}}
+            <div class="profile-image-placeholder">
+                <i class="fas fa-user"></i>
+            </div>
+            {{/if}}
+
+            <h1 class="name">{{name}}</h1>
+            <p class="title">{{title}}</p>
+        </header>
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i> Skills</h2>
+            <div class="card-grid">
+                {{#if skills.frontend}}
+                <div class="card">
+                    <h3 class="item-title-light">Frontend</h3>
+                    <div class="skill-list">
+                        {{#each skills.frontend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="card">
+                    <h3 class="item-title-light">Backend</h3>
+                    <div class="skill-list">
+                        {{#each skills.backend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div class="card">
+                    <h3 class="item-title-light">Mobile Development</h3>
+                    <div class="skill-list">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div class="card">
+                    <h3 class="item-title-light">DevOps</h3>
+                    <div class="skill-list">
+                        {{#each skills.devops}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="card-grid">
+                {{#each experience}}
+                <div class="card">
+                    <div class="item">
+                        <h3 class="item-title">{{title}}</h3>
+                        <div class="item-subtitle">
+                            <span><i class="fas fa-building"></i>{{company}}</span>
+                            {{#if date_start}}
+                            <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
+                            {{/if}}
+                            {{#if location}}
+                            <span><i class="fas fa-map-marker-alt"></i>{{location}}</span>
+                            {{/if}}
+                        </div>
+                        {{#if responsibilities}}
+                        <ul class="responsibilities">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Projects</h2>
+            <div class="card-grid">
+                {{#each projects}}
+                <div class="card">
+                    <div class="item">
+                        <h3 class="item-title">{{name}}</h3>
+                        {{#if description}}
+                        <p class="description">{{description}}</p>
+                        {{/if}}
+                        {{#if features}}
+                        <ul class="features-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="card-grid">
+                {{#each education}}
+                <div class="card">
+                    <div class="item">
+                        <h3 class="item-title">{{degree}}</h3>
+                        <div class="item-subtitle">
+                            <span><i class="fas fa-university"></i>{{institution}}</span>
+                            {{#if date_start}}
+                            <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
+                            {{/if}}
+                        </div>
+                        {{#if details}}
+                        <ul class="features-list">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+            <div class="card-grid">
+                {{#each certifications}}
+                <div class="card">
+                    <div class="item">
+                        <h3 class="item-title">{{name}}</h3>
+                        <div class="item-subtitle">
+                            <span><i class="fas fa-university"></i>{{issuer}}</span>
+                            {{#if date}}
+                            <span><i class="fas fa-calendar"></i>{{date}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+    </div>
+    <footer class="footer">
+        &copy; {{name}} {{new Date().getFullYear()}}
+    </footer>
+</body>
+</html>

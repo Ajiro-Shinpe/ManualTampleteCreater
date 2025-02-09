@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111; /* Black background */
+            color: #eee; /* Light text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #dc2626; /* Red border */
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.4rem;
+            color: #dc2626; /* Red title */
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #dc2626; /* Red section titles */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #333; /* Darker line */
+            padding-bottom: 0.5rem;
+        }
+
+        .card {
+            background-color: #222; /* Darker card background */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+        }
+
+        .skill-list {
+            @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+        }
+
+        .skill-item {
+            @apply bg-gray-800 p-3 rounded-md;
+        }
+
+        .skill-name {
+            @apply text-md font-medium text-white;
+        }
+
+        .experience-item,
+        .education-item,
+        .certification-item,
+        .project-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #444; /* Darker line */
+        }
+
+        .experience-item h3,
+        .education-item h3,
+        .certification-item h3,
+        .project-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #eee;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item p,
+        .education-item p,
+        .certification-item p,
+        .project-item p {
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .project-features {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #aaa;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            color: #777;
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="profile-header">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+            {{/if}}
+            {{#if name}}
+            <h1 class="profile-name">{{name}}</h1>
+            {{/if}}
+            {{#if title}}
+            <p class="profile-title">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p>{{summary}}</p>
+            {{/if}}
+        </div>
+
+        {{#if about_us}}
+        <div class="section">
+            <h2 class="section-title">About</h2>
+            <div class="card">
+                <p>{{about_us}}</p>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if skills}}
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="card">
+                <div class="skill-list">
+                    {{#if skills.frontend}}
+                    <div class="skill-item">
+                        <div class="skill-name">Frontend</div>
+                        <ul>
+                            {{#each skills.frontend}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    {{#if skills.backend}}
+                    <div class="skill-item">
+                        <div class="skill-name">Backend</div>
+                        <ul>
+                            {{#each skills.backend}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-item">
+                        <div class="skill-name">Mobile Development</div>
+                        <ul>
+                            {{#each skills.mobileDevelopment}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    {{#if skills.devops}}
+                    <div class="skill-item">
+                        <div class="skill-name">DevOps</div>
+                        <ul>
+                            {{#each skills.devops}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if experience}}
+        <div class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="card">
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}} at <a href="{{company_url}}">{{company}}</a></h3>
+                    <p>Location: {{location}} | Duration: {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if education}}
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="card">
+                {{#each education}}
+                <div class="education-item">
+                    <h3>{{degree}} at {{institution}}</h3>
+                    <p>Duration: {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if certifications}}
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="card">
+                {{#each certifications}}
+                <div class="certification-item">
+                    <h3>{{name}} issued by {{issuer}}</h3>
+                    <p>Date: {{date}} | Expiry: {{expire}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if projects}}
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="card">
+                {{#each projects}}
+                <div class="project-item">
+                    <h3><a href="{{url}}">{{name}}</a></h3>
+                    <p>{{description}}</p>
+                    <ul class="project-features">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="footer">
+            <p>&copy; 2023 Your Name. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

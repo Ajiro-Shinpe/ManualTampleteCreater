@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Split Panel Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6ee7b7;
+            --secondary: #818cf8;
+            --accent: #f472b6;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            height: 100vh;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at top right,
+                rgba(110, 231, 183, 0.1),
+                transparent 60%
+            );
+            pointer-events: none;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 30px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: var(--surface);
+            border-radius: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            content: '\f007';
+            font-size: 3rem;
+            color: var(--text-muted);
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .quick-link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .quick-link i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            overflow-y: auto;
+            padding-right: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--surface);
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .main-content::-webkit-scrollbar-track {
+            background: var(--surface);
+            border-radius: 3px;
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(
+                circle,
+                rgba(129, 140, 248, 0.1),
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-group {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .skill-group h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(110, 231, 183, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: var(--surface);
+            transform: translateY(-2px);
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .exp-card {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .exp-title {
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-company {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .exp-list {
+            list-style: none;
+        }
+
+        .exp-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .exp-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .project-title {
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.02);
+            border-color: var(--secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                overflow: visible;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .main-content {
+                height: auto;
+                overflow: visible;
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-container {
+                padding: 1rem;
+            }
+
+            .skills-grid,
+            .exp-grid,
+            .projects-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        <aside class="sidebar">
+            <div class="profile-section">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="Profile" class="profile-image">
+                {{else}}
+                <div class="profile-image"></div>
+                {{/if}}
+                {{#if name}}
+                <h1 class="name">{{name}}</h1>
+                {{/if}}
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+            </div>
+            {{#if about_us}}
+            <div class="quick-links">
+                <div class="quick-link">
+                    <i class="fas fa-user-circle"></i>
+                    <span>{{about_us}}</span>
+                </div>
+            </div>
+            {{/if}}
+        </aside>
+
+        <main class="main-content">
+            {{#if skills}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i>Skills & Expertise</h2>
+                <div class="skills-grid">
+                    {{#if skills.frontend}}
+                    <div class="skill-group">
+                        <h3>Frontend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.backend}}
+                    <div class="skill-group">
+                        <h3>Backend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.devops}}
+                    <div class="skill-group">
+                        <h3>DevOps & Cloud</h3>
+                        <div class="skill-tags">
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-group">
+                        <h3>Mobile Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i>Professional Experience</h2>
+                <div class="exp-grid">
+                    {{#each experience}}
+                    <div class="exp-card">
+                        <h3 class="exp-title">{{title}}</h3>
+                        <div class="exp-company">{{company}} | {{date_start}} - {{date_end}}</div>
+                        {{#if responsibilities}}
+                        <ul class="exp-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i>Featured Projects</h2>
+                <div class="projects-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p class="project-desc">{{description}}</p>
+                        {{#if features}}
+                        <ul class="exp-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+            
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-certificate"></i>Education</h2>
+                <div class="cert-grid">
+                    {{#each education}}
+                    <div class="cert-card">
+                        <h3 class="cert-title">{{title}}</h3>
+                        <div class="cert-desc">{{institution}} | {{date_start}} - {{date_end}}</div>
+                        {{#if details}}
+                        <ul class="exp-list">
+                        {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-certificate"></i>Certifications & Awards</h2>
+                <div class="cert-grid">
+                    {{#each certifications}}
+                    <div class="cert-card">
+                        <h3 class="cert-title">{{name}}</h3>
+                        <div class="cert-desc">{{institution}} | {{date_start}} - {{date_end}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+            
+        </main>
+        
+    </div>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/965d265c8a.js" crossorigin="anonymous"></script>
+    </body>
+    </html>

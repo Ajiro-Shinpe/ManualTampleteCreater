@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E1E1E;
+            --accent: #00FF94;
+            --background: #F4F4F4;
+            --surface: #FFFFFF;
+            --text: #1E1E1E;
+            --text-light: #666666;
+            --border: rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .resume-wrapper {
+            min-height: 100vh;
+            display: flex;
+            padding: 2rem;
+        }
+
+        .resume-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 30px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header-section {
+            grid-column: 1 / -1;
+            padding: 4rem;
+            background: var(--primary);
+            color: var(--surface);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: "Portfolio";
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Unbounded', cursive;
+            font-size: 15rem;
+            font-weight: 700;
+            opacity: 0.05;
+            white-space: nowrap;
+        }
+
+        .profile-info {
+            grid-column: 1 / 8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-name {
+            font-family: 'Unbounded', cursive;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--surface) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .contact-info {
+            grid-column: 8 / -1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            padding: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 2rem;
+            height: 2rem;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .experience-section {
+            grid-column: 1 / 9;
+        }
+
+        .sidebar-section {
+            grid-column: 9 / -1;
+        }
+
+        .experience-card {
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .experience-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .date {
+            font-family: 'Unbounded', cursive;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            background: var(--background);
+            border-radius: 20px;
+        }
+
+        .skill-section {
+            padding: 2rem;
+            background: var(--background);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--surface);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            width: var(--skill-percentage);
+            position: relative;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--background);
+            border-radius: 20px;
+            color: var(--text);
+        }
+
+        @media (max-width: 1200px) {
+            .header-section,
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-info,
+            .contact-info,
+            .experience-section,
+            .sidebar-section {
+                grid-column: 1 / -1;
+            }
+
+            .header-section::before {
+                font-size: 10rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .resume-wrapper {
+                padding: 0;
+            }
+
+            .resume-container {
+                border-radius: 0;
+            }
+
+            .header-section,
+            .main-content {
+                padding: 2rem;
+            }
+
+            .profile-name {
+                font-size: 3rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-wrapper">
+        <div class="resume-container">
+            <header class="header-section">
+                <div class="profile-info">
+                    <h1 class="profile-name">{{name}}</h1>
+                    <p class="profile-title">{{title}}</p>
+                    {{#if about_us}}
+                    <p>{{about_us}}</p>
+                    {{/if}}
+                </div>
+
+                {{#if contact}}
+                <div class="contact-info">
+                    <h2 class="section-title">Contact</h2>
+                    <ul>
+                        {{#each contact}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </header>
+
+            <main class="main-content">
+                <div class="experience-section">
+                    {{#if experience}}
+                    <h2 class="section-title">Experience</h2>
+                    {{#each experience}}
+                    <div class="experience-card">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <div class="experience-company">
+                            <span>{{company}}</span>
+                            <span class="date">{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    {{#if projects}}
+                    <h2 class="section-title">Projects</h2>
+                    <div class="project-grid">
+                        {{#each projects}}
+                        <div class="project-card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p>{{description}}</p>
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                <span class="tech-tag">{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="sidebar-section">
+                    {{#if skills}}
+                    <div class="skill-section">
+                        <h2 class="section-title">Skills</h2>
+                        {{#each skills}}
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span>{{@key}}</span>
+                                <span>{{this}}</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--skill-percentage: {{this}}"></div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+
+                    {{#if education}}
+                    <div class="skill-section">
+                        <h2 class="section-title">Education</h2>
+                        {{#each education}}
+                        <div class="experience-card">
+                            <h3 class="experience-title">{{degree}}</h3>
+                            <div class="experience-company">
+                                <span>{{institution}}</span>
+                                <span class="date">{{date_start}} - {{date_end}}</span>
+                            </div>
+                            {{#if details}}
+                            <ul>
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

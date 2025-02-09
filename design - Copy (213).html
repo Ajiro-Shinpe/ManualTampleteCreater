@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #2dd4bf;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #f43f5e;
+            --surface: #ffffff;
+            --surface-dark: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(45, 212, 191, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.2), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(45, 212, 191, 0.2), transparent 50%);
+            padding: 4rem 0;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 8px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(124, 58, 237, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--dark);
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certification-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            background: rgba(45, 212, 191, 0.2);
+            color: var(--secondary);
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            {{#if name}}
+            <h1 class="gradient-text">{{name}}</h1>
+            {{/if}}
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            {{#if title}}
+            <h2 class="animate__animated animate__fadeIn" style="font-size: 3rem; margin-bottom: 2rem;">{{title}}</h2>
+            {{/if}}
+            {{#if about_us}}
+            <p class="animate__animated animate__fadeIn animate__delay-1s" style="font-size: 1.2rem; max-width: 800px;">
+                {{about_us}}
+            </p>
+            {{/if}}
+        </div>
+    </section>
+
+    {{#if skills}}
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title gradient-text">Technical Expertise</h2>
+            <div class="grid grid-2">
+                {{#if skills.frontend}}
+                <div class="card">
+                    <h3 class="gradient-text" style="margin-bottom: 1.5rem;">Frontend Development</h3>
+                    <div>
+                        {{#each skills.frontend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="card">
+                    <h3 class="gradient-text" style="margin-bottom: 1.5rem;">Backend Development</h3>
+                    <div>
+                        {{#each skills.backend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="card">
+                    <h3 class="gradient-text" style="margin-bottom: 1.5rem;">Mobile Development</h3>
+                    <div>
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="card">
+                    <h3 class="gradient-text" style="margin-bottom: 1.5rem;">DevOps</h3>
+                    <div>
+                        {{#each skills.devops}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="section" style="background: rgba(124, 58, 237, 0.05);">
+        <div class="container">
+            <h2 class="section-title gradient-text">Professional Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <h3 style="color: var(--secondary);">{{title}}</h3>
+                    <h4 style="color: rgba(255,255,255,0.8);">{{company}}</h4>
+                    <p style="color: rgba(255,255,255,0.6);">{{date_start}} - {{date_end}}</p>
+                    {{#if responsibilities}}
+                    <ul style="margin-top: 1rem; list-style: none;">
+                        {{#each responsibilities}}
+                        <li style="margin-bottom: 0.5rem; position: relative; padding-left: 1.5rem;">
+                            <span style="position: absolute; left: 0; top: 0.6rem; width: 6px; height: 6px; background: var(--secondary); border-radius: 50%;"></span>
+                            {{this}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title gradient-text">Featured Projects</h2>
+            <div class="grid grid-3">
+                {{#each projects}}
+                <div class="project-card card">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">{{name}}</h3>
+                    <p style="margin-bottom: 1.5rem;">{{description}}</p>
+                    {{#if features}}
+                    <div>
+                        {{#each features}}
+                        <span class="badge" style="margin: 0.25rem;">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if certifications}}
+    <section class="section" style="background: rgba(45, 212, 191, 0.05);">
+        <div class="container">
+            <h2 class="section-title gradient-text">Certifications</h2>
+            <div class="certification-grid">
+                {{#each certifications}}
+                <div class="certification-card">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">{{name}}</h3>
+                    <p style="color: rgba(255,255,255,0.8);">{{issuer}}</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">{{date}}</p>
+                    {{#if credential_id}}
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.5);">
+                        ID: {{credential_id}}
+                    </p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    <footer style="background: var(--surface-dark); padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

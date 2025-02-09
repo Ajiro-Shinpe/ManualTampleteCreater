@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #fafafa;
+      --text-color: #333;
+      --accent-color: #ff6b6b;
+      --secondary-color: #f39c12;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .resume-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .profile-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 40px;
+    }
+
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-name {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 12px;
+    }
+
+    .profile-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+
+    .content-sections {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 40px;
+      width: 100%;
+    }
+
+    .section {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+    .section-content {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .section-content li {
+      margin-bottom: 24px;
+    }
+
+    .experience-title,
+    .project-title,
+    .skill-title,
+    .education-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+
+    .experience-meta,
+    .education-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary-color);
+      margin-bottom: 12px;
+    }
+
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .tech-tag {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .skill-progress-bar {
+      height: 12px;
+      background-color: var(--bg-color);
+      border-radius: 6px;
+      margin-top: 12px;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: var(--accent-color);
+      border-radius: 6px;
+      width: var(--skill-percentage);
+    }
+
+    @media (max-width: 768px) {
+      .resume-container {
+        padding: 40px 20px;
+      }
+
+      .profile-info {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+
+      .profile-name {
+        font-size: 28px;
+      }
+
+      .profile-title {
+        font-size: 16px;
+      }
+
+      .content-sections {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .experience-title,
+      .project-title,
+      .skill-title,
+      .education-title {
+        font-size: 16px;
+      }
+
+      .tech-tag {
+        font-size: 12px;
+        padding: 4px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <div class="profile-info">
+      <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+      <div class="profile-details">
+        <h1 class="profile-name">{{name}}</h1>
+        <p class="profile-title">{{title}}</p>
+        <p>{{about_us}}</p>
+      </div>
+    </div>
+
+    <div class="content-sections">
+      {{#if experience}}
+      <div class="section">
+        <h2 class="section-title">Experience</h2>
+        <ul class="section-content">
+          {{#each experience}}
+          <li>
+            <h3 class="experience-title">{{title}}</h3>
+            <div class="experience-meta">
+              <span>{{company}}</span>
+              <span>{{date_start}} - {{date_end}}</span>
+            </div>
+            <ul>
+              {{#each responsibilities}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if projects}}
+      <div class="section">
+        <h2 class="section-title">Projects</h2>
+        <ul class="section-content">
+          {{#each projects}}
+          <li>
+            <h3 class="project-title">{{name}}</h3>
+            <p>{{description}}</p>
+            <div class="project-tech-stack">
+              {{#each tech_stack}}
+              <span class="tech-tag">{{this}}</span>
+              {{/each}}
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if skills}}
+      <div class="section">
+        <h2 class="section-title">Skills</h2>
+        <ul class="section-content">
+          {{#each skills}}
+          <li>
+            <h3 class="skill-title">{{@key}}</h3>
+            <div class="skill-progress-bar">
+              <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if education}}
+      <div class="section">
+        <h2 class="section-title">Education</h2>
+        <ul class="section-content">
+          {{#each education}}
+          <li>
+            <h3 class="education-title">{{degree}}</h3>
+            <div class="education-meta">
+              <span>{{institution}}</span>
+              <span>{{date_start}} - {{date_end}}</span>
+            </div>
+            {{#if details}}
+            <ul>
+              {{#each details}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</body>
+</html>

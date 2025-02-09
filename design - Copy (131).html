@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #64748b;
+            --bg-dark: #1e293b;
+            --text-light: #f8fafc;
+            --text-dark: #334155;
+            --bg-light: #f1f5f9;
+            --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .header {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 3rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            text-align: center;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem; /* Reduced margin */
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            opacity: 0.9;
+            margin-bottom: 1rem; /* Reduced margin */
+        }
+
+        .about {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 2rem; /* Added margin */
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted minmax */
+            gap: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.25rem; /* Adjusted margin */
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+
+        /* ... (skill styles remain largely the same) */
+
+        .item-header {
+            display: flex;
+            flex-direction: column; /* Stack title and subtitle */
+            margin-bottom: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem; /* Reduced margin */
+        }
+
+        .item-subtitle {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* Adjusted gap */
+            flex-wrap: wrap;
+        }
+
+        /* ... (responsibilities, project description, etc. styles remain largely the same) */
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1.1rem;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr; /* Stack grid items */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            {{#if name}}
+            <h1 class="name">{{name}}</h1>
+            {{/if}}
+
+            {{#if title}}
+            <div class="title">{{title}}</div>
+            {{/if}}
+
+            {{#if about_us}}
+            <div class="about">{{about_us}}</div>
+            {{/if}}
+        </div>
+    </header>
+
+    <main class="container">
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            {{#if skills.frontend}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Frontend Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.frontend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Backend Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.backend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">Mobile Development</h3>
+                <div class="skills-grid">
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="skill-category">
+                <h3 class="skill-category-title">DevOps & Cloud</h3>
+                <div class="skills-grid">
+                    {{#each skills.devops}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </section>
+        {{/if}}
+
+        <div class="main-grid">
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Professional Experience</h2>
+                {{#each experience}}
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div class="item-title">{{title}}</div>
+                        <div class="item-subtitle">
+                            <span><i class="fas fa-building"></i> {{company}}</span>
+                            {{#if date_start}}
+                            <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                            {{/if}}
+                            {{#if location}}
+                            <span><i class="fas fa-map-marker-alt"></i> {{location}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{#if responsibilities}}
+                    <ul class="responsibilities">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="education-item">
+                    <div class="item-header">
+                        <div class="item-title">{{institution}}</div>
+                        <div class="item-subtitle">
+                            <span><i class="fas fa-university"></i> {{degree}}</span>
+                            {{#if date_start}}
+                            <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{#if details}}
+                    <ul class="features-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="main-grid">
+                    {{#each certifications}}
+                    <div class="certification-item">
+                        <div class="item-header">
+                            <div class="item-title">{{name}}</div>
+                            <div class="item-subtitle">
+                                <span><i class="fas fa-certificate"></i> {{issuer}}</span>
+                                {{#if date}}
+                                <span><i class="fas fa-calendar"></i> {{date}}</span>
+                                {{/if}}
+                                {{#if expire}}
+                                <span><i class="fas fa-calendar"></i> Expires: {{expire}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="main-grid">
+                    {{#each projects}}
+                    <div class="project-item">
+                        <div class="item-header">
+                            <div class="item-title">{{name}}</div>
+                        </div>
+                        {{#if description}}
+                        <div class="project-description">{{description}}</div>
+                        {{/if}}
+                        {{#if features}}
+                        <ul class="features-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniyal Shahid Ali - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1d283b; /* Dark blue background */
+            color: #e2e8f0; /* Light gray text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .profile-section {
+            background-color: #273142; /* Slightly lighter blue for sections */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #6366f1; /* Purple border */
+            margin: 0 auto 1rem; /* Center the image */
+            display: block; /* Make it a block element for centering */
+        }
+
+        .profile-name {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center; /* Center the name */
+
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: #9ca3af; /* Slightly darker gray for title */
+            text-align: center; /* Center the title */
+            margin-bottom: 1.5rem;
+        }
+
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #6366f1; /* Purple for section titles */
+        }
+
+        .timeline {
+            @apply relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 3px; /* Adjust position */
+            width: 2px;
+            background-color: #4b5563; /* Gray line */
+        }
+
+        .timeline-item {
+            @apply relative mb-4;
+            padding-left: 2rem; /* Space for the dot and line */
+        }
+
+        .timeline-item .timeline-date {
+            @apply absolute left-0 top-0 -ml-10 text-sm text-gray-400;
+        }
+
+        .timeline-item .timeline-content {
+            @apply bg-gray-800 p-4 rounded-md shadow-sm;
+        }
+
+        .timeline-item .timeline-content h3 {
+            @apply text-lg font-medium mb-1;
+        }
+
+        .skill-list {
+            @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+        }
+
+        .skill-item {
+            @apply bg-gray-800 p-4 rounded-md shadow-sm;
+        }
+
+        .skill-name {
+            @apply text-md font-medium mb-1;
+        }
+
+        .skill-level {
+            @apply h-2 bg-gray-600 rounded-md overflow-hidden;
+        }
+
+        .skill-level-bar {
+            @apply h-full bg-purple-500 rounded-md;
+            width: var(--skill-percentage, 0%); /* Use CSS variable for width */
+        }
+          /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .container {
+            padding: 1rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+            {{/if}}
+            <h1 class="profile-name">{{name}}</h1>
+            <p class="profile-title">{{title}}</p>
+            <p class="text-center">{{summary}}</p>
+
+        </div>
+
+        {{#if skills}}
+        <div class="profile-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skill-list">
+                {{#each skills}}
+                <div class="skill-item">
+                    <div class="skill-name">{{@key}}</div>
+                    <div class="skill-level">
+                        <div class="skill-level-bar" style="--skill-percentage: {{this}}%;"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+
+        {{#if experience}}
+        <div class="profile-section">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                    <div class="timeline-content">
+                        <h3>{{title}}</h3>
+                        <p class="text-gray-400">{{company}} {{#if location}} ({{location}}) {{/if}}</p>
+                        <ul>
+                            {{#each responsibilities}}
+                            <li class="list-disc ml-5">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if projects}}
+         <div class="profile-section">
+            <h2 class="section-title">Projects</h2>
+            <div class="timeline">
+                {{#each projects}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                    <div class="timeline-content">
+                        <h3>{{name}}</h3>
+                        <p>{{description}}</p>
+                        {{#if features}}
+                        <ul class="list-disc ml-5">
+                           {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if education}}
+        <div class="profile-section">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                {{#each education}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                    <div class="timeline-content">
+                        <h3>{{degree}}</h3>
+                        <p>{{institution}}</p>
+                         {{#if details}}
+                        <ul class="list-disc ml-5">
+                           {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if certifications}}
+        <div class="profile-section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="timeline">
+                {{#each certifications}}
+                <div class="timeline-item">
+                    <div class="timeline-date">{{date}}</div>
+                    <div class="timeline-content">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+</body>
+</html>

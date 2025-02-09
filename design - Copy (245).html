@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-primary: #4c1d95;
+            --color-secondary: #2563eb;
+            --color-tertiary: #10b981;
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+        }
+
+        .custom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-gap: 1.5rem;
+        }
+
+        .custom-card {
+            background-color: var(--bg-light);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-badge {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-icon {
+            color: var(--color-secondary);
+            margin-right: 0.5rem;
+        }
+
+        .custom-section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+        }
+
+        .custom-timeline {
+            border-left: 2px solid var(--color-secondary);
+            padding-left: 2rem;
+        }
+
+        .custom-timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .custom-timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -1.25rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+        }
+
+        .custom-timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-timeline-date {
+            font-size: 0.875rem;
+            color: var(--color-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-timeline-description {
+            color: #475569;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    {{#if name}}
+    <div class="hero min-h-screen bg-gradient-to-br from-indigo-600 to-blue-500">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+            <div class="max-w-md">
+                <h1 class="mb-5 text-5xl font-bold">{{name}}</h1>
+                {{#if title}}
+                <p class="mb-5 text-2xl">{{title}}</p>
+                {{/if}}
+                {{#if about_us}}
+                <p class="mb-5">{{about_us}}</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if skills}}
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="mb-10 lg:mb-16">
+            <h2 class="custom-section-title">Technical Skills</h2>
+        </div>
+        <div class="custom-grid">
+            {{#if skills.frontend}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">Frontend</h3>
+                <div class="space-y-2">
+                    {{#each skills.frontend}}
+                    <span class="custom-badge">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">Backend</h3>
+                <div class="space-y-2">
+                    {{#each skills.backend}}
+                    <span class="custom-badge">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">Mobile Development</h3>
+                <div class="space-y-2">
+                    {{#each skills.mobileDevelopment}}
+                    <span class="custom-badge">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">DevOps</h3>
+                <div class="space-y-2">
+                    {{#each skills.devops}}
+                    <span class="custom-badge">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if experience}}
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="mb-10 lg:mb-16">
+            <h2 class="custom-section-title">Work Experience</h2>
+        </div>
+        <div class="custom-timeline">
+            {{#each experience}}
+            <div class="custom-timeline-item">
+                <h3 class="custom-timeline-title">{{title}}</h3>
+                <p class="custom-timeline-date">{{date_start}} - {{date_end}}</p>
+                <p class="custom-timeline-description">{{company}}</p>
+                {{#if responsibilities}}
+                <ul class="space-y-2">
+                    {{#each responsibilities}}
+                    <li class="flex items-start space-x-2">
+                        <span class="custom-icon"><i class="fas fa-check-circle"></i></span>
+                        <span>{{this}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if projects}}
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="mb-10 lg:mb-16">
+            <h2 class="custom-section-title">Projects</h2>
+        </div>
+        <div class="custom-grid">
+            {{#each projects}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">{{name}}</h3>
+                <p class="mb-4 text-gray-500">{{description}}</p>
+                {{#if features}}
+                <div class="space-y-2">
+                    {{#each features}}
+                    <span class="custom-badge">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if education}}
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="mb-10 lg:mb-16">
+            <h2 class="custom-section-title">Education</h2>
+        </div>
+        <div class="custom-timeline">
+            {{#each education}}
+            <div class="custom-timeline-item">
+                <h3 class="custom-timeline-title">{{title}}</h3>
+                <p class="custom-timeline-date">{{date_start}} - {{date_end}}</p>
+                <p class="custom-timeline-description">{{institution}}</p>
+                {{#if details}}
+                <ul class="space-y-2">
+                    {{#each details}}
+                    <li class="flex items-start space-x-2">
+                        <span class="custom-icon"><i class="fas fa-graduation-cap"></i></span>
+                        <span>{{this}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if certifications}}
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="mb-10 lg:mb-16">
+            <h2 class="custom-section-title">Certifications</h2>
+        </div>
+        <div class="custom-grid">
+            {{#each certifications}}
+            <div class="custom-card">
+                <h3 class="custom-timeline-title">{{name}}</h3>
+                <p class="text-gray-500">{{issuer}}</p>
+                <p class="text-gray-500">{{date}}</p>
+                {{#if credential_id}}
+                <p class="text-gray-400 text-sm mt-2">ID: {{credential_id}}</p>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #6c757d; /* Gray */
+            --card-bg: #fff;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .resume-container {
+            width: 95%;
+            max-width: 1200px;
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.08);
+        }
+
+        .experience-title, .project-title, .education-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company, .education-info {
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .experience-description, .card ul {
+            color: var(--secondary-color);
+            padding-left: 1.2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+        }
+
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.4rem;
+            font-size: 0.8rem;
+            transition: background-color 0.3s;
+        }
+
+        .tech-tag:hover {
+            background-color: #0056b3; /* Darker blue */
+        }
+
+        .skill-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-level {
+            background-color: var(--border-color);
+            height: 5px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            background-color: var(--primary-color);
+            height: 100%;
+            width: var(--skill-percentage);
+            border-radius: 3px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="sidebar">
+            <div class="header">
+                <h1 class="profile-name">{{name}}</h1>
+                <p class="profile-title">{{title}}</p>
+                {{#if about_us}}
+                    <p class="profile-description">{{about_us}}</p>
+                {{/if}}
+            </div>
+
+            <div class="section">
+                {{#if skills}}
+                    <h2 class="section-title">Skills</h2>
+                    {{#each skills}}
+                        <div class="skill-item">
+                            <div class="skill-name">{{@key}}</div>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
+
+            {{#if education}}
+                <div class="section">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                        <div class="card">
+                            <h3 class="education-title">{{degree}}</h3>
+                            <div class="education-info">
+                                <span>{{institution}}</span>
+                                <span>{{date_start}} - {{date_end}}</span>
+                            </div>
+                            {{#if details}}
+                                <ul>
+                                    {{#each details}}
+                                        <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="main-content">
+            {{#if experience}}
+                <div class="section">
+                    <h2 class="section-title">Experience</h2>
+                    {{#each experience}}
+                        <div class="card">
+                            <h3 class="experience-title">{{title}}</h3>
+                            <div class="experience-company">
+                                <span>{{company}}</span>
+                                <span>{{date_start}} - {{date_end}}</span>
+                            </div>
+                            {{#if description}}
+                                <p class="experience-description">{{description}}</p>
+                            {{else}}
+                                <ul>
+                                    {{#each responsibilities}}
+                                        <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+
+            {{#if projects}}
+                <div class="section">
+                    <h2 class="section-title">Projects</h2>
+                    {{#each projects}}
+                        <div class="card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="experience-description">{{description}}</p>
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                    <span class="tech-tag">{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>                                    

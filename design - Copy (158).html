@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #121212; /* Dark background */
+            --primary: #00bcd4; /* Cyan accent */
+            --secondary: #ff9800; /* Orange accent */
+            --text: #f5f5f5; /* Off-white text */
+            --muted: #757575; /* Darker muted text */
+            --card: #1e1e1e; /* Darker card */
+            --border: #424242; /* Darker border */
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0; /* Remove default body margin */
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(to bottom, var(--card), #232323);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: sticky; /* Sticky sidebar */
+            top: 0;
+            height: 100vh; /* Full viewport height */
+            border-right: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--secondary);
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .main-content {
+            flex: 1; /* Take up remaining space */
+            padding: 4rem 2rem;
+            overflow-y: auto; /* Add scrollbar if content overflows */
+        }
+
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .skill-category {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 188, 212, 0.2);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: var(--text);
+        }
+
+        .card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .card-subtitle span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+            {{else}}
+            <div class="profile-image" style="background: var(--card); display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user fa-3x" style="color: var(--primary);"></i>
+            </div>
+            {{/if}}
+            <h1 class="name">{{name}}</h1>
+            <div class="title">{{title}}</div>
+            <ul class="nav-links">
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#projects"><i class="fas fa-rocket"></i> Projects</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            {{#if skills}}
+            <section id="skills" class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Technical Skills</h2>
+                <div class="skills-grid">
+                    {{#if skills.frontend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title"><i class="fas fa-paintbrush"></i> Frontend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.backend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title"><i class="fas fa-server"></i> Backend Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title"><i class="fas fa-mobile-alt"></i> Mobile Development</h3>
+                        <div class="skill-tags">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.devops}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title"><i class="fas fa-cloud"></i> DevOps & Cloud</h3>
+                        <div class="skill-tags">
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section id="experience" class="section">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">
+                        <span><i class="fas fa-building"></i> {{company}}</span>
+                        {{#if date_start}}
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                        {{/if}}
+                    </div>
+                    {{#if responsibilities}}
+                    <ul class="card-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section id="projects" class="section">
+                <h2 class="section-title"><i class="fas fa-rocket"></i> Projects</h2>
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    {{#if description}}
+                    <p style="color: var(--muted); margin-bottom: 1rem;">{{description}}</p>
+                    {{/if}}
+                    {{#if features}}
+                    <ul class="card-list">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498DB;
+            --secondary-color: #F1C40F;
+            --tertiary-color: #2ECC71;
+            --text-color: #333333;
+            --bg-color: #FFFFFF;
+            --grid-color: #F0F0F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .profile-description {
+            font-size: 1rem;
+            max-width: 600px;
+            color: var(--text-color);
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .section {
+            background: var(--bg-color);
+            padding: 2rem;
+            border: 1px solid var(--grid-color);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--grid-color);
+            border-radius: 10px;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-title, .project-title, .education-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company, .education-info {
+            font-size: 1rem;
+            color: var(--text-color);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            background: var(--tertiary-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <h1 class="profile-name">{{name}}</h1>
+            <p class="profile-title">{{title}}</p>
+            {{#if about_us}}
+            <p class="profile-description">{{about_us}}</p>
+            {{/if}}
+        </header>
+
+        <main class="main-content">
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="experience-title">{{title}}</h3>
+                    <div class="experience-company">
+                        <span>{{company}}</span>
+                        <span>{{date_start}} - {{date_end}}</span>
+                    </div>
+                    {{#if description}}
+                    <p>{{description}}</p>
+                    {{else}}
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p>{{description}}</p>
+                    <div class="tech-stack">
+                        {{#each tech_stack}}
+                        <span class="tech-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </main>
+
+        <aside class="sidebar">
+            {{#if skills}}
+            <section class="section">
+                <h2 class="section-title">Skills</h2>
+                {{#each skills}}
+                <div class="card">
+                    <h3 class="skill-title">{{@key}}</h3>
+                    <p>{{this}}</p>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="card">
+                    <h3 class="education-title">{{degree}}</h3>
+                    <div class="education-info">
+                        <span>{{institution}}</span>
+                        <span>{{date_start}} - {{date_end}}</span>
+                    </div>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </aside>
+    </div>
+</body>
+</html>

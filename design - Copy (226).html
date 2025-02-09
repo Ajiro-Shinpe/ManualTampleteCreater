@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF; /* White Background */
+            --text: #111827; /* Dark Gray Text */
+            --primary: #3B82F6; /* Blue Accent */
+            --card: #F9FAFB; /* Light Gray Card */
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: #6B7280;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-list li {
+            background-color: var(--card);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        .card-list li:hover{
+            transform: translateY(-3px);
+        }
+
+        .skill-item {
+            display: inline-block;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #EBF5FB; /* Light Blue */
+            color: var(--primary);
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0.75rem;
+            width: 1px;
+            background-color: #D1D5DB;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 2px solid var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-content {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+            margin-left: 2rem;
+        }
+        .timeline-date{
+            color: #6B7280;
+            font-size: small;
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0.5rem 0.5rem 0 0;
+            box-shadow: var(--shadow);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: #6B7280;
+        }
+        .project-features{
+            margin-top: 1rem;
+        }
+        .feature-tag{
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #EBF5FB;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="profile">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+            {{/if}}
+            {{#if name}}
+            <h1 class="profile-name">{{name}}</h1>
+            {{/if}}
+            {{#if title}}
+            <p class="profile-title">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p>{{summary}}</p>
+            {{/if}}
+        </div>
+
+        {{#if about_us}}
+        <section class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="card-list">
+                <li>
+                    <p>{{about_us}}</p>
+                </li>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <ul class="card-list">
+                {{#if skills.frontend}}
+                <li>
+                    {{#each skills.frontend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </li>
+                {{/if}}
+                {{#if skills.backend}}
+                <li>
+                    {{#each skills.backend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </li>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <li>
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </li>
+                {{/if}}
+                {{#if skills.devops}}
+                <li>
+                    {{#each skills.devops}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </li>
+                {{/if}}
+            </ul>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+            <ul class="card-list">
+                {{#each experience}}
+                <li>
+                    <div class="timeline-item">
+                        <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                        <div class="timeline-content">
+                            <h3>{{title}}</h3>
+                            <p>{{company}}</p>
+                            {{#if location}}
+                            <p>{{location}}</p>
+                            {{/if}}
+                            {{#if responsibilities}}
+                            <ul>
+                                {{#each responsibilities}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            <ul class="card-list">
+                {{#each projects}}
+                <li>
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}" class="project-image">
+                    {{/if}}
+                    <div class="project-content">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p class="project-description">{{description}}</p>
+                        {{#if features}}
+                        <div class="project-features">
+                            {{#each features}}
+                            <span class="feature-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <ul class="card-list">
+                {{#each education}}
+                <li>
+                    <div class="timeline-item">
+                        <div class="timeline-date">{{date_start}} - {{date_end}}</div>
+                        <div class="timeline-content">
+                            <h3>{{degree}}</h3>
+                            <p>{{institution}}</p>
+                            {{#if details}}
+                            <ul>
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="card-list">
+                {{#each certifications}}
+                <li>
+                    <div class="timeline-item">
+                        <div class="timeline-date">{{date}}</div>
+                        <div class="timeline-content">
+                            <h3>{{name}}</h3>
+                            <p>{{issuer}}</p>
+                            {{#if credential_id}}
+                            <p>ID: {{credential_id}}</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+        {{/if}}
+
+        <footer class="footer">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} - {{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #FF6B6B;
+      --secondary-color: #FFA500;
+      --accent-color: #6C63FF;
+      --text-color: #333333;
+      --background-color: #F0F0F0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .profile-image {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-content {
+      flex: 1;
+    }
+
+    .profile-name {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .profile-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 18px;
+    }
+
+    .profile-about {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .section {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 30px;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-gap: 30px;
+    }
+
+    .skill-item {
+      background-color: var(--primary-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .skill-icon {
+      font-size: 36px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .skill-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .experience-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .experience-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .experience-item:before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      margin-right: 20px;
+    }
+
+    .experience-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 6px;
+    }
+
+    .experience-company,
+    .experience-date {
+      font-size: 14px;
+      color: var(--accent-color);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 40px;
+    }
+
+    .project-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 12px;
+    }
+
+    .project-description {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-color);
+      margin-bottom: 24px;
+    }
+
+    .project-features {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .project-features li {
+      font-size: 14px;
+      color: var(--accent-color);
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .profile {
+        flex-direction: column;
+        margin-bottom: 40px;
+      }
+
+      .profile-image {
+        width: 200px;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+
+      .profile-name {
+        font-size: 32px;
+      }
+
+      .profile-title {
+        font-size: 18px;
+      }
+
+      .profile-about {
+        font-size: 14px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .skill-icon {
+        font-size: 30px;
+      }
+
+      .skill-name {
+        font-size: 14px;
+      }
+
+      .experience-title {
+        font-size: 16px;
+      }
+
+      .experience-company,
+      .experience-date {
+        font-size: 12px;
+      }
+
+      .project-title {
+        font-size: 18px;
+      }
+
+      .project-description {
+        font-size: 14px;
+      }
+
+      .project-features li {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile">
+      {{#if profile_image}}
+      <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+      {{/if}}
+      <div class="profile-content">
+        <h1 class="profile-name">{{name}}</h1>
+        <h2 class="profile-title">{{title}}</h2>
+        <p class="profile-about">{{about_us}}</p>
+      </div>
+    </div>
+
+    {{#if skills.frontend.length}}
+    <div class="section">
+      <h2 class="section-title">Skills</h2>
+      <div class="skill-grid">
+        {{#if skills.frontend.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128187;</span>
+          <h3 class="skill-name">Frontend</h3>
+        </div>
+        {{/if}}
+        {{#if skills.backend.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128295;</span>
+          <h3 class="skill-name">Backend</h3>
+        </div>
+        {{/if}}
+        {{#if skills.mobileDevelopment.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128241;</span>
+          <h3 class="skill-name">Mobile Development</h3>
+        </div>
+        {{/if}}
+        {{#if skills.devops.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#127979;</span>
+          <h3 class="skill-name">DevOps</h3>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if experience.length}}
+    <div class="section">
+      <h2 class="section-title">Experience</h2>
+      <ul class="experience-list">
+        {{#each experience}}
+        <li class="experience-item">
+          <h3 class="experience-title">{{title}}</h3>
+          <div>
+            <p class="experience-company">{{company}}</p>
+            <p class="experience-date">{{date_start}} - {{date_end}}</p>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+    {{#if projects.length}}
+    <div class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-grid">
+        {{#each projects}}
+        <div class="project-card">
+          <div>
+            <h3 class="project-title">{{name}}</h3>
+            <p class="project-description">{{description}}</p>
+          </div>
+          <ul class="project-features">
+            {{#each features}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</body>
+</html>

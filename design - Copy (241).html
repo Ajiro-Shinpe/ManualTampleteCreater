@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8B5CF6;
+            --color-secondary: #EC4899;
+            --color-tertiary: #10B981;
+            --bg-dark: #1F2937;
+            --bg-light: #F9FAFB;
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 1.5rem;
+            grid-auto-flow: dense;
+        }
+
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .animated-border:hover::after {
+            transform: translateX(0);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+        }
+
+        .card-glow {
+            transition: all 0.3s ease;
+        }
+
+        .card-glow:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .scroll-tracker {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100vh;
+            background: #E5E7EB;
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            width: 100%;
+            background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+            transition: height 0.1s ease;
+        }
+
+        .floating-menu {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .menu-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 1rem 0;
+            background: #E5E7EB;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-dot:hover {
+            background: var(--color-primary);
+            transform: scale(1.2);
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            transform: skew(-10deg);
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: skew(-10deg) scale(1.05);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="scroll-tracker"><div class="scroll-progress"></div></div>
+
+    <!-- Header Section -->
+    {{#if name}}
+    <header class="min-h-screen relative overflow-hidden bg-gradient-to-br from-violet-600 via-pink-500 to-emerald-500">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="container mx-auto px-4 py-20 relative z-10">
+            <div class="max-w-5xl mx-auto text-white text-center">
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 float-animation">{{name}}</h1>
+                {{#if title}}
+                <p class="text-2xl md:text-3xl mb-8 opacity-90">{{title}}</p>
+                {{/if}}
+                {{#if about_us}}
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-8 mt-12">
+                    <p class="text-lg leading-relaxed">{{about_us}}</p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </header>
+    {{/if}}
+
+    <!-- Skills Section -->
+    {{#if skills}}
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-violet-600">Technical Arsenal</h2>
+            <div class="masonry-grid">
+                {{#if skills.frontend}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                    <h3 class="text-2xl font-bold mb-6 animated-border inline-block text-violet-600">Frontend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.frontend}}
+                        <span class="skill-tag px-4 py-2 text-white rounded-lg text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                    <h3 class="text-2xl font-bold mb-6 animated-border inline-block text-pink-600">Backend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.backend}}
+                        <span class="skill-tag px-4 py-2 text-white rounded-lg text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                    <h3 class="text-2xl font-bold mb-6 animated-border inline-block text-emerald-600">Mobile</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag px-4 py-2 text-white rounded-lg text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                    <h3 class="text-2xl font-bold mb-6 animated-border inline-block text-blue-600">DevOps</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.devops}}
+                        <span class="skill-tag px-4 py-2 text-white rounded-lg text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    <!-- Experience Section -->
+    {{#if experience}}
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-violet-600">Career Timeline</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                {{#each experience}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow relative">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-violet-600 to-pink-500 rounded-l-xl"></div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-violet-600">{{title}}</h3>
+                        <p class="text-xl text-pink-600 mb-2">{{company}}</p>
+                        <p class="text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                        {{#if responsibilities}}
+                        <ul class="space-y-3">
+                            {{#each responsibilities}}
+                            <li class="flex items-start space-x-3">
+                                <span class="text-emerald-500 mt-1"><i class="fas fa-check-circle"></i></span>
+                                <span class="text-gray-700">{{this}}</span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    <!-- Projects Section -->
+    {{#if projects}}
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-violet-600">Project Showcase</h2>
+            <div class="masonry-grid">
+                {{#each projects}}
+                <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                    <h3 class="text-2xl font-bold mb-4 text-violet-600">{{name}}</h3>
+                    <p class="text-gray-600 mb-6">{{description}}</p>
+                    {{#if features}}
+                    <div class="space-y-2">
+                        {{#each features}}
+                        <span class="inline-block bg-violet-100 text-violet-800 text-sm px-4 py-1 rounded-full mr-2 mb-2">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    <!-- Education & Certifications -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-20">
+                {{#if education}}
+                <div>
+                    <h2 class="text-4xl font-bold mb-16 text-violet-600">Education</h2>
+                    {{#each education}}
+                    <div class="bg-white rounded-xl shadow-lg p-8 mb-8 card-glow">
+                        <h3 class="text-2xl font-bold text-violet-600">{{title}}</h3>
+                        <p class="text-xl text-pink-600">{{institution}}</p>
+                        <p class="text-gray-500 mb-4">{{date_start}} - {{date_end}}</p>
+                        {{#if details}}
+                        <ul class="space-y-2">
+                            {{#each details}}
+                            <li class="text-gray-700 flex items-start space-x-2">
+                                <span class="text-emerald-500 mt-1"><i class="fas fa-graduation-cap"></i></span>
+                                <span>{{this}}</span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if certifications}}
+                <div>
+                    <h2 class="text-4xl font-bold mb-16 text-violet-600">Certifications</h2>
+                    <div class="space-y-6">
+                        {{#each certifications}}
+                        <div class="bg-white rounded-xl shadow-lg p-8 card-glow">
+                            <h3 class="text-xl font-bold text-violet-600">{{name}}</h3>
+                            <p class="text-pink-600">{{issuer}}</p>
+                            <p class="text-gray-500">{{date}}</p>
+                            {{#if credential_id}}
+                            <p class="text-sm text-gray-400 mt-2">ID: {{credential_id}}</p>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+
+    <nav class="floating-menu hidden md:block">
+        <div class="menu-dot"></div>
+        <div class="menu-dot"></div>
+        <div class="menu-dot"></div>
+        <div class="menu-dot"></div>
+    </nav>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.scroll-progress').style.height = scrolled + '%';
+        });
+    </script>
+</body>
+</html>

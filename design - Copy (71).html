@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1e1e2e;
+            --primary: #ff6f61;
+            --secondary: #ff9f43;
+            --text-light: #f4f4f4;
+            --text-dark: #333;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-radius: 12px;
+            --shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .resume-container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .left-column {
+            width: 30%;
+            padding: 20px;
+            background: var(--primary);
+            border-radius: var(--border-radius);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 15px;
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .right-column {
+            width: 65%;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .experience-title, .education-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .experience-company, .education-details {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background: var(--secondary);
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                flex-direction: column;
+            }
+
+            .left-column, .right-column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        <!-- Left Column (Profile & Contact) -->
+        <div class="left-column">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-img">
+            {{/if}}
+            <h1 class="profile-name">{{name}}</h1>
+            <p class="profile-title">{{title}}</p>
+
+            {{#if contact}}
+            <div class="contact-info">
+                {{#each contact}}
+                <div class="contact-item">📩 {{this}}</div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+
+        <!-- Right Column (Experience, Skills, Projects, Education) -->
+        <div class="right-column">
+            {{#if about_us}}
+            <section class="section">
+                <h2 class="section-title">About Me</h2>
+                <div class="card">
+                    <p>{{about_us}}</p>
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="experience-title">{{title}}</h3>
+                    <div class="experience-company">
+                        <span>{{company}}</span> - <span>{{date_start}} - {{date_end}}</span>
+                    </div>
+                    <p>{{description}}</p>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if skills}}
+            <section class="section">
+                <h2 class="section-title">Skills</h2>
+                <div class="card">
+                    <div class="skill-list">
+                        {{#each skills}}
+                        <span class="skill-item">{{@key}} ({{this}}%)</span>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="experience-title">{{name}}</h3>
+                    <p>{{description}}</p>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="card">
+                    <h3 class="education-title">{{degree}}</h3>
+                    <div class="education-details">
+                        {{institution}} - ({{date_start}} - {{date_end}})
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </div>
+    </div>
+
+</body>
+</html>

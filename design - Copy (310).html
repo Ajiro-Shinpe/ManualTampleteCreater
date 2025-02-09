@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} - {{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #FFC107;
+      --accent-color: #673AB7;
+      --text-color: #212121;
+      --background-color: #F5F5F5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .hero-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 60px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-name {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-color);
+      margin-bottom: 24px;
+    }
+
+    .hero-about {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .section {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--secondary-color);
+      margin-bottom: 30px;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 30px;
+    }
+
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .skill-icon {
+      font-size: 48px;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .skill-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .experience-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .experience-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .experience-item:before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      margin-right: 20px;
+    }
+
+    .experience-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 6px;
+    }
+
+    .experience-company,
+    .experience-date {
+      font-size: 14px;
+      color: var(--accent-color);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 40px;
+    }
+
+    .project-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 12px;
+    }
+
+    .project-description {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-color);
+      margin-bottom: 24px;
+    }
+
+    .project-features {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .project-features li {
+      font-size: 14px;
+      color: var(--accent-color);
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .hero {
+        flex-direction: column;
+        margin-bottom: 40px;
+      }
+
+      .hero-image {
+        width: 200px;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+
+      .hero-name {
+        font-size: 32px;
+      }
+
+      .hero-title {
+        font-size: 18px;
+      }
+
+      .hero-about {
+        font-size: 14px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .skill-icon {
+        font-size: 36px;
+      }
+
+      .skill-name {
+        font-size: 16px;
+      }
+
+      .experience-title {
+        font-size: 18px;
+      }
+
+      .experience-company,
+      .experience-date {
+        font-size: 12px;
+      }
+
+      .project-title {
+        font-size: 18px;
+      }
+
+      .project-description {
+        font-size: 14px;
+      }
+
+      .project-features li {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      {{#if profile_image}}
+      <img src="{{profile_image}}" alt="{{name}}" class="hero-image">
+      {{/if}}
+      <div class="hero-content">
+        <h1 class="hero-name">{{name}}</h1>
+        <h2 class="hero-title">{{title}}</h2>
+        <p class="hero-about">{{about_us}}</p>
+      </div>
+    </div>
+
+    {{#if skills.frontend.length}}
+    <div class="section">
+      <h2 class="section-title">Skills</h2>
+      <div class="skill-grid">
+        {{#if skills.frontend.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128187;</span>
+          <h3 class="skill-name">Frontend</h3>
+          <ul>
+            {{#each skills.frontend}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+        {{#if skills.backend.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128295;</span>
+          <h3 class="skill-name">Backend</h3>
+          <ul>
+            {{#each skills.backend}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+        {{#if skills.mobileDevelopment.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#128241;</span>
+          <h3 class="skill-name">Mobile Development</h3>
+          <ul>
+            {{#each skills.mobileDevelopment}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+        {{#if skills.devops.length}}
+        <div class="skill-item">
+          <span class="skill-icon">&#127979;</span>
+          <h3 class="skill-name">DevOps</h3>
+          <ul>
+            {{#each skills.devops}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if experience.length}}
+    <div class="section">
+      <h2 class="section-title">Experience</h2>
+      <ul class="experience-list">
+        {{#each experience}}
+        <li class="experience-item">
+          <h3 class="experience-title">{{title}}</h3>
+          <div>
+            <p class="experience-company">{{company}}</p>
+            <p class="experience-date">{{date_start}} - {{date_end}}</p>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+    {{#if projects.length}}
+    <div class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-grid">
+        {{#each projects}}
+        <div class="project-card">
+          <div>
+            <h3 class="project-title">{{name}}</h3>
+            <p class="project-description">{{description}}</p>
+          </div>
+          <ul class="project-features">
+            {{#each features}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</body>
+</html>

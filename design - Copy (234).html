@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366F1;
+            --secondary-color: #38BDF8;
+            --accent-color: #10B981;
+            --background-color: #F3F4F6;
+            --text-color: #1F2937;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            padding: 4rem 2rem;
+        }
+
+        .hero-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1);
+        }
+
+        .name-title h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .name-title p {
+            font-size: 1.25rem;
+            color: #FFFFFF;
+            opacity: 0.8;
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .sidebar {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-list,
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-list li,
+        .skill-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-list li::before,
+        .skill-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .main-content {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -0.75rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            border: 2px solid var(--background-color);
+        }
+
+        .project-card {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-stack span {
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-body">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+            {{/if}}
+            <div class="name-title">
+                <h1>{{name}}</h1>
+                <p>{{title}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="content-grid">
+            <div class="sidebar">
+                {{#if contact}}
+                <div class="sidebar-section">
+                    <h2>Contact</h2>
+                    <ul class="contact-list">
+                        {{#each contact}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills}}
+                <div class="sidebar-section">
+                    <h2>Skills</h2>
+                    <ul class="skill-list">
+                        {{#each skills}}
+                        {{#each this}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+
+            <div class="main-content">
+                {{#if experience}}
+                <section>
+                    <h2 class="section-title">Experience</h2>
+                    <div class="timeline">
+                        {{#each experience}}
+                        <div class="timeline-item">
+                            <h3>{{title}}</h3>
+                            <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                            <ul>
+                                {{#each responsibilities}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if projects}}
+                <section>
+                    <h2 class="section-title">Projects</h2>
+                    <div>
+                        {{#each projects}}
+                        <div class="project-card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{description}}</p>
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                <span>{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

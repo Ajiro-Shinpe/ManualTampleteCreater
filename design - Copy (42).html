@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --electric-purple: #8A2BE2;
+            --neon-orange: #FF5F1F;
+            --vivid-teal: #00D1B2;
+            --deep-black: #1A1A1A;
+            --soft-white: #F5F5F5;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--deep-black);
+            color: var(--soft-white);
+        }
+        .resume-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: var(--deep-black);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, var(--electric-purple), var(--neon-orange));
+            padding: 4rem 3rem;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+            position: relative;
+        }
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--vivid-teal);
+            filter: blur(10px);
+        }
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--soft-white);
+            box-shadow: 0 0 20px var(--electric-purple);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px var(--neon-orange);
+        }
+        .name-title {
+            margin-top: 1.5rem;
+        }
+        .name-title h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--soft-white);
+            text-shadow: 0 0 10px var(--electric-purple);
+        }
+        .name-title p {
+            font-size: 1.5rem;
+            color: var(--soft-white);
+            opacity: 0.9;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            padding: 3rem;
+        }
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        .sidebar-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--vivid-teal);
+            margin-bottom: 1rem;
+        }
+        .contact-list, .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-list li, .skill-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-list li::before, .skill-list li::before {
+            content: "•";
+            color: var(--vivid-teal);
+            font-size: 1.2rem;
+        }
+        .main-content {
+            padding: 1rem;
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--vivid-teal);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--electric-purple);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--vivid-teal);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -0.75rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-orange);
+            border-radius: 50%;
+            border: 2px solid var(--soft-white);
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--vivid-teal);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .project-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--soft-white);
+            margin-bottom: 0.5rem;
+        }
+        .project-description {
+            color: var(--soft-white);
+            opacity: 0.8;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .tech-stack span {
+            background: var(--neon-orange);
+            color: var(--deep-black);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="name-title">{{name}}</h1>
+                    <p class="name-title">{{title}}</p>
+                </div>
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                {{#if contact}}
+                <div class="sidebar-section">
+                    <h2>Contact</h2>
+                    <ul class="contact-list">
+                        {{#each contact}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills}}
+                <div class="sidebar-section">
+                    <h2>Skills</h2>
+                    <ul class="skill-list">
+                        {{#each skills}}
+                        {{#each this}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                {{#if experience}}
+                <section>
+                    <h2 class="section-title">Experience</h2>
+                    <div class="timeline">
+                        {{#each experience}}
+                        <div class="timeline-item">
+                            <h3>{{title}}</h3>
+                            <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                            <ul>
+                                {{#each responsibilities}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if projects}}
+                <section>
+                    <h2 class="section-title">Projects</h2>
+                    <div>
+                        {{#each projects}}
+                        <div class="project-card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{description}}</p>
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                <span>{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

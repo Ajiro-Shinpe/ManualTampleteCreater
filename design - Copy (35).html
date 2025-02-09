@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f8; /* Light gray background */
+            color: #374151; /* Dark gray text */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .resume-container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            background-color: #fff;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); /* More prominent shadow */
+            border-radius: 18px;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+        .profile-header {
+            background-color: #4b3ead; /* Darker purple */
+            color: #fff;
+            padding: 3rem;
+            text-align: center;
+        }
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #fff;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+        }
+        .profile-name {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .profile-title {
+            font-size: 1.3rem;
+            color: #d0bfff; /* Lighter purple */
+        }
+        .content {
+            padding: 3.5rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+        .sidebar {
+            background-color: #f9f8fd; /* Very light purple sidebar */
+            padding: 2.5rem;
+            border-radius: 16px;
+        }
+        .sidebar-section {
+            margin-bottom: 2.5rem;
+        }
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: #4b3ead; /* Darker purple */
+        }
+        .contact-list, .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-list li, .skill-list li {
+            margin-bottom: 1rem;
+        }
+        .main-section {
+            margin-bottom: 3rem;
+        }
+        .main-section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #374151;
+            border-bottom: 3px solid #e2d7ff; /* Lighter purple */
+            padding-bottom: 1rem;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .timeline-item::before { /* Rounded square marker */
+            content: "";
+            position: absolute;
+            left: -14px;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px; /* Rounded square */
+            background-color: #6d5ba3; /* Slightly lighter purple */
+            border: 4px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Shadow on marker */
+        }
+        .timeline-item::after { /* Line */
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 2.25rem;
+            bottom: 0;
+            width: 3px;
+            background-color: #d8c8f9; /* Very light purple */
+        }
+        .project-item {
+            margin-bottom: 2.5rem;
+            border: 1px solid #f0e8ff; /* Very light purple */
+            padding: 2rem;
+            border-radius: 16px;
+            transition: transform 0.25s ease-in-out;
+        }
+        .project-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18); /* Stronger shadow on hover */
+        }
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+        .project-description {
+            color: #525a64; /* Darker gray */
+        }
+        .project-features {
+            list-style: disc;
+            margin-left: 1.75rem;
+            color: #525a64;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+        .tech-stack span {
+            background-color: #ece6ff; /* Very light purple */
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #525a64;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .profile-header {
+                padding: 2.5rem;
+            }
+            .profile-name {
+                font-size: 2rem;
+            }
+            .project-item {
+                padding: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="profile-header">
+          {{#if profile_image}}
+            <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+          {{/if}}
+            {{#if name}}
+            <h1 class="profile-name">{{name}}</h1>
+            {{#if title}}
+            <p class="profile-title">{{title}}</p>
+            {{/if}}
+            {{/if}}
+        </div>
+        <div class="content">
+            <div class="sidebar">
+                {{#if contact}}
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">Contact</h2>
+                    <ul class="contact-list">
+                        {{#if contact.email}}
+                        <li>{{contact.email}}</li>
+                        {{/if}}
+                        {{#if contact.phone}}
+                        <li>{{contact.phone}}</li>
+                        {{/if}}
+                        {{#if contact.location}}
+                        <li>{{contact.location}}</li>
+                        {{/if}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{#if skills}}
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">Skills</h2>
+                    {{#if skills.frontend}}
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">Frontend</h3>
+                        <ul class="skill-list">
+                            {{#each skills.frontend}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                    {{#if skills.backend}}
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">Backend</h3>
+                        <ul class="skill-list">
+                            {{#each skills.backend}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/if}}
+
+                {{#if about_us}}
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">About</h2>
+                    <p>{{about_us}}</p>
+                </div>
+                {{/if}}
+
+            </div>
+            <div class="main-content">
+                {{#if experience}}
+                <section class="main-section">
+                    <h2 class="main-section-title">Experience</h2>
+                    <div class="timeline">
+                        {{#each experience}}
+                        <div class="timeline-item">
+                            <h3 class="font-medium">{{title}}</h3>
+                            <p class="text-gray-500">{{company}} ({{date_start}} - {{date_end}})</p>
+                            {{#if responsibilities}}
+                            <ul class="list-style-none pl-0 mt-1 text-sm">
+                                {{#each responsibilities}}
+                                <li>• {{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if projects}}
+                <section class="main-section">
+                    <h2 class="main-section-title">Projects</h2>
+                    <div>
+                        {{#each projects}}
+                        <div class="project-item">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{description}}</p>
+                            {{#if features}}
+                            <ul class="project-features">
+                                {{#each features}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                            {{#if tech_stack}}
+                            <div class="tech-stack">
+                                {{#each tech_stack}}
+                                <span>{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if education}}
+                <section class="main-section">
+                    <h2 class="main-section-title">Education</h2>
+                    <div>
+                        {{#each education}}
+                        <div class="mb-3">
+                            <h3 class="font-medium">{{institution}}</h3>
+                            <p class="text-gray-500">{{degree}} ({{date_start}} - {{date_end}})</p>
+                            {{#if details}}
+                            <ul class="list-style-none pl-0 mt-1 text-sm">
+                                {{#each details}}
+                                <li>• {{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

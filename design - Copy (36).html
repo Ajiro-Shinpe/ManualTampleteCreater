@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #2D2A32;
+            --parchment: #E3D5C5;
+            --sage: #7A9E7E;
+            --ember: #D44D5C;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--parchment);
+            color: var(--obsidian);
+        }
+        .resume-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: var(--obsidian);
+            border-radius: 32px 32px 0 0;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+        }
+        .hero-section {
+            background: linear-gradient(165deg, var(--sage) 40%, var(--obsidian) 40%);
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid var(--parchment);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .profile-image:hover {
+            transform: rotate(8deg) scale(1.05);
+        }
+        .floating-nav {
+            position: sticky;
+            top: 2rem;
+            background: rgba(234, 234, 234, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1rem;
+            margin: -4rem 2rem 2rem;
+            z-index: 50;
+        }
+        .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+            clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+            background: var(--parchment);
+        }
+        .timeline-connector {
+            position: absolute;
+            left: 48%;
+            height: 90%;
+            width: 4px;
+            background: var(--ember);
+            transform: rotate(15deg);
+        }
+        .skill-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+        .skill-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--sage);
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        .project-card {
+            background: var(--parchment);
+            border: 3px solid var(--sage);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 12px 12px 0 var(--ember);
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="floating-nav flex justify-center space-x-6">
+                <a href="#experience" class="text-lg font-bold text-ember hover:text-sage">Experience</a>
+                <a href="#projects" class="text-lg font-bold text-ember hover:text-sage">Projects</a>
+                <a href="#education" class="text-lg font-bold text-ember hover:text-sage">Education</a>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="space-y-4">
+                    <h1 class="text-5xl font-bold text-parchment">{{name}}</h1>
+                    <p class="text-2xl text-sage">{{title}}</p>
+                </div>
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="hex-grid">
+            <!-- Left Column -->
+            <div class="space-y-8">
+                {{#if contact}}
+                <section class="p-6 bg-obsidian rounded-2xl">
+                    <h2 class="text-2xl font-bold text-ember mb-4">Contact</h2>
+                    <div class="space-y-2 text-parchment">
+                        {{#each contact}}
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-ember rounded-full"></div>
+                            <p>{{this}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if skills}}
+                <section class="relative">
+                    <div class="timeline-connector"></div>
+                    <h2 class="text-3xl font-bold text-ember mb-6">Skills</h2>
+                    <div class="skill-matrix">
+                        {{#each skills}}
+                        <div class="flex items-center gap-2">
+                            {{#each this}}
+                            <div class="skill-dot"></div>
+                            {{/each}}
+                            <span class="text-sm font-medium text-obsidian">{{@key}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                {{#if experience}}
+                <section id="experience" class="relative">
+                    <h2 class="text-3xl font-bold text-ember mb-6">Experience</h2>
+                    <div class="space-y-6">
+                        {{#each experience}}
+                        <div class="project-card">
+                            <h3 class="text-xl font-bold">{{title}}</h3>
+                            <p class="text-sage">{{company}} • {{date_start}} - {{date_end}}</p>
+                            <ul class="mt-4 space-y-2">
+                                {{#each responsibilities}}
+                                <li class="flex items-start gap-2">
+                                    <div class="w-2 h-2 bg-ember mt-2 rounded-full"></div>
+                                    <p>{{this}}</p>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if projects}}
+                <section id="projects">
+                    <h2 class="text-3xl font-bold text-ember mb-6">Projects</h2>
+                    <div class="grid gap-6">
+                        {{#each projects}}
+                        <div class="project-card">
+                            <h3 class="text-xl font-bold">{{name}}</h3>
+                            <p class="text-sage">{{description}}</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                {{#each tech_stack}}
+                                <span class="px-3 py-1 bg-sage text-obsidian rounded-full text-sm">{{this}}</span>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

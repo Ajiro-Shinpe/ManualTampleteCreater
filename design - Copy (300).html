@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #333;
+      --accent-color: #1abc9c;
+      --secondary-color: #7f8c8d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .resume-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-name {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .profile-title {
+      font-size: 18px;
+      color: var(--secondary-color);
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+    .experience-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .experience-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .experience-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+
+    .experience-card ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .project-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tech-tag {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .skill-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .skill-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .skill-bar {
+      height: 10px;
+      background-color: var(--bg-color);
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: var(--accent-color);
+      border-radius: 5px;
+      width: var(--skill-percentage);
+    }
+
+    .education-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .education-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .education-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+
+    .education-card ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .resume-container {
+        padding: 20px;
+      }
+
+      .profile-name {
+        font-size: 28px;
+      }
+
+      .profile-title {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .experience-title, .project-title, .education-title {
+        font-size: 18px;
+      }
+
+      .tech-tag {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <div class="header">
+      <h1 class="profile-name">{{name}}</h1>
+      <p class="profile-title">{{title}}</p>
+    </div>
+
+    {{#if experience}}
+    <div class="section">
+      <h2 class="section-title">Experience</h2>
+      {{#each experience}}
+      <div class="experience-card">
+        <h3 class="experience-title">{{title}}</h3>
+        <div class="experience-meta">
+          <span>{{company}}</span>
+          <span>{{date_start}} - {{date_end}}</span>
+        </div>
+        <ul>
+          {{#each responsibilities}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if projects}}
+    <div class="section">
+      <h2 class="section-title">Projects</h2>
+      {{#each projects}}
+      <div class="project-card">
+        <h3 class="project-title">{{name}}</h3>
+        <p>{{description}}</p>
+        <div class="project-tech-stack">
+          {{#each tech_stack}}
+          <span class="tech-tag">{{this}}</span>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if skills}}
+    <div class="section">
+      <h2 class="section-title">Skills</h2>
+      {{#each skills}}
+      <div class="skill-card">
+        <h3 class="skill-title">{{@key}}</h3>
+        <div class="skill-bar">
+          <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if education}}
+    <div class="section">
+      <h2 class="section-title">Education</h2>
+      {{#each education}}
+      <div class="education-card">
+        <h3 class="education-title">{{degree}}</h3>
+        <div class="education-meta">
+          <span>{{institution}}</span>
+          <span>{{date_start}} - {{date_end}}</span>
+        </div>
+        {{#if details}}
+        <ul>
+          {{#each details}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+</body>
+</html>
