@@ -1,57 +1,380 @@
-}}
-<div class="project-card">
-    <h3>{{name}}</h3>
-    <p>{{description}}</p>
-    {{#if features}}
-    <ul>
-        {{#each features}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
-    {{/if}}
-</div>
-{{/each}}
-</div>
-{{/if}}
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - {{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;600;800&family=Space+Mono:wght@400;700&display=swap');
 
-<section class="education-container">
-{{#if education}}
-<h2>Education</h2>
-<div class="education-grid">
-{{#each education}}
-<div class="education-card">
-    <h3>{{degree}}</h3>
-    <p>{{institution}} | {{date_start}} - {{date_end}}</p>
-    {{#if details}}
-    <ul>
-        {{#each details}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
-    {{/if}}
-</div>
-{{/each}}
-</div>
-{{/if}}
-</section>
+        :root {
+            --bg-primary: #0A0B0D;
+            --bg-secondary: #12141A;
+            --accent-1: #FF3366;
+            --accent-2: #00FFB3;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+        }
 
-<section class="certifications-container">
-{{#if certifications}}
-<h2>Certifications</h2>
-<div class="certifications-grid">
-{{#each certifications}}
-<div class="certifications-card">
-    <h3>{{name}}</h3>
-    <p>{{issuer}} | {{date}}</p>
-    {{#if credential_id}}
-    <p>ID: {{credential_id}}</p>
-    {{/if}}
-</div>
-{{/each}}
-</div>
-{{/if}}
-</section>
-</div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr minmax(300px, 2fr);
+            gap: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: var(--accent-1);
+            filter: blur(150px);
+            opacity: 0.1;
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-2);
+            filter: blur(120px);
+            opacity: 0.1;
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 0;
+        }
+
+        .hero-name {
+            font-family: 'Unbounded', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-title {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 4px solid var(--accent-1);
+        }
+
+        .hero-about {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .skill-card h3 {
+            font-family: 'Unbounded', cursive;
+            color: var(--accent-2);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .experience-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card h3 {
+            font-family: 'Unbounded', cursive;
+            color: var(--accent-2);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .experience-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .experience-card ul {
+            list-style: none;
+        }
+
+        .experience-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .experience-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .project-card h3 {
+            font-family: 'Unbounded', cursive;
+            color: var(--accent-2);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-card ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .project-card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .project-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                padding: 2rem 0;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .skills-grid,
+            .experience-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-name">{{name}}</h1>
+                <p class="hero-title">{{title}}</p>
+                <div class="hero-about">{{about_us}}</div>
+            </div>
+        </section>
+
+        <section class="skills-grid">
+            {{#if skills.frontend}}
+            <div class="skill-card">
+                <h3>Frontend Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.frontend}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="skill-card">
+                <h3>Backend Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.backend}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="skill-card">
+                <h3>Mobile Development</h3>
+                <ul class="skill-list">
+                    {{#each skills.mobileDevelopment}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="skill-card">
+                <h3>DevOps & Cloud</h3>
+                <ul class="skill-list">
+                    {{#each skills.devops}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </section>
+
+        <section class="experience-grid">
+            {{#if experience}}
+            {{#each experience}}
+            <div class="experience-card">
+                <h3>{{title}}</h3>
+                <p>{{company}} | {{date_start}} - {{date_end}}</p>
+                {{#if responsibilities}}
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
+
+        <section class="projects-grid">
+            {{#if projects}}
+            {{#each projects}}
+            <div class="project-card">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+                {{#if features}}
+                <ul>
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
+    </div>
 </body>
 </html>

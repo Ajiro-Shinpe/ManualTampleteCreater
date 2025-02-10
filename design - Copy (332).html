@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{name}} - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>{{name}} - {{title}}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=DM+Sans:wght@400;700&display=swap');
 
         :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #151922;
-            --accent-primary: #00f5d4;
-            --accent-secondary: #7b2cbf;
-            --text-primary: #ffffff;
-            --text-secondary: #94a1b2;
+            --color-bg: #F6F6F6;
+            --color-text: #222222;
+            --color-primary: #0055FF;
+            --color-secondary: #FF2D55;
+            --color-gray: #666666;
+            --grid-unit: 8px;
         }
 
         * {
@@ -24,193 +23,240 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+            letter-spacing: -0.02em;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        .layout {
+            display: grid;
+            grid-template-columns: [full-start] minmax(var(--grid-unit), 1fr) [main-start] minmax(0, 1400px) [main-end] minmax(var(--grid-unit), 1fr) [full-end];
+            gap: calc(var(--grid-unit) * 12);
         }
 
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
+        .layout > * {
+            grid-column: main;
+        }
+
+        .layout > .full-bleed {
+            grid-column: full-start / full-end;
+            padding: 0 calc(var(--grid-unit) * 2);
+        }
+
+        /* Intro Section */
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 2px 1fr;
+            gap: calc(var(--grid-unit) * 8);
+            padding: calc(var(--grid-unit) * 16) 0;
             align-items: center;
-            padding: 4rem 2rem;
-            overflow: hidden;
         }
 
-        .hero::before {
+        .intro-divider {
+            height: 70vh;
+            background-color: var(--color-text);
+            opacity: 0.1;
+        }
+
+        .name {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: calc(var(--grid-unit) * 3);
+        }
+
+        .title {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--color-primary);
+            margin-bottom: calc(var(--grid-unit) * 4);
+        }
+
+        .about {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+        }
+
+        /* Skills Grid */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--grid-unit) * 4);
+            padding: calc(var(--grid-unit) * 8) 0;
+            position: relative;
+        }
+
+        .skill-group {
+            position: relative;
+            padding: calc(var(--grid-unit) * 4);
+            background: white;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-group:hover {
+            transform: translateY(-4px);
+        }
+
+        .skill-group h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--grid-unit) * 3);
+            position: relative;
+            padding-left: calc(var(--grid-unit) * 2);
+        }
+
+        .skill-group h3::before {
             content: '';
             position: absolute;
-            width: 60vw;
-            height: 60vw;
-            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-            filter: blur(120px);
-            opacity: 0.1;
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-        }
-
-        .hero-name {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .hero-title {
-            font-family: 'Space Mono', monospace;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.2s forwards;
-        }
-
-        .hero-about {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.4s forwards;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .skill-card {
-            background: var(--bg-secondary);
-            border-radius: 1rem;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 245, 212, 0.1);
-        }
-
-        .skill-card h3 {
-            font-family: 'Space Mono', monospace;
-            color: var(--accent-primary);
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .skill-card h3::before {
-            content: '>';
-            position: absolute;
             left: 0;
-            color: var(--accent-secondary);
+            top: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--color-primary);
+            transform: translateY(-50%);
         }
 
         .skill-list {
             list-style: none;
+            display: grid;
+            gap: calc(var(--grid-unit));
         }
 
         .skill-list li {
-            margin-bottom: 0.8rem;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
+            padding: calc(var(--grid-unit));
+            background: var(--color-bg);
+            border-radius: 2px;
         }
 
-        .skill-list li::before {
+        /* Experience Timeline */
+        .timeline {
+            display: grid;
+            gap: calc(var(--grid-unit) * 6);
+            padding: calc(var(--grid-unit) * 8) 0;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: calc(var(--grid-unit) * 4);
+            padding: calc(var(--grid-unit) * 4);
+            background: white;
+            border-radius: 2px;
+        }
+
+        .experience-item h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            color: var(--color-primary);
+        }
+
+        .experience-meta {
+            color: var(--color-gray);
+        }
+
+        .experience-details ul {
+            list-style: none;
+            display: grid;
+            gap: calc(var(--grid-unit));
+        }
+
+        .experience-details li {
+            position: relative;
+            padding-left: calc(var(--grid-unit) * 3);
+        }
+
+        .experience-details li::before {
             content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-primary);
-            margin-right: 1rem;
-            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: calc(var(--grid-unit) * 2);
+            height: 1px;
+            background: var(--color-secondary);
+        }
+
+        /* Projects Grid */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: calc(var(--grid-unit) * 4);
+            padding: calc(var(--grid-unit) * 8) 0;
+        }
+
+        .project-card {
+            background: white;
+            padding: calc(var(--grid-unit) * 4);
+            border-radius: 2px;
             transition: transform 0.3s ease;
         }
 
-        .skill-list li:hover {
-            color: var(--text-primary);
+        .project-card:hover {
+            transform: translateY(-4px);
         }
 
-        .skill-list li:hover::before {
-            transform: scale(1.5);
+        .project-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: calc(var(--grid-unit) * 2);
+            color: var(--color-primary);
         }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .project-card p {
+            color: var(--color-gray);
+            margin-bottom: calc(var(--grid-unit) * 3);
         }
 
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+        .project-features {
+            list-style: none;
+            display: grid;
+            gap: calc(var(--grid-unit));
+        }
+
+        .project-features li {
+            padding: calc(var(--grid-unit));
+            background: var(--color-bg);
+            border-radius: 2px;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .hero {
-                padding: 2rem 1rem;
-            }
-
-            .hero-about {
-                padding: 1.5rem;
-            }
-
-            .skills-grid {
+            .intro {
                 grid-template-columns: 1fr;
+                gap: calc(var(--grid-unit) * 4);
+            }
+
+            .intro-divider {
+                display: none;
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: calc(var(--grid-unit) * 2);
+            }
+
+            .layout {
+                gap: calc(var(--grid-unit) * 6);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-name">{{name}}</h1>
-                <p class="hero-title">{{title}}</p>
-                <div class="hero-about">{{about_us}}</div>
+    <div class="layout">
+        <section class="intro full-bleed">
+            <div class="intro-content">
+                <h1 class="name">{{name}}</h1>
+                <p class="title">{{title}}</p>
             </div>
+            <div class="intro-divider"></div>
+            <div class="about">{{about_us}}</div>
         </section>
 
-        <div class="skills-grid">
+        <section class="skills">
             {{#if skills.frontend}}
-            <div class="skill-card">
+            <div class="skill-group">
                 <h3>Frontend Development</h3>
                 <ul class="skill-list">
                     {{#each skills.frontend}}
@@ -221,7 +267,7 @@
             {{/if}}
 
             {{#if skills.backend}}
-            <div class="skill-card">
+            <div class="skill-group">
                 <h3>Backend Development</h3>
                 <ul class="skill-list">
                     {{#each skills.backend}}
@@ -232,7 +278,7 @@
             {{/if}}
 
             {{#if skills.mobileDevelopment}}
-            <div class="skill-card">
+            <div class="skill-group">
                 <h3>Mobile Development</h3>
                 <ul class="skill-list">
                     {{#each skills.mobileDevelopment}}
@@ -243,7 +289,7 @@
             {{/if}}
 
             {{#if skills.devops}}
-            <div class="skill-card">
+            <div class="skill-group">
                 <h3>DevOps & Cloud</h3>
                 <ul class="skill-list">
                     {{#each skills.devops}}
@@ -252,7 +298,48 @@
                 </ul>
             </div>
             {{/if}}
-        </div>
+        </section>
+
+        <section class="timeline">
+            {{#if experience}}
+            {{#each experience}}
+            <div class="experience-item">
+                <div class="experience-meta">
+                    <h3>{{title}}</h3>
+                    <p>{{company}}</p>
+                    <p>{{date_start}} - {{date_end}}</p>
+                </div>
+                <div class="experience-details">
+                    {{#if responsibilities}}
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
+
+        <section class="projects">
+            {{#if projects}}
+            {{#each projects}}
+            <div class="project-card">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+                {{#if features}}
+                <ul class="project-features">
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
     </div>
 </body>
 </html>
