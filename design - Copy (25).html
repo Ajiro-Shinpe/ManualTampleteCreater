@@ -279,11 +279,14 @@
 <body>
     <aside class="side-panel">
         <div class="profile-section">
+            {{#if profile-image}}
             <div class="profile-image">
-                <img src="{{profile_picture_url}}" alt="Profile Picture">
+                <img src="{{profile-image}}" alt="Profile Picture">
             </div>
+            {{/if}}
             <h1 style="font-family: 'Sora', sans-serif; margin: 1rem 0;">{{name}}</h1>
-            <p style="color: var(--accent);">{{location}}</p>
+            <p style="color: var(--accent);">{{title}}</p>
+            <p style="color: var(--accent);">{{summary}}</p>
         </div>
 
         <nav>
@@ -293,6 +296,7 @@
                 <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
                 <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+                <li class="nav-item"><a href="#certifications" class="nav-link">Certifications</a></li>
             </ul>
         </nav>
     </aside>
@@ -357,6 +361,21 @@
                 {{/each}}
             </div>
         </section>
+
+        {{#if certifications}}
+        <section id="education" class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="education-grid">
+                {{#each certifications}}
+                <div class="education-card">
+                    <h3>{{issuer}}</h3>
+                    <h4 style="color: var(--accent);">{{name}}</h4>
+                    <p style="opacity: 0.7;">{{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
     </main>
 
     <script>

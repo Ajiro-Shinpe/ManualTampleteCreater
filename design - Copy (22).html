@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +63,7 @@
             height: 300px;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             object-fit: cover;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+            box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1);
             animation: morphing 8s ease-in-out infinite;
         }
 
@@ -84,7 +85,7 @@
             background: white;
             padding: 1.5rem;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -121,7 +122,7 @@
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             margin: 2rem 0;
             position: relative;
         }
@@ -149,7 +150,7 @@
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
         }
 
@@ -179,7 +180,22 @@
             background: white;
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .certification-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
         }
 
         /* Footer */
@@ -209,19 +225,24 @@
         }
     </style>
 </head>
+
 <body>
     <section class="hero">
         <div class="hero-content">
             <h1 style="font-size: 3rem; margin-bottom: 1rem;">{{name}}</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">{{location}}</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">{{title}}</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">{{summary}}</p>
             <p>{{about_us}}</p>
         </div>
+        {{#if profile_image}}
         <div class="hero-image">
-            <img src="{{profile_picture_url}}" alt="Profile Picture" class="profile-picture">
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-picture">
         </div>
+        {{/if}}
     </section>
 
     <div class="container">
+        <!-- Skills Section -->
         <section>
             <h2 style="font-size: 2.5rem; margin: 4rem 0 2rem;">Skills</h2>
             <div class="skills-grid">
@@ -233,6 +254,7 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
         <section>
             <h2 style="font-size: 2.5rem; margin: 4rem 0 2rem;">Experience</h2>
             <div class="experience-timeline">
@@ -247,12 +269,15 @@
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section>
             <h2 style="font-size: 2.5rem; margin: 4rem 0 2rem;">Projects</h2>
             <div class="projects-grid">
                 {{#each projects}}
                 <div class="project-card">
+                    {{#if image}}
                     <img src="{{image}}" alt="{{name}}" class="project-image">
+                    {{/if}}
                     <div class="project-content">
                         <h3>{{name}}</h3>
                         <p>{{description}}</p>
@@ -263,6 +288,7 @@
             </div>
         </section>
 
+        <!-- Education Section -->
         <section>
             <h2 style="font-size: 2.5rem; margin: 4rem 0 2rem;">Education</h2>
             <div class="education-grid">
@@ -271,15 +297,39 @@
                     <h3>{{institution}}</h3>
                     <p style="color: var(--primary);">{{degree}}</p>
                     <p>{{date_start}} - {{date_end}}</p>
-                    <p>{{details}}</p>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
         </section>
+
+        <!-- Certifications Section -->
+        {{#if certifications}}
+        <section>
+            <h2 style="font-size: 2.5rem; margin: 4rem 0 2rem;">Certifications</h2>
+            <div class="certifications-grid">
+                {{#each certifications}}
+                <div class="certification-card">
+                    <h3>{{issuer}}</h3>
+                    <p style="color: var(--primary);">{{name}}</p>
+                    <p>{{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; {{year}} {{name}}. All rights reserved.</p>
     </footer>
 </body>
+
 </html>

@@ -314,6 +314,18 @@
             </div>
             {{/if}}
 
+            {{#if certifications}}
+            <div class="section">
+                <div class="section-title">Certifications</div>
+                {{#each certifications}}
+                <div class="education-item">
+                    <h3>{{issuer}}</h3>
+                    <p>{{name}} | {{date}} </p>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+
             <!-- Footer -->
             <div class="footer">
                 &copy; {{year}} {{name}}. All rights reserved.

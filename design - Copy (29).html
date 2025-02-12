@@ -1,174 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
     <!-- Third-party Libraries -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        :root {
-            --primary: #6366f1;
-            --secondary: #10b981;
-            --accent: #f59e0b;
-            --dark: #1e293b;
-            --light: #f8fafc;
-        }
+      :root {
+        --primary: #6366f1;
+        --secondary: #10b981;
+        --accent: #f59e0b;
+        --dark: #1e293b;
+        --light: #f8fafc;
+      }
 
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+      * {
+        font-family: "Inter", sans-serif;
+      }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        }
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+      }
 
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
         }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            height: 100%;
-            background: var(--primary);
-            opacity: 0.2;
-        }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: var(--primary);
+        opacity: 0.2;
+      }
     </style>
-</head>
-<body class="bg-gray-50">
+  </head>
+  <body class="bg-gray-50">
     <!-- Navigation -->
     <nav class="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-[var(--primary)]">{{name}}</div>
-            <div class="space-x-8 hidden md:flex">
-                <a href="#skills" class="hover:text-[var(--primary)] transition">Skills</a>
-                <a href="#experience" class="hover:text-[var(--primary)] transition">Experience</a>
-                <a href="#projects" class="hover:text-[var(--primary)] transition">Projects</a>
-                <a href="#education" class="hover:text-[var(--primary)] transition">Education</a>
-            </div>
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold text-[var(--primary)]">{{name}}</div>
+        <div class="space-x-8 hidden md:flex">
+          <a href="#skills" class="hover:text-[var(--primary)] transition"
+            >Skills</a
+          >
+          <a href="#experience" class="hover:text-[var(--primary)] transition"
+            >Experience</a
+          >
+          <a href="#projects" class="hover:text-[var(--primary)] transition"
+            >Projects</a
+          >
+          <a href="#education" class="hover:text-[var(--primary)] transition"
+            >Education</a
+          >
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="gradient-bg min-h-screen pt-32 px-6">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-            <div class="text-white md:w-1/2 mb-12 md:mb-0">
-                <h1 class="text-5xl font-bold mb-6 leading-tight">{{name}}</h1>
-                <p class="text-xl mb-8 opacity-90">{{location}}</p>
-                <p class="text-lg opacity-85">{{about_us}}</p>
-                <div class="flex space-x-4 mt-8">
-                    <button class="glass-card px-8 py-3 flex items-center hover:bg-white/20 transition">
-                        <span class="mr-2">Download CV</span>
-                        <i class="mdi mdi-download"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <img src="{{profile_picture_url}}" alt="Profile" 
-                     class="floating w-80 h-80 object-cover rounded-3xl shadow-2xl border-8 border-white/20">
-            </div>
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center justify-between"
+      >
+        <div class="text-dark md:w-1/2 mb-12 md:mb-0">
+          <h1 class="text-5xl font-bold mb-6 leading-tight">{{name}}</h1>
+          <p class="text-xl mb-8 opacity-90">{{title}}</p>
+          <p class="text-lg mb-8 opacity-85">{{summary}}</p>
+          <p class="text-lg opacity-85">{{about_us}}</p>
+          <div class="flex space-x-4 mt-8">
+            <button
+              class="glass-card px-8 py-3 flex items-center hover:bg-white/20 transition"
+            >
+              <span class="mr-2">Download CV</span>
+              <i class="mdi mdi-download"></i>
+            </button>
+          </div>
         </div>
+        <div class="md:w-1/2 flex justify-center">
+          <img
+            src="{{profile_picture_url}}"
+            alt="Profile"
+            class="floating w-80 h-80 object-cover rounded-3xl shadow-2xl border-8 border-white/20"
+          />
+        </div>
+      </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-20 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16">Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {{#each skills}}
-                <div class="glass-card p-6 hover:shadow-lg transition">
-                    <div class="text-[var(--primary)] text-4xl mb-4">
-                        <i class="mdi mdi-code-braces"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">{{this}}</h3>
-                    <div class="h-2 bg-gray-200 rounded-full">
-                        <div class="h-2 bg-[var(--primary)] rounded-full w-3/4"></div>
-                    </div>
-                </div>
-                {{/each}}
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16">Skills</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {{#each skills}}
+          <div class="glass-card p-6 hover:shadow-lg transition">
+            <div class="text-[var(--primary)] text-4xl mb-4">
+              <i class="mdi mdi-code-braces"></i>
             </div>
+            <h3 class="text-xl font-semibold mb-2">{{this}}</h3>
+            <div class="h-2 bg-gray-200 rounded-full">
+              <div class="h-2 bg-[var(--primary)] rounded-full w-3/4"></div>
+            </div>
+          </div>
+          {{/each}}
         </div>
+      </div>
     </section>
 
     <!-- Experience Section -->
     <section id="experience" class="py-20 px-6 bg-[var(--light)]">
-        <div class="container mx-auto relative timeline">
-            <h2 class="text-4xl font-bold text-center mb-16">Experience</h2>
-            {{#each experience}}
-            <div class="mb-12 w-full md:w-1/2 {{#if @even}}md:ml-auto{{else}}md:mr-auto{{/if}}">
-                <div class="glass-card p-8 relative group">
-                    <div class="absolute -top-4 {{#if @even}}-right-4{{else}}-left-4{{/if}} 
-                        w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center text-white">
-                        <i class="mdi mdi-briefcase"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">{{title}}</h3>
-                    <a href="{{company_url}}" class="text-[var(--primary)] hover:underline">{{company}}</a>
-                    <p class="text-sm text-gray-500 my-2">{{date_start}} - {{date_end}}</p>
-                    <p class="text-gray-600">{{description}}</p>
-                </div>
+      <div class="container mx-auto relative timeline">
+        <h2 class="text-4xl font-bold text-center mb-16">Experience</h2>
+        {{#each experience}}
+        <div
+          class="mb-12 w-full md:w-1/2 {{#if @even}}md:ml-auto{{else}}md:mr-auto{{/if}}"
+        >
+          <div class="glass-card p-8 relative group">
+            <div
+              class="absolute -top-4 {{#if @even}}-right-4{{else}}-left-4{{/if}} 
+                        w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center text-dark"
+            >
+              <i class="mdi mdi-briefcase"></i>
             </div>
-            {{/each}}
+            <h3 class="text-2xl font-bold mb-2">{{title}}</h3>
+            <a
+              href="{{company_url}}"
+              class="text-[var(--primary)] hover:underline"
+              >{{company}}</a
+            >
+            <p class="text-sm text-gray-500 my-2">
+              {{date_start}} - {{date_end}}
+            </p>
+            <p class="text-gray-600">{{description}}</p>
+          </div>
         </div>
+        {{/each}}
+      </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {{#each projects}}
-                <div class="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition">
-                    <img src="{{image}}" alt="{{name}}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/60 flex items-end opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div class="p-6 text-white">
-                            <h3 class="text-xl font-bold mb-2">{{name}}</h3>
-                            <p class="mb-4">{{description}}</p>
-                            <a href="{{url}}" class="inline-flex items-center text-[var(--accent)] hover:text-[var(--primary)]">
-                                View Project <i class="mdi mdi-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {{#each projects}}
+          <div
+            class="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition"
+          >
+            <img
+              src="{{image}}"
+              alt="{{name}}"
+              class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-black/60 flex items-end opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <div class="p-6 text-dark">
+                <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                <p class="mb-4">{{description}}</p>
+                <a
+                  href="{{url}}"
+                  class="inline-flex items-center text-[var(--accent)] hover:text-[var(--primary)]"
+                >
+                  View Project <i class="mdi mdi-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
+          </div>
+          {{/each}}
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-[var(--dark)] text-white py-12">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="hover:text-[var(--primary)] transition">
-                    <i class="mdi mdi-github text-2xl"></i>
-                </a>
-                <a href="#" class="hover:text-[var(--primary)] transition">
-                    <i class="mdi mdi-linkedin text-2xl"></i>
-                </a>
-                <a href="#" class="hover:text-[var(--primary)] transition">
-                    <i class="mdi mdi-twitter text-2xl"></i>
-                </a>
+    {{#if education}}
+    <section id="experience" class="py-20 px-6 bg-[var(--light)]">
+      <div class="container mx-auto relative timeline">
+        <h2 class="text-4xl font-bold text-center mb-16">Education</h2>
+        {{#each education}}
+        <div
+          class="mb-12 w-full md:w-1/2 {{#if @even}}md:ml-auto{{else}}md:mr-auto{{/if}}"
+        >
+          <div class="glass-card p-8 relative group">
+            <div
+              class="absolute -top-4 {{#if @even}}-right-4{{else}}-left-4{{/if}} 
+                        w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center text-dark"
+            >
+              <i class="mdi mdi-briefcase"></i>
             </div>
-            <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+            <h3 class="text-2xl font-bold mb-2">{{degree}}</h3>
+            <h5 class="text-2xl font-bold mb-2">{{title}}</h5>
+            <p class="text-sm text-gray-500 my-2">
+              {{date_start}} - {{date_end}}
+            </p>
+            <p class="text-gray-600">{{institution}}</p>
+            {{#if details}}
+            <ul>
+              {{#each details}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
         </div>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}} 
+    {{#if certifications}}
+
+    <section id="experience" class="py-20 px-6 bg-[var(--light)]">
+        <div class="container mx-auto relative timeline">
+          <h2 class="text-4xl font-bold text-center mb-16">Certifications</h2>
+          {{#each certifications}}
+          <div
+            class="mb-12 w-full md:w-1/2 {{#if @even}}md:ml-auto{{else}}md:mr-auto{{/if}}"
+          >
+            <div class="glass-card p-8 relative group">
+              <div
+                class="absolute -top-4 {{#if @even}}-right-4{{else}}-left-4{{/if}} 
+                          w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center text-dark"
+              >
+                <i class="mdi mdi-briefcase"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">{{name}}</h3>
+              <p class="text-sm text-gray-500 my-2">
+                {{date}}
+              </p>
+              <p class="text-gray-600">{{issuer}}</p>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+    {{/if}}
+
+    <!-- Footer -->
+    <footer class="bg-[var(--dark)] text-dark py-12">
+      <div class="container mx-auto px-6 text-center">
+        <div class="flex justify-center space-x-6 mb-8">
+          <a href="#" class="hover:text-[var(--primary)] transition">
+            <i class="mdi mdi-github text-2xl"></i>
+          </a>
+          <a href="#" class="hover:text-[var(--primary)] transition">
+            <i class="mdi mdi-linkedin text-2xl"></i>
+          </a>
+          <a href="#" class="hover:text-[var(--primary)] transition">
+            <i class="mdi mdi-twitter text-2xl"></i>
+          </a>
+        </div>
+        <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

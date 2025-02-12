@@ -195,6 +195,7 @@
                 {{/if}}
                 <h2 class="profile-name">{{name}}</h2>
                 <p class="profile-title">{{title}}</p>
+                <p class="profile-title">{{summary}}</p>
             </div>
 
             {{#if contact}}
@@ -282,6 +283,21 @@
                             {{/each}}
                         </ul>
                         {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <section>
+                <h2 class="section-title">Certifications</h2>
+                <div>
+                    {{#each certifications}}
+                    <div class="mb-3">
+                        <h3 class="education-title">{{issuer}}</h3>
+                        <p class="text-gray-500 education-institution">{{name}} | ({{date}})</p>
                     </div>
                     {{/each}}
                 </div>

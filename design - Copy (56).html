@@ -1,279 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9f9;
-            color: #333;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        min-height: 100vh;
+        line-height: 1.6;
+      }
 
+      .resume-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .intro-section {
+        grid-column: 1 / -1;
+        background: #333;
+        color: #fff;
+        padding: 2rem;
+        border-radius: 2px;
+      }
+
+      .profile-name {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-title {
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+      }
+
+      .sidebar {
+        grid-column: 1;
+        background: #f7f7f7;
+        padding: 2rem;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+      }
+
+      .main-content {
+        grid-column: 2;
+      }
+
+      .section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      .timeline-item {
+        margin-bottom: 1.5rem;
+      }
+
+      .experience-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .experience-company {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .date {
+        font-size: 0.9rem;
+        color: #999;
+      }
+
+      .skill-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .skill-item {
+        margin-bottom: 1rem;
+      }
+
+      .skill-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .skill-level {
+        width: 100%;
+        height: 5px;
+        background: #ddd;
+        border-radius: 2px;
+        position: relative;
+      }
+
+      .skill-level::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: #333;
+        width: var(--skill-percentage, 80%);
+        border-radius: 2px;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .project-card {
+        background: #f7f7f7;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+      }
+
+      .project-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .tech-stack span {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.5rem;
+        background: #ddd;
+        color: #666;
+        border-radius: 2px;
+      }
+
+      @media (max-width: 768px) {
         .resume-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .intro-section {
-            grid-column: 1 / -1;
-            background: #333;
-            color: #fff;
-            padding: 2rem;
-            border-radius: 2px;
-        }
-
-        .profile-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-title {
-            font-size: 1.2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
+          grid-template-columns: 1fr;
         }
 
         .sidebar {
-            grid-column: 1;
-            background: #f7f7f7;
-            padding: 2rem;
-            border: 1px solid #ddd;
-            border-radius: 2px;
+          grid-column: 1;
         }
 
         .main-content {
-            grid-column: 2;
+          grid-column: 1;
         }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .experience-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-company {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .date {
-            font-size: 0.9rem;
-            color: #999;
-        }
-
-        .skill-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .skill-item {
-            margin-bottom: 1rem;
-        }
-
-        .skill-name {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-level {
-            width: 100%;
-            height: 5px;
-            background: #ddd;
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .skill-level::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            background: #333;
-            width: var(--skill-percentage, 80%);
-            border-radius: 2px;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: #f7f7f7;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 2px;
-        }
-
-        .project-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .tech-stack span {
-            font-size: 0.9rem;
-            padding: 0.2rem 0.5rem;
-            background: #ddd;
-            color: #666;
-            border-radius: 2px;
-        }
-
-        @media (max-width: 768px) {
-            .resume-container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                grid-column: 1;
-            }
-
-            .main-content {
-                grid-column: 1;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="resume-container">
-        <div class="intro-section">
-            <h1 class="profile-name">{{name}}</h1>
-            <p class="profile-title">{{title}}</p>
-            {{#if about_us}}
-            <p>{{about_us}}</p>
-            {{/if}}
-        </div>
+      <div class="intro-section">
+        <h1 class="profile-name">{{name}}</h1>
+        <p class="profile-title">{{title}}</p>
+        {{#if about_us}}
+        <p>{{about_us}}</p>
+        {{/if}}
+      </div>
 
-        <div class="sidebar">
-            {{#if contact}}
-            <div>
-                <h2 class="section-title">Contact</h2>
-                <ul>
-                    {{#each contact}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
+      <div class="sidebar">
+        <div class="education-section">
+          {{#if education}}
+          <h2 class="section-title">Education</h2>
+          {{#each education}}
+          <div class="timeline-item">
+            <h3 class="experience-title">{{degree}}</h3>
+            <div class="experience-company">
+              <span>{{institution}}</span>
+              <span class="date">{{date_start}} - {{date_end}}</span>
             </div>
+            {{#if details}}
+            <ul>
+              {{#each details}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
             {{/if}}
-        </div>
+          </div>
+          {{/each}} {{/if}}
 
+          <div class="education-section">
+            {{#if certifications}}
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="timeline-item">
+              <h3 class="experience-title">{{name}}</h3>
+              <div class="experience-company">
+                <span>{{issuer}}</span>
+                <span class="date">{{date}}</span>
+              </div>
+            </div>
+            {{/each}} {{/if}}
+          </div>
+        </div>
         <div class="main-content">
-            <div class="experience-section">
-                {{#if experience}}
-                <h2 class="section-title">Experience</h2>
-                {{#each experience}}
-                <div class="timeline-item">
-                    <h3 class="experience-title">{{title}}</h3>
-                    <div class="experience-company">
-                        <span>{{company}}</span>
-                        <span class="date">{{date_start}} - {{date_end}}</span>
-                    </div>
-                    <ul>
-                        {{#each responsibilities}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
+          <div class="experience-section">
+            {{#if experience}}
+            <h2 class="section-title">Experience</h2>
+            {{#each experience}}
+            <div class="timeline-item">
+              <h3 class="experience-title">{{title}}</h3>
+              <div class="experience-company">
+                <span>{{company}}</span>
+                <span class="date">{{date_start}} - {{date_end}}</span>
+              </div>
+              <ul>
+                {{#each responsibilities}}
+                <li>{{this}}</li>
                 {{/each}}
-                {{/if}}
+              </ul>
             </div>
+            {{/each}} {{/if}}
+          </div>
 
-            <div class="skills-section">
-                {{#if skills}}
-                <h2 class="section-title">Skills</h2>
-                <ul class="skill-list">
-                    {{#each skills}}
-                    <li class="skill-item">
-                        <div class="skill-name">{{@key}}</div>
-                        <div class="skill-level" style="--skill-percentage: {{this}}"></div>
-                    </li>
-                    {{/each}}
-                </ul>
-                {{/if}}
-            </div>
+          <div class="skills-section">
+            {{#if skills}}
+            <h2 class="section-title">Skills</h2>
+            <ul class="skill-list">
+              {{#each skills}}
+              <li class="skill-item">
+                <div class="skill-name">{{@key}}</div>
+                <div
+                  class="skill-level"
+                  style="--skill-percentage: {{this}}"
+                ></div>
+              </li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
 
-            <div class="project-section">
-                {{#if projects}}
-                <h2 class="section-title">Projects</h2>
-                <div class="project-grid">
-                    {{#each projects}}
-                    <div class="project-card">
-                        <h3 class="project-title">{{name}}</h3>
-                        <p>{{description}}</p>
-                        <div class="tech-stack">
-                            {{#each tech_stack}}
-                            <span>{{this}}</span>
-                            {{/each}}
-                        </div>
-                    </div>
-                    {{/each}}
+          <div class="project-section">
+            {{#if projects}}
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+              {{#each projects}}
+              <div class="project-card">
+                <h3 class="project-title">{{name}}</h3>
+                <p>{{description}}</p>
+                <div class="tech-stack">
+                  {{#each tech_stack}}
+                  <span>{{this}}</span>
+                  {{/each}}
                 </div>
-                {{/if}}
+              </div>
+              {{/each}}
             </div>
-
-            <div class="education-section">
-                {{#if education}}
-                <h2 class="section-title">Education</h2>
-                {{#each education}}
-                <div class="timeline-item">
-                    <h3 class="experience-title">{{degree}}</h3>
-                    <div class="experience-company">
-                        <span>{{institution}}</span>
-                        <span class="date">{{date_start}} - {{date_end}}</span>
-                    </div>
-                    {{#if details}}
-                    <ul>
-                        {{#each details}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
-                </div>
-                {{/each}}
-                {{/if}}
-            </div>
+            {{/if}}
+          </div>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

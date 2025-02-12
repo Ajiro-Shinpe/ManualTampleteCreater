@@ -98,17 +98,21 @@
     <div class="container">
         <div class="header">
             <h1>{{name}}</h1>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}    
         </div>
-
+        {{#if profile_image}}
         <div class="profile-picture">
-            <img src="{{profile_picture_url}}" alt="Profile Picture">
+            <img src="{{profile_image}}" alt="Profile Picture">
         </div>
-
+        {{/if}}
+        {{#if about_us}}
         <div class="profile-info">
-            <h2>{{name}}</h2>
-            <p>{{location}}</p>
+            <h2>About</h2>
             <p>{{about_us}}</p>
         </div>
+        {{ /if}}
+
 
         <section class="section">
             <h2 class="section-title">Skills</h2>
@@ -170,7 +174,21 @@
                 {{/each}}
             </div>
         </section>
-
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="row">
+                {{#each certifications}}
+                <div class="col-md-4">
+                    <div class="card project-card">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}} | {{date}} </p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
     </div>
 
     <footer>

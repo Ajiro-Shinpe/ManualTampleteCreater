@@ -204,27 +204,12 @@
               {{#if title}}
               <p class="profile-title">{{title}}</p>
               {{/if}}
+        {{#if summary}} <p>{{summary}}</p> {{/if}}
               {{/if}}
           </div>
           <div class="content">
               <div class="sidebar">
-                  {{#if contact}}
                   <div class="sidebar-section">
-                      <h2 class="sidebar-title">Contact</h2>
-                      <ul class="contact-list">
-                          {{#if contact.email}}
-                          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>{{contact.email}}</li>
-                          {{/if}}
-                          {{#if contact.phone}}
-                          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.144A2.021 2.021 0 006 3.62L4.63 5.197A2 2 0 004 6.678v9.883a2 2 0 002.02 2.021A19.787 19.787 0 019 21.322c1.342.186 2.684.386 4 .586 1.316-.2 2.632-.4 3.948-.6A19.9 19.9 0 0016 20.398A2.021 2.021 0 0018 18.38V8.517A2 2 0 0016.98 6.495l-1.43-1.43A2.021 2.021 0 0014.35 4.5H13.5m-3 0V3.75c0-.621.426-1.125 1.048-1.098A47.292 47.292 0 0110 5.368C11.922 5.5 13.845 5.65 15.767 5.8m-6 4.09v6.64m0-6.64L9.011 9.01m0 0h5.97m5.98 0L18 9.893m-5.98 0v6.64" /></svg>{{contact.phone}}</li>
-                          {{/if}}
-                          {{#if contact.location}}
-                          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14c.015.001.03.002.046.002a7.52 7.52 0 016.953 7.46A10.992 10.992 0 0012 21.75c-3.427 0-6.392-2.29-6.953-5.46A7.52 7.52 0 0112 14z" /></svg>{{contact.location}}</li>
-                          {{/if}}
-                      </ul>
-                  </div>
-                  {{/if}}
-  
                   {{#if skills}}
                   <div class="sidebar-section">
                       <h2 class="sidebar-title">Skills</h2>
@@ -324,6 +309,21 @@
                                   {{/each}}
                               </ul>
                               {{/if}}
+                          </div>
+                          {{/each}}
+                      </div>
+                  </section>
+                  {{/if}}
+
+                  
+                  {{#if certifications}}
+                  <section class="main-section">
+                      <h2 class="main-section-title">Certifications</h2>
+                      <div>
+                          {{#each certifications}}
+                          <div class="mb-3">
+                              <h3 class="font-medium">{{issuer}}</h3>
+                              <p class="text-gray-500">{{name}} ({{date}})</p>
                           </div>
                           {{/each}}
                       </div>

@@ -290,17 +290,23 @@
         <section class="hero">
             <div class="hero-content">
                 <h1 class="glitch-title">{{name}}</h1>
-                <p>{{location}}</p>
+                {{#if title}} <p class="lead"> {{title}}</p> {{/if}}
+                {{#if summary}} <p>{{summary}}</p> {{/if}}
+        
             </div>
         </section>
 
         <section class="profile-section">
+            {{#if profile_image}}
             <div class="profile-image">
-                <img src="{{profile_picture_url}}" alt="Profile Picture">
+                <img src="{{profile_image}}" alt="Profile Picture">
             </div>
+            {{/if}}
+            {{#if about_us}}
             <div class="profile-content">
                 <p style="font-size: 1.2rem;">{{about_us}}</p>
             </div>
+            {{/if}}
         </section>
 
         <section>
@@ -325,13 +331,12 @@
             </div>
             {{/each}}
         </section>
-
+        {{#if projects}}
         <section>
             <h2 style="font-family: 'Syncopate', sans-serif; margin-bottom: 2rem;">PROJECTS</h2>
             <div class="projects-grid">
                 {{#each projects}}
                 <div class="project-card">
-                    <img src="{{image}}" alt="{{name}}">
                     <div class="project-info">
                         <h3>{{name}}</h3>
                         <p>{{description}}</p>
@@ -341,7 +346,7 @@
                 {{/each}}
             </div>
         </section>
-
+        {{/if}}
         <section>
             <h2 style="font-family: 'Syncopate', sans-serif; margin-bottom: 2rem;">EDUCATION</h2>
             <div class="education-cards">
@@ -355,6 +360,20 @@
                 {{/each}}
             </div>
         </section>
+{{#if certifications}}
+        <section>
+            <h2 style="font-family: 'Syncopate', sans-serif; margin-bottom: 2rem;">Certifications</h2>
+            <div class="education-cards">
+                {{#each certifications}}
+                <div class="education-card">
+                    <h3>{{issuer}}</h3>
+                    <p style="color: var(--accent-1);">{{name}}</p>
+                    <p>{{date}} </p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
     </div>
 
     <footer>

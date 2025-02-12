@@ -159,7 +159,9 @@
         <div class="intro-section">
             <h1 class="profile-name">{{name}}</h1>
             <p class="profile-title">{{title}}</p>
+            <p class="profile-title">{{summary}}</p>
             {{#if about_us}}
+            <h2>About</h2>
             <p>{{about_us}}</p>
             {{/if}}
         </div>
@@ -248,6 +250,21 @@
                         {{/each}}
                     </ul>
                     {{/if}}
+                </div>
+                {{/each}}
+                {{/if}}
+
+                
+            <div class="education-section">
+                {{#if certifications}}
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="timeline-item">
+                    <h3 class="experience-title">{{name}}</h3>
+                    <div class="experience-company">
+                        <span>{{issuer}}</span>
+                        <span class="date">{{date}}</span>
+                    </div>
                 </div>
                 {{/each}}
                 {{/if}}

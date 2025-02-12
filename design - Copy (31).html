@@ -48,11 +48,11 @@
             {{/if}}
 
             <div class="mt-6 space-y-4">
-                {{#if email}}
-                <p class="flex items-center"><span class="font-semibold">Email:</span> {{email}}</p>
+                {{#if title}}
+                <p class="flex items-center"><span class="font-semibold">title:</span> {{title}}</p>
                 {{/if}}
-                {{#if phone}}
-                <p class="flex items-center"><span class="font-semibold">Phone:</span> {{phone}}</p>
+                {{#if summary}}
+                <p class="flex items-center"><span class="font-semibold">Summary:</span> {{summary}}</p>
                 {{/if}}
             </div>
 
@@ -114,6 +114,22 @@
                         <h3 class="font-semibold">{{institution}}</h3>
                         <p class="text-sm text-gray-600">{{degree}}</p>
                         <p class="text-sm text-gray-500">{{date_start}} - {{date_end}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <section>
+                <h2 class="text-2xl font-semibold">Certifications</h2>
+                <div class="mt-4 space-y-4">
+                    {{#each certifications}}
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h3 class="font-semibold">{{issuer}}</h3>
+                        <p class="text-sm text-gray-600">{{name}}</p>
+                        <p class="text-sm text-gray-500">{{date}}</p>
                     </div>
                     {{/each}}
                 </div>

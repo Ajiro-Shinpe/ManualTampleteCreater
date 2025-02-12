@@ -9,10 +9,11 @@
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background: #f9f6f3;
+            background: #f9f6f3; 
             color: #1a1a1a;
             min-height: 100vh;
             padding: 4rem 2rem;
+            overflow-x: hidden;
         }
 
         .resume-container {
@@ -34,7 +35,6 @@
             position: absolute;
             right: -2000px;
             top: 0;
-            width: 4000px;
             height: 100%;
             background: #2d2d2d;
             z-index: -1;
@@ -284,22 +284,19 @@
                 <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
                 {{/if}}
             </div>
-            <div class="header-content">
+            <div class="header-content" style="color: black;">
                 <h1 class="profile-name">{{name}}</h1>
-                <p class="profile-title">{{title}}</p>
+                {{#if title}} <p class="lead"> {{title}}</p> {{/if}}
+                {{#if summary}} <p>{{summary}}</p> {{/if}}
             </div>
         </header>
 
         <div class="main-grid">
             <div class="left-column">
-                {{#if contact}}
+                {{#if about_us}}
                 <section class="section">
-                    <h2 class="section-title">Contact</h2>
-                    <ul class="contact-list">
-                        {{#each contact}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
+                    <h2 class="section-title">About</h2>
+                    <p>{{about_us}} </p>
                 </section>
                 {{/if}}
 
@@ -319,12 +316,6 @@
             </div>
 
             <div class="right-column">
-                {{#if about_us}}
-                <div class="about-section">
-                    {{about_us}}
-                </div>
-                {{/if}}
-
                 {{#if experience}}
                 <section class="section">
                     <h2 class="section-title">Experience</h2>
@@ -381,6 +372,22 @@
                             {{/each}}
                         </ul>
                         {{/if}}
+                    </div>
+                    {{/each}}
+                </section>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <section class="section">
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="timeline-item">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <div class="experience-company">
+                            <span>{{issuer}}</span>
+                            <span class="date">{{date}}</span>
+                        </div>
                     </div>
                     {{/each}}
                 </section>

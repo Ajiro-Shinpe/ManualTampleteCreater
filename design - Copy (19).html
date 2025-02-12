@@ -183,16 +183,20 @@
 <body>
     <div class="container">
         <header>
-            <h1>{{name}}</h1>
-            <p>{{profession}}</p>
+            {{#if name}} <h1>{{name}}</h1> {{/if}}
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
         </header>
 
         <div class="profile-card">
-            <img src="{{profile_picture_url}}" alt="Profile Picture">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture">
+            {{/if}}
             <div class="profile-info">
-                <h2>{{name}}</h2>
-                <p>{{location}}</p>
+                {{#if about_us}}
+                <h2 class="section-title">About</h2>
                 <p>{{about_us}}</p>
+                {{/if}}
             </div>
         </div>
 
@@ -261,6 +265,20 @@
             </div>
         </section>
 
+        {{#if certifications}}        
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="education-list">
+                {{#each certifications}}
+                <div class="education-item">
+                    <h3>{{issuer}}</h3>
+                    <p>{{name}}</p>
+                    <div class="duration">{{date}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
     </div>
 
     <footer>

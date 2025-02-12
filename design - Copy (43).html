@@ -1,228 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --obsidian: #2D2A32;
-            --parchment: #E3D5C5;
-            --sage: #7A9E7E;
-            --ember: #D44D5C;
+            --primary: #6C63FF; /* Vibrant Purple */
+            --secondary: #FF6584; /* Soft Pink */
+            --accent: #00BFA6; /* Teal */
+            --background: #F5F5F5; /* Light Gray */
+            --text: #2E2E2E; /* Dark Gray */
+            --border: #E0E0E0; /* Light Gray Border */
         }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--parchment);
-            color: var(--obsidian);
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
-        .resume-container {
+
+        .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            background: var(--obsidian);
-            border-radius: 32px 32px 0 0;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
-        }
-        .hero-section {
-            background: linear-gradient(165deg, var(--sage) 40%, var(--obsidian) 40%);
-            padding: 4rem 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .profile-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 6px solid var(--parchment);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-        .profile-image:hover {
-            transform: rotate(8deg) scale(1.05);
-        }
-        .floating-nav {
-            position: sticky;
-            top: 2rem;
-            background: rgba(234, 234, 234, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1rem;
-            margin: -4rem 2rem 2rem;
-            z-index: 50;
-        }
-        .hex-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 3rem;
-            clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
-            background: var(--parchment);
-        }
-        .timeline-connector {
-            position: absolute;
-            left: 48%;
-            height: 90%;
-            width: 4px;
-            background: var(--ember);
-            transform: rotate(15deg);
-        }
-        .skill-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-        }
-        .skill-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--sage);
-            border-radius: 50%;
-            opacity: 0.8;
-        }
-        .project-card {
-            background: var(--parchment);
-            border: 3px solid var(--sage);
-            border-radius: 24px;
+            margin: 0 auto;
             padding: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 1.5rem auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar Section */
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-section li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-section li::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item p {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .experience-item li::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Projects Section */
+        .project-card {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
         .project-card:hover {
-            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
-            box-shadow: 12px 12px 0 var(--ember);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        .text-parchment { color: var(--parchment); }
-        .text-sage { color: var(--sage); }
-        .text-ember { color: var(--ember); }
-        .bg-obsidian { background-color: var(--obsidian); }
-        .bg-sage { background-color: var(--sage); }
-        .bg-ember { background-color: var(--ember); }
 
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
 
+        .project-card p {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 2rem;
+        }
+
+        .education-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item p {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Certifications Section */
+        .certification-item {
+            margin-bottom: 2rem;
+        }
+
+        .certification-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-item p {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class="resume-container">
-        <div class="hero-section">
-            <div class="floating-nav flex justify-center space-x-6">
-                <a href="#experience" class="text-lg font-bold text-ember hover:text-sage">Experience</a>
-                <a href="#projects" class="text-lg font-bold text-ember hover:text-sage">Projects</a>
-                <a href="#education" class="text-lg font-bold text-ember hover:text-sage">Education</a>
-            </div>
-            <div class="flex items-center justify-between">
-                <div class="space-y-4">
-                    <h1 class="text-5xl font-bold text-parchment">{{name}}</h1>
-                    <p class="text-2xl text-sage">{{title}}</p>
-                </div>
-                {{#if profile_image}}
-                <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
-                {{/if}}
-            </div>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+            {{/if}}
+            <h1>{{name}}</h1>
+            {{#if title}} <p>{{title}}</p> {{/if}}
+            {{#if summary}} <p>{{summary}}</p> {{/if}}
         </div>
 
-        <div class="hex-grid">
-            <div class="space-y-8">
-                {{#if contact}}
-                <section class="p-6 bg-obsidian rounded-2xl">
-                    <h2 class="text-2xl font-bold text-ember mb-4">Contact</h2>
-                    <div class="space-y-2 text-parchment">
-                        {{#each contact}}
-                        <div class="flex items-center gap-3">
-                            <div class="w-6 h-6 bg-ember rounded-full"></div>
-                            <p>{{this}}</p>
-                        </div>
-                        {{/each}}
-                    </div>
-                </section>
+        <!-- Main Grid Layout -->
+        <div class="main-grid">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                {{#if about_us}}
+                <div class="sidebar-section">
+                    <h2>About</h2>
+                    <p>{{about_us}}</p>
+                </div>
                 {{/if}}
 
                 {{#if skills}}
-                <section class="relative">
-                    <div class="timeline-connector"></div>
-                    <h2 class="text-3xl font-bold text-ember mb-6">Skills</h2>
-                    <div class="skill-matrix">
+                <div class="sidebar-section">
+                    <h2>Skills</h2>
+                    <ul>
                         {{#each skills}}
-                        <div class="flex items-center gap-2">
-                            {{#each this}}
-                            <div class="skill-dot"></div>
-                            {{/each}}
-                            <span class="text-sm font-medium text-obsidian">{{@key}}</span>
-                        </div>
+                        {{#each this}}
+                        <li>{{this}}</li>
                         {{/each}}
-                    </div>
-                </section>
+                        {{/each}}
+                    </ul>
+                </div>
                 {{/if}}
             </div>
 
-            <div class="space-y-8">
+            <!-- Main Content -->
+            <div class="main-content">
                 {{#if experience}}
-                <section id="experience" class="relative">
-                    <h2 class="text-3xl font-bold text-ember mb-6">Experience</h2>
-                    <div class="space-y-6">
-                        {{#each experience}}
-                        <div class="project-card">
-                            <h3 class="text-xl font-bold">{{title}}</h3>
-                            <p class="text-sage">{{company}} • {{date_start}} - {{date_end}}</p>
-                            <ul class="mt-4 space-y-2">
-                                {{#each responsibilities}}
-                                <li class="flex items-start gap-2">
-                                    <div class="w-2 h-2 bg-ember mt-2 rounded-full"></div>
-                                    <p>{{this}}</p>
-                                </li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                        {{/each}}
+                <section>
+                    <h2 class="section-title">Experience</h2>
+                    {{#each experience}}
+                    <div class="experience-item">
+                        <h3>{{title}}</h3>
+                        <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
                     </div>
+                    {{/each}}
                 </section>
                 {{/if}}
 
                 {{#if projects}}
-                <section id="projects">
-                    <h2 class="text-3xl font-bold text-ember mb-6">Projects</h2>
-                    <div class="grid gap-6">
-                        {{#each projects}}
-                        <div class="project-card">
-                            <h3 class="text-xl font-bold">{{name}}</h3>
-                            <p class="text-sage">{{description}}</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                {{#each tech_stack}}
-                                <span class="px-3 py-1 bg-sage text-obsidian rounded-full text-sm">{{this}}</span>
-                                {{/each}}
-                            </div>
-                        </div>
-                        {{/each}}
+                <section>
+                    <h2 class="section-title">Projects</h2>
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3>{{name}}</h3>
+                        <p>{{description}}</p>
+                        {{#if url}}
+                        <a href="{{url}}" target="_blank">View Project →</a>
+                        {{/if}}
                     </div>
+                    {{/each}}
                 </section>
                 {{/if}}
 
                 {{#if education}}
-                <section id="education">
-                    <h2 class="text-3xl font-bold text-ember mb-6">Education</h2>
-                    <div class="space-y-6">
-                        {{#each education}}
-                        <div class="project-card">
-                            <h3 class="text-xl font-bold">{{institution}}</h3>
-                            <p class="text-sage">{{degree}} • {{date_start}} - {{date_end}}</p>
-                            <ul class="mt-4 space-y-2">
-                                {{#each details}}
-                                <li class="flex items-start gap-2">
-                                    <div class="w-2 h-2 bg-ember mt-2 rounded-full"></div>
-                                    <p>{{this}}</p>
-                                </li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                        {{/each}}
+                <section>
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="education-item">
+                        <h3>{{institution}}</h3>
+                        <p>{{degree}} • {{date_start}} - {{date_end}}</p>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
                     </div>
+                    {{/each}}
                 </section>
                 {{/if}}
 
+                {{#if certifications}}
+                <section>
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="certification-item">
+                        <h3>{{name}}</h3>
+                        <p>{{issuer}} • {{date}}</p>
+                    </div>
+                    {{/each}}
+                </section>
+                {{/if}}
             </div>
         </div>
+
+        <!-- Footer Section -->
+        <footer>
+            <p>&copy; {{year}} {{name}}. All rights reserved.</p>
+        </footer>
     </div>
 </body>
+
 </html>

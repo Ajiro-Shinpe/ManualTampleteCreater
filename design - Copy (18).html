@@ -220,6 +220,8 @@
         <!-- Header Section -->
         <div class="header">
             <h1>{{name}}</h1>
+            <h4>{{title}} </h4>
+            <p>{{summary}} </p>
             <p>{{about_us}}</p>
             <div class="contact-info">
                 {{#if email}}
@@ -303,6 +305,20 @@
                 <div class="education-item">
                     <h3>{{institution}}</h3>
                     <p>{{degree}} | {{date_start}} - {{date_end}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if certifications}}
+        <div class="section">
+            <div class="section-title">Certifications</div>
+            <div class="space-y-6">
+                {{#each certifications}}
+                <div class="education-item">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} | {{date}}</p>
                 </div>
                 {{/each}}
             </div>

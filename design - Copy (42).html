@@ -190,8 +190,9 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="name-title">{{name}}</h1>
-                    <p class="name-title">{{title}}</p>
-                </div>
+                    {{#if title}} <p class="lead"> {{title}}</p> {{/if}}
+                    {{#if summary}} <p>{{summary}}</p> {{/if}}
+                            </div>
                 {{#if profile_image}}
                 <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
                 {{/if}}
@@ -202,14 +203,10 @@
         <div class="content-grid">
             <!-- Sidebar -->
             <div class="sidebar">
-                {{#if contact}}
                 <div class="sidebar-section">
-                    <h2>Contact</h2>
-                    <ul class="contact-list">
-                        {{#each contact}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
+                    {{#if about_us}}
+                    <h2>About</h2>
+                    <p> {{about_us}} </p>
                 </div>
                 {{/if}}
 
@@ -261,6 +258,47 @@
                                 <span>{{this}}</span>
                                 {{/each}}
                             </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                
+                
+                {{#if education}}
+                <section>
+                    <h2 class="section-title">Education</h2>
+                    <div>
+                        {{#each education}}
+                        <div class="project-card">
+                            <h5 class="project-title">{{title}}</h5>
+                            <h3 class="project-title">{{degree}}</h3>
+                            <p class="project-description">{{institution}}</p>
+                            <p class="project-description">{{date_start}} - {{date_end}} </p>
+                            {{#if details}}
+                            <div class="tech-stack">
+                                {{#each details}}
+                                <span>{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <section>
+                    <h2 class="section-title">Certifications</h2>
+                    <div>
+                        {{#each certifications}}
+                        <div class="project-card">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{issuer}}</p>
+                            <p class="project-description">{{date}} </p>
                         </div>
                         {{/each}}
                     </div>

@@ -192,6 +192,7 @@
                 <div>
                     <h1 class="name-title">{{name}}</h1>
                     <p class="name-title">{{title}}</p>
+                    <p class="name-title">{{summary}}</p>
                 </div>
                 {{#if profile_image}}
                 <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
@@ -203,14 +204,10 @@
         <div class="content-grid">
             <!-- Sidebar -->
             <div class="sidebar">
-                {{#if contact}}
+                {{#if about_us}}
                 <div class="sidebar-section">
-                    <h2>Contact</h2>
-                    <ul class="contact-list">
-                        {{#each contact}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
+                    <h2>About</h2>
+                    <p> {{about_us}} </p>
                 </div>
                 {{/if}}
 
@@ -267,6 +264,42 @@
                     </div>
                 </section>
                 {{/if}}
+                
+            {{#if education}}
+            <section>
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    {{#each education}}
+                    <div class="timeline-item">
+                        <h3 class="education-title">{{degree}}</h3>
+                        <p class="education-institution">{{institution}} ({{date_start}} - {{date_end}})</p>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <section>
+                <h2 class="section-title">Certifications</h2>
+                <div class="timeline-item">
+                    {{#each certifications}}
+                    <div class="mb-3">
+                        <h3 class="education-title">{{issuer}}</h3>
+                        <p class="education-institution">{{name}} | ({{date}})</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
             </div>
         </div>
     </div>

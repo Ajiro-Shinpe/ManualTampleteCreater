@@ -310,20 +310,15 @@
         <div class="sidebar">
             <div class="profile-section">
                 <h1 class="profile-name">{{name}}</h1>
-                <p class="profile-title">{{title}}</p>
-                {{#if about_us}}
-                <p>{{about_us}}</p>
-                {{/if}}
+                {{#if title}} <p class="lead"> {{title}}</p> {{/if}}
+                {{#if summary}} <p>{{summary}}</p> {{/if}}
             </div>
 
-            {{#if contact}}
+                
+            {{#if about_us}}
             <div class="contact-section">
-                <h2 class="section-title">Contact</h2>
-                <ul>
-                    {{#each contact}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
+                <h2 class="section-title">About</h2>
+                <p>{{about_us}}</p>
             </div>
             {{/if}}
         </div>
@@ -407,6 +402,24 @@
                             {{/each}}
                         </ul>
                         {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <section>
+                <h2 class="section-title">Certifications</h2>
+                <div class="experience-grid">
+                    {{#each certifications}}
+                    <div class="experience-card">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <div class="experience-company">
+                            <span>{{issuer}}</span>
+                            <span class="date-badge">{{date}}</span>
+                        </div>
                     </div>
                     {{/each}}
                 </div>

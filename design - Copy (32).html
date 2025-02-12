@@ -145,19 +145,16 @@
                     {{#if title}}
                     <p class="text-gray-600">{{title}}</p>
                     {{/if}}
+                    {{#if summary}}
+                    <p class="text-gray-600">{{summary}}</p>
+                    {{/if}}
                 </div>
                 {{/if}}
 
                 <div class="contact-info">
-                    <h3 class="text-lg font-medium mb-2 text-gray-700">Contact</h3>
-                    {{#if email}}
-                    <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>{{email}}</p>
-                    {{/if}}
-                    {{#if phone}}
-                    <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.578v4.87m0 0c-1.03-.134-2.092-.237-3.182-.318a21.879 21.879 0 01-2.519-.526c.135.498.28.995.422 1.493L5.6 10.39a48.094 48.094 0 009.269 0L18.44 6.995a2 2 0 011.055 1.754l-4.886 9.772c.259.174.552.32.862.437l5.89 2.945a2 2 0 01-2.002 3.098H19.398a2 2 0 01-1.563-.754l-4.886-9.772c-.259-.174-.552-.32-.862-.437L6.638 7.578a2 2 0 01-2.002-3.098h1.112z" /></svg>{{phone}}</p>
-                    {{/if}}
-                    {{#if location}}
-                    <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19 10.5c0 1.566-.569 3.038-1.584 4.182a6.002 6.002 0 01-5.657 1.98A6.002 6.002 0 017.584 14.682C6.569 13.538 6 12.066 6 10.5a9 9 0 1118 0z" /></svg>{{location}}</p>
+                    <h3 class="text-lg font-medium mb-2 text-gray-700">About</h3>
+                    {{#if about_us}}
+                    <p>{{about_us}} </p>
                     {{/if}}
                 </div>
 
@@ -261,6 +258,22 @@
                                 {{/each}}
                             </ul>
                             {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <section>
+                    <h2 class="section-title">Certifications</h2>
+                    <div>
+                        {{#each certifications}}
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold">{{issuer}}</h3>
+                            <div class="text-gray-600">{{name}}</div>
+                            <div class="text-sm text-gray-500 mb-2">{{date}}</div>
                         </div>
                         {{/each}}
                     </div>

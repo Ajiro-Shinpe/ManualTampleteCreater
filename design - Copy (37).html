@@ -127,6 +127,7 @@
                 <div>
                     <h1 class="text-5xl font-bold glow-text">{{name}}</h1>
                     <p class="text-2xl text-cyber-black">{{title}}</p>
+                    <p class="text-2xl text-cyber-black">{{summary}}</p>
                 </div>
                 {{#if profile_image}}
                 <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
@@ -137,17 +138,10 @@
         <!-- Modular Grid -->
         <div class="modular-grid">
             <!-- Contact Module -->
-            {{#if contact}}
+            {{#if about_us}}
             <div class="module">
-                <h2 class="text-2xl font-bold text-neon-pink mb-4">Contact</h2>
-                <ul class="space-y-2">
-                    {{#each contact}}
-                    <li class="flex items-center gap-2">
-                        <div class="w-2 h-2 bg-electric-blue rounded-full"></div>
-                        <p>{{this}}</p>
-                    </li>
-                    {{/each}}
-                </ul>
+                <h2 class="text-2xl font-bold text-neon-pink mb-4">About</h2>
+                <p>{{about_us}}</p>
             </div>
             {{/if}}
 
@@ -207,6 +201,45 @@
                             <span>{{this}}</span>
                             {{/each}}
                         </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            
+            {{#if education}}
+            <div class="module">
+                <h2 class="text-2xl font-bold text-neon-pink mb-4">Education</h2>
+                <div class="space-y-4">
+                    {{#each education}}
+                    <div>
+                        <h5 class="text-xl font-bold text-electric-blue">{{title}}</h5>
+                        <h3 class="text-xl font-bold text-electric-blue">{{degree}}</h3>
+                        <p class="text-acid-green">{{institution}}</p>
+                        <p class="text-acid-green">{{date_start}} - {{date_end}}  </p>
+                        {{#if details}}
+                        <div class="tech-stack mt-2">
+                            {{#each details}}
+                            <span>{{this}}</span>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <div class="module">
+                <h2 class="text-2xl font-bold text-neon-pink mb-4">Certifications</h2>
+                <div class="space-y-4">
+                    {{#each certifications}}
+                    <div>
+                        <h3 class="text-xl font-bold text-electric-blue">{{name}}</h3>
+                        <p class="text-acid-green">{{issuer}} | {{date}} </p>
                     </div>
                     {{/each}}
                 </div>

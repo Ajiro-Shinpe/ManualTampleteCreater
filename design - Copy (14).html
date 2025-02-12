@@ -28,17 +28,18 @@
         .container {
             display: flex;
             flex-wrap: wrap;
-            width: 100%;
+            width: 100vw;
+            overflow-x: hidden;
         }
 
         .sidebar {
             background-color: var(--primary);
             color: white;
-            width: 25%;
+            width: 30vw;
             padding: 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .sidebar h1 {
@@ -72,7 +73,7 @@
 
         .main-content {
             background-color: var(--background);
-            width: 75%;
+            width: 60vw;
             padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
@@ -296,6 +297,18 @@
             <div class="education-item">
                 <h3>{{institution}}</h3>
                 <p>{{degree}} | {{date_start}} - {{date_end}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if certifications}}
+        <div class="section">
+            <div class="section-title">Certifications</div>
+            {{#each certifications}}
+            <div class="education-item">
+                <h3>{{issuer}}</h3>
+                <p>{{name}} | {{date}} </p>
             </div>
             {{/each}}
         </div>

@@ -198,18 +198,9 @@
                 {{/if}}
                 <h2 class="profile-name">{{name}}</h2>
                 <p class="profile-title">{{title}}</p>
+                <p class="profile-title">{{summary}}</p>
             </div>
 
-            {{#if contact}}
-            <div class="sidebar-section">
-                <h2 class="sidebar-title">Contact</h2>
-                <ul class="contact-list">
-                    {{#each contact}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{/if}}
 
             {{#if skills}}
             <div class="sidebar-section">
@@ -285,6 +276,19 @@
                             {{/each}}
                         </ul>
                         {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+            {{#if certifications}}
+            <section>
+                <h2 class="section-title">Certifications</h2>
+                <div class="timeline">
+                    {{#each certifications}}
+                    <div class="timeline-item">
+                        <h3 class="education-title">{{name}}</h3>
+                        <p class="education-institution">{{issuer}} ({{date}})</p>
                     </div>
                     {{/each}}
                 </div>

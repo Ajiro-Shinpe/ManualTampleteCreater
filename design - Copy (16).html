@@ -224,15 +224,23 @@ footer p {
         <!-- Header Section -->
         <header>
             <h1>{{name}}</h1>
-            <p>{{about_us}}</p>
+            {{#if title}}
+            <h4>{{title}}</h4>
+            {{/if}}
+            {{#if summary}}
+            <p>{{summary}}</p>
+            {{/if}}
         </header>
 
         <!-- Profile Section -->
         <div class="profile">
-            <img src="{{profile_picture_url}}" alt="Profile Picture">
-            <h2>{{name}}</h2>
-            <p>{{profession}}</p>
-            <p>{{location}}</p>
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Picture">
+            {{/if}}
+            {{#if about_us}}
+            <h2>About</h2>
+            <p>{{about_us}}</p>
+            {{/if}}
         </div>
 
         <!-- Skills Section -->
@@ -266,6 +274,37 @@ footer p {
             {{/each}}
         </div>
 
+
+        {{#if education}}
+        <div class="section-title">Education</div>
+        <div class="projects">
+            {{#each education}}
+            <div class="project-card">
+                <h4>{{name}}</h4>
+                <p>{{institution}}</p>
+                <span> {{date_start}} - {{date_end}} </span>
+                {{#if details}}
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+{{/if}}
+{{#if certifications}}
+<div class="section-title">Certifications</div>
+<div class="projects">
+    {{#each certifications}}
+    <div class="project-card">
+        <h4>{{name}}</h4>
+        <p>{{issuer}} | {{date}}</p>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
         <!-- Footer Section -->
         <footer>
             <p>&copy; {{year}} {{name}}. All rights reserved.</p>

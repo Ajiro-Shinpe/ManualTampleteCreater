@@ -26,15 +26,15 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.8;
             background: var(--light-bg);
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .page {
-            width: 21cm;
-            min-height: 29.7cm;
-            margin: 2cm auto;
+            width: 90vw;
+            min-height: 100%;
+            margin: 2rem auto;
             background: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border-radius: 12px;
@@ -44,7 +44,7 @@
 
         .header {
             background: var(--gradient);
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
             color: white;
             position: relative;
             overflow: hidden;
@@ -87,7 +87,7 @@
         }
 
         .profile-info h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
@@ -118,7 +118,7 @@
         }
 
         .section-title {
-            font-size: 1.3em;
+            font-size: 1.5em;
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 1.5rem;
@@ -137,15 +137,15 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
             gap: 1rem;
         }
 
         .skill-item {
             background: var(--light-bg);
-            padding: 0.8rem 1.2rem;
+            padding: 1rem 1.5rem;
             border-radius: 8px;
-            font-size: 0.9em;
+            font-size: .9rem;
             font-weight: 500;
             transition: all 0.3s ease;
         }
@@ -178,7 +178,7 @@
         .company-title {
             font-weight: 600;
             color: var(--accent);
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
         .date-range {
@@ -244,6 +244,22 @@
             margin-bottom: 0.5rem;
         }
 
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--highlight);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: darken(var(--highlight), 10%);
+        }
+
         @media print {
             body {
                 background: none;
@@ -278,19 +294,16 @@
     <div class="page">
         <header class="header">
             <div class="profile-container">
+                {{#if profile_image}}
                 <div class="profile-image">
-                    <img src="{{profile_picture_url}}" alt="Profile Picture">
+                    <img src="{{profile_image}}" alt="Profile Picture">
                 </div>
+                {{/if}}
                 <div class="profile-info">
                     <h1>{{name}}</h1>
-                    <p style="font-size: 1.2em; opacity: 0.9;">{{location}}</p>
+                    <p style="font-size: 1.2em; opacity: 0.9;">{{title}}</p>
+                    <p style="font-size: 1.2em; opacity: 0.9;">{{summary}}</p>
                     <p style="margin-top: 1rem; opacity: 0.9;">{{about_us}}</p>
-                    <div class="contact-info">
-                        <span>📧 example@email.com</span>
-                        <span>📱 (123) 456-7890</span>
-                        <span>💼 linkedin.com/in/{{name}}</span>
-                        <span>🌐 portfolio.com</span>
-                    </div>
                 </div>
             </div>
         </header>
@@ -343,10 +356,27 @@
                     <h3 class="education-title">{{institution}}</h3>
                     <p style="font-weight: 500;">{{degree}}</p>
                     <p style="font-size: 0.9em; color: var(--highlight); margin-top: 0.5rem;">{{date_start}} - {{date_end}}</p>
-                    <p style="margin-top: 0.5rem;">{{details}}</p>
+                    {{#if details}}
+                    {{#each details}}
+                    <p style="margin-top: 0.5rem;">{{this}}</p>
+                    {{/each}}
+                    {{/if}}
                 </div>
                 {{/each}}
             </section>
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="education-item">
+                    <h3 class="education-title">{{issuer}}</h3>
+                    <p style="font-weight: 500;">{{name}}</p>
+                    <p style="font-size: 0.9em; color: var(--highlight); margin-top: 0.5rem;">{{date}}</p>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
         </div>
     </div>
 </body>

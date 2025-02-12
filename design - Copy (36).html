@@ -100,16 +100,11 @@
     <div class="resume-container">
         <!-- Hero Section -->
         <div class="hero-section">
-            <div class="floating-nav flex justify-center space-x-6">
-                <a href="#experience" class="text-lg font-bold text-ember hover:text-sage">Experience</a>
-                <a href="#projects" class="text-lg font-bold text-ember hover:text-sage">Projects</a>
-                <a href="#education" class="text-lg font-bold text-ember hover:text-sage">Education</a>
-            </div>
-            
             <div class="flex items-center justify-between">
                 <div class="space-y-4">
-                    <h1 class="text-5xl font-bold text-parchment">{{name}}</h1>
-                    <p class="text-2xl text-sage">{{title}}</p>
+                    <h1 class="text-5xl font-bold text-white text-parchment">{{name}}</h1>
+                    <p class="text-2xl text-sage text-white">{{title}}</p>
+                    <p class="text-2xl text-sage text-white">{{summary}}</p>
                 </div>
                 {{#if profile_image}}
                 <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
@@ -121,16 +116,10 @@
         <div class="hex-grid">
             <!-- Left Column -->
             <div class="space-y-8">
-                {{#if contact}}
+                {{#if about_us}}
                 <section class="p-6 bg-obsidian rounded-2xl">
-                    <h2 class="text-2xl font-bold text-ember mb-4">Contact</h2>
-                    <div class="space-y-2 text-parchment">
-                        {{#each contact}}
-                        <div class="flex items-center gap-3">
-                            <div class="w-6 h-6 bg-ember rounded-full"></div>
-                            <p>{{this}}</p>
-                        </div>
-                        {{/each}}
+                    <h2 class="text-2xl font-bold text-ember mb-4">About</h2>
+                    <p>{{about_us}} </p>
                     </div>
                 </section>
                 {{/if}}
@@ -151,13 +140,36 @@
                     </div>
                 </section>
                 {{/if}}
+
+                
+                {{#if education}}
+                <section id="projects">
+                    <h2 class="text-3xl font-bold text-ember mb-6">Education</h2>
+                    <div class="grid gap-6">
+                        {{#each education}}
+                        <div class="project-card">
+                            <h5 class="text-xl font-bold">{{title}}</h5>
+                            <h3 class="text-xl font-bold">{{degree}}</h3>
+                            <p class="text-sage">{{institution}} | {{date_start}} - {{date_end}} </p>
+                            {{#if details}}
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                {{#each details}}
+                                <span class="px-3 py-1 bg-sage text-obsidian rounded-full text-sm">{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
             </div>
 
             <!-- Right Column -->
             <div class="space-y-8">
                 {{#if experience}}
                 <section id="experience" class="relative">
-                    <h2 class="text-3xl font-bold text-ember mb-6">Experience</h2>
+                    <h2 class="text-3xl text-white font-bold text-ember mb-6">Experience</h2>
                     <div class="space-y-6">
                         {{#each experience}}
                         <div class="project-card">
@@ -179,7 +191,7 @@
 
                 {{#if projects}}
                 <section id="projects">
-                    <h2 class="text-3xl font-bold text-ember mb-6">Projects</h2>
+                    <h2 class="text-3xl font-bold text-white  mb-6">Projects</h2>
                     <div class="grid gap-6">
                         {{#each projects}}
                         <div class="project-card">
@@ -195,6 +207,21 @@
                     </div>
                 </section>
                 {{/if}}
+
+                {{#if certifications}}
+                <section id="projects">
+                    <h2 class="text-3xl font-bold text-white mb-6">Certifications</h2>
+                    <div class="grid gap-6">
+                        {{#each certifications}}
+                        <div class="project-card">
+                            <h3 class="text-xl font-bold">{{name}}</h3>
+                            <p class="text-sage">{{issuer}} | {{date}} </p>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
             </div>
         </div>
     </div>

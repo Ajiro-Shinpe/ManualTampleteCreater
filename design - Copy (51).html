@@ -252,25 +252,18 @@
             <div class="intro-bg"></div>
             <div class="intro-content">
                 <h1 class="profile-name">{{name}}</h1>
-                <p class="profile-title">{{title}}</p>
-                {{#if about_us}}
-                <p>{{about_us}}</p>
-                {{/if}}
+                {{#if title}} <p class="lead"> {{title}}</p> {{/if}}
+                {{#if summary}} <p>{{summary}}</p> {{/if}}
             </div>
         </div>
 
         <div class="sidebar">
-            {{#if contact}}
-            <div>
-                <h2 class="section-title">Contact</h2>
-                <ul class="contact-list">
-                    {{#each contact}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-            </div>
+                
+            {{#if about_us}}
+            <h2 style="color: white; font-size: 3b0px;">About</h2>
+            <p style="color: white;">{{about_us}}</p>
             {{/if}}
-        </div>
+    </div>
 
         <div class="main-content">
             <div class="experience-section">
@@ -341,6 +334,20 @@
                         {{/each}}
                     </ul>
                     {{/if}}
+                </div>
+                {{/each}}
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="timeline-item">
+                    <h3 class="experience-title">{{name}}</h3>
+                    <div class="experience-company">
+                        <span>{{issuer}}</span>
+                        <span class="date">{{date}}</span>
+                    </div>
                 </div>
                 {{/each}}
                 {{/if}}
