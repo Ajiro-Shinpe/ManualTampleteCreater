@@ -184,17 +184,12 @@
         <header class="header-section">
             <h1 class="profile-name">{{name}}</h1>
             <p class="profile-title">{{title}}</p>
+            <p class="profile-title">{{summary}}</p>
             {{#if about_us}}
+            <h2 class="section-title">About Us</h2>
             <p class="profile-description">{{about_us}}</p>
             {{/if}}
 
-            {{#if contact}}
-            <div class="contact-info">
-                {{#each contact}}
-                <a href="#">{{this}}</a>
-                {{/each}}
-            </div>
-            {{/if}}
         </header>
 
         <main class="main-grid">
@@ -207,9 +202,17 @@
                         <h3 class="experience-title">{{title}}</h3>
                         <div class="experience-company">
                             <span>{{company}}</span>
+                            <span>{{location}}</span>
                             <span>{{date_start}} - {{date_end}}</span>
                         </div>
                         <p>{{description}}</p>
+                        {{#if responsibilities}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
                     </div>
                     {{/each}}
                 </section>
@@ -223,7 +226,7 @@
                         <h3 class="project-title">{{name}}</h3>
                         <p>{{description}}</p>
                         <div class="tech-stack">
-                            {{#each tech_stack}}
+                            {{#each features}}
                             <span class="tech-tag">{{this}}</span>
                             {{/each}}
                         </div>
@@ -253,8 +256,29 @@
                     <h2 class="section-title">Education</h2>
                     {{#each education}}
                     <div class="card">
+                        <h5 class="experience-title">{{title}}</h5>
                         <h3 class="experience-title">{{degree}}</h3>
                         <p>{{institution}} ({{date_start}} - {{date_end}})</p>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </section>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <section>
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="card">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <p>{{issuer}} ({{date}})</p>
                     </div>
                     {{/each}}
                 </section>

@@ -37,7 +37,6 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 2rem;
-            position: relative;
         }
 
         .header-section {
@@ -46,78 +45,39 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 2rem;
-            position: relative;
         }
 
         .profile-container {
             grid-column: 3 / 11;
             align-self: center;
             text-align: center;
-            position: relative;
         }
 
         .profile-name {
             font-size: 8rem;
             font-weight: 700;
-            line-height: 1;
             margin-bottom: 2rem;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            transform: translateX(-100%);
-            opacity: 0;
-            animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .profile-title {
             font-size: 2rem;
             color: var(--text-secondary);
-            transform: translateX(100%);
-            opacity: 0;
-            animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .scroll-line {
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--accent-primary), transparent);
-            animation: scrollPulse 2s infinite;
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.6); }
         }
 
         .content-grid {
-            grid-column: 1 / -1;
+            /* grid-column: 1 / -1;
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(12, 1fr); */
             gap: 4rem;
             margin-top: var(--section-spacing);
         }
 
         .section {
             scroll-margin-top: 2rem;
+            width: 100%;
         }
 
         .experience-section {
@@ -131,45 +91,10 @@
             display: inline-block;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-primary);
-            transform-origin: left;
-            transform: scaleX(0);
-            animation: lineReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes lineReveal {
-            to { transform: scaleX(1); }
-        }
-
         .experience-card {
             padding: 3rem;
             background: var(--bg-secondary);
             margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .experience-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .experience-card:hover::before {
-            opacity: 1;
         }
 
         .experience-title {
@@ -189,17 +114,6 @@
             gap: 1rem;
         }
 
-        .responsibilities-list li {
-            padding: 1rem;
-            background: white;
-            border-radius: 4px;
-            transition: transform 0.3s ease;
-        }
-
-        .responsibilities-list li:hover {
-            transform: translateX(10px);
-        }
-
         .skills-section {
             grid-column: 3 / 11;
             margin-top: var(--section-spacing);
@@ -215,8 +129,6 @@
             padding: 2rem;
             background: white;
             border-radius: 4px;
-            position: relative;
-            overflow: hidden;
         }
 
         .skill-name {
@@ -224,30 +136,6 @@
             justify-content: space-between;
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
-        }
-
-        .skill-progress-container {
-            position: relative;
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            width: var(--skill-percentage);
-            transform-origin: left;
-            transform: scaleX(0);
-            animation: progressReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes progressReveal {
-            to { transform: scaleX(1); }
         }
 
         .projects-section {
@@ -264,8 +152,6 @@
         .project-card {
             padding: 2rem;
             background: white;
-            position: relative;
-            overflow: hidden;
             transition: transform 0.3s ease;
         }
 
@@ -277,16 +163,6 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--accent-primary);
-        }
-
-        @media (max-width: 1200px) {
-            .profile-name {
-                font-size: 6rem;
-            }
-
-            .content-grid > * {
-                grid-column: 2 / 12;
-            }
         }
 
         @media (max-width: 768px) {
@@ -301,10 +177,6 @@
             .content-grid > * {
                 grid-column: 1 / -1;
             }
-
-            .experience-card {
-                padding: 2rem;
-            }
         }
     </style>
 </head>
@@ -314,10 +186,6 @@
             <div class="profile-container">
                 <h1 class="profile-name">{{name}}</h1>
                 <p class="profile-title">{{title}}</p>
-            </div>
-            <div class="scroll-indicator">
-                <span>Scroll to explore</span>
-                <div class="scroll-line"></div>
             </div>
         </header>
 
@@ -351,9 +219,6 @@
                             <span>{{@key}}</span>
                             <span>{{this}}</span>
                         </div>
-                        <div class="skill-progress-container">
-                            <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
-                        </div>
                     </div>
                     {{/each}}
                 </div>
@@ -368,11 +233,49 @@
                     <div class="project-card">
                         <h3 class="project-title">{{name}}</h3>
                         <p>{{description}}</p>
+                        {{#each features}}
+                        <span>{{this}} </span>
+                        {{/each}}
                     </div>
                     {{/each}}
                 </div>
             </section>
             {{/if}}
+
+            {{#if education}}
+            <section class="education-section section" id="education">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    {{#each education}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{degree}}</h3>
+                        <p>{{institution}} ({{date_start}} - {{date_end}})</p>
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="certifications-section section" id="certifications">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    {{#each certifications}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>Issued by: {{issuer}}</p>
+                        <p>Date: {{date}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
         </main>
     </div>
 </body>

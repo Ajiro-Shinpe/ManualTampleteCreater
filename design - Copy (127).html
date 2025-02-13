@@ -147,13 +147,10 @@
         <div class="header">
             {{#if name}}
             <div class="full-name">{{name}}</div>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    
             {{/if}}
-
-            <div class="contact-info">
-                <a href="mailto:{{email}}"><i class="fas fa-envelope"></i> {{email}}</a>
-                <span class="mx-2">|</span>
-                <a href="tel:{{phone}}"><i class="fas fa-phone"></i> {{phone}}</a>
-            </div>
 
             {{#if about_us}}
             <div class="about mt-4">

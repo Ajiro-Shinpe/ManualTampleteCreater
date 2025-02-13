@@ -252,15 +252,9 @@
         {{#if name}}
         <h1 class="name">{{name}}</h1>
         {{/if}}
-        {{#if title}}
-        <div class="title">{{title}}</div>
-        {{/if}}
-        <div class="contact-info">
-            <a href="mailto:{{email}}"><i class="fas fa-envelope"></i> {{email}}</a>
-            <a href="tel:{{phone}}"><i class="fas fa-phone"></i> {{phone}}</a>
-            <a href="{{linkedin}}"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="{{github}}"><i class="fab fa-github"></i> GitHub</a>
-        </div>
+        {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+        {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+
     </div>
 
     <div class="main-content">

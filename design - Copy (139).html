@@ -191,21 +191,103 @@
 
 <body>
     <div class="container">
-        <div class="profile-section">
-            {{#if profile_image}}
-            <img src="{{profile_image}}" alt="Profile Picture" class="profile-picture">
-            {{/if}}
-            <div class="profile-info">
-                {{#if name}}
-                <h1 class="name">{{name}}</h1>
+        <div class="col-4">
+            <div class="profile-card">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="Profile Picture" class="profile-picture">
                 {{/if}}
+                <div class="profile-info">
+                    {{#if name}}
+                    <h1 class="name">{{name}}</h1>
+                    {{/if}}
 
-                {{#if title}}
-                <div class="title">{{title}}</div>
-                {{/if}}
+                    {{#if title}}
+                    <div class="title">{{title}}</div>
+                    {{/if}}
+                </div>
             </div>
+
+            {{#if skills}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Technical Skills</h2>
+                </div>
+                <div class="card-content">
+                    {{#if skills.frontend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Frontend Development</h3>
+                        <div class="skills-grid">
+                            {{#each skills.frontend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.backend}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Backend Development</h3>
+                        <div class="skills-grid">
+                            {{#each skills.backend}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Mobile Development</h3>
+                        <div class="skills-grid">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.devops}}
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">DevOps & Cloud</h3>
+                        <div class="skills-grid">
+                            {{#each skills.devops}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if certifications}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Certifications</h2>
+                </div>
+                <div class="card-content">
+                    {{#each certifications}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{name}}</div>
+                            <div class="item-subtitle">
+                                <span><i class="fas fa-certificate"></i> {{issuer}}</span>
+                                {{#if date}}
+                                <span><i class="fas fa-calendar"></i> {{date}}</span>
+                                {{/if}}
+                                {{#if expire}}
+                                <span><i class="fas fa-calendar"></i> Expires: {{expire}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
         </div>
-        <div class="content-section">
+
+        <div class="col-8">
             {{#if about_us}}
             <div class="card">
                 <div class="card-header">
@@ -213,6 +295,31 @@
                 </div>
                 <div class="card-content">
                     <p>{{about_us}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Education</h2>
+                </div>
+                <div class="card-content">
+                    {{#each education}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{degree}}</div>
+                        </div>
+                        <div class="project-description">{{institution}}</div>
+                        {{#if details}}
+                        <ul class="features-list">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
                 </div>
             </div>
             {{/if}}

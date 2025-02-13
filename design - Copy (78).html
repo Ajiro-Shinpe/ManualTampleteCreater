@@ -165,19 +165,15 @@
 <body>
     <div class="resume-container">
         <div class="header">
-            <h1 class="profile-name">{{name}}</h1>
-            <p class="profile-title">{{title}}</p>
-            {{#if about_us}}
-            <p class="profile-description">{{about_us}}</p>
-            {{/if}}
 
-            {{#if contact}}
-            <div class="contact-info">
-                {{#each contact}}
-                <a href="#">{{this}}</a>
-                {{/each}}
-            </div>
-            {{/if}}
+            <h1 class="profile-name">{{name}}</h1>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    
+            {{#if about_us}}
+            <h2>About</h2>
+            <p class="profile-description">{{about_us}}</p>
+            {{/if}}        
         </div>
 
         {{#if skills}}
@@ -206,6 +202,7 @@
                 <div class="experience-company">
                     <span>{{company}}</span>
                     <span>{{date_start}} - {{date_end}}</span>
+                    <span>{{location}}</span>
                 </div>
                 {{#if description}}
                 <p class="experience-description">{{description}}</p>
@@ -229,7 +226,7 @@
                 <h3 class="project-title">{{name}}</h3>
                 <p>{{description}}</p>
                 <div class="tech-stack">
-                    {{#each tech_stack}}
+                    {{#each features}}
                     <span class="tech-tag">{{this}}</span>
                     {{/each}}
                 </div>
@@ -255,6 +252,21 @@
                     {{/each}}
                 </ul>
                 {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="card">
+                <h3 class="education-title">{{name}}</h3>
+                <div class="education-details">
+                    {{issuer}} - ({{date}})
+                </div>
             </div>
             {{/each}}
         </section>

@@ -297,6 +297,11 @@
                 <div class="profile-image"></div>
                 <h1 class="profile-name">{{name}}</h1>
                 <p class="profile-title">{{title}}</p>
+                <p>{{summary}}</p>
+                {{#if about_us}}
+                <h2>About Me</h2>
+                <p>{{about_us}}</p>
+                {{/if}}    
             </div>
 
             {{#if skills}}
@@ -316,6 +321,29 @@
                     {{/each}}
                 </div>
             </div>
+            {{/if}}
+
+            
+                
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="project-card">
+                    <h4> {{title}} </h4>
+                    <h3 class="project-title">{{degree}}</h3>
+                    <p>{{institution}}</p>
+                    <span> {{date_start}} - {{date_end}} </span>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
             {{/if}}
         </aside>
 
@@ -349,10 +377,26 @@
                 <div class="project-card">
                     <h3 class="project-title">{{name}}</h3>
                     <p>{{description}}</p>
+                    {{#each features}}
+                    <span> {{this}} </span>
+                    {{/each}}
                 </div>
                 {{/each}}
             </section>
             {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p>{{issuer}} | {{date}} </p>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
         </main>
     </div>
 </body>

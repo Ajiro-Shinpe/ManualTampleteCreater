@@ -171,7 +171,13 @@
     <div class="resume-container">
         <header class="header-section">
             <h1 class="profile-name">{{name}}</h1>
-            <p class="profile-title">{{title}}</p>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+            {{#if about_us}}
+            <h2>about</h2>
+            <p>{{about_us}} </p>
+            {{/if}}
+            
         </header>
 
         <main>
@@ -221,11 +227,50 @@
                     <div class="project-card">
                         <h3 class="project-title">{{name}}</h3>
                         <p class="project-description">{{description}}</p>
+                        {{#each features}}
+                        <span>{{this}} </span>
+                        {{/each}}
+       
                     </div>
                     {{/each}}
                 </div>
             </section>
             {{/if}}
+
+            {{#if education}}
+            <section class="education-section section" id="education">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    {{#each education}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{degree}}</h3>
+                        <p>{{institution}} ({{date_start}} - {{date_end}})</p>
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="certifications-section section" id="certifications">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    {{#each certifications}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>Issued by: {{issuer}}</p>
+                        <p>Date: {{date}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
         </main>
     </div>
 </body>

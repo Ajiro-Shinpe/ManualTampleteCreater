@@ -31,7 +31,6 @@
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            flex-direction: row-reverse; /* Reverse column order */
         }
 
         .col-8 {
@@ -72,11 +71,6 @@
             font-weight: 600;
             color: var(--primary);
             margin-right: auto;
-        }
-
-        .card-subtitle {
-            font-size: 1.1rem;
-            color: var(--secondary);
         }
 
         .card-content {
@@ -175,13 +169,14 @@
 
         .item-subtitle {
             font-size: 1rem;
-            color: var(--primary); /* Primary color for subtitles */
+            color: var(--primary);
         }
 
         .responsibilities,
         .features-list {
             list-style: none;
             padding-left: 1.2rem;
+            margin: 0;
         }
 
         .responsibilities li::before,
@@ -189,14 +184,6 @@
             content: "•";
             color: var(--primary);
             margin-right: 0.5rem;
-        }
-
-        .card-header {
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .card-title {
-            color: var(--primary);
         }
 
         /* Responsive adjustments */
@@ -277,128 +264,140 @@
                         <h3 class="skill-category-title">DevOps & Cloud</h3>
                         <div class="skills-grid">
                             {{#each skills.devops}}
-                            <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
-                            {{/if}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
                         </div>
                     </div>
-                    {{#if details}}
-                    <ul class="features-list">
-                        {{#each details}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
                     {{/if}}
                 </div>
-                {{/each}}
             </div>
-        </div>
-        {{/if}}
+            {{/if}}
 
-        {{#if certifications}}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Certifications</h2>
-            </div>
-            <div class="card-content">
-                {{#each certifications}}
-                <div class="item">
-                    <div class="item-header">
-                        <div class="item-title">{{name}}</div>
-                        <div class="item-subtitle">
-                            <span><i class="fas fa-certificate"></i> {{issuer}}</span>
-                            {{#if date}}
-                            <span><i class="fas fa-calendar"></i> {{date}}</span>
-                            {{/if}}
-                            {{#if expire}}
-                            <span><i class="fas fa-calendar"></i> Expires: {{expire}}</span>
-                            {{/if}}
+            {{#if certifications}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Certifications</h2>
+                </div>
+                <div class="card-content">
+                    {{#each certifications}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{name}}</div>
+                            <div class="item-subtitle">
+                                <span><i class="fas fa-certificate"></i> {{issuer}}</span>
+                                {{#if date}}
+                                <span><i class="fas fa-calendar"></i> {{date}}</span>
+                                {{/if}}
+                                {{#if expire}}
+                                <span><i class="fas fa-calendar"></i> Expires: {{expire}}</span>
+                                {{/if}}
+                            </div>
                         </div>
                     </div>
+                    {{/each}}
                 </div>
-                {{/each}}
             </div>
+            {{/if}}
         </div>
-        {{/if}}
 
+        <div class="col-8">
+            {{#if about_us}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">About Me</h2>
+                </div>
+                <div class="card-content">
+                    <p>{{about_us}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Education</h2>
+                </div>
+                <div class="card-content">
+                    {{#each education}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{degree}}</div>
+                        </div>
+                        <div class="project-description">{{institution}}</div>
+                        {{#if details}}
+                        <ul class="features-list">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if experience}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Professional Experience</h2>
+                </div>
+                <div class="card-content">
+                    {{#each experience}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{title}}</div>
+                            <div class="item-subtitle">
+                                <span><i class="fas fa-building"></i> {{company}}</span>
+                                {{#if date_start}}
+                                <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                                {{/if}}
+                                {{#if location}}
+                                <span><i class="fas fa-map-marker-alt"></i> {{location}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{#if responsibilities}}
+                        <ul class="responsibilities">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if projects}}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Projects</h2>
+                </div>
+                <div class="card-content">
+                    {{#each projects}}
+                    <div class="item">
+                        <div class="item-header">
+                            <div class="item-title">{{name}}</div>
+                        </div>
+                        {{#if description}}
+                        <div class="project-description">{{description}}</div>
+                        {{/if}}
+                        {{#if features}}
+                        <ul class="features-list">
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
     </div>
-    <div class="col-8">
-        {{#if name}}
-        <h1 class="name">{{name}}</h1>
-        {{/if}}
-
-        {{#if about_us}}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">About Me</h2>
-            </div>
-            <div class="card-content">
-                <p>{{about_us}}</p>
-            </div>
-        </div>
-        {{/if}}
-
-        {{#if experience}}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Professional Experience</h2>
-            </div>
-            <div class="card-content">
-                {{#each experience}}
-                <div class="item">
-                    <div class="item-header">
-                        <div class="item-title">{{title}}</div>
-                        <div class="item-subtitle">
-                            <span><i class="fas fa-building"></i> {{company}}</span>
-                            {{#if date_start}}
-                            <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
-                            {{/if}}
-                            {{#if location}}
-                            <span><i class="fas fa-map-marker-alt"></i> {{location}}</span>
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{#if responsibilities}}
-                    <ul class="responsibilities">
-                        {{#each responsibilities}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
-                </div>
-                {{/each}}
-            </div>
-        </div>
-        {{/if}}
-
-        {{#if projects}}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Projects</h2>
-            </div>
-            <div class="card-content">
-                {{#each projects}}
-                <div class="item">
-                    <div class="item-header">
-                        <div class="item-title">{{name}}</div>
-                    </div>
-                    {{#if description}}
-                    <div class="project-description">{{description}}</div>
-                    {{/if}}
-                    {{#if features}}
-                    <ul class="features-list">
-                        {{#each features}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
-                </div>
-                {{/each}}
-            </div>
-        </div>
-        {{/if}}
-
-    </div>
-</div>
 </body>
 
 </html>

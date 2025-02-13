@@ -19,9 +19,6 @@ it must be unique don't change code script functionality eg {{#if}} statement do
 
 =============================================================
 
-Here's your optimized prompt for generating a truly unique and innovative design every time:  
-
----
 
 ### **Optimized Prompt for Unique Layout Design**  
 
@@ -61,5 +58,3 @@ Listen carefully: Your task is to **create a fresh, visually distinct, and compl
 - Provide **fully functional HTML & CSS** in one go.  
 - Do **not** modify the data logic—focus on **redesigning the UI**.  
 - Ensure **each version looks significantly different from the last** by varying layout, colors, and typography.  
-
----  

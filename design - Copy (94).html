@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Unbounded:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0F172A;
-            --secondary-color: #64748B;
-            --accent-color: #06B6D4;
-            --bg-color: #F8FAFC;
-            --grid-color: rgba(15, 23, 42, 0.05);
-            --card-bg: #FFFFFF;
-            --border-light: rgba(15, 23, 42, 0.1);
+            --primary: #F4F0E8;
+            --secondary: #1A1A1A;
+            --accent: #FF5733;
+            --text: #333333;
+            --muted: #666666;
+            --border: #E0E0E0;
+            --surface: #FFFFFF;
         }
 
         * {
@@ -23,486 +23,392 @@
         }
 
         body {
+            background: var(--primary);
+            color: var(--text);
             font-family: 'DM Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-color);
             line-height: 1.6;
-            background-image: 
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px;
         }
 
-        .resume-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        .resume {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            position: relative;
-        }
-
-        .resume-container::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 0% 0%, rgba(6, 182, 212, 0.1), transparent 40%),
-                        radial-gradient(circle at 100% 100%, rgba(15, 23, 42, 0.1), transparent 40%);
-            pointer-events: none;
-            z-index: -1;
+            grid-template-columns: 380px 1fr;
+            min-height: 100vh;
         }
 
         .sidebar {
-            position: sticky;
-            top: 4rem;
-            height: fit-content;
-        }
-
-        .header {
-            margin-bottom: 3rem;
-        }
-
-        .profile-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 4rem 2rem;
             position: relative;
+            overflow: hidden;
         }
 
-        .profile-name::after {
+        .sidebar::before {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 100px;
-            height: 4px;
-            background: var(--accent-color);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 87, 51, 0.1),
+                rgba(255, 87, 51, 0.1) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+            z-index: 1;
         }
 
-        .profile-title {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
+        .profile {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-family: 'Unbounded', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .title {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             font-weight: 500;
         }
 
-        .profile-description {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            max-width: 600px;
+        .about {
+            font-size: 0.95rem;
+            color: rgba(244, 240, 232, 0.8);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(244, 240, 232, 0.2);
+        }
+
+        .main-content {
+            padding: 4rem;
+            background: var(--surface);
         }
 
         .section {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 2px;
-            box-shadow: 20px 20px 40px rgba(15, 23, 42, 0.03);
-            margin-bottom: 2rem;
-            position: relative;
-            border: 1px solid var(--border-light);
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 1rem;
-            left: -0.5rem;
-            width: 2px;
-            height: 2rem;
-            background: var(--accent-color);
+            margin-bottom: 3.5rem;
         }
 
         .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
+            font-family: 'Unbounded', cursive;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
+            letter-spacing: 0.2em;
+            color: var(--accent);
             margin-bottom: 2rem;
-            font-weight: 600;
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
-        .card {
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            margin-left: 1rem;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
             margin-bottom: 2.5rem;
             position: relative;
         }
 
-        .card:last-child {
-            margin-bottom: 0;
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 190px;
+            top: 0;
+            bottom: -2.5rem;
+            width: 1px;
+            background: var(--border);
         }
 
-        .experience-title, .project-title, .education-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem;
+        .experience-item:last-child::before {
+            display: none;
+        }
+
+        .experience-meta {
+            text-align: right;
+        }
+
+        .experience-company {
             font-weight: 600;
+            color: var(--secondary);
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
         }
 
-        .experience-company, .education-info {
-            font-size: 1rem;
-            color: var(--secondary-color);
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
+        .experience-date, .experience-location {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .experience-content h3 {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.2rem;
             font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--secondary);
         }
 
-        .experience-description, .card ul {
-            color: var(--secondary-color);
-            font-size: 1rem;
-            padding-left: 1.2rem;
-            border-left: 2px solid var(--border-light);
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .skill {
+            position: relative;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .skill-bar {
+            height: 2px;
+            background: rgba(244, 240, 232, 0.2);
+            position: relative;
+        }
+
+        .skill-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--accent);
+            width: var(--skill-percentage);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .project-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
         }
 
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .tech-tag {
-            padding: 0.4rem 1rem;
-            background: var(--bg-color);
-            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            background: var(--surface);
             border-radius: 2px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-light);
+            font-size: 0.8rem;
+            color: var(--muted);
         }
 
-        .skill-item {
-            margin-bottom: 2rem;
+        ul {
+            list-style: none;
+            color: var(--text);
+        }
+
+        ul li {
             position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
         }
 
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-        }
-
-        .skill-bar {
-            height: 4px;
-            background: var(--bg-color);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: var(--accent-color);
-            width: var(--skill-percentage);
-            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1);
-        }
-
-        .contact-info {
-            margin-top: 2rem;
-            font-size: 1rem;
-            color: var(--secondary-color);
+        ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
 
         @media (max-width: 1024px) {
-            .resume-container {
+            .resume {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
 
             .sidebar {
-                position: relative;
-                top: 0;
+                padding: 3rem 2rem;
             }
 
-            .profile-name {
-                font-size: 3rem;
+            .main-content {
+                padding: 3rem 2rem;
+            }
+
+            .experience-item {
+                grid-template-columns: 150px 1fr;
+            }
+
+            .experience-item::before {
+                left: 140px;
             }
         }
 
         @media (max-width: 768px) {
-            .resume-container {
-                padding: 2rem 1rem;
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .section {
-                padding: 1.5rem;
+            .experience-meta {
+                text-align: left;
             }
 
-            .profile-name {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section {
-            animation: slideIn 0.5s ease-out forwards;
-        }
-
-        .section:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .section:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* Improved Styles */
-        .resume-container {
-            grid-template-columns: minmax(250px, 1fr) 2fr; /* Responsive sidebar width */
-            gap: 4rem; /* Increased gap */
-            padding: 5rem 3rem; /* Adjusted padding */
-        }
-
-        .sidebar {
-            position: sticky;
-            top: 3rem; /* Adjusted top spacing */
-            height: fit-content;
-        }
-
-        .header {
-            margin-bottom: 4rem; /* Increased margin */
-        }
-
-        .profile-name {
-            font-size: 4rem; /* Slightly smaller */
-            margin-bottom: 1.5rem;
-        }
-
-        .profile-name::after {
-            width: 120px; /* Slightly longer line */
-        }
-
-        .profile-title {
-            font-size: 1.6rem;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            padding: 3rem; /* Increased padding */
-            margin-bottom: 3rem; /* Increased margin */
-            border: none; /* Removed border */
-            box-shadow: 0 8px 16px rgba(15, 23, 42, 0.05); /* Softer shadow */
-        }
-
-        .section::before {
-            height: 2.5rem; /* Slightly longer line */
-            left: -0.75rem; /* Adjusted position */
-        }
-
-        .section-title {
-            font-size: 1.3rem; /* Slightly larger */
-            margin-bottom: 2.5rem; /* Increased margin */
-        }
-
-        .card {
-            margin-bottom: 3rem; /* Increased margin */
-        }
-
-        .experience-title, .project-title, .education-title {
-            font-size: 1.5rem; /* Slightly larger */
-        }
-
-        .experience-company, .education-info {
-            margin-bottom: 1.2rem; /* Increased margin */
-        }
-
-        .experience-description, .card ul {
-            padding-left: 1.5rem; /* Increased padding */
-        }
-
-        .tech-tag {
-            padding: 0.5rem 1.2rem; /* Adjusted padding */
-            font-size: 1rem; /* Slightly larger */
-        }
-
-        .skill-item {
-            margin-bottom: 2.5rem; /* Increased margin */
-        }
-
-        .skill-name {
-            margin-bottom: 1rem; /* Increased margin */
-        }
-
-        .skill-bar {
-            height: 6px; /* Slightly thicker bar */
-        }
-
-
-        /* Responsive Design - Improved */
-        @media (max-width: 1200px) {
-            .resume-container {
-                grid-template-columns: 1fr; /* Stack on larger tablets */
-                gap: 3rem;
-                padding: 4rem 2rem;
+            .experience-item::before {
+                display: none;
             }
 
-            .sidebar {
-                position: relative; /* No longer sticky */
-                top: 0;
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
-
-            .profile-name {
-                font-size: 3.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .resume-container {
-                padding: 3rem 1.5rem;
-                gap: 2rem;
-            }
-
-            .profile-name {
-                font-size: 3rem;
-            }
-
-            .section {
-                padding: 2rem;
-            }
-
-            .card {
-                margin-bottom: 2.5rem;
-            }
-        }
-
-        /* Animations - Refined */
-        .section {
-            animation: slideIn 0.6s ease-out forwards; /* Slightly slower */
-        }
-
-        .section:nth-child(2) {
-            animation-delay: 0.25s; /* Adjusted delay */
-        }
-
-        .section:nth-child(3) {
-            animation-delay: 0.5s; /* Adjusted delay */
-        }
-
-        /* Added hover effect to tech-tags */
-        .tech-tag {
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-        }
-
-        .tech-tag:hover {
-            background-color: var(--accent-color);
-            color: white;
         }
     </style>
 </head>
 <body>
-    <div class="resume-container">
-        <div class="sidebar">
-            <div class="header">
-                <h1 class="profile-name">{{name}}</h1>
-                <p class="profile-title">{{title}}</p>
+    <main class="resume">
+        <aside class="sidebar">
+            <div class="profile">
+                <h1 class="name">{{name}}</h1>
+                <h2 class="title">{{title}}</h2>
                 {{#if about_us}}
-                <p class="profile-description">{{about_us}}</p>
+                <p class="about">{{about_us}}</p>
                 {{/if}}
-            </div>
 
-            <div class="section">
                 {{#if skills}}
-                <h2 class="section-title">Expertise</h2>
-                {{#each skills}}
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>{{@key}}</span>
-                        <span>{{this}}</span>
+                <section class="section">
+                    <h2 class="section-title">Skills</h2>
+                    <div class="skills-grid">
+                        {{#each skills}}
+                        <div class="skill">
+                            <div class="skill-name">{{@key}}</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
-                    </div>
-                </div>
-                {{/each}}
+                </section>
                 {{/if}}
             </div>
-
-            {{#if education}}
-            <div class="section">
-                <h2 class="section-title">Education</h2>
-                {{#each education}}
-                <div class="card">
-                    <h3 class="education-title">{{degree}}</h3>
-                    <div class="education-info">
-                        <span>{{institution}}</span>
-                        <span>{{date_start}} - {{date_end}}</span>
-                    </div>
-                    {{#if details}}
-                    <ul>
-                        {{#each details}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
-                </div>
-                {{/each}}
-            </div>
-            {{/if}}
-        </div>
+        </aside>
 
         <div class="main-content">
             {{#if experience}}
-            <div class="section">
+            <section class="section">
                 <h2 class="section-title">Experience</h2>
                 {{#each experience}}
-                <div class="card">
-                    <h3 class="experience-title">{{title}}</h3>
-                    <div class="experience-company">
-                        <span>{{company}}</span>
-                        <span>{{date_start}} - {{date_end}}</span>
+                <div class="experience-item">
+                    <div class="experience-meta">
+                        <div class="experience-company">{{company}}</div>
+                        <div class="experience-date">{{date_start}} - {{date_end}}</div>
+                        <div class="experience-location">{{location}}</div>
                     </div>
-                    {{#if description}}
-                    <p class="experience-description">{{description}}</p>
-                    {{else}}
-                    <ul>
-                        {{#each responsibilities}}
-                        <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
+                    <div class="experience-content">
+                        <h3>{{title}}</h3>
+                        {{#if description}}
+                        <p>{{description}}</p>
+                        {{else}}
+                        <ul>
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
                 </div>
                 {{/each}}
-            </div>
+            </section>
             {{/if}}
 
             {{#if projects}}
-            <div class="section">
-                <h2 class="section-title">Featured Projects</h2>
-                {{#each projects}}
-                <div class="card">
-                    <h3 class="project-title">{{name}}</h3>
-                    <p class="experience-description">{{description}}</p>
-                    <div class="tech-stack">
-                        {{#each tech_stack}}
-                        <span class="tech-tag">{{this}}</span>
-                        {{/each}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-grid">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tech-stack">
+                            {{#each features}}
+                            <span class="tech-tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="experience-item">
+                    <div class="experience-meta">
+                        <div class="experience-company">{{institution}}</div>
+                        <div class="experience-date">{{date_start}} - {{date_end}}</div>
+                    </div>
+                    <div class="experience-content">
+                        <h3>{{degree}}</h3>
+                        {{#if details}}
+                        <ul>
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
-            </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="experience-item">
+                    <div class="experience-meta">
+                        <div class="experience-company">{{issuer}}</div>
+                        <div class="experience-date">{{date}}</div>
+                    </div>
+                    <div class="experience-content">
+                        <h3>{{name}}</h3>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
             {{/if}}
         </div>
-    </div>
+    </main>
 </body>
 </html>

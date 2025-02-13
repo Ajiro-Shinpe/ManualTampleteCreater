@@ -147,9 +147,9 @@
             {{#if name}}
             <h1 class="name">{{name}}</h1>
             {{/if}}
-            {{#if title}}
-            <div class="title">{{title}}</div>
-            {{/if}}
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    
         </header>
 
         {{#if about_us}}
@@ -236,6 +236,21 @@
                     <li>{{this}}</li>
                     {{/each}}
                 </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+        
+            
+        {{#if certifications}}
+        <div class="section" id="projects">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="card">
+                <div class="item-title">{{name}}</div>
+                {{#if issuer}}
+                <div class="project-description">{{issuer}} | {{date}} </div>
                 {{/if}}
             </div>
             {{/each}}

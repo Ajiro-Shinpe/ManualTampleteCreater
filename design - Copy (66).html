@@ -4,48 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(180deg, #FF6B6B, #FFD93D);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 5px solid #FFD93D;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #FF6B6B;
+            margin: 0;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #FF6B6B;
+            border-bottom: 2px solid #FFD93D;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .skills {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .progress {
+            background: #FFD93D;
+            border-radius: 5px;
+            height: 10px;
+            width: 100%;
+        }
+        .progress-fill {
+            background: #FF6B6B;
+            height: 100%;
+            border-radius: 5px;
+        }
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
+<body>
 
-    <div class="max-w-4xl w-full bg-white/90 backdrop-blur-lg shadow-lg rounded-xl p-8">
-        <!-- Header -->
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-blue-700">{{name}}</h1>
-            <p class="text-gray-600 text-lg">{{title}}</p>
+    <div class="container">
+        <header>
+            <h1>{{name}}</h1>
+            <p>{{title}}</p>
             {{#if about_us}}
-                <p class="mt-2 text-gray-500">{{about_us}}</p>
-            {{/if}}
-            {{#if contact}}
-                <div class="flex justify-center gap-4 mt-4">
-                    {{#each contact}}
-                        <a href="#" class="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-500 hover:text-white transition">
-                            {{this}}
-                        </a>
-                    {{/each}}
-                </div>
+                <p class="mt-2">{{about_us}}</p>
             {{/if}}
         </header>
 
         <!-- Experience -->
         <section>
-            <h2 class="text-xl font-semibold text-red-500 border-b pb-2 mb-4">Experience</h2>
+            <h2>Experience</h2>
             {{#each experience}}
-                <div class="bg-gray-100 p-4 rounded-lg shadow mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">{{title}}</h3>
-                    <div class="text-sm text-gray-600 flex justify-between">
-                        <span>{{company}}</span>
-                        <span>{{date_start}} - {{date_end}}</span>
-                    </div>
+                <div class="card">
+                    <h3>{{title}}</h3>
+                    <p>{{company}} | {{date_start}} - {{date_end}}</p>
                     {{#if description}}
-                        <p class="mt-2 text-gray-700">{{description}}</p>
+                        <p>{{description}}</p>
                     {{else}}
-                        <ul class="list-disc pl-6 mt-2 text-gray-700">
+                        <ul>
                             {{#each responsibilities}}
                                 <li>{{this}}</li>
                             {{/each}}
@@ -57,50 +119,40 @@
 
         <!-- Projects -->
         <section>
-            <h2 class="text-xl font-semibold text-red-500 border-b pb-2 mb-4">Projects</h2>
+            <h2>Projects</h2>
             {{#each projects}}
-                <div class="bg-white p-4 rounded-lg shadow mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">{{name}}</h3>
-                    <p class="text-gray-600">{{description}}</p>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        {{#each tech_stack}}
-                            <span class="px-2 py-1 bg-blue-500 text-white text-sm rounded">{{this}}</span>
-                        {{/each}}
-                    </div>
+                <div class="card">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
                 </div>
             {{/each}}
         </section>
 
         <!-- Skills -->
         <section>
-            <h2 class="text-xl font-semibold text-red-500 border-b pb-2 mb-4">Skills</h2>
-            <div class="p-4 bg-gray-100 rounded-lg shadow">
-                {{#each skills}}
-                    <div class="mb-4">
-                        <div class="flex justify-between text-gray-800 font-medium">
-                            <span>{{@key}}</span>
-                            <span>{{this}}</span>
-                        </div>
-                        <div class="w-full bg-gray-200 h-2 rounded mt-1">
-                            <div class="bg-red-500 h-2 rounded" style="width:{{this}};"></div>
-                        </div>
+            <h2>Skills</h2>
+            {{#each skills}}
+                <div class="card">
+                    <div class="skills">
+                        <span>{{@key}}</span>
+                        <span>{{this}}</span>
                     </div>
-                {{/each}}
-            </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width:{{this}};"></div>
+                    </div>
+                </div>
+            {{/each}}
         </section>
 
         <!-- Education -->
         <section>
-            <h2 class="text-xl font-semibold text-red-500 border-b pb-2 mb-4">Education</h2>
+            <h2>Education</h2>
             {{#each education}}
-                <div class="bg-gray-100 p-4 rounded-lg shadow mb-4">
-                    <h3 class="text-lg font-semibold text-gray-800">{{degree}}</h3>
-                    <div class="text-sm text-gray-600 flex justify-between">
-                        <span>{{institution}}</span>
-                        <span>{{date_start}} - {{date_end}}</span>
-                    </div>
+                <div class="card">
+                    <h3>{{degree}}</h3>
+                    <p>{{institution}} | {{date_start}} - {{date_end}}</p>
                     {{#if details}}
-                        <ul class="list-disc pl-6 mt-2 text-gray-700">
+                        <ul>
                             {{#each details}}
                                 <li>{{this}}</li>
                             {{/each}}
@@ -109,6 +161,17 @@
                 </div>
             {{/each}}
         </section>
+        {{#if certifications}}
+        <section>
+            <h2>certifications</h2>
+            {{#each Certifications}}
+                <div class="card">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} | {{date}}</p>
+                </div>
+            {{/each}}
+        </section>
+        {{/if}}
     </div>
 
 </body>

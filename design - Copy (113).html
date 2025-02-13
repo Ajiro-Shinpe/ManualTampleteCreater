@@ -277,6 +277,7 @@
             <div class="name-section">
                 <h1 class="profile-name">{{name}}</h1>
                 <p class="profile-title">{{title}}</p>
+                <p class="profile-title">{{summary}}</p>
             </div>
             {{#if about_us}}
             <div class="about-section">
@@ -316,7 +317,7 @@
                     <h3 class="project-title">{{name}}</h3>
                     <p>{{description}}</p>
                     <div class="tech-stack">
-                        {{#each tech_stack}}
+                        {{#each features}}
                         <span class="tech-tag">{{this}}</span>
                         {{/each}}
                     </div>
@@ -360,6 +361,21 @@
                 </div>
                 {{/each}}
                 {{/if}}
+
+                     
+            {{#if certifications}}
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="education-title">{{name}}</h3>
+                    <div class="education-info">
+                        <span>{{issuer}}</span>
+                        <span>{{date}}</span>
+                    </div>
+                </div>
+                {{/each}}
+            {{/if}}
+
             </div>
         </div>
     </div>

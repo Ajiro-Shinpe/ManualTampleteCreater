@@ -262,6 +262,48 @@
                     </div>
                 </section>
                 {{/if}}
+
+                
+                {{#if education}}
+                <section>
+                    <h2 class="section-title">Education</h2>
+                    <div class="card">
+                        {{#each education}}
+                        <div>
+                            <p><strong>{{title}}</strong></p>
+                            <p><strong>{{degree}}</strong></p>
+                            <div class="skill-bar">
+                                <div class="skill-progress" >{{institution}} | ( {{date_start}} - {{date_end}} )</div>
+                            </div>
+                            {{#if details}}
+                            <ul>
+                                {{#each details}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                {{#if certifications}}
+                <section>
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="card">
+                        {{#each certifications}}
+                        <div>
+                            <p><strong>{{name}}</strong></p>
+                            <div class="skill-bar">
+                                <div class="skill-progress" >{{issuer}} | {{date}} </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
             </div>
         </main>
     </div>

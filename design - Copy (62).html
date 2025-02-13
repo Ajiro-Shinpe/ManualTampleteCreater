@@ -240,19 +240,10 @@
                     <img src="/api/placeholder/150/150" alt="Profile Image" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                 </div>
                 <h1 class="profile-name">{{name}}</h1>
-                <p class="profile-title">{{title}}</p>
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
             </div>
-
-            {{#if contact}}
-            <div class="contact-section">
-                <h2 class="section-title">Contact</h2>
-                <ul style="list-style: none">
-                    {{#each contact}}
-                    <li style="margin-bottom: 0.5rem">{{this}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{/if}}
 
             {{#if skills}}
             <div class="skills-section" style="margin-top: 2rem">
@@ -339,6 +330,21 @@
                 {{/each}}
             </section>
             {{/if}}
+            {{#if certifications}}
+            <section class="content-section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="experience-card">
+                    <div class="experience-date">{{date}}</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <div class="experience-company">{{issuer}}</div>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
         </main>
     </div>
 </body>

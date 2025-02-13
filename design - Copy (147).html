@@ -144,9 +144,9 @@
             {{#if name}}
             <h1 class="name">{{name}}</h1>
             {{/if}}
-            {{#if title}}
-            <div class="title">{{title}}</div>
-            {{/if}}
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    
         </div>
 
         {{#if about_us}}
