@@ -245,8 +245,8 @@
     <div class="container">
         <header class="header">
             <h1 class="name">{{name}}</h1>
-            <div class="title">{{title}}</div>
-        </header>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}        </header>
 
         <div class="about">
             <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>

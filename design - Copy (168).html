@@ -192,9 +192,12 @@
                 <h1 class="profile-name">{{name}}</h1>
                 {{/if}}
 
-                {{#if title}}
-                <div class="profile-title">{{title}}</div>
-                {{/if}}
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
+                {{#if about_us}}
+                    <p>{{about_us}}</p>
+                    {{/if}}
 
                 {{#if skills}}
                 <div class="skills-grid" style="margin-top: 1.5rem;">
@@ -261,6 +264,46 @@
                 {{/each}}
             </section>
             {{/if}}
+            {{#if education}}
+            <section class="section-card">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                </div>
+                {{#each education}}
+                <div class="project-item">
+                    <div class="item-title">{{degree}}</div>
+                    {{#if institution}}
+                    <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{institution}} | {{date_start}} - {{date_end}} </div>
+                    {{/if}}
+                    {{#if details}}
+                    <ul style="color: var(--text-secondary); padding-left: 1rem;">
+                        {{#each details}}
+                        <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            
+            {{#if certifications}}
+            <section class="section-card">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications</h2>
+                </div>
+                   {{#each certifications}}
+                <div class="project-item">
+                    <div class="item-title">{{name}}</div>
+                    {{#if issuer}}
+                    <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{issuer}} | {{date}} </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+   
         </main>
     </div>
 </body>

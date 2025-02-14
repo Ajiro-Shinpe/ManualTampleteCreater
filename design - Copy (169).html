@@ -240,6 +240,10 @@
 
         <div class="content-grid">
             <aside class="sidebar">
+                
+                {{#if about_us}}
+                    <p>{{about_us}}</p>
+                {{/if}}
                 {{#if skills}}
                 <div class="section-card">
                     <h2 class="section-title">Skills</h2>
@@ -312,6 +316,46 @@
                     {{/each}}
                 </div>
                 {{/if}}
+                {{#if education}}
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2 class="section-title">Education</h2>
+                    </div>
+                    {{#each education}}
+                    <div class="project-item">
+                        <div class="item-title">{{degree}}</div>
+                        {{#if institution}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{institution}} | {{date_start}} - {{date_end}} </div>
+                        {{/if}}
+                        {{#if details}}
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
+                            {{#each details}}
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </section>
+                {{/if}}
+    
+                
+                {{#if certifications}}
+                <section class="section-card">
+                    <div class="section-header">
+                        <h2 class="section-title">Certifications</h2>
+                    </div>
+                       {{#each certifications}}
+                    <div class="project-item">
+                        <div class="item-title">{{name}}</div>
+                        {{#if issuer}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{issuer}} | {{date}} </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </section>
+                {{/if}}
+       
             </main>
         </div>
     </div>

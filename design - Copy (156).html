@@ -148,7 +148,8 @@
     <div class="container">
         <header>
             <h1>{{name}}</h1>
-            <p>{{title}}</p>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
         </header>
 
         {{#if about_us}}
@@ -247,6 +248,21 @@
             </div>
         </section>
         {{/if}}
+
+        
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Certifications</h2>
+            <div class="grid">
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <p>{{institution}}  | {{date}} </p>
+            </div>
+        </section>
+        {{/if}}
+
+        
     </div>
 </body>
 

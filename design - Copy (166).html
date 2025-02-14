@@ -263,6 +263,10 @@
 
         <div class="content-layout">
             <aside class="sidebar">
+                <div class="interactive-card" style="margin-top: 2rem;">
+                    <h2 class="section-title">About</h2>
+                    <p>{{about_us}} </p>
+                    </div>
                 {{#if skills}}
                 <div class="interactive-card">
                     <h2 class="section-title">Skills Matrix</h2>
@@ -334,6 +338,42 @@
                             </li>
                             {{/each}}
                         </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if education}}
+                <div class="interactive-card" style="margin-top: 2rem;">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="project-item">
+                        <div class="item-title">{{degree}}</div>
+                        {{#if institution}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{institution}} | {{date_start}} - {{date_end}} </div>
+                        {{/if}}
+                        {{#if details}}
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
+                            {{#each details}}
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <div class="interactive-card" style="margin-top: 2rem;">
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="project-item">
+                        <div class="item-title">{{name}}</div>
+                        {{#if issuer}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{issuer}} | {{date}} </div>
                         {{/if}}
                     </div>
                     {{/each}}

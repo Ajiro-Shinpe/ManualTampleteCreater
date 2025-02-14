@@ -343,6 +343,7 @@
                     {{#if title}}
                     <div class="title">{{title}}</div>
                     {{/if}}
+                    <div class="title">{{summary}}</div>
                 </div>
             </div>
             <div class="sidebar-content">
@@ -398,30 +399,15 @@
 
         <main class="main-content">
             <div class="content-grid">
-                {{#if experience}}
+                {{#if about_us}}
                 <section class="card">
-                    <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
-                    {{#each experience}}
+                    <h2 class="section-title"><i class="fas fa-person"></i>About</h2>
                     <div class="experience-item">
                         <div class="item-header">
-                            <div class="item-title">{{title}}</div>
                             <div class="item-subtitle">
-                                <span><i class="fas fa-building"></i>{{company}}</span>
-                                {{#if date_start}}
-                                <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
-                                {{/if}}
-                                {{#if location}}
-                                <span><i class="fas fa-map-marker-alt"></i>{{location}}</span>
-                                {{/if}}
+                                <span><i class="fas fa-building"></i>{{about_us}}</span>
                             </div>
                         </div>
-                        {{#if responsibilities}}
-                        <ul class="responsibilities">
-                            {{#each responsibilities}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                        {{/if}}
                     </div>
                     {{/each}}
                 </section>

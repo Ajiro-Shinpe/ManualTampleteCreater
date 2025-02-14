@@ -215,13 +215,11 @@
         <section class="profile-section">
             {{#if profile_image}}
             <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
-            {{else}}
-            <div class="profile-image" style="background: white; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-user fa-3x" style="color: var(--primary);"></i>
-            </div>
-            {{/if}}
+                {{/if}}
             <h1 class="name">{{name}}</h1>
-            <div class="title">{{title}}</div>
+            {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    
             <ul class="nav-links">
                 <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
                 <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
@@ -322,6 +320,43 @@
                 {{/if}}
             </div>
             {{/each}}
+        </section>
+        {{/if}}
+        
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="grid">
+                {{#each education}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">
+                        <span><i class="fas fa-graduation-cap"></i> {{degree}}</span>
+                        <span><i class="fas fa-university"></i> {{institution}}</span>
+                        <span><i class="fas fa-calendar"></i> {{date_start}} - {{date_end}}</span>
+                    </div>
+                    {{#if details}}
+                    <ul class="card-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Certifications</h2>
+            <div class="grid">
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <p>{{institution}}  | {{date}} </p>
+            </div>
         </section>
         {{/if}}
     </div>

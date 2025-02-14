@@ -179,10 +179,13 @@
                 {{#if name}}
                 <h1 class="name">{{name}}</h1>
                 {{/if}}
-                {{#if title}}
-                <div class="title">{{title}}</div>
-                {{/if}}
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
             </div>
+            {{#if about_us}}
+            <p>{{about_us}} </p>
+            {{/if}}
         </div>
 
         {{#if skills}}
@@ -307,6 +310,18 @@
                     {{/each}}
                 </ul>
                 {{/if}}
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="card" id="certifications">
+            <h2 class="section-title"><i class="fas fa-certificate"></i>Certifications</h2>
+            {{#each certifications}}
+            <div class="experience-item">
+                <div class="item-title">{{name}}</div>
+                <div class="item-subtitle">{{issuer}} ({{date}})</div>
             </div>
             {{/each}}
         </section>

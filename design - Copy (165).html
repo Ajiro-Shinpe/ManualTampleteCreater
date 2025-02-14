@@ -219,17 +219,13 @@
     </style>
 </head>
 <body>
-    <div class="portfolio-wrapper">
-        <svg class="abstract-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <path fill="#3A5A8E" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,154.7C384,149,480,107,576,101.3C672,96,768,128,864,154.7C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-
+    <div class="portfolio-container">
         <div class="header">
             {{#if profile_image}}
             <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
             {{else}}
-            <div class="profile-image" style="background: var(--primary-color); display: flex; align-items: center; justify-content: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100px; height: 100px;">
+            <div class="profile-image" style="background: var(--accent-primary); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 80px; height: 80px;">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -239,20 +235,26 @@
                 {{#if name}}
                 <h1 class="name">{{name}}</h1>
                 {{/if}}
-                {{#if title}}
-                <div class="title">{{title}}</div>
-                {{/if}}
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
             </div>
         </div>
 
-        <div class="content-grid">
+        <div class="content-wrapper">
             <aside class="sidebar">
+                {{#if about_us}}
+                <div class="card">
+                <h2 class="section-title">About </h2>
+                <p>{{about_us}}</p>
+                </div>
+                {{/if}}
                 {{#if skills}}
                 <div class="card">
                     <h2 class="section-title">Skills</h2>
                     {{#if skills.frontend}}
                     <div class="skill-category">
-                        <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">Frontend</h3>
+                        <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Frontend</h3>
                         <div class="skills-grid">
                             {{#each skills.frontend}}
                             <span class="skill-tag">{{this}}</span>
@@ -263,7 +265,7 @@
 
                     {{#if skills.backend}}
                     <div class="skill-category" style="margin-top: 1rem;">
-                        <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">Backend</h3>
+                        <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Backend</h3>
                         <div class="skills-grid">
                             {{#each skills.backend}}
                             <span class="skill-tag">{{this}}</span>
@@ -273,25 +275,24 @@
                     {{/if}}
                 </div>
                 {{/if}}
+
+
             </aside>
 
-            <main>
+            <main class="main-content">
                 {{#if experience}}
                 <div class="card">
                     <h2 class="section-title">Professional Experience</h2>
                     {{#each experience}}
-                    <div class="timeline-item">
+                    <div class="experience-item">
                         <div class="item-title">{{title}}</div>
                         <div class="item-subtitle">
                             {{company}} | {{date_start}} - {{date_end}}
                         </div>
                         {{#if responsibilities}}
-                        <ul style="color: var(--text-light); padding-left: 1rem; list-style-type: none;">
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
                             {{#each responsibilities}}
-                            <li style="position: relative; padding-left: 1rem; margin-bottom: 0.5rem;">
-                                <span style="position: absolute; left: 0; color: var(--accent-color);">▸</span>
-                                {{this}}
-                            </li>
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
                             {{/each}}
                         </ul>
                         {{/if}}
@@ -301,23 +302,57 @@
                 {{/if}}
 
                 {{#if projects}}
-                <div class="card" style="margin-top: 2rem;">
+                <div class="card">
                     <h2 class="section-title">Projects</h2>
                     {{#each projects}}
-                    <div class="timeline-item">
+                    <div class="project-item">
                         <div class="item-title">{{name}}</div>
                         {{#if description}}
-                        <div style="color: var(--text-light); margin-bottom: 1rem;">{{description}}</div>
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{description}}</div>
                         {{/if}}
                         {{#if features}}
-                        <ul style="color: var(--text-light); padding-left: 1rem; list-style-type: none;">
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
                             {{#each features}}
-                            <li style="position: relative; padding-left: 1rem; margin-bottom: 0.5rem;">
-                                <span style="position: absolute; left: 0; color: var(--secondary-color);">▸</span>
-                                {{this}}
-                            </li>
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
                             {{/each}}
                         </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                
+                {{#if education}}
+                <div class="card">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="project-item">
+                        <div class="item-title">{{degree}}</div>
+                        {{#if institution}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{institution}} | {{date_start}} - {{date_end}} </div>
+                        {{/if}}
+                        {{#if details}}
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
+                            {{#each details}}
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <div class="card">
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="project-item">
+                        <div class="item-title">{{name}}</div>
+                        {{#if issuer}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{issuer}} | {{date}} </div>
                         {{/if}}
                     </div>
                     {{/each}}

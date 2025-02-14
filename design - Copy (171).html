@@ -208,9 +208,14 @@
                     <h1 class="name">{{name}}</h1>
                     {{/if}}
 
-                    {{#if title}}
-                    <div class="title">{{title}}</div>
-                    {{/if}}
+                    {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                    {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+            
+                                        
+                {{#if about_us}}
+                <p>{{about_us}}</p>
+            {{/if}}
+
                 </div>
             </div>
         </section>
@@ -295,6 +300,54 @@
             </div>
         </section>
         {{/if}}
+
+        
+        {{#if education}}
+        <section class="scroll-section">
+            <div class="section-content">
+                <div style="width: 100%;">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="timeline-item">
+                        <h3 class="timeline-title">{{degree}}</h3>
+                        {{#if institution}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            {{institution}} | ({{date_start}} - {{date_end}} )
+                        </div>
+                        {{/if}}
+                        {{#if details}}
+                        <ul style="color: var(--text-secondary); padding-left: 2rem; list-style-type: disc;">
+                            {{#each details}}
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        
+        {{#if certifications}}
+        <section class="scroll-section">
+            <div class="section-content">
+                <div style="width: 100%;">
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="timeline-item">
+                        <h3 class="timeline-title">{{name}}</h3>
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            {{issuer}} | {{date}} 
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
     </div>
 </body>
 </html>

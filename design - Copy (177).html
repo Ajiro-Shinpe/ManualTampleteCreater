@@ -220,24 +220,12 @@
 <div class="header">
 
     <div class="container">
-    
-    <div class="header-content">
-    
-    {{#if name}}
-    
-    <div class="profile-avatar">
-    
-    {{name.[0]}}{{name.[1]}}
-    
-    </div>
-    
-    <div>
-    
     <h1 class="header-title">{{name}}</h1>
-    
     <p class="header-subtitle">{{title}}</p>
-    
-    </div>
+    <p class="header-subtitle">{{summary}}</p>
+
+    <p>{{about_us}} </p>
+</div>
     
     {{/if}}
     
@@ -340,6 +328,45 @@
                     {{/each}}
                 </ul>
                 {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if education}}
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="project-grid">
+            {{#each education}}
+            <div class="project-card">
+                <h3 class="project-title">{{degree}}</h3>
+                <p class="project-description">{{institution}} | ( {{date_start}} - {{date_end}} )</p>
+                {{#if details}}
+                <ul style="color: var(--text-secondary); padding-left: 20px;">
+                    {{#each details}}
+                    <li style="margin-bottom: 10px;">{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if Certifications}}
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Certification</h2>
+        <div class="project-grid">
+            {{#each Certifications}}
+            <div class="project-card">
+                <h3 class="project-title">{{name}}</h3>
+                <p class="project-description">{{issuer}} | {{date}} </p>
             </div>
             {{/each}}
         </div>

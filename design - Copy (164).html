@@ -204,14 +204,20 @@
                 {{#if name}}
                 <h1 class="name">{{name}}</h1>
                 {{/if}}
-                {{#if title}}
-                <div class="title">{{title}}</div>
-                {{/if}}
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
             </div>
         </div>
 
         <div class="content-wrapper">
             <aside class="sidebar">
+                {{#if about_us}}
+                <div class="card">
+                <h2 class="section-title">About </h2>
+                <p>{{about_us}}</p>
+                </div>
+                {{/if}}
                 {{#if skills}}
                 <div class="card">
                     <h2 class="section-title">Skills</h2>
@@ -238,6 +244,8 @@
                     {{/if}}
                 </div>
                 {{/if}}
+
+
             </aside>
 
             <main class="main-content">
@@ -277,6 +285,43 @@
                             <li style="margin-bottom: 0.5rem;">{{this}}</li>
                             {{/each}}
                         </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                
+                {{#if education}}
+                <div class="card">
+                    <h2 class="section-title">Education</h2>
+                    {{#each education}}
+                    <div class="project-item">
+                        <div class="item-title">{{degree}}</div>
+                        {{#if institution}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{institution}} | {{date_start}} - {{date_end}} </div>
+                        {{/if}}
+                        {{#if details}}
+                        <ul style="color: var(--text-secondary); padding-left: 1rem;">
+                            {{#each details}}
+                            <li style="margin-bottom: 0.5rem;">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                
+                {{#if certifications}}
+                <div class="card">
+                    <h2 class="section-title">Certifications</h2>
+                    {{#each certifications}}
+                    <div class="project-item">
+                        <div class="item-title">{{name}}</div>
+                        {{#if issuer}}
+                        <div style="color: var(--text-secondary); margin-bottom: 1rem;">{{issuer}} | {{date}} </div>
                         {{/if}}
                     </div>
                     {{/each}}

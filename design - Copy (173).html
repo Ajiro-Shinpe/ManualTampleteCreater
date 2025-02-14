@@ -204,12 +204,12 @@
         <div class="container">
             <div class="header-content">
                 {{#if name}}
-                <div class="profile-avatar">
-                    {{name.[0]}}{{name.[1]}}
-                </div>
                 <h1 class="header-title">{{name}}</h1>
-                <p class="header-subtitle">{{title}}</p>
+                {{#if title}} <p class="lead"><strong>Title:</strong> {{title}}</p> {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+        
                 {{/if}}
+                <p>{{about_us}} </p>
             </div>
         </div>
     </div>
@@ -308,6 +308,47 @@
                         {{/each}}
                     </ul>
                     {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    
+    {{#if education}}
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="projects-grid">
+                {{#each education}}
+                <div class="project-card">
+                    <h3 class="project-title">{{degree}}</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">{{institution}} | ( {{date_start}} - {{date_end}} ) </p>
+                    {{#if details}}
+                    <ul style="color: var(--text-secondary); padding-left: 20px;">
+                        {{#each details}}
+                        <li style="margin-bottom: 10px;">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    
+    {{#if certifications}}
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="projects-grid">
+                {{#each certifications}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 15px;">{{issuer}} | {{date}} </p>
                 </div>
                 {{/each}}
             </div>
