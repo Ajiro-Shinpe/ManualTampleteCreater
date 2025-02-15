@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniyal Shahid Ali - Portfolio</title>
+    <title>{{name}} - Portfolio</title>
     <style>
         /* Global Styles */
         body {
@@ -136,53 +136,99 @@
 </head>
 <body>
     <div class="header">
-        {{#if name}}
-        <h1 class="header-title">{{name}}</h1>
-        {{/if}}
-        {{#if title}}
-        <p class="header-subtitle">{{title}}</p>
-        {{/if}}
+        <div class="header-content">
+            {{#if name}}
+            <div class="profile-avatar">{{name.[0]}}{{name.[1]}}</div>
+            <div>
+                <h1 class="header-title">{{name}}</h1>
+                <p class="header-subtitle">{{title}}</p>
+                <p class="header-subtitle">{{summary}}</p>
+            </div>
+            {{/if}}
+        </div>
     </div>
 
+    {{#if about_us}}
     <div class="container">
-        {{#if about_us}}
         <div class="section">
-            <div class="about-container">
-                <div class="about-image"></div>
-                <div class="about-content">
-                    <h2 class="about-title">About Me</h2>
-                    <p class="about-description">{{about_us}}</p>
-                </div>
+            <h2 class="section-title">About</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="timeline-subtitle">
+                        {{about_us}}
+                    </p>
             </div>
         </div>
-        {{/if}}
-
-        {{#if certifications}}
+    </div>
+    {{/if}}
+    {{#if skills}}
+    <div class="container">
         <div class="section">
-            <h2 class="section-title">Certifications</h2>
-            <div class="cert-edu-container">
-                {{#each certifications}}
-                <div class="cert-card">
-                    <h3 class="cert-title">{{name}}</h3>
-                    <p class="cert-details">Issuer: {{issuer}} | Date: {{date}}</p>
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skill-grid">
+                {{#if skills.frontend}}
+                <div class="skill-card">
+                    <h3 class="skill-category">Frontend</h3>
+                    <div class="skill-list">
+                        {{#each skills.frontend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
                 </div>
-                {{/each}}
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-card">
+                    <h3 class="skill-category">Backend</h3>
+                    <div class="skill-list">
+                        {{#each skills.backend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-card">
+                    <h3 class="skill-category">Mobile Development</h3>
+                    <div class="skill-list">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-card">
+                    <h3 class="skill-category">DevOps</h3>
+                    <div class="skill-list">
+                        {{#each skills.devops}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
             </div>
         </div>
-        {{/if}}
+    </div>
+    {{/if}}
 
-        {{#if education}}
+    {{#if experience}}
+    <div class="container">
         <div class="section">
-            <h2 class="section-title">Education</h2>
-            <div class="cert-edu-container">
-                {{#each education}}
-                <div class="edu-card">
-                    <h3 class="edu-title">{{title}}</h3>
-                    <p class="edu-details">Degree: {{degree}} | Institution: {{institution}} | {{date_start}} - {{date_end}}</p>
-                    {{#if details}}
-                    <ul class="edu-details">
-                        {{#each details}}
-                        <li>{{this}}</li>
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <h3 class="timeline-title">{{title}}</h3>
+                    <p class="timeline-subtitle">
+                        {{company}} | {{date_start}} - {{date_end}}
+                    </p>
+                    {{#if responsibilities}}
+                    <ul style="color: #666; padding-left: 20px;">
+                        {{#each responsibilities}}
+                        <li style="margin-bottom: 10px;">{{this}}</li>
                         {{/each}}
                     </ul>
                     {{/if}}
@@ -190,45 +236,73 @@
                 {{/each}}
             </div>
         </div>
-        {{/if}}
+    </div>
+    {{/if}}
 
-        {{#if experience}}
-        <div class="section">
-            <h2 class="section-title">Professional Experience</h2>
-            {{#each experience}}
-            <div class="experience-card">
-                <h3 class="experience-title">{{title}}</h3>
-                <p class="experience-subtitle">{{company}} | {{date_start}} - {{date_end}}</p>
-                {{#if responsibilities}}
-                <ul class="experience-responsibilities">
-                    {{#each responsibilities}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-                {{/if}}
-            </div>
-            {{/each}}
-        </div>
-        {{/if}}
-
-        {{#if projects}}
+    {{#if projects}}
+    <div class="container">
         <div class="section">
             <h2 class="section-title">Project Showcase</h2>
-            {{#each projects}}
-            <div class="project-card">
-                <h3 class="project-title">{{name}}</h3>
-                <p class="project-description">{{description}}</p>
-                {{#if features}}
-                <ul class="project-features">
-                    {{#each features}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-                {{/if}}
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{description}}</p>
+                    {{#if features}}
+                    <ul style="color: #666; padding-left: 20px;">
+                        {{#each features}}
+                        <li style="margin-bottom: 10px;">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
-        {{/if}}
     </div>
+    {{/if}}
+
+    {{#if education}}
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                {{#each education}}
+                <div class="timeline-item">
+                    <h3 class="timeline-title">{{degree}}</h3>
+                    <h3 class="timeline-title">{{title}}</h3>
+                    <p class="timeline-subtitle">
+                        {{institution}} | {{date_start}} - {{date_end}}
+                    </p>
+                    {{#if details}}
+                    <ul style="color: #666; padding-left: 20px;">
+                        {{#each details}}
+                        <li style="margin-bottom: 10px;">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+
+    {{#if certifications}}
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="project-grid">
+                {{#each certifications}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{issuer}} | {{date}} </p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
 </body>
 </html>

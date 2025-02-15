@@ -134,6 +134,8 @@
                         {{#if title}}
                         <p class="text-muted">{{title}}</p>
                         {{/if}}
+        {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+
                     </div>
                     {{/if}}
 
@@ -142,6 +144,7 @@
                         <a href="#skills" class="block text-muted hover:text-primary transition-colors">Skills</a>
                         <a href="#experience" class="block text-muted hover:text-primary transition-colors">Experience</a>
                         <a href="#projects" class="block text-muted hover:text-primary transition-colors">Projects</a>
+                        <a href="#education" class="block text-muted hover:text-primary transition-colors">Education</a>
                         <a href="#certifications" class="block text-muted hover:text-primary transition-colors">Certifications</a>
                     </nav>
                 </div>
@@ -244,6 +247,30 @@
                             {{#if features}}
                             <div class="flex flex-wrap gap-2">
                                 {{#each features}}
+                                <span class="text-xs px-2 py-1 rounded-full bg-gray-100">{{this}}</span>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                <div class="section-divider"></div>
+                {{/if}}
+                
+                {{#if education}}
+                <section id="education" class="mb-20">
+                    <h2 class="text-3xl font-bold mb-8" data-aos="fade-up">Education</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{#each education}}
+                        <div class="project-card p-6 rounded-lg" data-aos="fade-up">
+                            <h3 class="text-xl font-semibold mb-2">{{degree}}</h3>
+                            <p class="text-muted mb-4">{{institution}} | ({{date_start}} - {{date_end}} )  </p>
+                            
+                            {{#if details}}
+                            <div class="flex flex-wrap gap-2">
+                                {{#each details}}
                                 <span class="text-xs px-2 py-1 rounded-full bg-gray-100">{{this}}</span>
                                 {{/each}}
                             </div>

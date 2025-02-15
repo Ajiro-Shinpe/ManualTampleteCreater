@@ -143,6 +143,7 @@
             {{/if}}
             <h1 class="white-text">{{name}}</h1>
             <p class="flow-text">{{title}}</p>
+            <p class="flow-text">{{summary}}</p>
             <div class="divider"></div>
             <p class="flow-text">{{about_us}}</p>
         </div>
@@ -276,6 +277,22 @@
                                 {{/each}}
                             </ul>
                             {{/if}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="row">
+                    {{#each certifications}}
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <h3 class="white-text">{{name}}</h3>
+                            <p class="grey-text">{{issuer}}</p>
+                            <p class="grey-text">{{date}}</p>
                         </div>
                     </div>
                     {{/each}}

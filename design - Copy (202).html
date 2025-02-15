@@ -133,6 +133,16 @@
             <p class="text-center">{{summary}}</p>
 
         </div>
+        
+        {{#if about_us}}
+        <div class="profile-section">
+            <h2 class="section-title">About</h2>
+            <div class="skill-list">
+                    <div class="skill-name">{{about_us}}</div>
+            </div>
+        </div>
+        {{/if}}
+
 
         {{#if skills}}
         <div class="profile-section">

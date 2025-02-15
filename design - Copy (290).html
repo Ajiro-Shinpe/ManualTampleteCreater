@@ -321,6 +321,27 @@
             </div>
         </div>
         {{/if}}
+        
+        {{#if education}}
+        <div class="card">
+            <h2 class="card-title">Education</h2>
+            <div class="project-grid">
+                {{#each education}}
+                <div class="project-card">
+                    <h3 class="project-title">{{degree}}</h3>
+                    <p>{{issuer}} | {{date}}  </p>
+                    {{#if details}}
+                    <ul class="feature-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
 
         {{#if certifications}}
         <div class="card">

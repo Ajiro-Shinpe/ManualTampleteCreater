@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #fafafa;
-      --text-color: #333;
-      --accent-color: #ff6b6b;
-      --secondary-color: #f39c12;
+      --bg-color: #f0f4f8;
+      --text-color: #2d3748;
+      --accent-color: #4c6ef5;
+      --secondary-color: #748ffc;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     * {
@@ -20,7 +22,7 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
@@ -29,63 +31,60 @@
     .resume-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 60px 20px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 40px;
     }
 
-    .profile-info {
-      display: flex;
-      align-items: center;
-      margin-bottom: 60px;
-    }
-
-    .profile-image {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 40px;
-    }
-
-    .profile-details {
-      display: flex;
-      flex-direction: column;
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      grid-column: 1 / -1;
     }
 
     .profile-name {
-      font-size: 36px;
-      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
       color: var(--accent-color);
       margin-bottom: 12px;
     }
 
     .profile-title {
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--secondary-color);
     }
 
-    .content-sections {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 40px;
-      width: 100%;
+    .sidebar {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
     }
 
     .section {
-      background-color: #fff;
+      background-color: var(--card-bg);
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow);
       padding: 30px;
     }
 
     .section-title {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 24px;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--accent-color);
       margin-bottom: 20px;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 8px;
     }
 
     .section-content {
@@ -94,7 +93,7 @@
     }
 
     .section-content li {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .experience-title,
@@ -112,66 +111,72 @@
       display: flex;
       justify-content: space-between;
       color: var(--secondary-color);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .project-tech-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
+      gap: 8px;
+      margin-top: 12px;
     }
 
     .tech-tag {
       background-color: var(--accent-color);
       color: #fff;
-      padding: 6px 16px;
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 14px;
     }
 
     .skill-progress-bar {
-      height: 12px;
+      height: 8px;
       background-color: var(--bg-color);
-      border-radius: 6px;
-      margin-top: 12px;
+      border-radius: 4px;
+      margin-top: 8px;
     }
 
     .skill-progress {
       height: 100%;
       background-color: var(--accent-color);
-      border-radius: 6px;
+      border-radius: 4px;
       width: var(--skill-percentage);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary-color);
+      margin-bottom: 8px;
     }
 
     @media (max-width: 768px) {
       .resume-container {
+        grid-template-columns: 1fr;
         padding: 40px 20px;
       }
 
-      .profile-info {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 40px;
-      }
-
-      .profile-image {
-        width: 120px;
-        height: 120px;
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-
       .profile-name {
-        font-size: 28px;
+        font-size: 36px;
       }
 
       .profile-title {
-        font-size: 16px;
-      }
-
-      .content-sections {
-        grid-template-columns: 1fr;
+        font-size: 18px;
       }
 
       .section-title {
@@ -187,23 +192,63 @@
 
       .tech-tag {
         font-size: 12px;
-        padding: 4px 12px;
       }
     }
   </style>
 </head>
 <body>
   <div class="resume-container">
-    <div class="profile-info">
-      <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
-      <div class="profile-details">
-        <h1 class="profile-name">{{name}}</h1>
-        <p class="profile-title">{{title}}</p>
-        <p>{{about_us}}</p>
-      </div>
+    <div class="header">
+      <h1 class="profile-name">{{name}}</h1>
+      <p class="profile-title">{{title}}</p>
+      {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
     </div>
 
-    <div class="content-sections">
+    <div class="sidebar">
+      {{#if about_us}}
+      <div class="section">
+        <h2 class="section-title">About</h2>
+        <div class="card">
+          <div class="card-meta">
+            <span>{{about_us}}</span>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if skills}}
+      <div class="section">
+        <h2 class="section-title">Skills</h2>
+        <ul class="section-content">
+          {{#each skills}}
+          <li>
+            <h3 class="skill-title">{{@key}}</h3>
+            <div class="skill-progress-bar">
+              <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      {{#if certifications}}
+      <div class="section">
+        <h2 class="section-title">Certifications</h2>
+        {{#each certifications}}
+        <div class="card">
+          <h3 class="card-title">{{name}}</h3>
+          <div class="card-meta">
+            <span>{{issuer}}</span>
+            <span>{{date}}</span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="main-content">
       {{#if experience}}
       <div class="section">
         <h2 class="section-title">Experience</h2>
@@ -238,22 +283,6 @@
               {{#each tech_stack}}
               <span class="tech-tag">{{this}}</span>
               {{/each}}
-            </div>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
-
-      {{#if skills}}
-      <div class="section">
-        <h2 class="section-title">Skills</h2>
-        <ul class="section-content">
-          {{#each skills}}
-          <li>
-            <h3 class="skill-title">{{@key}}</h3>
-            <div class="skill-progress-bar">
-              <div class="skill-progress" style="--skill-percentage: {{this}};"></div>
             </div>
           </li>
           {{/each}}

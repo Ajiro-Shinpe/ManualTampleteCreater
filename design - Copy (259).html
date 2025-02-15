@@ -174,91 +174,184 @@
 </head>
 
 <body>
-
-    <div class="container">
-        <section class="hero-section">
-            {{#if profile_image}}
-            <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
-            {{else}}
-            <div class="profile-image" style="background: var(--primary); display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-user fa-3x" style="color: var(--light);"></i>
-            </div>
-            {{/if}}
-            {{#if name}}
-            <h1 class="name">{{name}}</h1>
-            {{/if}}
-            {{#if title}}
-            <div class="title">{{title}}</div>
-            {{/if}}
-        </section>
-
-        {{#if skills}}
-        <section class="section">
-            <div class="section-content">
-                <h2 class="section-title"><i class="fas fa-code"></i>Technical Skills</h2>
-                <div class="grid">
-                    {{#each skills}}
-                    <div class="card">
-                        <h3 class="card-title">{{this}}</h3>
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
-        </section>
+    
+<div class="container">
+    <section id="hero" class="hero-section">
+        {{#if profile_image}}
+        <img src="{{profile_image}}" alt="Profile Picture" class="profile-image">
+        {{else}}
+        <div class="profile-image" style="background: var(--card); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-user fa-3x" style="color: var(--primary);"></i>
+        </div>
+        {{/if}}
+        {{#if name}}
+        <h1 class="name">{{name}}</h1>
+        {{/if}}
+        {{#if title}}
+        <div class="title">{{title}}</div>
         {{/if}}
 
-        {{#if experience}}
-        <section class="section">
-            <div class="section-content">
-                <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
-                <div class="grid">
-                    {{#each experience}}
-                    <div class="card">
-                        <h3 class="card-title">{{title}}</h3>
-                        <div class="card-subtitle">
-                            <span><i class="fas fa-building"></i>{{company}}</span>
-                            {{#if date_start}}
-                            <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
-                            {{/if}}
-                        </div>
-                        {{#if responsibilities}}
-                        <ul class="card-list">
-                            {{#each responsibilities}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                        {{/if}}
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
-        </section>
+        {{#if summary}}
+        <div class="title">{{summary}}</div>
         {{/if}}
 
-        {{#if projects}}
-        <section class="section">
-            <div class="section-content">
-                <h2 class="section-title"><i class="fas fa-rocket"></i>Projects</h2>
-                <div class="grid">
-                    {{#each projects}}
-                    <div class="card">
-                        <h3 class="card-title">{{name}}</h3>
-                        {{#if description}}
-                        <p style="color: var(--light); margin-bottom: 1rem;">{{description}}</p>
-                        {{/if}}
-                        {{#if features}}
-                        <ul class="card-list">
-                            {{#each features}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
+        
+    {{#if about_us}}
+        <h2 class="section-title">About</h2>
+        <p>{{about_us}}</p>
+    {{/if}}
+    </section>
+
+    {{#if skills}}
+    <section id="skills" class="section">
+        <div class="section-content">
+            <h2 class="section-title"><i class="fas fa-code"></i>Technical Skills</h2>
+            <div class="skills-grid">
+                {{#if skills.frontend}}
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Frontend Development</h3>
+                    <div class="skill-tags">
+                        {{#each skills.frontend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Backend Development</h3>
+                    <div class="skill-tags">
+                        {{#each skills.backend}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Mobile Development</h3>
+                    <div class="skill-tags">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-category">
+                    <h3 class="skill-category-title">DevOps & Cloud</h3>
+                    <div class="skill-tags">
+                        {{#each skills.devops}}
+                        <span class="skill-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section id="experience" class="section">
+        <div class="section-content">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
+            <div class="experience-grid">
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">
+                        <span><i class="fas fa-building"></i>{{company}}</span>
+                        {{#if date_start}}
+                        <span><i class="fas fa-calendar"></i>{{date_start}} - {{date_end}}</span>
                         {{/if}}
                     </div>
-                    {{/each}}
+                    {{#if responsibilities}}
+                    <ul class="card-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section id="projects" class="section">
+        <div class="section-content">
+            <h2 class="section-title"><i class="fas fa-rocket"></i>Projects</h2>
+            <div class="projects-grid">
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    {{#if description}}
+                    <p style="color: var(--muted); margin-bottom: 1rem;">{{description}}</p>
+                    {{/if}}
+                    {{#if features}}
+                    <ul class="card-list">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="section">
+        <div class="section-content">
+        <h2 class="section-title">Education</h2>
+        <div class="row">
+            {{#each education}}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <p class="grey-text">{{institution}}</p>
+                    <p class="grey-text">{{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li class="white-text">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
                 </div>
             </div>
-        </section>
-        {{/if}}
-    </div>
+            {{/each}}
+        </div>
+        </div>
+    </section>
+    {{/if}}
+    {{#if certifications}}
+    <section class="section">
+        <div class="section-content">
+        <h2 class="section-title">Certifications</h2>
+        <div class="row">
+            {{#each certifications}}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <p class="grey-text">{{issuer}}</p>
+                    <p class="grey-text">{{date}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        </div>
+    </section>
+    {{/if}}
+</div>
 </body>
+
 </html>

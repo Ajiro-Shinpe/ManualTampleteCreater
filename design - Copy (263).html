@@ -286,6 +286,8 @@
                 {{#if title}}
                 <p class="title">{{title}}</p>
                 {{/if}}
+        {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+
 
                 {{#if about_us}}
                 <div class="section">
@@ -344,6 +346,29 @@
                         <div class="project-card">
                             <h3>{{name}}</h3>
                             <p>{{description}}</p>
+                            {{$each features}}
+                            <span> {{this}} </span>
+                            {{/each}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+                {{/if}}
+
+                
+                {{#if education}}
+                <section class="section">
+                    <h2 class="section-title">Education</h2>
+                    <div class="project-grid">
+                        {{#each education}}
+                        <div class="project-card">
+                            <h4>{{title}}</h4>
+                            <h3>{{degree}}</h3>
+                            <p>{{institution}}</p>
+                            <p> {{date_start}} - {{date_end}} </p>
+                            {{$each details}}
+                            <span> {{this}} </span>
+                            {{/each}}
                         </div>
                         {{/each}}
                     </div>

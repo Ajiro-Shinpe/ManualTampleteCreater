@@ -4,219 +4,488 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniyal Shahid Ali - Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #334155;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #020617;
+            --border-radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F2F2F2;
-            color: #333333;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--light);
+            color: var(--primary);
+            min-height: 100vh;
         }
-
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 1rem;
+            overflow: hidden;
         }
-
-        .portfolio-container {
-            width: 80%;
-            height: 80%;
-            background-color: #FFFFFF;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            display: flex;
-            /* overflow: hidden; */
+        
+        @media (min-width: 1024px) {
+            .main-container {
+                grid-template-columns: 380px 1fr;
+                gap: 2rem;
+                padding: 2rem;
+                min-height: 100vh;
+            }
         }
-
-        .profile-section {
-            width: 40%;
-            background-color: #1C1C1C;
-            border-top-left-radius: 2rem;
-            border-bottom-left-radius: 2rem;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #FFFFFF;
+        
+        /* Profile Card */
+        .profile-card {
+            background: var(--primary);
+            color: var(--light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 10;
         }
-
-        .profile-image {
+        
+        @media (min-width: 1024px) {
+            .profile-card {
+                position: sticky;
+                top: 2rem;
+                margin-bottom: 0;
+                height: calc(100vh - 4rem);
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+        .profile-header {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
             width: 200px;
             height: 200px;
+            background: var(--accent);
             border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .profile-image-container {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            margin: 0 auto 2rem;
+        }
+        
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: var(--accent);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 6px solid #FFFFFF;
-            margin-bottom: 2rem;
+            border-radius: 50%;
+            border: 4px solid var(--light);
         }
-
+        
         .profile-name {
-            font-size: 2.25rem;
-            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            text-align: center;
         }
-
+        
         .profile-title {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-
+        
         .profile-summary {
             font-size: 1rem;
             line-height: 1.6;
+            opacity: 0.85;
             text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
-
-        .content-section {
-            width: 60%;
-            padding: 4rem;
+        
+        /* Content Area */
+        .content-area {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 3rem;
+            padding-bottom: 3rem;
         }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1C1C1C;
+        
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-header {
+            position: relative;
             margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
         }
-
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
         }
-
+        
         .skill-item {
-            background-color: #F2F2F2;
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            background: var(--light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            opacity: 0.6;
+        }
+        
         .skill-name {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            z-index: 1;
         }
-
+        
         .skill-level {
             font-size: 0.875rem;
-            color: #707070;
+            color: var(--secondary);
+            position: relative;
+            z-index: 1;
         }
-
+        
+        .skill-level::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Timeline Sections */
         .timeline {
             position: relative;
             padding-left: 2rem;
         }
-
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            bottom: 0;
+            left: 8px;
+            width: 2px;
+            background: var(--secondary);
+            opacity: 0.2;
+        }
+        
         .timeline-item {
             position: relative;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
-
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
         .timeline-item::before {
             content: '';
             position: absolute;
-            top: 0.25rem;
+            top: 8px;
             left: -2rem;
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: #1C1C1C;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
         }
-
+        
         .timeline-date {
             font-size: 0.875rem;
-            color: #707070;
+            color: var(--accent);
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
-
+        
         .timeline-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 1.25rem;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .timeline-details {
+            font-size: 0.9375rem;
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        
+        .timeline-details li {
+            list-style-type: none;
+            position: relative;
+            padding-left: 1.25rem;
             margin-bottom: 0.5rem;
         }
-
-        .timeline-details {
-            font-size: 1rem;
-            color: #707070;
-            line-height: 1.6;
+        
+        .timeline-details li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 0;
         }
-
-        .timeline-details li {
-            list-style-type: disc;
-            margin-left: 1.5rem;
-        }
-
+        
+        /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
         }
-
+        
         .project-card {
-            background-color: #F2F2F2;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            background: var(--light);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                        0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image-container {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
         .project-image {
             width: 100%;
-            height: 150px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 0.75rem;
-            margin-bottom: 1.5rem;
+            transition: transform 0.6s ease;
         }
-
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
         .project-title {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
         }
-
+        
         .project-description {
-            font-size: 0.9rem;
-            color: #707070;
+            font-size: 0.9375rem;
+            color: var(--secondary);
             line-height: 1.6;
             margin-bottom: 1rem;
         }
-
+        
+        .project-features {
+            padding-left: 1.25rem;
+        }
+        
         .project-features li {
-            list-style-type: disc;
-            margin-left: 1.5rem;
-            font-size: 0.9rem;
-            color: #707070;
-            line-height: 1.6;
+            font-size: 0.875rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .project-features li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: -1.25rem;
+        }
+        
+        @media (max-width: 1023px) {
+            .profile-card {
+                padding: 2rem;
+            }
+            
+            .profile-image-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.75rem;
+            }
+            
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+        
+        @media (max-width: 639px) {
+            .profile-card {
+                padding: 1.5rem;
+            }
+            
+            .profile-image-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-name {
+                font-size: 1.75rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="portfolio-container">
-            <div class="profile-section">
+    <div class="main-container">
+        <div class="profile-card">
+            <div class="profile-header">
                 {{#if profile_image}}
-                <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                <div class="profile-image-container">
+                    <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                </div>
                 {{/if}}
                 <h1 class="profile-name">{{name}}</h1>
                 <p class="profile-title">{{title}}</p>
                 {{#if summary}}
                 <p class="profile-summary">{{summary}}</p>
                 {{/if}}
+
+                {{#if about_us}}
+                <div>
+                    <h2 >About</h2>
+                    <p>{{about_us}}</p>
+                </div>
+                {{/if}}
+        
             </div>
-            <div class="content-section">
-                {{#if skills}}
-                <div class="section-title">Skills</div>
+        </div>
+        
+        <div class="content-area">
+            {{#if skills}}
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Skills</h2>
+                </div>
                 <div class="skills-grid">
                     {{#each skills}}
                     <div class="skill-item">
@@ -225,10 +494,14 @@
                     </div>
                     {{/each}}
                 </div>
-                {{/if}}
-
-                {{#if experience}}
-                <div class="section-title">Experience</div>
+            </section>
+            {{/if}}
+            
+            {{#if experience}}
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Experience</h2>
+                </div>
                 <div class="timeline">
                     {{#each experience}}
                     <div class="timeline-item">
@@ -243,10 +516,14 @@
                     </div>
                     {{/each}}
                 </div>
-                {{/if}}
-
-                {{#if education}}
-                <div class="section-title">Education</div>
+            </section>
+            {{/if}}
+            
+            {{#if education}}
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                </div>
                 <div class="timeline">
                     {{#each education}}
                     <div class="timeline-item">
@@ -263,10 +540,14 @@
                     </div>
                     {{/each}}
                 </div>
-                {{/if}}
-
-                {{#if certifications}}
-                <div class="section-title">Certifications</div>
+            </section>
+            {{/if}}
+            
+            {{#if certifications}}
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications</h2>
+                </div>
                 <div class="timeline">
                     {{#each certifications}}
                     <div class="timeline-item">
@@ -276,30 +557,38 @@
                     </div>
                     {{/each}}
                 </div>
-                {{/if}}
-
-                {{#if projects}}
-                <div class="section-title">Projects</div>
+            </section>
+            {{/if}}
+            
+            {{#if projects}}
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Projects</h2>
+                </div>
                 <div class="projects-grid">
                     {{#each projects}}
                     <div class="project-card">
                         {{#if image}}
-                        <img src="{{image}}" alt="{{name}}" class="project-image">
+                        <div class="project-image-container">
+                            <img src="{{image}}" alt="{{name}}" class="project-image">
+                        </div>
                         {{/if}}
-                        <h3 class="project-title">{{name}}</h3>
-                        <p class="project-description">{{description}}</p>
-                        {{#if features}}
-                        <ul class="project-features">
-                            {{#each features}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                        {{/if}}
+                        <div class="project-content">
+                            <h3 class="project-title">{{name}}</h3>
+                            <p class="project-description">{{description}}</p>
+                            {{#if features}}
+                            <ul class="project-features">
+                                {{#each features}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            {{/if}}
+                        </div>
                     </div>
                     {{/each}}
                 </div>
-                {{/if}}
-            </div>
+            </section>
+            {{/if}}
         </div>
     </div>
 </body>

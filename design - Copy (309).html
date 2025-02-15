@@ -312,6 +312,22 @@
                     {{/each}}
                 </div>
                 {{/if}}
+
+                
+            <div class="section">
+                <h2 class="section-title">certifications</h2>
+                {{#if certifications}}
+                <div class="timeline">
+                    {{#each certifications}}
+                    <div class="timeline-item">
+                        <div class="timeline-item-content">
+                            <h3 class="timeline-item-title">{{name}}</h3>
+                            <p class="timeline-item-date">{{issuer}} | {{date}}</p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/if}}
             </div>
         </div>
     </div>

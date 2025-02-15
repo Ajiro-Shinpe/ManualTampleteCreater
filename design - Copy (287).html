@@ -423,6 +423,26 @@
                 </div>
             </section>
             {{/if}}
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-certificate"></i>Education</h2>
+                <div class="cert-grid">
+                    {{#each education}}
+                    <div class="cert-card">
+                        <h3 class="project-title">{{degree}}</h3>
+                        <div class="cert-desc">{{institution}} | {{date_start}} - {{date_end}}</div>
+                        {{#if details}}
+                        <ul class="exp-list">
+                        {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
 
             {{#if certifications}}
             <section class="section">

@@ -334,6 +334,7 @@
 </head>
 <body>
     <div class="container">
+
         <header class="header">
             <div class="profile">
                 {{#if profile_image}}
@@ -350,6 +351,7 @@
                     {{#if title}}
                     <div class="title">{{title}}</div>
                     {{/if}}
+                    {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
                 </div>
             </div>
         </header>
@@ -424,6 +426,26 @@
                         {{#if features}}
                         <ul class="feature-list">
                             {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i>Education</h2>
+                <div class="project-grid">
+                    {{#each education}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{degree}}</h3>
+                        <p>{{institution}} | {{date_start}} - {{date_end}}  </p>
+                        {{#if details}}
+                        <ul class="feature-list">
+                            {{#each details}}
                             <li>{{this}}</li>
                             {{/each}}
                         </ul>

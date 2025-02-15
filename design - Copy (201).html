@@ -182,17 +182,19 @@
                 <p class="profile-title">{{title}}</p>
             </div>
 
-            {{#if contact}}
+            {{#if certifications}}
             <div>
-                <h2 class="section-title">Contact</h2>
+                <h2 class="section-title">Certifications</h2>
                 <ul class="contact-list">
-                    {{#each contact}}
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="{{this.icon}}" />
-                        </svg>
-                        <span>{{this.text}}</span>
+                    {{#each certifications}}
+                    <li class="timeline-item">
+                        <div class="timeline-date">{{date}}</div>
+                        <div class="timeline-content">
+                            <h3>{{name}}</h3>
+                            <p>{{issuer}}</p>
+                        </div>
                     </li>
+
                     {{/each}}
                 </ul>
             </div>

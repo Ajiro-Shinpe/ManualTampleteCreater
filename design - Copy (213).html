@@ -212,6 +212,10 @@
             {{#if title}}
             <h2 class="animate__animated animate__fadeIn" style="font-size: 3rem; margin-bottom: 2rem;">{{title}}</h2>
             {{/if}}
+            
+            {{#if summary}}
+            <h2 class="animate__animated animate__fadeIn" style="font-size: 3rem; margin-bottom: 2rem;">{{summary}}</h2>
+            {{/if}}
             {{#if about_us}}
             <p class="animate__animated animate__fadeIn animate__delay-1s" style="font-size: 1.2rem; max-width: 800px;">
                 {{about_us}}
@@ -312,6 +316,29 @@
                     {{#if features}}
                     <div>
                         {{#each features}}
+                        <span class="badge" style="margin: 0.25rem;">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    {{#if education}}
+    <section class="section" style="background: rgba(45, 212, 191, 0.05);">
+        <div class="container">
+            <h2 class="section-title gradient-text">Education</h2>
+            <div class="certification-grid">
+                {{#each education}}
+                <div class="certification-card">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">{{degree}}</h3>
+                    <p style="color: rgba(255,255,255,0.8);">{{institution}}</p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">{{date_start}} - {{date_end}} </p>
+                    {{#if details}}
+                    <div>
+                        {{#each details}}
                         <span class="badge" style="margin: 0.25rem;">{{this}}</span>
                         {{/each}}
                     </div>

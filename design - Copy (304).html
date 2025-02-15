@@ -309,6 +309,7 @@
                 {{#if title}}
                 <div class="title">{{title}}</div>
                 {{/if}}
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
             </div>
             {{#if about_us}}
             <div class="quick-links">
@@ -335,7 +336,37 @@
                         </div>
                     </div>
                     {{/if}}
-                    <!-- Similar sections for backend, mobile, and devops skills -->
+                    {{#if skills.backend}}
+                    <div>
+                        <h3>Backend</h3>
+                        <div class="skills-grid">
+                            {{#each skills.backend}}
+                            <div class="skill-tag">{{this}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.mobileDevelopment}}
+                    <div>
+                        <h3>Mobile Development</h3>
+                        <div class="skills-grid">
+                            {{#each skills.mobileDevelopment}}
+                            <div class="skill-tag">{{this}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if skills.devops}}
+                    <div>
+                        <h3>DevOps</h3>
+                        <div class="skills-grid">
+                            {{#each skills.devops}}
+                            <div class="skill-tag">{{this}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
                 </div>
             </section>
             {{/if}}
@@ -372,6 +403,27 @@
                         {{#if features}}
                         <ul class="feature-list">
                             {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Education</h2>
+                <div class="project-grid">
+                    {{#each education}}
+                    <div class="project-card">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{issuer}}</p>
+                        {{#if details}}
+                        <ul class="feature-list">
+                            {{#each details}}
                             <li>{{this}}</li>
                             {{/each}}
                         </ul>

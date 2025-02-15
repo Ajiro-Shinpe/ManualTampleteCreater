@@ -317,6 +317,28 @@
                 </div>
             </section>
             {{/if}}
+            
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-certificate"></i> Education</h2>
+            <div class="project-grid">
+            {{#each education}}
+                <div class="profile-card">
+                    <h3 class="project-title">{{degree}}</h3>
+                    <div class="item-subtitle">{{institution}} | {{date_start}} - {{date_end}}</div>
+                    {{#if details}}
+                    <ul class="feature-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
 
             {{#if certifications}}
             <section class="section">
