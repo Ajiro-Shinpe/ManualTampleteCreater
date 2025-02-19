@@ -319,6 +319,20 @@
                 </div>
                 {{/if}}
             </div>
+            <div class="section">
+                {{#if certifications}}
+                <h2 class="section-title">Certifications</h2>
+                <ul class="education-list">
+                  {{#each certifications}}
+                  <li class="education-item">
+                    <h3 class="education-title">{{name}}</h3>
+                    <p class="education-info">{{issuer}}</p>
+                    <p class="education-date">{{date}}</p>
+                  </li>
+                  {{/each}}
+                </ul>
+                {{/if}}
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

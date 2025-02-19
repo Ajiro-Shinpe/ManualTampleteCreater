@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --neon-purple: #f81ce5;
+            --neon-blue: #0070f3;
+            --neon-green: #50e3c2;
+            --dark-void: #000000;
+            --light-void: #111111;
+            --text-primary: #ffffff;
+            --grid-size: 20px;
+        }
+
+        @keyframes cyber-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 5px var(--neon-purple),
+                           0 0 10px var(--neon-purple),
+                           0 0 20px var(--neon-purple);
+            }
+            50% { 
+                box-shadow: 0 0 10px var(--neon-blue),
+                           0 0 20px var(--neon-blue),
+                           0 0 40px var(--neon-blue);
+            }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        body {
+            background: var(--dark-void);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            background-image: 
+                linear-gradient(rgba(0, 112, 243, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 112, 243, 0.1) 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            overflow-x: hidden;
+        }
+
+        .cyber-section {
+            position: relative;
+            border: 1px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.8);
+            clip-path: polygon(
+                0 20px,
+                20px 0,
+                calc(100% - 20px) 0,
+                100% 20px,
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%,
+                20px 100%,
+                0 calc(100% - 20px)
+            );
+            backdrop-filter: blur(10px);
+        }
+
+        .cyber-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            z-index: -1;
+            animation: cyber-pulse 2s infinite;
+        }
+
+        .glitch-text {
+            position: relative;
+            animation: glitch 0.5s infinite;
+            text-shadow: 
+                2px 2px var(--neon-blue),
+                -2px -2px var(--neon-purple);
+        }
+
+        .skill-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .skill-card {
+            position: relative;
+            transform: rotateY(20deg);
+            transition: transform 0.5s ease;
+            background: linear-gradient(45deg, var(--light-void), var(--dark-void));
+            border: 1px solid var(--neon-green);
+            padding: 20px;
+        }
+
+        .skill-card:hover {
+            transform: rotateY(0deg) scale(1.05);
+        }
+
+        .skill-card::before {
+            content: '<skill>';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: var(--neon-green);
+            font-size: 0.8em;
+        }
+
+        .skill-card::after {
+            content: '</skill>';
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            color: var(--neon-green);
+            font-size: 0.8em;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            border: 1px solid var(--neon-purple);
+            background: var(--light-void);
+            padding: 20px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+            border-color: var(--neon-blue);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(248, 28, 229, 0.2));
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-purple), var(--neon-blue));
+            animation: cyber-pulse 2s infinite;
+        }
+
+        .experience-node {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .experience-node::before {
+            content: '';
+            position: absolute;
+            left: -54px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            animation: cyber-pulse 2s infinite;
+        }
+
+        .cert-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 2000px;
+        }
+
+        .cert-card {
+            background: var(--light-void);
+            border: 1px solid var(--neon-green);
+            padding: 20px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .cert-card:hover {
+            transform: translateZ(20px) rotateX(10deg);
+            border-color: var(--neon-blue);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            color: var(--neon-blue);
+            -webkit-text-stroke: 0px;
+            border-right: 2px solid var(--neon-blue);
+            overflow: hidden;
+            animation: cyber-type 6s linear infinite;
+        }
+
+        @keyframes cyber-type {
+            0%, 10%, 100% { width: 0; }
+            70%, 90% { width: 100%; }
+        }
+
+        .terminal-text {
+            font-family: 'Space Mono', monospace;
+            color: var(--neon-green);
+            position: relative;
+            padding-left: 1em;
+        }
+
+        .terminal-text::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--neon-purple);
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-card {
+                transform: none;
+            }
+            
+            .cert-card:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{#if name}}
+    <header class="min-h-screen flex items-center justify-center p-8">
+        <div class="cyber-section p-12 w-full max-w-4xl text-center">
+            <h1 class="glitch-text text-7xl font-black mb-6">{{name}}</h1>
+            {{#if title}}
+            <p class="terminal-text text-2xl mb-8">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p class="text-xl" style="color: var(--neon-green)">{{summary}}</p>
+            {{/if}}
+        </div>
+    </header>
+    {{/if}}
+
+    {{#if about_us}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="About Me">About Me</h2>
+            <div class="cyber-section p-10">
+                <p class="terminal-text text-xl leading-relaxed">{{about_us}}</p>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="Skills">Skills</h2>
+            <div class="skill-container">
+                {{#if skills.frontend}}
+                <div class="skill-card">
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--neon-purple)">Frontend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.frontend}}
+                        <span class="terminal-text">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-card">
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--neon-purple)">Backend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.backend}}
+                        <span class="terminal-text">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-card">
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--neon-purple)">Mobile</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="terminal-text">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-card">
+                    <h3 class="text-2xl font-bold mb-6" style="color: var(--neon-purple)">DevOps</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.devops}}
+                        <span class="terminal-text">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="Experience">Experience</h2>
+            <div class="experience-timeline">
+                {{#each experience}}
+                <div class="experience-node cyber-section p-8">
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--neon-purple)">{{title}}</h3>
+                    <p class="terminal-text mb-4">{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-3">
+                        {{#each responsibilities}}
+                        <li class="terminal-text">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="Projects">Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--neon-purple)">{{name}}</h3>
+                    <p class="text-gray-400 mb-6">{{description}}</p>
+                    <ul class="space-y-3">
+                        {{#each features}}
+                        <li class="terminal-text">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="Education">Education</h2>
+            <div class="project-grid">
+                {{#each education}}
+                <div class="cyber-section p-8">
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--neon-purple)">{{degree}}</h3>
+                    <p class="terminal-text mb-4">{{institution}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-3">
+                        {{#each details}}
+                        <li class="terminal-text">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    
+    {{#if certifications}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title" data-text="Education">Certifications</h2>
+            <div class="project-grid">
+                {{#each certifications}}
+                <div class="cyber-section p-8">
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--neon-purple)">{{name}}</h3>
+                    <p class="terminal-text mb-4">{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</body>
+</html>

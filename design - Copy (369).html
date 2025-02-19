@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --light-gray: #f4f4f4;
-            --dark-gray: #333;
-            --navy-blue: #2c3e50;
-            --teal: #1abc9c;
-            --gold: #f39c12;
+            --linen: #FAF0E6;
+            --antique-white: #FAEBD7;
+            --light-goldenrod-yellow: #FAFAD2;
+            --dark-goldenrod: #B8860B;
+            --ash-gray: #B2BEB5;
+            --midnight-blue: #192734; /* Darker background */
         }
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--light-gray);
-            color: var(--dark-gray);
+            background-color: var(--midnight-blue);
+            color: var(--dark-goldenrod); /* Light golden text color */
             margin: 0;
             padding: 0;
             display: flex;
@@ -25,120 +26,134 @@
             min-height: 100vh;
         }
 
-        .resume-container {
-            width: 85%;
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .invitation-card {
+            width: 90%;
+            max-width: 800px;
+            margin: 3rem auto; /* Increased margin for better spacing */
+            background-color: var(--linen); /* Light background */
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            text-align: center; /* Center all content */
         }
+
 
         .section {
             margin-bottom: 2rem;
         }
 
         .section-heading {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--navy-blue);
-            text-transform: uppercase;
+            color: var(--dark-goldenrod);
             margin-bottom: 1rem;
-            border-bottom: 2px solid var(--teal); /* Underline */
-            padding-bottom: 0.5rem;
-        }
-
-        .hero {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
+            text-transform: capitalize; /* Capitalize each word */
         }
 
         .profile-image {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 1.5rem;
-            border: 2px solid var(--teal);
+            border: 3px solid var(--antique-white);
+            margin-bottom: 1rem;
         }
 
         .hero-text h1 {
-            font-size: 1.8rem;
-            color: var(--navy-blue);
-            margin-bottom: 0.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-goldenrod);
+            margin-bottom: 0.5rem;
         }
 
         .hero-text p {
             font-size: 1rem;
-            color: var(--dark-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
-        .skills-list {
+        .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
 
-        .skill-item {
-            background-color: var(--light-gray);
-            padding: 0.5rem 1rem;
-            border-radius: 0.3rem;
-            border: 1px solid #ddd; /* Subtle border */
-        }
-
-        .experience-card, .project-card, .education-card, .certification-card {
-            margin-bottom: 1.5rem;
+        .skill-group {
+            background-color: rgba(250, 240, 230, 0.7); /* Slightly transparent background */
             padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.3rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--antique-white);
         }
 
-        .experience-card h3, .project-card h3, .education-card h3, .certification-card h3 {
-            font-size: 1.1rem;
-            color: var(--navy-blue);
+        .skill-group h3 {
+            font-size: 1.2rem;
+            color: var(--dark-goldenrod);
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background-color: var(--dark-goldenrod);
+            color: var(--linen);
+            padding: 0.5rem 1rem;
+            margin: 0.2rem;
+            border-radius: 0.3rem;
+            font-size: 0.8rem;
+        }
+
+        .timeline-card, .project-card, .certification-card {
+            background-color: rgba(250, 240, 230, 0.7);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--antique-white);
+            margin-bottom: 1.5rem; /* Space between cards */
+        }
+
+        .timeline-card h3, .project-card h3, .certification-card h3 {
+            font-size: 1.3rem;
+            color: var(--dark-goldenrod);
             margin-bottom: 0.5rem;
         }
 
-        .experience-card p, .project-card p, .education-card p, .certification-card p {
+        .timeline-card p, .project-card p, .certification-card p {
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        .experience-card ul, .project-card ul, .education-card ul {
-            list-style-type: disc; /* Use bullet points */
+        .timeline-card ul, .project-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.75rem;
+        }
+
+        .timeline-card li, .project-card li {
+            margin-bottom: 0.4rem;
+            position: relative;
             padding-left: 1.2rem;
-            margin-top: 0.5rem;
         }
 
-        .experience-card li, .project-card li, .education-card li {
-            margin-bottom: 0.3rem;
+        .timeline-card li::before, .project-card li::before {
+            content: "•";
+            color: var(--dark-goldenrod);
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
         }
-
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column; /* Stack image and text vertically */
-                align-items: flex-start; /* Align to the left */
-            }
-            .profile-image {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-            .skills-list {
+            .skills-container {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="resume-container">
+    <div class="invitation-card">
 
         {{#if name}}
-        <section class="section hero">
+        <section class="section">
             {{#if profile_image}}
             <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
             {{/if}}
@@ -160,36 +175,36 @@
         {{#if skills}}
         <section class="section">
             <h2 class="section-heading">Skills</h2>
-            <div class="skills-list">
+            <div class="skills-container">
                 {{#if skills.frontend}}
-                <div class="skill-item">
+                <div class="skill-group">
                     <h3>Frontend</h3>
                     {{#each skills.frontend}}
-                    <p>{{this}}</p>
+                    <span class="skill-badge">{{this}}</span>
                     {{/each}}
                 </div>
                 {{/if}}
                 {{#if skills.backend}}
-                <div class="skill-item">
+                <div class="skill-group">
                     <h3>Backend</h3>
                     {{#each skills.backend}}
-                    <p>{{this}}</p>
+                    <span class="skill-badge">{{this}}</span>
                     {{/each}}
                 </div>
                 {{/if}}
                 {{#if skills.mobileDevelopment}}
-                <div class="skill-item">
+                <div class="skill-group">
                     <h3>Mobile</h3>
                     {{#each skills.mobileDevelopment}}
-                    <p>{{this}}</p>
+                    <span class="skill-badge">{{this}}</span>
                     {{/each}}
                 </div>
                 {{/if}}
                 {{#if skills.devops}}
-                <div class="skill-item">
+                <div class="skill-group">
                     <h3>DevOps</h3>
                     {{#each skills.devops}}
-                    <p>{{this}}</p>
+                    <span class="skill-badge">{{this}}</span>
                     {{/each}}
                 </div>
                 {{/if}}
@@ -201,7 +216,7 @@
         <section class="section">
             <h2 class="section-heading">Experience</h2>
             {{#each experience}}
-            <div class="experience-card">
+            <div class="timeline-card">
                 <h3>{{title}}</h3>
                 <p>{{company}} • {{date_start}} - {{date_end}}</p>
                 <ul>
@@ -235,7 +250,7 @@
         <section class="section">
             <h2 class="section-heading">Education</h2>
             {{#each education}}
-            <div class="education-card">
+            <div class="timeline-card">
                 <h3>{{degree}}</h3>
                 <p>{{institution}} • {{date_start}} - {{date_end}}</p>
                 <ul>

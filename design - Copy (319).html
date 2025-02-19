@@ -258,6 +258,7 @@
     {{#if title}}
     <div class="title">{{title}}</div>
     {{/if}}
+    {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
   </div>
 
   <div class="portfolio-container">
@@ -335,6 +336,27 @@
           {{#if features}}
           <ul class="feature-list">
             {{#each features}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+    {{#if education}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 2rem;">Education</h2>
+      <div class="project-grid">
+        {{#each education}}
+        <div class="project-card">
+          <h3>{{degree}}</h3>
+          <h4>{{title}}</h4>
+          <p>{{institution}} | {{date_start}} - {{date_end}}     </p>
+          {{#if details}}
+          <ul class="feature-list">
+            {{#each details}}
             <li>{{this}}</li>
             {{/each}}
           </ul>

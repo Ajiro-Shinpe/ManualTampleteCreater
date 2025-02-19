@@ -205,92 +205,114 @@
 </style>
 </head>
 <body>
-<div class="portfolio-container">
-<div class="profile-section">
-{{#if profile_image}}
-<img src="{{profile_image}}" alt="{{name}}" class="profile-image">
-{{/if}}
-<h1 class="name">{{name}}</h1>
-<p class="title">{{title}}</p>
-<p class="about-us">{{about_us}}</p>
-</div>
-<div class="content-section">
-    {{#if skills}}
-    <div class="section">
-        <h2 class="section-title">Skills</h2>
-        {{#each skills}}
-        <div class="skill-item">
-            <div class="skill-name">{{@key}}</div>
-            <div class="skill-bar">
-                <div class="skill-progress" style="--skill-percentage: {{this}}%;"></div>
+    <div class="portfolio-container">
+    <div class="profile-section">
+    {{#if profile_image}}
+    <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
+    {{/if}}
+    <h1 class="name">{{name}}</h1>
+    <p class="title">{{title}}</p>
+    {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+    <p class="about-us">{{about_us}}</p>
+    </div>
+    <div class="content-section">
+        {{#if skills}}
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            {{#each skills}}
+            <div class="skill-item">
+                <div class="skill-name">{{@key}}</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--skill-percentage: {{this}}%;"></div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    
+        {{#if experience}}
+        <div class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h3>{{title}}</h3>
+                        <p>{{company}} | {{date_start}} - {{date_end}}</p>
+                        {{#if responsibilities}}
+                        <ul class="feature-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
             </div>
         </div>
-        {{/each}}
-    </div>
-    {{/if}}
-
-    {{#if experience}}
-    <div class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            {{#each experience}}
-            <div class="timeline-item">
-                <div class="timeline-item-content">
-                    <h3>{{title}}</h3>
-                    <p>{{company}} | {{date_start}} - {{date_end}}</p>
-                    {{#if responsibilities}}
+        {{/if}}
+    
+        {{#if projects}}
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p>{{description}}</p>
+                    {{#if features}}
                     <ul class="feature-list">
-                        {{#each responsibilities}}
+                        {{#each features}}
                         <li>{{this}}</li>
                         {{/each}}
                     </ul>
                     {{/if}}
                 </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
-    </div>
-    {{/if}}
-
-    {{#if projects}}
-    <div class="section">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-grid">
-            {{#each projects}}
-            <div class="project-card">
-                <h3 class="project-title">{{name}}</h3>
-                <p>{{description}}</p>
-                {{#if features}}
-                <ul class="feature-list">
-                    {{#each features}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-                {{/if}}
+        {{/if}}
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="projects-grid">
+                {{#each education}}
+                <div class="project-card">
+                    <h3>{{degree}}</h3>
+                    <p>{{title}}</p>
+                    <p>{{institution}}</p>
+                    <p>{{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
-        </div>
-    </div>
-    {{/if}}
-
-    {{#if certifications}}
-    <div class="section">
-        <h2 class="section-title">Certifications</h2>
-        <div class="cert-grid">
-            {{#each certifications}}
-            <div class="cert-card">
-                <h3>{{name}}</h3>
-                <p>{{issuer}} | {{date}}</p>
-                {{#if credential_id}}
-                <p>ID: {{credential_id}}</p>
-                {{/if}}
+        </section>
+        {{/if}}
+        {{#if certifications}}
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cert-grid">
+                {{#each certifications}}
+                <div class="cert-card">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} | {{date}}</p>
+                    {{#if credential_id}}
+                    <p>ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
+        {{/if}}
     </div>
-    {{/if}}
-</div>
-</div>
-</body>
-
-</html>
+    </div>
+    </body>
+    
+    </html>

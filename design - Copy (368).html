@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-purple: #4A154B;
+            --electric-blue: #00B4D8;
+            --neon-green: #00FF88;
+            --soft-pink: #FF6B6B;
+            --void-black: #0A0A0F;
+            --hud-gray: #A0A0A0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--void-black);
+            color: var(--hud-gray);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .portfolio-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .section {
+            position: relative;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            background: linear-gradient(45deg, rgba(10,10,15,0.9), rgba(20,20,30,0.9));
+            clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+        }
+
+        .section-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0,255,136,0.3);
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric-blue), transparent);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .hologram-frame {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--electric-blue), var(--neon-green));
+            border-radius: 15px;
+            padding: 10px;
+            transform: rotate(5deg);
+            box-shadow: 0 0 30px var(--electric-blue);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        .cyber-text {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .cyber-text h1 {
+            font-size: 3.5rem;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(0,180,216,0.4);
+        }
+
+        .cyber-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .cyber-text p::before {
+            content: '▹';
+            color: var(--neon-green);
+            position: absolute;
+            left: 0;
+        }
+
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .skill-node {
+            background: rgba(20,20,30,0.95);
+            border: 2px solid var(--soft-pink);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-node:hover {
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 0 25px var(--soft-pink);
+        }
+
+        .skill-category {
+            color: var(--electric-blue);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-item {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.3rem;
+            background: rgba(0,180,216,0.1);
+            border: 1px solid var(--electric-blue);
+            border-radius: 20px;
+            color: var(--electric-blue);
+            font-size: 0.9rem;
+        }
+
+        .timeline-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            position: relative;
+        }
+
+        .timeline-card {
+            background: rgba(20,20,30,0.95);
+            border-left: 4px solid var(--neon-green);
+            padding: 2rem;
+            position: relative;
+            margin-left: 2rem;
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(20,20,30,0.95);
+            border: 2px solid var(--electric-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hologram-frame {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+            
+            .cyber-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .glitch-effect {
+            animation: glitch 2s infinite linear;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-wrapper">
+        {{#if name}}
+        <section class="section hero-grid">
+            <div class="hologram-frame glitch-effect">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                {{/if}}
+            </div>
+            <div class="cyber-text">
+                <h1>{{name}}</h1>
+                {{#if title}}<p>{{title}}</p>{{/if}}
+                {{#if summary}}<p>{{summary}}</p>{{/if}}
+                {{#if about_us}}<p>{{about_us}}</p>{{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <h2 class="section-heading">Skill Matrix</h2>
+            <div class="skills-matrix">
+                {{#if skills.frontend}}
+                <div class="skill-node">
+                    <div class="skill-category">Frontend OS</div>
+                    {{#each skills.frontend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="skill-node">
+                    <div class="skill-category">Backend Core</div>
+                    {{#each skills.backend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-node">
+                    <div class="skill-category">Mobile Interface</div>
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div class="skill-node">
+                    <div class="skill-category">System Protocols</div>
+                    {{#each skills.devops}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <h2 class="section-heading">Experience Log</h2>
+            <div class="timeline-wrapper">
+                {{#each experience}}
+                <div class="timeline-card">
+                    <h3 style="color: var(--electric-blue)">{{title}}</h3>
+                    <p style="color: var(--soft-pink)">{{company}} | {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li style="margin: 1rem 0">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <h2 class="section-heading">Project Archives</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 style="color: var(--neon-green)">{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul style="list-style: none; padding: 0">
+                        {{#each features}}
+                        <li style="margin: 0.5rem 0">» {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <h2 class="section-heading">Education Cache</h2>
+            <div class="timeline-wrapper">
+                {{#each education}}
+                <div class="timeline-card">
+                    <h3 style="color: var(--electric-blue)">{{degree}}</h3>
+                    <p style="color: var(--soft-pink)">{{institution}} | {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each details}}
+                        <li style="margin: 1rem 0">◈ {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <h2 class="section-heading">Security Certs</h2>
+            <div class="skills-matrix">
+                {{#each certifications}}
+                <div class="skill-node">
+                    <h3 style="color: var(--electric-blue)">{{name}}</h3>
+                    <p style="color: var(--hud-gray)">{{issuer}} | {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

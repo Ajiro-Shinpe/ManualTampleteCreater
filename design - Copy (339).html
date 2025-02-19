@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Futuristic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #00ffcc;
+            --accent: #ff00ff;
+            --text: #f0f0f0;
+            --background: #000;
+            --card-bg: rgba(10, 10, 10, 0.8);
+            --gradient: linear-gradient(135deg, var(--secondary), var(--accent));
+            --neon-shadow: 0 0 10px var(--secondary), 0 0 20px var(--accent);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--secondary);
+            font-weight: 300;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .summary {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--neon-shadow);
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .section {
+            backdrop-filter: blur(10px);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            position: relative;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            box-shadow: var(--neon-shadow);
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--gradient);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: scale(1.05);
+        }
+
+        .experience-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            text-shadow: var(--neon-shadow);
+        }
+
+        @media (max-width: 768px) {
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        {{#if name}}
+        <h1>{{name}}</h1>
+        {{/if}}
+        {{#if title}}<div class="title">{{title}}</div>{{/if}}
+        {{#if summary}}<div class="summary">{{summary}}</div>{{/if}}
+    </div>
+
+    <div class="sections-grid">
+        {{#if about_us}}
+        <section class="section about-section">
+            <h2 class="section-title">About Me</h2>
+            <p>{{about_us}}</p>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section skills-section">
+            {{#if skills.frontend}}
+            <div class="skill-card">
+                <h3>Frontend</h3>
+                <div class="skill-tags">
+                    {{#each skills.frontend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.backend}}
+            <div class="skill-card">
+                <h3>Backend</h3>
+                <div class="skill-tags">
+                    {{#each skills.backend}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.mobileDevelopment}}
+            <div class="skill-card">
+                <h3>Mobile Development</h3>
+                <div class="skill-tags">
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if skills.devops}}
+            <div class="skill-card">
+                <h3>DevOps</h3>
+                <div class="skill-tags">
+                    {{#each skills.devops}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section experience-section">
+            <h2 class="section-title">Experience</h2>
+            <div class="sections-grid">
+                {{#each experience}}
+                <div class="experience-card">
+                    <h3>{{title}}</h3>
+                    <p>{{company}} | {{location}}</p>
+                    <p>{{date_start}} - {{date_end}}</p>
+                    {{#if responsibilities}}
+                    <ul class="feature-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section experience-section">
+            <h2 class="section-title">Projects</h2>
+            <div class="sections-grid">
+                {{#each projects}}
+                <div class="experience-card">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    {{#if features}}
+                    <ul class="feature-list">
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section experience-section">
+            <h2 class="section-title">Education</h2>
+            <div class="sections-grid">
+                {{#each education}}
+                <div class="experience-card">
+                    <h4>{{title}}</h4>
+                    <h2>{{degree}}</h2>
+                    <p>{{institution}}</p>
+                    <p>{{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul class="feature-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section experience-section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="sections-grid">
+                {{#each certifications}}
+                <div class="experience-card">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}}</p>
+                    <p>ID: {{credential_id}}</p>
+                    <p>{{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

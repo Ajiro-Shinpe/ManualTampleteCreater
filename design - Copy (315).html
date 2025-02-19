@@ -221,6 +221,7 @@
             {{#if title}}
             <div class="title">{{title}}</div>
             {{/if}}
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
         </div>
 
         <div class="masonry-grid">
@@ -313,6 +314,29 @@
                         {{#if features}}
                         <ul class="feature-list">
                             {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div class="card">
+                <h2 class="card-title">Education</h2>
+                <div class="project-grid">
+                    {{#each education}}
+                    <div class="project-card">
+                        <p>{{title}}</p>
+                        <h3 class="project-title">{{degree}}</h3>
+                        <p>{{institution}}</p>
+                        <p>{{date_start}} - {{date_end}} </p>
+                        {{#if details}}
+                        <ul class="feature-list">
+                            {{#each details}}
                             <li>{{this}}</li>
                             {{/each}}
                         </ul>

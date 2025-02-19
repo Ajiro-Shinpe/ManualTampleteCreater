@@ -296,7 +296,7 @@
           <h3 class="project-title">{{name}}</h3>
           <p class="project-description">{{description}}</p>
           <div class="tech-stack">
-            {{#each tech_stack}}
+            {{#each features}}
             <span class="tech-tag">{{this}}</span>
             {{/each}}
           </div>
@@ -336,6 +336,19 @@
             {{/each}}
           </ul>
           {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+
+      {{#if certifications}}
+      <h2 class="section-title">Certifications</h2>
+      <ul class="education-list">
+        {{#each certifications}}
+        <li class="education-item">
+          <h3 class="education-title">{{name}}</h3>
+          <p class="education-info">{{issuer}}</p>
+          <p class="education-date">{{date}}</p>
         </li>
         {{/each}}
       </ul>

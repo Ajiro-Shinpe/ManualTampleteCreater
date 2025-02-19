@@ -380,6 +380,36 @@
             {{/each}}
             {{/if}}
         </div>
+        <div class="projects-grid">
+            {{#if education}}
+            {{#each education}}
+            <div class="project-card">
+                <h3>{{name}}</h3>
+                <p>{{title}}</p>
+                <p>{{institution}}</p>
+                <p>{{date_start}} - {{date_end}}  </p>
+                {{#if details}}
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
+        <div class="projects-grid">
+            {{#if certifications}}
+            {{#each certifications}}
+            <div class="project-card">
+                <h3>{{name}}</h3>
+                <p>{{issuer}}</p>
+                <p>{{date}}</p>
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
     </div>
 </body>
 </html>

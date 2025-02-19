@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #1e1b4b;
+            --accent: #f472b6;
+            --background: #0f172a;
+            --text: #e2e8f0;
+            --card-bg: rgba(30, 41, 59, 0.8);
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .hexagon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .skill-hexagon {
+            position: relative;
+            width: 100%;
+            padding: 2rem;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .skill-hexagon:hover {
+            transform: scale(1.05);
+            background: var(--primary);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background: var(--accent);
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, var(--primary) 360deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        .cert-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .cert-card {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        .section-header {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{#if name}}
+    <header class="min-h-screen flex items-center justify-center gradient-bg p-8">
+        <div class="text-center max-w-4xl">
+            <h1 class="text-7xl font-black mb-6 text-white">{{name}}</h1>
+            {{#if title}}
+            <p class="text-2xl mb-8 text-white/90">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p class="text-xl text-white/80">{{summary}}</p>
+            {{/if}}
+        </div>
+    </header>
+    {{/if}}
+
+    {{#if about_us}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">About Me</h2>
+            <div class="glass-card p-8">
+                <p class="text-xl leading-relaxed">{{about_us}}</p>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">Skills</h2>
+            <div class="hexagon-grid">
+                {{#if skills.frontend}}
+                <div class="skill-hexagon">
+                    <h3 class="text-xl font-bold mb-4">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.frontend}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-primary/20">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-hexagon">
+                    <h3 class="text-xl font-bold mb-4">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.backend}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-primary/20">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-hexagon">
+                    <h3 class="text-xl font-bold mb-4">Mobile</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-primary/20">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-hexagon">
+                    <h3 class="text-xl font-bold mb-4">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.devops}}
+                        <span class="px-3 py-1 rounded-full text-sm bg-primary/20">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item glass-card">
+                    <h3 class="text-2xl font-bold mb-2">{{title}}</h3>
+                    <p class="text-primary mb-4">{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-2">
+                        {{#each responsibilities}}
+                        <li class="text-gray-300">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">{{name}}</h3>
+                    <p class="text-gray-400 mb-6">{{description}}</p>
+                    <ul class="space-y-2">
+                        {{#each features}}
+                        <li class="text-gray-300">• {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {{#each education}}
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-2">{{degree}}</h3>
+                    <p class="text-primary mb-4">{{institution}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-2">
+                        {{#each details}}
+                        <li class="text-gray-300">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if certifications}}
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header text-4xl font-bold">Certifications</h2>
+            <div class="cert-container">
+                {{#each certifications}}
+                <div class="cert-card">
+                    <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                    <p class="text-primary">{{issuer}} • {{date}}</p>
+                    {{#if credential_id}}
+                    <p class="text-sm text-gray-500 mt-2">ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</body>
+</html>

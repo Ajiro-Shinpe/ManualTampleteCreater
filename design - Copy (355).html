@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #FF2E63;
+            --cyber-blue: #08D9D6;
+            --deep-navy: #252A34;
+            --off-white: #EAEAEA;
+            --accent-purple: #9D4EDD;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--deep-navy);
+            color: var(--off-white);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 46, 99, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(8, 217, 214, 0.1) 0%, transparent 50%);
+        }
+
+        .portfolio-container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            grid-column: span 12;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2rem;
+            background: rgba(37, 42, 52, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 46, 99, 0.2);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            transform: perspective(1000px) rotateY(-15deg);
+            transition: transform 0.5s ease;
+            box-shadow: 20px 20px 60px rgba(8, 217, 214, 0.2);
+        }
+
+        .profile-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            grid-column: span 12;
+            padding: 4rem 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .skill-group {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .skill-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--neon-pink);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-group:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-item {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            background: rgba(157, 78, 221, 0.1);
+            border: 1px solid var(--accent-purple);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        /* Experience Section */
+        .experience-section {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--neon-pink));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(8, 217, 214, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyber-blue);
+        }
+
+        /* Education Section */
+        .education-section {
+            grid-column: span 12;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            padding: 4rem 0;
+        }
+
+        .education-card {
+            flex: 1 1 300px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(8, 217, 214, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .education-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .certification-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--neon-pink);
+            transition: all 0.3s ease;
+        }
+
+        .certification-card:hover {
+            background: rgba(255, 46, 99, 0.1);
+            transform: translateX(10px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--cyber-blue);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--neon-pink);
+            transform-origin: left;
+            animation: titleLine 0.5s ease forwards;
+        }
+
+        @keyframes titleLine {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-container {
+                order: -1;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        {{#if name}}
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="text-6xl font-bold mb-4" style="color: var(--neon-pink)">{{name}}</h1>
+                    {{#if title}}
+                    <p class="text-3xl mb-6" style="color: var(--cyber-blue)">{{title}}</p>
+                    {{/if}}
+                    {{#if summary}}
+                    <p class="text-xl max-w-2xl">{{summary}}</p>
+                    {{/if}}
+                    {{#if about_us}}
+                    <div class="mt-8">
+                        <p class="text-lg">{{about_us}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+                {{#if profile_image}}
+                <div class="profile-container">
+                    <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="skills-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                {{#if skills.frontend}}
+                <div class="skill-group">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--cyber-blue)">Frontend</h3>
+                    {{#each skills.frontend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-group">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--cyber-blue)">Backend</h3>
+                    {{#each skills.backend}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-group">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--cyber-blue)">Mobile</h3>
+                    {{#each skills.mobileDevelopment}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-group">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--cyber-blue)">DevOps</h3>
+                    {{#each skills.devops}}
+                    <span class="skill-item">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="experience-section">
+            <h2 class="section-title">Experience</h2>
+            {{#each experience}}
+            <div class="experience-card">
+                <h3 class="text-2xl font-bold mb-2" style="color: var(--cyber-blue)">{{title}}</h3>
+                <p class="text-xl mb-4" style="color: var(--neon-pink)">{{company}} • {{date_start}} - {{date_end}}</p>
+                <ul class="space-y-3">
+                    {{#each responsibilities}}
+                    <li class="text-lg">{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="projects-section">
+            <h2 class="section-title">Projects</h2>
+            {{#each projects}}
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4" style="color: var(--cyber-blue)">{{name}}</h3>
+                <p class="text-lg mb-6">{{description}}</p>
+                <ul class="space-y-3">
+                    {{#each features}}
+                    <li class="text-lg">{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="education-section">
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="education-card">
+                <h3 class="text-2xl font-bold mb-2" style="color: var(--cyber-blue)">{{degree}}</h3>
+                <p class="text-xl mb-4" style="color: var(--neon-pink)">{{institution}} • {{date_start}} - {{date_end}}</p>
+                <ul class="space-y-3">
+                    {{#each details}}
+                    <li class="text-lg">{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="certifications-section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="certification-card">
+                <h3 class="text-2xl font-bold mb-2" style="color: var(--cyber-blue)">{{name}}</h3>
+                <p class="text-lg" style="color: var(--neon-pink)">{{issuer}} • {{date}}</p>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>
+</antA

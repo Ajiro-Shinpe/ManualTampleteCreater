@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #FF6584;
+            --accent-color: #00C9A7;
+            --background-color: #1A1A2E;
+            --text-color: #E0E0E0;
+            --card-background: #16213E;
+            --card-border: rgba(108, 99, 255, 0.3);
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--background-color);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .certification-card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .education-card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{#if name}}
+    <header class="text-center py-20">
+        <div class="container mx-auto px-4">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image" class="profile-image mx-auto">
+            {{/if}}
+            <h1 class="text-5xl font-bold mb-4" style="color: var(--primary-color)">{{name}}</h1>
+            {{#if title}}
+            <p class="text-xl mb-6" style="color: var(--secondary-color)">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-color)">{{summary}}</p>
+            {{/if}}
+        </div>
+    </header>
+    {{/if}}
+
+    {{#if about_us}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <p class="text-lg">{{about_us}}</p>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Skills</h2>
+            <div class="flex flex-wrap">
+                {{#if skills.frontend}}
+                <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary-color)">Frontend</h3>
+                        <div class="flex flex-wrap">
+                            {{#each skills.frontend}}
+                            <span class="skill-badge">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary-color)">Backend</h3>
+                        <div class="flex flex-wrap">
+                            {{#each skills.backend}}
+                            <span class="skill-badge">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary-color)">Mobile</h3>
+                        <div class="flex flex-wrap">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="skill-badge">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary-color)">DevOps</h3>
+                        <div class="flex flex-wrap">
+                            {{#each skills.devops}}
+                            <span class="skill-badge">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="timeline-item">
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--primary-color)">{{title}}</h3>
+                        <p class="text-lg mb-4" style="color: var(--secondary-color)">{{company}} • {{date_start}} - {{date_end}}</p>
+                        <ul class="space-y-2">
+                            {{#each responsibilities}}
+                            <li class="text-lg">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <h3 class="text-xl font-bold mb-4" style="color: var(--primary-color)">{{name}}</h3>
+                    <p class="text-lg mb-6" style="color: var(--text-color)">{{description}}</p>
+                    <ul class="space-y-2">
+                        {{#each features}}
+                        <li class="text-lg">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {{#each education}}
+                <div class="education-card">
+                    <h3 class="text-xl font-bold mb-2" style="color: var(--primary-color)">{{degree}}</h3>
+                    <p class="text-lg mb-4" style="color: var(--secondary-color)">{{institution}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-2">
+                        {{#each details}}
+                        <li class="text-lg">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if certifications}}
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {{#each certifications}}
+                <div class="certification-card">
+                    <h3 class="text-xl font-bold mb-2" style="color: var(--primary-color)">{{name}}</h3>
+                    <p class="text-lg" style="color: var(--secondary-color)">{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</body>
+</html>

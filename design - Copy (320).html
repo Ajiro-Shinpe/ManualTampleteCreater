@@ -1,364 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{name}} - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #282c34; /* Dark background */
-            --text-color: #e0e0e0; /* Light text */
-            --accent-color: #61dafb; /* Blue accent */
-            --card-bg: #353941; /* Slightly lighter card background */
-            --shadow-color: rgba(0, 0, 0, 0.3);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{name}} - Creative Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    :root {
+      --primary: #ff6f61;
+      --secondary: #6fbf7f;
+      --background: #ffffff;
+      --surface: #f0f4f8;
+      --text: #2e2e2e;
+      --muted: #757575;
+      --border: #eaeaea;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            flex-grow: 1;
-        }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
 
-        .profile-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
 
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            box-shadow: 0 0 10px var(--accent-color);
-        }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
 
-        .name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+    .header .title {
+      color: var(--muted);
+      font-size: 1.5rem;
+    }
 
-        .title {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
+    .portfolio-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
 
-        .about-us {
-            font-size: 1rem;
-        }
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      transition: transform 0.3s ease;
+    }
 
-        .content-area {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-        .section {
-            background-color: var(--card-bg);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 10px var(--shadow-color);
-            overflow: hidden; /* Ensure content doesn't overflow */
-        }
+    .about-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-        }
+    .about-card img {
+      max-width: 300px;
+      border-radius: 16px;
+      margin-right: 2rem;
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 0.8rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            transition: transform 0.2s ease; /* Add transition for hover effect */
-        }
+    .about-content {
+      flex: 1;
+    }
 
-        .card:hover {
-            transform: translateY(-5px); /* Move card up slightly on hover */
-        }
+    .about-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
 
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
+    .skill-grid, .project-grid, .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .card-content {
-            font-size: 1rem;
-            color: var(--text-color);
-        }
+    .skill-card, .project-card, .cert-card {
+      background-color: rgba(var(--primary), 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
 
-        .skill-list {
-            list-style: none;
-            padding: 0;
-        }
+    .skill-card:hover, .project-card:hover, .cert-card:hover {
+      transform: scale(1.05);
+    }
 
-        .skill-item {
-            margin-bottom: 1rem;
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Vertically align items */
-        }
+    .skill-card h3, .project-card h3, .cert-card h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
 
-        .skill-name {
-            font-weight: 500;
-            margin-right: 1rem; /* Add some space between name and bar */
-        }
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
 
-        .skill-bar {
-            height: 8px;
-            background-color: #40444b; /* Darker background for bar */
-            border-radius: 4px;
-            overflow: hidden;
-            flex-grow: 1; /* Allow bar to expand */
-        }
+    .feature-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--muted);
+    }
 
-        .skill-progress {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 4px;
-            width: var(--skill-percentage);
-            transition: width 1s ease-in-out;
-        }
+    .feature-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+    }
 
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
+    @media (max-width: 768px) {
+      .about-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-        .timeline::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0.75rem;
-            width: 2px;
-            background-color: var(--accent-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -0.5rem;
-            top: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            border: 2px solid var(--card-bg);
-        }
-
-        .timeline-item-content {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 5px var(--shadow-color);
-        }
-
-        .timeline-item-title {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item-date {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            transition: transform 0.2s ease; /* Add transition for hover effect */
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px); /* Move card up slightly on hover */
-        }
-
-        .project-title {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-description {
-            color: var(--text-color);
-            font-size: 0.95rem;
-        }
-
-        .project-features {
-            list-style: none;
-            padding: 0;
-            margin-top: 1rem;
-        }
-
-        .project-features li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-features li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skill-item {
-                flex-direction: column; /* Stack skill name and bar vertically */
-                align-items: flex-start; /* Align items to the left */
-            }
-            .skill-name {
-                margin-right: 0;
-                margin-bottom: 0.5rem; /* Add margin below skill name */
-            }
-        }
-    </style>
+      .about-card img {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="profile-header">
-            {{#if profile_image}}
-            <img src="{{profile_image}}" alt="{{name}}" class="profile-image">
-            {{/if}}
-            <h1 class="name">{{name}}</h1>
-            <p class="title">{{title}}</p>
-            {{#if about_us}}
-            <p class="about-us">{{about_us}}</p>
-            {{/if}}
-        </div>
+  <div class="header">
+    {{#if name}}
+    <h1>{{name}}</h1>
+    {{/if}}
+    {{#if title}}
+    <div class="title">{{title}}</div>
+    {{/if}}
+    {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
+  </div>
 
-        <div class="content-grid">
-            <div class="section">
-                {{#if skills}}
-                <h2 class="section-title">Skills</h2>
-                <ul class="skill-list">
-                    {{#each skills}}
-                    <li class="skill-item">
-                        <div class="skill-name">
-                            <span>{{@key}}</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="--skill-percentage: {{this}}%;"></div>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ul>
-                {{/if}}
-            </div>
-
-            <div class="section">
-                {{#if experience}}
-                <h2 class="section-title">Experience</h2>
-                <div class="timeline">
-                    {{#each experience}}
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <h3 class="timeline-item-title">{{title}}</h3>
-                            <p class="timeline-item-date">{{company}} | {{date_start}} - {{date_end}}</p>
-                            {{#if responsibilities}}
-                            <ul>
-                                {{#each responsibilities}}
-                                <li>{{this}}</li>
-                                {{/each}}
-                            </ul>
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
-                {{/if}}
-            </div>
-
-            <div class="section">
-                {{#if projects}}
-                <h2 class="section-title">Projects</h2>
-                <div class="project-grid">
-                    {{#each projects}}
-                    <div class="project-card">
-                        <h3 class="project-title">{{name}}</h3>
-                        <p class="project-description">{{description}}</p>
-                        {{#if features}}
-                        <ul class="project-features">
-                            {{#each features}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                        {{/if}}
-                    </div>
-                    {{/each}}
-                </div>
-                {{/if}}
-            </div>
-
-            <div class="section">
-                {{#if education}}
-                <h2 class="section-title">Education</h2>
-                <div class="timeline">
-                    {{#each education}}
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <h3 class="timeline-item-title">{{degree}}</h3>
-                            <p class="timeline-item-date">{{institution}} | {{date_start}} - {{date_end}}</p>
-                            {{#if details}}
-                            <ul>
-                                {{#each details}}
-                                <li>{{this}}</li>
-                                {{/each}}
-                            </ul>
-                            {{/if}}
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
-                {{/if}}
-            </div>
-        </div>
+  <div class="portfolio-container">
+    {{#if about_us}}
+    <div class="card about-card">
+      <img src="about-image.jpg" alt="About Me" />
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>{{about_us}}</p>
+      </div>
     </div>
+    {{/if}}
+
+    {{#if skills}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 1rem;">Skills & Expertise</h2>
+      <div class="skill-grid">
+        {{#if skills.frontend}}
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <p>{{join skills.frontend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.backend}}
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <p>{{join skills.backend ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.devops}}
+        <div class="skill-card">
+          <h3>DevOps</h3>
+          <p>{{join skills.devops ", "}}</p>
+        </div>
+        {{/if}}
+        {{#if skills.mobileDevelopment}}
+        <div class="skill-card">
+          <h3>Mobile</h3>
+          <p>{{join skills.mobileDevelopment ", "}}</p>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if experience}}
+    <div class="card">
+      <h2 style="color: var(--secondary); margin-bottom: 1rem;">Experience</h2>
+      {{#each experience}}
+      <div class="feature-list">
+        <li>
+          <strong>{{title}}</strong> at {{company}} ({{date_start}} - {{date_end}})
+          {{#if responsibilities}}
+          <ul>
+            {{#each responsibilities}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </li>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if projects}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 1rem;">Projects</h2>
+      <div class="project-grid">
+        {{#each projects}}
+        <div class="project-card">
+          <h3>{{name}}</h3>
+          <p>{{description}}</p>
+          {{#if features}}
+          <ul class="feature-list">
+            {{#each features}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if education}}
+    <div class="card">
+      <h2 style="color: var(--primary); margin-bottom: 1rem;">Education</h2>
+      <div class="project-grid">
+        {{#each education}}
+        <div class="project-card">
+          <h3>{{degree}}</h3>
+          <h4>{{title}}</h4>
+          <p>{{institution}} | {{date_start}} - {{date_end}}</p>
+          {{#if details}}
+          <ul class="feature-list">
+            {{#each details}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if certifications}}
+    <div class="card">
+      <h2 style="color: var(--secondary); margin-bottom: 1rem;">Certifications</h2>
+      <div class="cert-grid">
+        {{#each certifications}}
+        <div class="cert-card">
+          <h3>{{name}}</h3>
+          <p>{{issuer}} | {{date}}</p>
+          {{#if credential_id}}
+          <p>ID: {{credential_id}}</p>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
 </body>
 </html>

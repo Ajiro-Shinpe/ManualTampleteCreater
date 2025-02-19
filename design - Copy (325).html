@@ -311,6 +311,35 @@
                 {{/each}}
             </div>
         </div>
+
+        
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="project-grid">
+                {{#each education}}
+                <div class="project-card">
+                    <h3 class="project-title">{{degree}}</h3>
+                    <p class="project-description">{{institution}} | {{date_start}} - {{date_end}}   </p>
+                    <ul class="project-features">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="section">
+            <h2 class="section-title">My Certifications</h2>
+            <div class="project-grid">
+                {{#each certifications}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{issuer}} | {{date}} </p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
 </body>
 </html>

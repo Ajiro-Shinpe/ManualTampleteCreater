@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffd60a;
+            --secondary: #001d3d;
+            --tertiary: #003566;
+            --accent: #ff6b6b;
+            --text: #f8f9fa;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--secondary), var(--tertiary));
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .side-nav {
+            background: rgba(0, 29, 61, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 214, 10, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 80px;
+            transition: width 0.3s ease;
+            z-index: 50;
+        }
+
+        .side-nav:hover {
+            width: 240px;
+        }
+
+        .content-wrapper {
+            margin-left: 80px;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 0;
+            background: var(--primary);
+            z-index: 100;
+        }
+
+        .section-title {
+            display: inline-block;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .section-title:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 214, 10, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 214, 10, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-card {
+            position: relative;
+            animation: scaleIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, var(--primary) 360deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        .project-card:hover::after {
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 214, 10, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator"></div>
+    
+    <nav class="side-nav flex flex-col items-center py-8">
+        <!-- Add navigation items here -->
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center p-8">
+            {{#if name}}
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-8xl font-black mb-6" style="color: var(--primary)">{{name}}</h1>
+                {{#if title}}
+                <p class="text-2xl mb-8 text-gray-300">{{title}}</p>
+                {{/if}}
+                {{#if summary}}
+                <p class="text-xl text-gray-400">{{summary}}</p>
+                {{/if}}
+            </div>
+            {{/if}}
+        </section>
+
+        <!-- About Section -->
+        {{#if about_us}}
+        <section class="py-20 px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">About</h2>
+                <div class="bg-opacity-10 bg-white p-8 rounded-2xl">
+                    <p class="text-xl leading-relaxed">{{about_us}}</p>
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Skills Section -->
+        {{#if skills}}
+        <section class="py-20 px-8 bg-opacity-5 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {{#if skills.frontend}}
+                    <div class="skill-card p-6">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary)">Frontend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.frontend}}
+                            <span class="px-3 py-1 rounded-full text-sm bg-opacity-10 bg-white">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.backend}}
+                    <div class="skill-card p-6">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary)">Backend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.backend}}
+                            <span class="px-3 py-1 rounded-full text-sm bg-opacity-10 bg-white">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.mobileDevelopment}}
+                    <div class="skill-card p-6">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary)">Mobile</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.mobileDevelopment}}
+                            <span class="px-3 py-1 rounded-full text-sm bg-opacity-10 bg-white">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if skills.devops}}
+                    <div class="skill-card p-6">
+                        <h3 class="text-xl font-bold mb-4" style="color: var(--primary)">DevOps</h3>
+                        <div class="flex flex-wrap gap-2">
+                            {{#each skills.devops}}
+                            <span class="px-3 py-1 rounded-full text-sm bg-opacity-10 bg-white">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Experience Section -->
+        {{#if experience}}
+        <section class="py-20 px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">Experience</h2>
+                <div class="space-y-12">
+                    {{#each experience}}
+                    <div class="experience-card pl-8">
+                        <h3 class="text-2xl font-bold mb-2">{{title}}</h3>
+                        <p class="text-gray-400 mb-4">{{company}} • {{date_start}} - {{date_end}}</p>
+                        <ul class="space-y-2">
+                            {{#each responsibilities}}
+                            <li class="text-gray-300">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Projects Section -->
+        {{#if projects}}
+        <section class="py-20 px-8 bg-opacity-5 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {{#each projects}}
+                    <div class="project-card p-8">
+                        <h3 class="text-2xl font-bold mb-4" style="color: var(--primary)">{{name}}</h3>
+                        <p class="text-gray-400 mb-6">{{description}}</p>
+                        <ul class="space-y-2">
+                            {{#each features}}
+                            <li class="text-gray-300">• {{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Education Section -->
+        {{#if education}}
+        <section class="py-20 px-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">Education</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {{#each education}}
+                    <div class="skill-card p-8">
+                        <h3 class="text-2xl font-bold mb-2">{{degree}}</h3>
+                        <p class="text-gray-400 mb-4">{{institution}} • {{date_start}} - {{date_end}}</p>
+                        <ul class="space-y-2">
+                            {{#each details}}
+                            <li class="text-gray-300">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        <!-- Certifications Section -->
+        {{#if certifications}}
+        <section class="py-20 px-8 bg-opacity-5 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-4xl font-bold mb-12">Certifications</h2>
+                <div class="cert-grid">
+                    {{#each certifications}}
+                    <div class="cert-card p-6">
+                        <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                        <p class="text-gray-400">{{issuer}} • {{date}}</p>
+                        {{#if credential_id}}
+                        <p class="text-sm text-gray-500 mt-2">ID: {{credential_id}}</p>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

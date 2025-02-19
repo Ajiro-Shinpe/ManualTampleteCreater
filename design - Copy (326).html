@@ -280,6 +280,7 @@
             <div class="hero-content">
                 <h1 class="name">{{name}}</h1>
                 <p class="title">{{title}}</p>
+                {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
                 <p class="about">{{about_us}}</p>
             </div>
         </section>
@@ -360,6 +361,33 @@
                         <li>{{this}}</li>
                         {{/each}}
                     </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section class="projects">
+            <div class="projects-grid">
+                {{#each education}}
+                <div class="project-card">
+                    <p class="project-description">{{title}}</p>
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{institution}}</p>
+                    <p class="project-description">{{date_start}} - {{date_end}} </p>
+                    <ul class="project-features">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section class="projects">
+            <div class="projects-grid">
+                {{#each certifications}}
+                <div class="project-card">
+                    <h3 class="project-title">{{name}}</h3>
+                    <p class="project-description">{{institution}} | {{date}} </p>
                 </div>
                 {{/each}}
             </div>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #22d3ee;
+            --secondary: #0f172a;
+            --accent: #f0abfc;
+            --background: #020617;
+            --text: #f8fafc;
+            --card-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        @keyframes morphGradient {
+            0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 50%, rgba(240, 171, 252, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(34, 211, 238, 0.1) 0%, transparent 20%);
+        }
+
+        .morph-blob {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            animation: morphGradient 8s ease-in-out infinite;
+            border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+            transition: all 1s ease-in-out;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .neo-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(34, 211, 238, 0.1);
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(34, 211, 238, 0.1),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        .neo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .diagonal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            transform: skewY(-3deg);
+            padding: 4rem 0;
+        }
+
+        .diagonal-grid > * {
+            transform: skewY(3deg);
+        }
+
+        .skill-pill {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .staggered-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .staggered-grid > *:nth-child(odd) {
+            transform: translateY(2rem);
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--background);
+            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.2);
+        }
+
+        .section-heading {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .cert-card {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .cert-card:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        @media (max-width: 768px) {
+            .staggered-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .staggered-grid > *:nth-child(odd) {
+                transform: none;
+            }
+            
+            .diagonal-grid {
+                transform: none;
+                padding: 2rem 0;
+            }
+            
+            .diagonal-grid > * {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{#if name}}
+    <header class="min-h-screen relative flex items-center justify-center px-8">
+        <div class="morph-blob"></div>
+        <div class="text-center max-w-4xl z-10">
+            <h1 class="text-8xl font-black mb-6 tracking-tight">{{name}}</h1>
+            {{#if title}}
+            <p class="text-3xl mb-8 text-primary">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p class="text-xl text-gray-400">{{summary}}</p>
+            {{/if}}
+        </div>
+    </header>
+    {{/if}}
+
+    {{#if about_us}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">About Me</h2>
+            <div class="neo-card p-10 text-xl leading-relaxed">
+                {{about_us}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if skills}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">Skills</h2>
+            <div class="diagonal-grid">
+                {{#if skills.frontend}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">Frontend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.frontend}}
+                        <span class="skill-pill px-4 py-2 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">Backend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.backend}}
+                        <span class="skill-pill px-4 py-2 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">Mobile</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-pill px-4 py-2 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">DevOps</h3>
+                    <div class="flex flex-wrap gap-3">
+                        {{#each skills.devops}}
+                        <span class="skill-pill px-4 py-2 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if experience}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">Experience</h2>
+            <div class="experience-timeline">
+                {{#each experience}}
+                <div class="experience-item neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-2">{{title}}</h3>
+                    <p class="text-primary mb-4">{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-3">
+                        {{#each responsibilities}}
+                        <li class="text-gray-300">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if projects}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">Projects</h2>
+            <div class="staggered-grid">
+                {{#each projects}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">{{name}}</h3>
+                    <p class="text-gray-400 mb-6">{{description}}</p>
+                    <ul class="space-y-3">
+                        {{#each features}}
+                        <li class="text-gray-300">• {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if education}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">Education</h2>
+            <div class="diagonal-grid">
+                {{#each education}}
+                <div class="neo-card p-8">
+                    <h3 class="text-2xl font-bold mb-2">{{degree}}</h3>
+                    <p class="text-primary mb-4">{{institution}} • {{date_start}} - {{date_end}}</p>
+                    <ul class="space-y-3">
+                        {{#each details}}
+                        <li class="text-gray-300">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if certifications}}
+    <section class="py-32 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-heading">Certifications</h2>
+            <div class="cert-grid">
+                {{#each certifications}}
+                <div class="cert-card neo-card p-6">
+                    <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                    <p class="text-primary">{{issuer}} • {{date}}</p>
+                    {{#if credential_id}}
+                    <p class="text-sm text-gray-500 mt-2">ID: {{credential_id}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    {{/if}}
+</body>
+</html>

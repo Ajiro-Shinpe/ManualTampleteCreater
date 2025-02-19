@@ -269,7 +269,9 @@
             {{/if}}
             <h1 class="name">{{name}}</h1>
             <p class="title">{{title}}</p>
+            {{#if summary}} <p><strong>Summary:</strong> {{summary}}</p> {{/if}}
             {{#if about_us}}
+            <h2 class="section-title">About</h2>
             <p class="about-us">{{about_us}}</p>
             {{/if}}
         </div>
@@ -358,6 +360,22 @@
                     {{/each}}
                 </div>
                 {{/if}}
+            </div>
+            <div class="section">
+                {{#if certifications}}
+              <h2 class="section-title">Certifications</h2>
+              <div class="timeline">
+                {{#each certifications}}
+                <div class="timeline-item">
+                  <h3 class="timeline-item-title">{{name}}</h3>
+                  <p class="timeline-item-date">{{issuer}} | {{date}}</p>
+                  {{#if credential_id}}
+                  <p class="timeline-item-content">ID: {{credential_id}}</p>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
+              {{/if}}
             </div>
         </div>
     </div>

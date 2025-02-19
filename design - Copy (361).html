@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Data Display</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #faf9f6;
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Profile Section Styles */
+    .profile-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-right: 30px;
+      object-fit: cover;
+    }
+
+    .profile-info h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    /* Skills Section Styles */
+    .skills-section {
+      margin-bottom: 40px;
+    }
+
+    .skills-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .skills-list li {
+      background-color: #e1f0ff;
+      color: #0077b6;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    /* Experience and Education Sections Styles */
+    .experience-section, .education-section {
+      margin-bottom: 40px;
+    }
+
+    .experience-section h2, .education-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .experience-list, .education-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .experience-list li, .education-list li {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .experience-list h3, .education-list h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .experience-list p, .education-list p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    /* Projects Section Styles */
+    .projects-section {
+      margin-bottom: 40px;
+    }
+
+    .projects-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 30px;
+    }
+
+    .project-card {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-card-content {
+      padding: 20px;
+    }
+
+    .project-card h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div class="profile-section">
+
+        <div class="profile-info">
+          <h1>{{name}}</h1>
+          <p>{{title}}</p>
+          <p>{{summary}}</p>
+        </div>
+      </div>
+
+    {{#if skills}}
+      <div class="skills-section">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          {{#each skills}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    {{#if experience}}
+      <div class="experience-section">
+        <h2>Experience</h2>
+        <ul class="experience-list">
+          {{#each experience}}
+            <li>
+                <h3>{{title}} at <a href="{{company_url}}">{{company}}</a></h3>
+                <p>Location: {{location}} | Duration: {{date_start}} - {{date_end}}</p>
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    {{#if education}}
+      <div class="education-section">
+        <h2>Education</h2>
+        <ul class="education-list">
+          {{#each education}}
+            <li>
+                <h3>{{degree}}</h3>
+                <p>{{title}}</p>
+                <p>{{institution}}</p>
+                <p>{{date_start}} - {{date_end}} </p>
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+    {{#if certifications}}
+    <div class="education-section">
+      <h2>Certifications</h2>
+      <ul class="education-list">
+        {{#each certifications}}
+          <li>
+            <h3>{{name}}</h3>
+            <p>{{issuer}}</p>
+            <p>{{date}} </p>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+    {{#if projects}}
+      <div class="projects-section">
+        <h2>Projects</h2>
+        <div class="project-list">
+          {{#each projects}}
+            <div class="project-card">
+              <div class="project-card-content">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+                {{#each features}}
+                <p>{{this}}</p>
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2dd4bf;
+            --secondary: #0f172a;
+            --accent: #f97316;
+            --text: #e2e8f0;
+            --bg: #0f172a;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, rgba(45, 212, 191, 0.1), rgba(249, 115, 22, 0.1));
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        .timeline-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="pt-20 pb-32 px-4">
+        {{#if name}}
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-6xl font-bold mb-6 gradient-text">{{name}}</h1>
+            {{#if title}}
+            <p class="text-xl text-gray-400 mb-8">{{title}}</p>
+            {{/if}}
+            {{#if summary}}
+            <p class="max-w-2xl mx-auto text-gray-300">{{summary}}</p>
+            {{/if}}
+        </div>
+        {{/if}}
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20">
+        {{#if about_us}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">About Me</h2>
+            <p class="text-lg leading-relaxed text-gray-300">{{about_us}}</p>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{#if skills.frontend}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.frontend}}
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                
+                {{#if skills.backend}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.backend}}
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-primary">Mobile</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.mobileDevelopment}}
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-primary">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {{#each skills.devops}}
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Experience</h2>
+            <div class="timeline-container relative">
+                {{#each experience}}
+                <div class="timeline-item relative pl-8">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">{{title}}</h3>
+                        <p class="text-gray-400 mb-4">{{company}} • {{date_start}} - {{date_end}}</p>
+                        <p class="text-gray-400 mb-4">{{location}} </p>
+                        <ul class="space-y-2">
+                            {{#each responsibilities}}
+                            <li class="text-gray-300">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{#each projects}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-2">{{name}}</h3>
+                    <p class="text-gray-400 mb-4">{{description}}</p>
+                    <ul class="space-y-2">
+                        {{#each features}}
+                        <li class="text-gray-300">• {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        
+        {{#if education}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{#each education}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-2">{{degree}}</h3>
+                    <p class="text-gray-400 mb-4">{{title}}</p>
+                    <p class="text-gray-400 mb-4">{{institution}}</p>
+                    <p class="text-gray-400 mb-4">{{date_start}} - {{date_end}} </p>
+                    <ul class="space-y-2">
+                        {{#each details}}
+                        <li class="text-gray-300">• {{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{#each certifications}}
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-lg font-bold mb-2">{{name}}</h3>
+                    <p class="text-gray-400">{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </main>
+
+    <footer class="text-center py-8 text-gray-400">
+        <p>&copy; {{name}} - {{title}}</p>
+    </footer>
+</body>
+</html>
