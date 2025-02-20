@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #ffffff;
-            --text-color: #2c3e50;
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --primary-color: #4d7cfe;
+            --secondary-color: #ffa500;
             --accent-color: #e74c3c;
-            --shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            --border-radius: 10px;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --border-radius: 20px;
         }
 
         * {
@@ -24,117 +24,146 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Lato', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 20px;
+            padding: 40px;
         }
 
         .portfolio-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 40px;
+            background-color: #fff;
             box-shadow: var(--shadow);
             border-radius: var(--border-radius);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .profile-name {
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
             color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .profile-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--secondary-color);
+            font-weight: 600;
             margin-bottom: 20px;
+        }
+
+        .profile-summary {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: #666;
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -10px;
             left: 0;
-            width: 50px;
+            width: 60px;
             height: 4px;
             background: var(--accent-color);
         }
 
         .card {
-            background-color: #f9f9f9;
+            background-color: #fafafa;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
             transition: transform 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
         }
 
-        .experience-title, .project-title, .education-title {
-            font-size: 1.5rem;
+        .experience-title, .project-title, .education-title, .certification-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--text-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .experience-meta, .education-meta {
             display: flex;
             justify-content: space-between;
             color: var(--secondary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .project-description {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .skill-item {
             background-color: var(--secondary-color);
             color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .portfolio-container {
+                padding: 30px;
+            }
+
             .profile-name {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
+
             .profile-title {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
             }
+
+            .profile-summary {
+                font-size: 1rem;
+            }
+
             .section-title {
-                font-size: 1.75rem;
+                font-size: 1.8rem;
             }
-            .experience-title, .project-title, .education-title {
-                font-size: 1.25rem;
+
+            .experience-title, .project-title, .education-title, .certification-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -145,7 +174,7 @@
         <div class="header">
             <h1 class="profile-name">{{name}}</h1>
             <p class="profile-title">{{title}}</p>
-            <p class="profile-title">{{summary}}</p>
+            <p class="profile-summary">{{summary}}</p>
         </div>
 
         {{#if about_us}}
@@ -232,7 +261,7 @@
             <h2 class="section-title">Certifications</h2>
             {{#each certifications}}
             <div class="card">
-                <h3 class="education-title">{{name}}</h3>
+                <h3 class="certification-title">{{name}}</h3>
                 <div class="education-meta">
                     <span>{{issuer}}</span>
                     <span>{{date}}</span>
@@ -243,4 +272,5 @@
         {{/if}}
     </div>
 </body>
+
 </html>

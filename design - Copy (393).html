@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - {{title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #F5F5F5;
+            --bg-secondary: #FFFFFF;
+            --accent-1: #6C63FF;
+            --accent-2: #FF6B6B;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --spacing: 2rem;
+            --radius: 12px;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing) 0;
+            margin-bottom: var(--spacing);
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border: 6px solid var(--accent-1);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-1);
+        }
+
+        .hero-title {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-summary {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: var(--spacing);
+        }
+
+        .section-card {
+            background: var(--bg-secondary);
+            padding: var(--spacing);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-1);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-card p {
+            font-size: 1rem;
+            color: var(--text-primary);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            background: var(--accent-1);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .experience-item,
+        .project-item,
+        .education-item,
+        .certification-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3,
+        .project-item h3,
+        .education-item h3,
+        .certification-item h3 {
+            font-size: 1.5rem;
+            color: var(--accent-2);
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item p,
+        .project-item p,
+        .education-item p,
+        .certification-item p {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            opacity: 0.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item ul,
+        .project-item ul {
+            list-style: none;
+            padding-left: 1.25rem;
+        }
+
+        .experience-item li,
+        .project-item li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item li::before,
+        .project-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.25rem;
+            }
+
+            .hero-summary {
+                font-size: 1rem;
+            }
+
+            .section-card h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if name}}
+        <section class="hero">
+            {{#if profile_image}}
+            <div class="profile-image">
+                <img src="{{profile_image}}" alt="Profile Image">
+            </div>
+            {{/if}}
+            <h1 class="hero-name">{{name}}</h1>
+            {{#if title}}
+            <div class="hero-title">{{title}}</div>
+            {{/if}}
+            {{#if summary}}
+            <p class="hero-summary">{{summary}}</p>
+            {{/if}}
+        </section>
+        {{/if}}
+
+        {{#if about_us}}
+        <section class="section">
+            <div class="section-card">
+                <h2>About Me</h2>
+                <p>{{about_us}}</p>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <div class="section-card">
+                <h2>Skills</h2>
+                {{#if skills.frontend}}
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-list">
+                        {{#each skills.frontend}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-list">
+                        {{#each skills.backend}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-category">
+                    <h3>Mobile</h3>
+                    <div class="skill-list">
+                        {{#each skills.mobileDevelopment}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-category">
+                    <h3>DevOps</h3>
+                    <div class="skill-list">
+                        {{#each skills.devops}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <div class="section-card">
+                <h2>Experience</h2>
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}}</h3>
+                    <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <div class="section-card">
+                <h2>Projects</h2>
+                {{#each projects}}
+                <div class="project-item">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul>
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <div class="section-card">
+                <h2>Education</h2>
+                {{#each education}}
+                <div class="education-item">
+                    <h3>{{degree}}</h3>
+                    <p>{{institution}} • {{date_start}} - {{date_end}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <div class="section-card">
+                <h2>Certifications</h2>
+                {{#each certifications}}
+                <div class="certification-item">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

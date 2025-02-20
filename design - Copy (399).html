@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A1A2E;
-            --secondary: #16213E;
-            --accent: #E94560;
-            --background: #F5F5F5;
+            --primary: #2A2D34;
+            --secondary: #01A7C2;
+            --accent: #FF6B6B;
+            --background: #F7F9FC;
             --surface: #FFFFFF;
-            --text: #0F0F0F;
+            --text: #2A2D34;
             --muted: #6C757D;
-            --gradient: linear-gradient(135deg, var(--accent), #FF6B6B);
+            --gradient: linear-gradient(135deg, var(--secondary), #7209B7);
         }
 
         * {
@@ -24,97 +24,130 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background: var(--background);
             color: var(--text);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .layout-container {
-            max-width: 1400px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
         }
 
         .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 0;
-            background: var(--surface);
-            border-radius: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 4rem;
+            grid-column: 1 / -1;
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-section img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1.5rem;
-            border: 4px solid var(--accent);
+        .hero-content {
+            grid-column: 2 / 8;
+            align-self: center;
+            position: relative;
+            z-index: 2;
         }
 
-        .hero-section h1 {
-            font-size: 3.5rem;
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: var(--gradient);
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+            opacity: 0.1;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5.5rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        .hero-section h2 {
-            font-size: 1.8rem;
-            font-weight: 500;
+        .title {
+            font-size: 2rem;
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
         }
 
-        .hero-section p {
-            font-size: 1.1rem;
+        .summary {
+            font-size: 1.2rem;
             color: var(--muted);
             max-width: 600px;
         }
 
         .section {
-            margin-bottom: 4rem;
+            grid-column: 1 / -1;
+            padding: 6rem 0;
+            position: relative;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
             color: var(--primary);
             position: relative;
-            padding-left: 2rem;
+            margin-left: 4rem;
         }
 
-        .section-header h2::before {
+        .section-title::before {
             content: '';
             position: absolute;
-            left: 0;
+            left: -4rem;
             top: 50%;
-            width: 1.5rem;
-            height: 4px;
+            width: 3rem;
+            height: 2px;
             background: var(--accent);
             transform: translateY(-50%);
         }
 
         .about-container {
+            grid-column: 3 / 11;
             background: var(--surface);
             padding: 3rem;
             border-radius: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.1;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
         }
 
         .skills-grid {
+            grid-column: 2 / 12;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
@@ -124,8 +157,8 @@
             background: var(--surface);
             padding: 2rem;
             border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(0);
             transition: transform 0.3s ease;
         }
 
@@ -133,78 +166,46 @@
             transform: translateY(-10px);
         }
 
-        .skill-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .skill-card p {
-            font-size: 1rem;
-            color: var(--muted);
-        }
-
         .experience-timeline {
+            grid-column: 2 / 12;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
 
         .experience-card {
             background: var(--surface);
-            padding: 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
             position: relative;
+            overflow: hidden;
         }
 
-        .experience-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-card .meta-info {
-            display: flex;
-            justify-content: space-between;
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .experience-card ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .experience-card ul li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--text);
-        }
-
-        .experience-card ul li::before {
-            content: '•';
+        .experience-card::before {
+            content: '';
             position: absolute;
+            top: 0;
             left: 0;
-            color: var(--accent);
-            font-weight: bold;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
         }
 
         .projects-grid {
+            grid-column: 2 / 12;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .project-card {
             background: var(--surface);
             padding: 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
             transition: transform 0.3s ease;
         }
 
@@ -212,83 +213,38 @@
             transform: translateY(-10px);
         }
 
-        .project-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            font-size: 1rem;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-        }
-
         .tag-container {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
         .tag {
             background: var(--background);
-            color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 1rem;
+            color: var(--secondary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
             font-size: 0.9rem;
             font-weight: 500;
         }
 
         .education-grid {
+            grid-column: 2 / 12;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
 
         .education-card {
             background: var(--surface);
-            padding: 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .education-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card .meta-info {
-            display: flex;
-            justify-content: space-between;
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .education-card ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .education-card ul li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--text);
-        }
-
-        .education-card ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
         .certifications-grid {
+            grid-column: 2 / 12;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
@@ -297,35 +253,75 @@
         .certification-card {
             background: var(--surface);
             padding: 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
-        .certification-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .certification-card .meta-info {
+        .meta-info {
             display: flex;
             justify-content: space-between;
             color: var(--muted);
             font-size: 0.95rem;
+            margin: 1rem 0;
+        }
+
+        .detail-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .detail-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .detail-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-column: 2 / 10;
+            }
+
+            .name {
+                font-size: 4rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero-section h1 {
+            .layout-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .hero-content {
+                grid-column: 2 / 12;
+            }
+
+            .name {
+                font-size: 3rem;
+            }
+
+            .section-title {
                 font-size: 2.5rem;
+                margin-left: 2rem;
             }
 
-            .hero-section h2 {
-                font-size: 1.5rem;
+            .section-title::before {
+                left: -2rem;
+                width: 1.5rem;
             }
 
-            .section-header h2 {
-                font-size: 2rem;
+            .about-container {
+                grid-column: 2 / 12;
+                padding: 2rem;
             }
         }
     </style>
@@ -333,18 +329,18 @@
 <body>
     <div class="layout-container">
         <section class="hero-section">
-            {{#if profile_image}}
-            <img src="{{profile_image}}" alt="Profile Image">
-            {{/if}}
-            <h1>{{name}}</h1>
-            <h2>{{title}}</h2>
-            <p>{{summary}}</p>
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1 class="name">{{name}}</h1>
+                <h2 class="title">{{title}}</h2>
+                <p class="summary">{{summary}}</p>
+            </div>
         </section>
 
         {{#if about_us}}
         <section class="section">
             <div class="section-header">
-                <h2>About</h2>
+                <h2 class="section-title">About</h2>
             </div>
             <div class="about-container">
                 <p>{{about_us}}</p>
@@ -355,7 +351,7 @@
         {{#if skills}}
         <section class="section">
             <div class="section-header">
-                <h2>Skills</h2>
+                <h2 class="section-title">Skills</h2>
             </div>
             <div class="skills-grid">
                 {{#each skills}}
@@ -371,7 +367,7 @@
         {{#if experience}}
         <section class="section">
             <div class="section-header">
-                <h2>Experience</h2>
+                <h2 class="section-title">Experience</h2>
             </div>
             <div class="experience-timeline">
                 {{#each experience}}
@@ -381,7 +377,7 @@
                         <span>{{company}}</span>
                         <span>{{date_start}} - {{date_end}}</span>
                     </div>
-                    <ul>
+                    <ul class="detail-list">
                         {{#each responsibilities}}
                         <li>{{this}}</li>
                         {{/each}}
@@ -395,7 +391,7 @@
         {{#if projects}}
         <section class="section">
             <div class="section-header">
-                <h2>Projects</h2>
+                <h2 class="section-title">Projects</h2>
             </div>
             <div class="projects-grid">
                 {{#each projects}}
@@ -416,7 +412,7 @@
         {{#if education}}
         <section class="section">
             <div class="section-header">
-                <h2>Education</h2>
+                <h2 class="section-title">Education</h2>
             </div>
             <div class="education-grid">
                 {{#each education}}
@@ -426,7 +422,7 @@
                         <span>{{institution}}</span>
                         <span>{{date_start}} - {{date_end}}</span>
                     </div>
-                    <ul>
+                    <ul class="detail-list">
                         {{#each details}}
                         <li>{{this}}</li>
                         {{/each}}
@@ -440,7 +436,7 @@
         {{#if certifications}}
         <section class="section">
             <div class="section-header">
-                <h2>Certifications</h2>
+                <h2 class="section-title">Certifications</h2>
             </div>
             <div class="certifications-grid">
                 {{#each certifications}}

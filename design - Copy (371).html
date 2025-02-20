@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2A2F4F;
+            --secondary: #917FB3;
+            --accent: #E5BEEC;
+            --background: #FDE2F3;
+            --text: #2A2F4F;
+            --card-bg: #ffffff;
+            --section-gap: 2.5rem;
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .resume-wrapper {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            color: white;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--section-gap);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .skills-container {
+            margin-top: 2rem;
+        }
+
+        .skills-category {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skills-category h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .card {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .card ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .card li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .resume-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .resume-wrapper {
+                margin: 1rem;
+                padding: 0;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-wrapper">
+        <div class="sidebar">
+            {{#if name}}
+            <div class="profile">
+                {{#if profile_image}}
+                <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+                {{/if}}
+                <h1 class="name">{{name}}</h1>
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+                {{#if summary}}
+                <div class="summary">{{summary}}</div>
+                {{/if}}
+
+                <p>{{about_us}} </p>
+            </div>
+            {{/if}}
+
+            {{#if skills}}
+            <div class="skills-container">
+                {{#if skills.frontend}}
+                <div class="skills-category">
+                    <h3>Frontend</h3>
+                    {{#each skills.frontend}}
+                    <div class="skill-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="skills-category">
+                    <h3>Backend</h3>
+                    {{#each skills.backend}}
+                    <div class="skill-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div class="skills-category">
+                    <h3>Mobile</h3>
+                    {{#each skills.mobileDevelopment}}
+                    <div class="skill-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div class="skills-category">
+                    <h3>DevOps</h3>
+                    {{#each skills.devops}}
+                    <div class="skill-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="main-content">
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-subtitle">{{company}} • {{date_start}} - {{date_end}}</div>
+                    <ul class="card-content">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <div class="card-content">
+                        <p>{{description}}</p>
+                        <ul>
+                            {{#each features}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="card">
+                    <h3 class="card-title">{{degree}}</h3>
+                    <div class="card-subtitle">{{institution}} • {{date_start}} - {{date_end}}</div>
+                    <ul class="card-content">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <div class="card-subtitle">{{issuer}} • {{date}}</div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

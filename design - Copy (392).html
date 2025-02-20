@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=Syne:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #080808;
+            --bg-secondary: #111111;
+            --accent-1: #00ff88;
+            --accent-2: #ff0055; 
+            --text: #ffffff;
+            --text-secondary: #888888;
+            --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .portfolio {
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .glitch-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 8vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            color: var(--text);
+            text-shadow: 2px 2px var(--accent-1), -2px -2px var(--accent-2);
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: none; opacity: 1; }
+            7% { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
+            10% { transform: none; opacity: 1; }
+            27% { transform: none; opacity: 1; }
+            30% { transform: skew(0.8deg, -0.1deg); opacity: 0.75; }
+            35% { transform: none; opacity: 1; }
+        }
+
+        .title-text {
+            font-size: 2rem;
+            color: var(--accent-1);
+            margin: 1rem 0;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--text-secondary);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 6rem;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--accent-1);
+            opacity: 0.3;
+            margin-right: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: var(--gradient);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-1);
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(0,255,136,0.1);
+            color: var(--accent-1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent-1);
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .detail-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+        }
+
+        @media (max-width: 768px) {
+            .intro {
+                padding: 1rem;
+            }
+
+            .glitch-name {
+                font-size: 3rem;
+            }
+
+            .title-text {
+                font-size: 1.5rem;
+            }
+
+            .bio-text {
+                font-size: 1rem;
+            }
+
+            .section-number {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .masonry-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .scroll-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-dot.active {
+            background: var(--accent-1);
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="portfolio">
+        <section class="intro">
+            <div class="intro-content">
+                <h1 class="glitch-name">{{name}}</h1>
+                <h2 class="title-text">{{title}}</h2>
+                <p class="bio-text">{{summary}}</p>
+            </div>
+        </section>
+
+        <main class="main-content">
+            {{#if about_us}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title">About Me</h2>
+                </div>
+                <div class="card">
+                    <p>{{about_us}}</p>
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if skills}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2 class="section-title">Skills</h2>
+                </div>
+                <div class="skills-grid">
+                    {{#each skills}}
+                    <div class="skill-item">
+                        <h3>{{@key}}</h3>
+                        <p>{{this}}%</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2 class="section-title">Experience</h2>
+                </div>
+                <div class="masonry-grid">
+                    {{#each experience}}
+                    <div class="card">
+                        <h3 class="card-title">{{title}}</h3>
+                        <div class="card-meta">
+                            <span>{{company}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="detail-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2 class="section-title">Projects</h2>
+                </div>
+                <div class="masonry-grid">
+                    {{#each projects}}
+                    <div class="card">
+                        <h3 class="card-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tag-cloud">
+                            {{#each features}}
+                            <span class="tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2 class="section-title">Education</h2>
+                </div>
+                <div class="masonry-grid">
+                    {{#each education}}
+                    <div class="card">
+                        <h3 class="card-title">{{degree}}</h3>
+                        <div class="card-meta">
+                            <span>{{institution}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="detail-list">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2 class="section-title">Certifications</h2>
+                </div>
+                <div class="masonry-grid">
+                    {{#each certifications}}
+                    <div class="card">
+                        <h3 class="card-title">{{name}}</h3>
+                        <div class="card-meta">
+                            <span>{{issuer}}</span>
+                            <span>{{date}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </main>
+    </div>
+</body>
+</html>

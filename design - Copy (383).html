@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7C4DFF;
+            --secondary: #FF6F61;
+            --accent: #00C9A7;
+            --text: #E0E0E0;
+            --bg: #1E1E2F;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --spacing: 2.5rem;
+            --radius: 20px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--spacing);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        /* Left Column (Profile Section) */
+        .left-column {
+            position: sticky;
+            top: var(--spacing);
+            height: fit-content;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: var(--spacing);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Right Column (Content Sections) */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing);
+        }
+
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: var(--spacing);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-card h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item p {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 1.25rem;
+        }
+
+        .experience-item li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Projects Section */
+        .project-item {
+            margin-bottom: 2rem;
+        }
+
+        .project-item h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-item p {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-item ul {
+            list-style: none;
+            padding-left: 1.25rem;
+        }
+
+        .project-item li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 2rem;
+        }
+
+        .education-item h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .education-item p {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Certifications Section */
+        .certification-item {
+            margin-bottom: 2rem;
+        }
+
+        .certification-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .certification-item p {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --spacing: 1.5rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .summary {
+                font-size: 0.9rem;
+            }
+
+            .content-card h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if name}}
+        <div class="left-column">
+            <div class="profile-card">
+                {{#if profile_image}}
+                <div class="profile-image">
+                    <img src="{{profile_image}}" alt="Profile Image">
+                </div>
+                {{/if}}
+                <h1 class="name">{{name}}</h1>
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+                {{#if summary}}
+                <p class="summary">{{summary}}</p>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="right-column">
+            {{#if about_us}}
+            <div class="content-card">
+                <h2>About Me</h2>
+                <p>{{about_us}}</p>
+            </div>
+            {{/if}}
+
+            {{#if skills}}
+            <div class="content-card">
+                <h2>Skills</h2>
+                {{#if skills.frontend}}
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-list">
+                        {{#each skills.frontend}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.backend}}
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-list">
+                        {{#each skills.backend}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-category">
+                    <h3>Mobile</h3>
+                    <div class="skill-list">
+                        {{#each skills.mobileDevelopment}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if skills.devops}}
+                <div class="skill-category">
+                    <h3>DevOps</h3>
+                    <div class="skill-list">
+                        {{#each skills.devops}}
+                        <div class="skill-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
+
+            {{#if experience}}
+            <div class="content-card">
+                <h2>Experience</h2>
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}}</h3>
+                    <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+
+            {{#if projects}}
+            <div class="content-card">
+                <h2>Projects</h2>
+                {{#each projects}}
+                <div class="project-item">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul>
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+
+            {{#if education}}
+            <div class="content-card">
+                <h2>Education</h2>
+                {{#each education}}
+                <div class="education-item">
+                    <h3>{{degree}}</h3>
+                    <p>{{institution}} • {{date_start}} - {{date_end}}</p>
+                    {{#each details}}
+                    <span>{{this}} </span>
+                    {{/each}}
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+
+            {{#if certifications}}
+            <div class="content-card">
+                <h2>Certifications</h2>
+                {{#each certifications}}
+                <div class="certification-item">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Neue+Montreal:wght@300;500;700&family=Gochi+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D3047;
+            --secondary: #419D78;
+            --accent: #E0A458;
+            --background: #FAF3DD;
+            --text: #2D3047;
+            --curve: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Neue Montreal', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .orbit-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-bg {
+            position: absolute;
+            width: 150vw;
+            height: 150vw;
+            background: radial-gradient(circle at center, 
+                rgba(65, 157, 120, 0.1) 0%,
+                rgba(65, 157, 120, 0.05) 30%,
+                transparent 70%);
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .intro {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .name {
+            font-size: 5rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .title {
+            font-family: 'Gochi Hand', cursive;
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 2rem 0;
+        }
+
+        .summary {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin: 6rem 0;
+        }
+
+        .section {
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            grid-column: span 12;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+        }
+
+        .squiggle {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: url("data:image/svg+xml,%3Csvg width='70' height='10' viewBox='0 0 70 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5C15 5 15 0 30 0S45 10 60 10 75 5 90 5' stroke='%23419D78' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+        }
+
+        .skills-container {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            opacity: 0.1;
+            clip-path: polygon(0 0, 100% 0, 100% 20%, 0 50%);
+            transition: transform 0.3s var(--curve);
+        }
+
+        .skill-card:hover::before {
+            transform: scale(1.2);
+        }
+
+        .experience-container {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .experience-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .projects-container {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s var(--curve);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .education-container {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+        }
+
+        .certifications-container {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: var(--background);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .detail-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .detail-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .name {
+                font-size: 3rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orbit-container">
+        <div class="orbit-bg"></div>
+        <div class="intro">
+            <h1 class="name">{{name}}</h1>
+            <h2 class="title">{{title}}</h2>
+            <p class="summary">{{summary}}</p>
+        </div>
+    </div>
+
+    <div class="container">
+        {{#if about_us}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">About<div class="squiggle"></div></h2>
+                </div>
+                <div class="experience-card" style="grid-column: span 12;">
+                    <p>{{about_us}}</p>
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">Skills<div class="squiggle"></div></h2>
+                </div>
+                <div class="skills-container">
+                    {{#each skills}}
+                    <div class="skill-card">
+                        <h3>{{@key}}</h3>
+                        <p>{{this}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">Experience<div class="squiggle"></div></h2>
+                </div>
+                <div class="experience-container">
+                    {{#each experience}}
+                    <div class="experience-card">
+                        <h3 class="experience-title">{{title}}</h3>
+                        <div class="experience-meta">
+                            <span>{{company}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="detail-list">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">Projects<div class="squiggle"></div></h2>
+                </div>
+                <div class="projects-container">
+                    {{#each projects}}
+                    <div class="project-card">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tags">
+                            {{#each features}}
+                            <span class="tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">Education<div class="squiggle"></div></h2>
+                </div>
+                <div class="education-container">
+                    {{#each education}}
+                    <div class="education-card">
+                        <h3 class="experience-title">{{degree}}</h3>
+                        <div class="experience-meta">
+                            <span>{{institution}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="detail-list">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="section">
+            <div class="content-grid">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications<div class="squiggle"></div></h2>
+                </div>
+                <div class="certifications-container">
+                    {{#each certifications}}
+                    <div class="certification-card">
+                        <h3 class="experience-title">{{name}}</h3>
+                        <div class="experience-meta">
+                            <span>{{issuer}}</span>
+                            <span>{{date}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #1a1b4b;
+            --teal: #06d6a0;
+            --salmon: #ff6b6b;
+            --cream: #fff7f0;
+            --navy: #2d314d;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark-blue);
+            color: var(--cream);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(6, 214, 160, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+        }
+
+        .hero-content {
+            padding: 2rem;
+        }
+
+        .hero-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 600;
+            background: linear-gradient(to right, var(--teal), var(--salmon));
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        .hero-skills {
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-content: center;
+        }
+
+        .skill-pill {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .skill-pill:hover {
+            transform: translateY(-3px);
+            background: var(--teal);
+            color: var(--dark-blue);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .section {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-section {
+            grid-column: span 12;
+        }
+
+        .experience-section {
+            grid-column: span 8;
+        }
+
+        .projects-section {
+            grid-column: span 4;
+        }
+
+        .education-section {
+            grid-column: span 6;
+        }
+
+        .certifications-section {
+            grid-column: span 6;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--teal);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40%;
+            height: 3px;
+            background: var(--salmon);
+            transition: width 0.3s ease;
+        }
+
+        .section:hover .section-title::after {
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: var(--salmon);
+            color: var(--dark-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .responsibility-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .responsibility-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .responsibility-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+        }
+
+        @media (max-width: 1200px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .experience-section,
+            .projects-section,
+            .education-section,
+            .certifications-section {
+                grid-column: span 12;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 3rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-name">{{name}}</h1>
+                <h2 class="hero-title">{{title}}</h2>
+                <p class="hero-summary">{{summary}}</p>
+            </div>
+            {{#if skills}}
+            <div class="hero-skills">
+                <h2 class="section-title"> Skills </h2>
+                {{#each skills}}
+                <span class="skill-pill">{{@key}} ({{this}}%)</span>
+                {{/each}}
+            </div>
+            {{/if}}
+        </section>
+
+        <div class="content-grid">
+            {{#if about_us}}
+            <section class="section about-section floating">
+                <h2 class="section-title">About Me</h2>
+                <p class="card-content">{{about_us}}</p>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section experience-section">
+                <h2 class="section-title">Experience</h2>
+                {{#each experience}}
+                <div class="card">
+                    <h3 class="card-title">{{title}}</h3>
+                    <div class="card-meta">
+                        <span>{{company}}</span>
+                        <span>{{date_start}} - {{date_end}}</span>
+                    </div>
+                    <ul class="responsibility-list">
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section projects-section">
+                <h2 class="section-title">Projects</h2>
+                {{#each projects}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <p class="card-content">{{description}}</p>
+                    <div class="tag-container">
+                        {{#each features}}
+                        <span class="tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section education-section">
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="card">
+                    <h3 class="card-title">{{degree}}</h3>
+                    <div class="card-meta">
+                        <span>{{institution}}</span>
+                        <span>{{date_start}} - {{date_end}}</span>
+                    </div>
+                    <ul class="responsibility-list">
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section certifications-section">
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="card">
+                    <h3 class="card-title">{{name}}</h3>
+                    <div class="card-meta">
+                        <span>{{issuer}}</span>
+                        <span>{{date}}</span>
+                    </div>
+                </div>
+                {{/each}}
+            </section>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

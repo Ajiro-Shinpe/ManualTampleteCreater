@@ -1,12 +1,9 @@
-thats good make another completely unique design
-
-make another unique design with different layout make sure to print all data with if statement and use different colors
-
-
-
 just continue from where you left after the end of previous generteyou don't have generate code from strart
 
-**Prompt:**  
+
+
+
+
 
 listen carefully you have to 
 Create a unique and completely different layout for displaying data using an `if` statement to ensure all data is printed correctly. Use a fresh color scheme and a distinct theme from the previous design. The layout should be innovative and well-structured for better UI/UX.  
@@ -17,8 +14,20 @@ Create a unique and completely different layout for displaying data using an `if
 - Provide the complete code in one go, including HTML, CSS, only.  
 - Try a new layout structure compared to the previous version, ensuring better readability and visual appeal."   don’t use react/angular you canuse 3rd part UI libraries 
 it must be unique don't change code script functionality eg {{#if}} statement don't change var name just redesign it give complrete html css code 
-make sure you aree making all section and printing all keys and vales of name,title,summary,profile_image ,skills , experiance , projects , education ,certifications with {{@if }}
-=============================================================
+make sure you aree making all section and printing all keys and values of name,title,summary, profile_image , about_us, skills , experiance , projects , education ,certifications with {{@if }}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### **Optimized Prompt for Unique Layout Design**  

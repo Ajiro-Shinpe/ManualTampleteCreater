@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            background: #1e1e1e;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff6f61;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #b0bec5;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title {
+            font-size: 2rem;
+            color: #ff6f61;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #ff6f61;
+            position: absolute;
+            top: -10px;
+            left: 0;
+        }
+
+        /* Summary */
+        .summary {
+            font-size: 1.1rem;
+            color: #cfd8dc;
+            line-height: 1.8;
+        }
+
+        /* Skills */
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .skill-item {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+            background: #ff6f61;
+            color: #fff;
+        }
+        .skill-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Experience */
+        .experience-item {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .experience-item::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #ff6f61;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: -20px;
+        }
+        .experience-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff6f61;
+        }
+        .experience-item p {
+            font-size: 1rem;
+            color: #b0bec5;
+            margin-bottom: 10px;
+        }
+
+        /* Education */
+        .education-item {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .education-item::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #ff6f61;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: -20px;
+        }
+        .education-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff6f61;
+        }
+
+        /* Certifications */
+        .certification-item {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .certification-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            color: #ff6f61;
+        }
+
+        /* Projects */
+        .project-item {
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .project-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ff6f61;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #424242;
+        }
+        .footer p {
+            color: #b0bec5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image">
+            {{/if}}
+            {{#if name}}<h1>{{name}}</h1>{{/if}}
+            {{#if title}}<p>{{title}}</p>{{/if}}
+        </div>
+
+        {{#if summary}}
+        <div class="section">
+            <h2 class="section-title">Summary</h2>
+            <p class="summary">{{summary}}</p>
+        </div>
+        {{/if}}
+
+        {{#if about_us}}
+        <div class="section">
+            <h2 class="section-title">About Me</h2>
+            <p class="summary">{{about_us}}</p>
+        </div>
+        {{/if}}
+
+        {{#if skills}}
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-list">
+                {{#if skills.frontend}}
+                <div class="skill-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <p>Frontend: {{skills.frontend}}</p>
+                </div>
+                {{/if}}
+                {{#if skills.backend}}
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <p>Backend: {{skills.backend}}</p>
+                </div>
+                {{/if}}
+                {{#if skills.mobileDevelopment}}
+                <div class="skill-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <p>Mobile Dev: {{skills.mobileDevelopment}}</p>
+                </div>
+                {{/if}}
+                {{#if skills.devops}}
+                <div class="skill-item">
+                    <i class="fas fa-cogs"></i>
+                    <p>DevOps: {{skills.devops}}</p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if experience}}
+        <div class="section">
+            <h2 class="section-title">Experience</h2>
+            {{#each experience}}
+            <div class="experience-item">
+                <h3>{{title}} at <a href="{{company_url}}">{{company}}</a></h3>
+                <p><i class="fas fa-map-marker-alt"></i> {{location}} | <i class="fas fa-calendar-alt"></i> {{date_start}} - {{date_end}}</p>
+                <ul>
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if education}}
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            {{#each education}}
+            <div class="education-item">
+                <h3>{{degree}} at {{institution}}</h3>
+                <p><i class="fas fa-calendar-alt"></i> {{date_start}} - {{date_end}}</p>
+                <ul>
+                    {{#each details}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if certifications}}
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="certification-item">
+                <h3>{{name}} issued by {{issuer}}</h3>
+                <p><i class="fas fa-calendar-alt"></i> {{date}} | <i class="fas fa-hourglass-end"></i> {{expire}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if projects}}
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            {{#each projects}}
+            <div class="project-item">
+                <h3><a href="{{url}}">{{name}}</a></h3>
+                <p>{{description}}</p>
+                <ul>
+                    {{#each features}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</body>
+</html>

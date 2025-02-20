@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2A2356;
+            --secondary: #FF3366;
+            --tertiary: #7A4EBE;
+            --text: #333333;
+            --light: #F8F9FA;
+            --gradient: linear-gradient(135deg, var(--tertiary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: #FFFFFF;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 100%;
+            background: var(--gradient);
+            transform: skewX(-20deg) translateX(-10%);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .summary {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 8rem 0;
+            background: var(--light);
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 0;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-level {
+            font-size: 3rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            padding: 8rem 0;
+            background: var(--primary);
+            color: white;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .experience-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 8rem 0;
+            background: var(--light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Education Section */
+        .education-section {
+            padding: 8rem 0;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .education-card {
+            padding: 2rem;
+            border-left: 4px solid var(--tertiary);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .degree {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .institution {
+            color: var(--tertiary);
+            margin-bottom: 1rem;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: 8rem 0;
+            background: var(--light);
+        }
+
+        .certification-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .certification-name {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-issuer {
+            color: var(--tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero::before {
+                width: 100%;
+                transform: skewX(0);
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="name">{{name}}</h1>
+                <h2 class="title">{{title}}</h2>
+                <p class="summary">{{summary}}</p>
+            </div>
+        </section>
+
+        {{#if about_us}}
+        <section class="profile-section">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title">About Me</h2>
+                    <p>{{about_us}}</p>
+                </div>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if skills}}
+        <section class="skills-container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                {{#each skills}}
+                <div class="skill-card">
+                    <h3 class="skill-name">{{@key}}</h3>
+                    <span class="skill-level">{{this}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if experience}}
+        <section class="experience-section">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                {{#each experience}}
+                <div class="experience-card">
+                    <h3 class="experience-title">{{title}}</h3>
+                    <p class="experience-date">{{company}} | {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if projects}}
+        <section class="projects-section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                {{#each projects}}
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">{{name}}</h3>
+                        <p>{{description}}</p>
+                        <div class="tags">
+                            {{#each features}}
+                            <span class="tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if education}}
+        <section class="education-section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                {{#each education}}
+                <div class="education-card">
+                    <h3 class="degree">{{degree}}</h3>
+                    <p class="institution">{{institution}}</p>
+                    <p>{{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if certifications}}
+        <section class="certifications-section">
+            <h2 class="section-title">Certifications</h2>
+            {{#each certifications}}
+            <div class="certification-card">
+                <h3 class="certification-name">{{name}}</h3>
+                <p class="certification-issuer">{{issuer}} | {{date}}</p>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+    </main>
+</body>
+</html>

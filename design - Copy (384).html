@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6E44FF;
+            --secondary: #FF7B54;
+            --accent: #FFA500;
+            --text: #FAFAFA;
+            --bg: #12181B;
+            --card-bg: #1F2833;
+            --spacing: 2rem;
+            --radius: 1rem;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: var(--spacing);
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+            margin-left: 2rem;
+        }
+
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--card-bg);
+            padding: var(--spacing);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-me {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .contact-list li i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-right: 1rem;
+        }
+
+        /* Main Section */
+        .main-section {
+            background: var(--card-bg);
+            padding: var(--spacing);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .experience-item,
+        .project-item,
+        .education-item,
+        .certification-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3,
+        .project-item h3,
+        .education-item h3,
+        .certification-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item p,
+        .project-item p,
+        .education-item p,
+        .certification-item p {
+            font-size: 0.95rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item ul,
+        .project-item ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .experience-item li,
+        .project-item li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .experience-item li::before,
+        .project-item li::before {
+            content: '»';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--secondary);
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: var(--primary);
+            color: var(--text);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-info {
+                margin-left: 1rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .skills-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if name}}
+        <header class="header">
+            {{#if profile_image}}
+            <div class="profile-image">
+                <img src="{{profile_image}}" alt="Profile Image">
+            </div>
+            {{/if}}
+            <div class="profile-info">
+                <h1 class="name">{{name}}</h1>
+                {{#if title}}
+                <div class="title">{{title}}</div>
+                {{/if}}
+                {{#if summary}}
+                <p class="summary">{{summary}}</p>
+                {{/if}}
+            </div>
+        </header>
+        {{/if}}
+
+        <div class="main-content">
+            <div class="sidebar">
+                {{#if about_us}}
+                <h2>About Me</h2>
+                <p class="about-me">{{about_us}}</p>
+                {{/if}}
+
+            </div>
+
+            <div class="main-section">
+                {{#if experience}}
+                <h2 class="section-title">Experience</h2>
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3>{{title}}</h3>
+                    <p>{{company}} • {{date_start}} - {{date_end}}</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+                {{/if}}
+
+                {{#if projects}}
+                <h2 class="section-title">Projects</h2>
+                {{#each projects}}
+                <div class="project-item">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul>
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+                {{/if}}
+
+                {{#if skills}}
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-list">
+                    {{#each skills}}
+                    <div class="skill-item">{{@key}}</div>
+                    {{/each}}
+                </div>
+                {{/if}}
+
+                {{#if education}}
+                <h2 class="section-title">Education</h2>
+                {{#each education}}
+                <div class="education-item">
+                    <h3>{{degree}}</h3>
+                    <p>{{institution}} • {{date_start}} - {{date_end}}</p>
+                    {{#if details}}
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+                {{/each}}
+                {{/if}}
+
+                {{#if certifications}}
+                <h2 class="section-title">Certifications</h2>
+                {{#each certifications}}
+                <div class="certification-item">
+                    <h3>{{name}}</h3>
+                    <p>{{issuer}} • {{date}}</p>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

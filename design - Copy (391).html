@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #7c3aed;
+            --accent: #22d3ee;
+            --text: #e2e8f0;
+            --dark: #1e293b;
+            --card: #334155;
+            --hover: #4c1d95;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(45deg, var(--dark) 0, var(--dark) 2px, transparent 0, transparent 50%);
+            background-size: 30px 30px;
+        }
+
+        .portfolio-layout {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header-banner {
+            background: var(--dark);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            opacity: 0.1;
+            transform: skewY(-6deg);
+            transform-origin: top left;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .role-title {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .bio-text {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: -3rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skills-bar {
+            background: var(--dark);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-chip {
+            background: var(--card);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--secondary);
+        }
+
+        .skill-chip:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--secondary);
+            opacity: 0.3;
+        }
+
+        .card {
+            background: var(--dark);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            display: flex;
+            justify-content: space-between;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .card-content {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            background: var(--card);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .list-items {
+            list-style: none;
+        }
+
+        .list-items li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-items li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .name-title {
+                font-size: 3rem;
+            }
+
+            .role-title {
+                font-size: 1.5rem;
+            }
+
+            .bio-text {
+                font-size: 1rem;
+            }
+
+            .header-banner {
+                padding: 3rem 1.5rem;
+            }
+
+            .main-content {
+                padding: 0 1.5rem;
+            }
+
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, var(--dark) 0%, var(--card) 50%, var(--dark) 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-layout">
+        <header class="header-banner">
+            <div class="header-content">
+                <h1 class="name-title">{{name}}</h1>
+                <h2 class="role-title">{{title}}</h2>
+                <p class="bio-text">{{summary}}</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            {{#if skills}}
+            <div class="skills-bar">
+                {{#each skills}}
+                <span class="skill-chip">{{@key}} ({{this}}%)</span>
+                {{/each}}
+            </div>
+            {{/if}}
+
+            {{#if about_us}}
+            <section class="section">
+                <h2 class="section-title">About Me</h2>
+                <div class="card">
+                    <p class="card-content">{{about_us}}</p>
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if experience}}
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                <div class="grid-layout">
+                    {{#each experience}}
+                    <div class="card">
+                        <h3 class="card-title">{{title}}</h3>
+                        <div class="card-subtitle">
+                            <span>{{company}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="list-items">
+                            {{#each responsibilities}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if projects}}
+            <section class="section">
+                <h2 class="section-title">Projects</h2>
+                <div class="grid-layout">
+                    {{#each projects}}
+                    <div class="card">
+                        <h3 class="card-title">{{name}}</h3>
+                        <p class="card-content">{{description}}</p>
+                        <div class="tag-list">
+                            {{#each features}}
+                            <span class="tag">{{this}}</span>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if education}}
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="grid-layout">
+                    {{#each education}}
+                    <div class="card">
+                        <h3 class="card-title">{{degree}}</h3>
+                        <div class="card-subtitle">
+                            <span>{{institution}}</span>
+                            <span>{{date_start}} - {{date_end}}</span>
+                        </div>
+                        <ul class="list-items">
+                            {{#each details}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            {{#if certifications}}
+            <section class="section">
+                <h2 class="section-title">Certifications</h2>
+                <div class="grid-layout">
+                    {{#each certifications}}
+                    <div class="card">
+                        <h3 class="card-title">{{name}}</h3>
+                        <div class="card-subtitle">
+                            <span>{{issuer}}</span>
+                            <span>{{date}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+        </main>
+    </div>
+</body>
+</html>

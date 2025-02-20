@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #f1c40f;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .header .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .header .title {
+            font-size: 18px;
+            color: var(--secondary-color);
+        }
+
+        .summary {
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .about-us {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skill {
+            width: 25%;
+            margin-bottom: 20px;
+        }
+
+        .skill .skill-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .experience {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .experience-item {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+
+        .experience-item .company {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .project {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .project .project-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .education {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .education-item {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+
+        .education-item .institution {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .certification {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .certification .certification-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="Profile Image" class="profile-image">
+            {{/if}}
+            <div>
+                <h1 class="name">{{name}}</h1>
+                <h2 class="title">{{title}}</h2>
+            </div>
+        </div>
+        <p class="summary">{{summary}}</p>
+        {{#if about_us}}
+        <div class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-us">
+                <p>{{about_us}}</p>
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if skills}}
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills">
+                {{#each skills}}
+                <div class="skill">
+                    <h3 class="skill-name">{{@key}}</h3>
+                    <p>{{this}}%</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if experience}}
+        <div class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience">
+                {{#each experience}}
+                <div class="experience-item">
+                    <h3 class="company">{{company}}</h3>
+                    <p>{{title}} ({{date_start}} - {{date_end}})</p>
+                    <ul>
+                        {{#each responsibilities}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if projects}}
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects">
+                {{#each projects}}
+                <div class="project">
+                    <h3 class="project-name">{{name}}</h3>
+                    <p>{{description}}</p>
+                    <ul>
+                        {{#each features}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if education}}
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education">
+                {{#each education}}
+                <div class="education-item">
+                    <h3 class="institution">{{institution}}</h3>
+                    <p>{{degree}} ({{date_start}} - {{date_end}})</p>
+                    <ul>
+                        {{#each details}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if certifications}}
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications">
+                {{#each certifications}}
+                <div class="certification">
+                    <h3 class="certification-name">{{name}}</h3>
+                    <p>{{issuer}} ({{date}})</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
